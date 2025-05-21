@@ -11,7 +11,7 @@ const Home = () => {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent from-70% to-black"></div>
 
       <div className="relative z-20 flex h-full flex-col justify-center pb-20">
-        <h1 className="text-3xl">Matt</h1>
+        <h1 className="text-3xl">Matt Marotti</h1>
       </div>
     </section>
   );

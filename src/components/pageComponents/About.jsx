@@ -11,7 +11,7 @@ const About = () => {
           <img src={aboutImg} alt="about image" className="h-full" />
         </div>
         <div className="w-full flex flex-col items-center">
-          <h1 className="text-3xl text-center mt-8">Matt</h1>
+          <h1 className="text-3xl text-center mt-8">Matt Marotti</h1>
           <p className="w-3/4 text-justify mt-8">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
             suscipit amet cumque delectus ipsa obcaecati expedita, cum iure,
