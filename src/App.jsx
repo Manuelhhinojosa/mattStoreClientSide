@@ -14,7 +14,7 @@ function App() {
     <main className="overflow-hidden overflow-y-scroll">
       <Navbar />
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/recent" element={<RecentWork />} />
       </Routes>

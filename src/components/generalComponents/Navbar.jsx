@@ -36,7 +36,7 @@ const Navbar = () => {
               onClick={() => dispatch(setShowNavbarToFalse())}
               to={link.text}
             >
-              {link.text}
+              {link.id === 1 ? "home" : link.text}
             </Link>
           ))}
         </div>
@@ -55,7 +55,7 @@ const Navbar = () => {
               onClick={() => dispatch(toggleNavbar())}
               to={link.text}
             >
-              {link.text}
+              {link.id === 1 ? "home" : link.text}
             </Link>
           ))}
         </div>

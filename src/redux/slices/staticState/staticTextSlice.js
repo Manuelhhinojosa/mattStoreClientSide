@@ -4,7 +4,7 @@ export const staticTextSlice = createSlice({
   name: "staticTextSlice",
   initialState: {
     links: [
-      { text: "home", id: 1 },
+      { text: "/", id: 1 },
       { text: "about", id: 2 },
       { text: "recent", id: 3 },
       { text: "contact", id: 4 },
