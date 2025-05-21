@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import { toggleNavbar } from "../../redux/slices/staticState/logicSlice";
+import {
+  toggleNavbar,
+  setShowNavbarToFalse,
+} from "../../redux/slices/staticState/logicSlice";
 
 // assets
 import logoImg from "../../assets/logoImg.png";
@@ -30,7 +33,7 @@ const Navbar = () => {
               className={`text-sm ${
                 index !== 0 ? "border-l-2 border-neutral-300/20 pl-2" : ""
               } hover:opacity-50`}
-              onClick={() => dispatch(toggleNavbar())}
+              onClick={() => dispatch(setShowNavbarToFalse())}
               to={link.text}
             >
               {link.text}

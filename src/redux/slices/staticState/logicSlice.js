@@ -9,9 +9,13 @@ export const logicSlice = createSlice({
     toggleNavbar: (state, action) => {
       state.showNavbar = !state.showNavbar;
     },
+
+    setShowNavbarToFalse: (state, action) => {
+      state.showNavbar = false;
+    },
   },
 });
 
-export const { toggleNavbar } = logicSlice.actions;
+export const { toggleNavbar, setShowNavbarToFalse } = logicSlice.actions;
 
 export default logicSlice.reducer;
