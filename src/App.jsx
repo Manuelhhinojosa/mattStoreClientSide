@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 // Page components
 import Home from "./components/pageComponents/Home";
 import About from "./components/pageComponents/About";
+import RecentWork from "./components/pageComponents/RecentWork";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/recent" element={<RecentWork />} />
       </Routes>
     </main>
   );

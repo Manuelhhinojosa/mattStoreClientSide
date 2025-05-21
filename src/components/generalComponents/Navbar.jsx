@@ -47,11 +47,11 @@ const Navbar = () => {
         </div>
       </div>
       {logic.showNavbar && (
-        <div className="w-full backdrop-blur-lg lg:hidden">
+        <div className="w-full backdrop-blur-lg lg:hidden ">
           {staticText.links.map((link, index) => (
             <Link
               key={index}
-              className="block p-4 uppercase tracking-tighter"
+              className="block p-4 uppercase tracking-tighter text-center hover:opacity-50"
               onClick={() => dispatch(toggleNavbar())}
               to={link.text}
             >
