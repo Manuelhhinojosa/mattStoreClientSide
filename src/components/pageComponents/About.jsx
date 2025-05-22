@@ -5,9 +5,9 @@ import aboutImg from "../../assets/aboutImg.png";
 
 const About = () => {
   return (
-    <section className="container mx-auto w-screen h-screen flex items-end">
-      <div className="h-3/4 w-full flex flex-col items-center ">
-        <div className=" h-96 ">
+    <section className="container mx-auto  flex items-end">
+      <div className="mt-32 w-full flex flex-col items-center bg-red-200">
+        <div className="mt-8 h-96 ">
           <img src={aboutImg} alt="about image" className="h-full rounded-xl" />
         </div>
         <div className="w-full flex flex-col items-center">

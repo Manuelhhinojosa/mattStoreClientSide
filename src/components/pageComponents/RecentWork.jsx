@@ -28,7 +28,7 @@ const RecentWork = () => {
 
   return (
     <section className="container mx-auto flex">
-      <div className="mt-32 w-full flex flex-col items-center">
+      <div className="mt-32 w-full flex flex-col items-center bg-red-200">
         {imagesArr.map((img) => (
           <div className="flex flex-col mt-8">
             <img
