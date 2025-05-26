@@ -8,10 +8,17 @@ import About from "./components/pageComponents/About";
 import RecentWork from "./components/pageComponents/RecentWork";
 import Contact from "./components/pageComponents/Contact";
 import Store from "./components/pageComponents/Store";
+import SingleProd from "./components/pageComponents/SingleProd";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 
+// redux
+import { useSelector } from "react-redux";
+
 function App() {
+  // redux & state
+  const storeState = useSelector((state) => state.storeSlice);
+
   return (
     <main>
       <Navbar />
@@ -21,6 +28,9 @@ function App() {
         <Route path="/recent" element={<RecentWork />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/store" element={<Store />} />
+        {storeState.artPieces.map((p) => (
+          <Route key={p.id} path={`/store/${p.id}`} element={<SingleProd />} />
+        ))}
       </Routes>
     </main>
   );

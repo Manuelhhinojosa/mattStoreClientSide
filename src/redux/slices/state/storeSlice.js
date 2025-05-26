@@ -253,6 +253,7 @@ export const storeSlice = createSlice({
         internationalDelivery: "$0.00 CAD",
       },
       {
+        id: 20,
         inStock: true,
         recentWork: true,
         title: `"They Don't Make Men Like They Used To"`,
