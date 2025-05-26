@@ -11,7 +11,7 @@ const RecentWork = () => {
   const storeState = useSelector((state) => state.storeSlice);
   return (
     <section className="container mx-auto flex">
-      <div className="mt-32 w-full flex flex-row flex-wrap">
+      <div className="mt-32 w-full flex flex-row flex-wrap mb-[150px]">
         {storeState.artPieces.map((work) =>
           work.recentWork ? (
             <div className="flex flex-col items-center justify-center mt-8 md:w-1/2 lg:w-1/3">
