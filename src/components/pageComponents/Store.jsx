@@ -28,7 +28,7 @@ const Store = () => {
             <p className=" p-3 text-center text-xs h-5">{art.title}</p>
             <p className=" p-3 text-center text-xs h-5">{art.shortDesc}</p>
             <p className=" p-3 text-center text-xs h-5">{art.cost}</p>
-            <button className=" p-3 text-center text-sm h-5 font-extrabold">
+            <button className=" p-3 text-center text-sm h-5 font-extrabold hover:text-slate-700">
               add to cart
             </button>
           </div>

@@ -8,20 +8,24 @@ import { useSelector } from "react-redux";
 
 const RecentWork = () => {
   // redux & state
-  const staticText = useSelector((state) => state.staticTextSlice);
+  const storeState = useSelector((state) => state.storeSlice);
   return (
     <section className="container mx-auto flex">
       <div className="mt-32 w-full flex flex-row flex-wrap">
-        {staticText.recentWork.map((work) => (
-          <div className="flex flex-col items-center justify-center mt-8 md:w-1/2 lg:w-1/3">
-            <img
-              src={work.imgSrcHref}
-              alt="recent work img"
-              className="p-2 rounded-3xl"
-            />
-            <p className=" p-3 text-center text-xs h-10">{work.title}</p>
-          </div>
-        ))}
+        {storeState.artPieces.map((work) =>
+          work.recentWork ? (
+            <div className="flex flex-col items-center justify-center mt-8 md:w-1/2 lg:w-1/3">
+              <Link to={`/store/${work.id}`}>
+                <img
+                  src={work.imgSrcHref}
+                  alt="recent work img"
+                  className="p-2 rounded-3xl"
+                />
+              </Link>
+              <p className=" p-3 text-center text-xs h-10">{work.title}</p>
+            </div>
+          ) : null
+        )}
         <div className="fixed bottom-20 right-10 font-extrabold text-lg hover:text-slate-700">
           <Link to="/store">more work</Link>
         </div>
