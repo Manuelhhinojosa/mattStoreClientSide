@@ -1,5 +1,8 @@
 import React from "react";
 
+//React Router 6
+import { Link } from "react-router-dom";
+
 // redux
 import { useSelector } from "react-redux";
 
@@ -19,6 +22,9 @@ const RecentWork = () => {
             <p className=" p-3 text-center text-xs h-10">{work.title}</p>
           </div>
         ))}
+        <div className="fixed bottom-20 right-10 font-extrabold text-lg hover:text-slate-700">
+          <Link to="/store">more work</Link>
+        </div>
       </div>
     </section>
   );
