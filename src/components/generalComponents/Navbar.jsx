@@ -10,9 +10,6 @@ import {
   setShowNavbarToFalse,
 } from "../../redux/slices/staticState/logicSlice";
 
-// assets
-import logoImg from "../../assets/logoImg.png";
-
 // react icons
 import { FaTimes, FaBars } from "react-icons/fa";
 
@@ -25,7 +22,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-4 z-50 w-full flex flex-col items-center">
       <div className="flex w-full items-center justify-between overflow-hidden p-4 backdrop-blur-lg lg:m-2 lg:w-[50rem] lg:rounded-full lg:shadow-lg">
-        <img src={logoImg} alt="logo" width={50} />
+        <img src={staticText.navbar.logoSrcHref} alt="logo" width={45} />
         <div className="hidden  space-x-6 lg:flex">
           {staticText.links.map((link, index) => (
             <Link
@@ -34,9 +31,9 @@ const Navbar = () => {
                 index !== 0 ? "border-l-2 border-neutral-300/20 pl-2" : ""
               } hover:opacity-50`}
               onClick={() => dispatch(setShowNavbarToFalse())}
-              to={link.text}
+              to={link.to}
             >
-              {link.id === 1 ? "home" : link.text}
+              {link.text}
             </Link>
           ))}
         </div>

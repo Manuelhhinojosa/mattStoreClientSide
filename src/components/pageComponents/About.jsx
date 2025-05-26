@@ -1,40 +1,38 @@
 import React from "react";
 
-// assets
-import aboutImg from "../../assets/aboutImg.png";
+// redux
+import { useSelector } from "react-redux";
 
 const About = () => {
+  // redux
+  const staticState = useSelector((state) => state.staticTextSlice);
+
   return (
     <section className="container mx-auto  flex items-end">
-      <div className="mt-32 w-full flex flex-col items-center bg-red-200">
+      <div className="mt-32 w-full flex flex-col items-center">
         <div className="mt-8 h-96 ">
-          <img src={aboutImg} alt="about image" className="h-full rounded-xl" />
+          <img
+            src={staticState.about.aboutImgSrcHref}
+            alt="about image"
+            className="h-full rounded-xl"
+          />
         </div>
         <div className="w-full flex flex-col items-center">
           <h1 className="text-3xl text-center mt-8">Matt Marotti</h1>
           <p className="w-3/4 text-justify mt-8">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-            suscipit amet cumque delectus ipsa obcaecati expedita, cum iure,
-            beatae tempora mollitia laudantium eos totam illum id eaque
-            necessitatibus at. Architecto. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit.
+            {staticState.about.aboutText.slice(0, 201)}
             <br />
             <br />
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-            suscipit amet cumque delectus ipsa obcaecati expedita, cum iure,
-            beatae tempora mollitia laudantium eos totam illum id eaque
-            necessitatibus at. Architecto. Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Itaque suscipit amet cumque delectus
-            ipsa obcaecati expedita, cum iure, beatae tempora mollitia
-            laudantium eos totam illum id eaque necessitatibus at.
+            {staticState.about.aboutText.slice(202, 388)}
             <br />
             <br />
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-            suscipit amet cumque delectus ipsa obcaecati expedita, cum iure,
-            beatae tempora mollitia laudantium eos totam illum id eaque
-            necessitatibus at.
+            {staticState.about.aboutText.slice(388)}
           </p>
-          <a href="" target="_blank" className="mt-8 mb-8">
+          <a
+            href={staticState.about.cvSrcHref}
+            target="_blank"
+            className="mt-8 mb-8"
+          >
             Download my CV
           </a>
         </div>
