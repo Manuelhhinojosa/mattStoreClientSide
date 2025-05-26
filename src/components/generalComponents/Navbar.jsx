@@ -50,9 +50,9 @@ const Navbar = () => {
               key={index}
               className="block p-4 uppercase tracking-tighter text-center hover:opacity-50"
               onClick={() => dispatch(toggleNavbar())}
-              to={link.text}
+              to={link.to}
             >
-              {link.id === 1 ? "home" : link.text}
+              {link.text}
             </Link>
           ))}
         </div>
