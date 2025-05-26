@@ -13,7 +13,7 @@ import Navbar from "./components/generalComponents/Navbar";
 
 function App() {
   return (
-    <main className="overflow-hidden overflow-y-scroll">
+    <main>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

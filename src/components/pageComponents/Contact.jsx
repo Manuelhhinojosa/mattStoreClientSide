@@ -5,23 +5,23 @@ import { TfiEmail } from "react-icons/tfi";
 
 const Contact = () => {
   return (
-    <section className="container mx-auto">
-      <div className="mt-32 w-full h-screen">
-        <div className="h-1/4 text-center">
-          <div className="h-1/2 flex justify-center items-center text-3xl">
+    <section className="container mx-auto h-[700px]">
+      <div className="mt-32 w-ful">
+        <div className="h-[150px] text-center border-b-[1px] border-b-slate-700">
+          <div className="flex justify-center items-center text-3xl h-1/2">
             Contact
           </div>
-          <div className="h-1/2 flex justify-center gap-7 items-center text-3xl border-b-[1px] border-b-slate-700">
+          <div className=" flex justify-center gap-7 items-center text-3xl h-1/2">
             <a
               href="mailto:matt.marotti@gmail.com"
-              className="hover:text-slate-600 transition-all duration-500"
+              className="hover:text-slate-600"
             >
               <TfiEmail />
             </a>
             <a
               href="https://www.instagram.com/martysville/"
               target="_blank"
-              className=" hover:text-slate-600 transition-all duration-500"
+              className=" hover:text-slate-600"
             >
               <CiInstagram />
             </a>
@@ -29,7 +29,7 @@ const Contact = () => {
         </div>
         <form
           action=""
-          className="h-3/4 flex flex-col items-center justify-evenly"
+          className="h-[550px] flex flex-col items-center justify-evenly"
         >
           <input
             type="text"
