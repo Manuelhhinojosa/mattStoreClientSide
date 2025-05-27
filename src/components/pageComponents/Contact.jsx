@@ -1,9 +1,16 @@
 import React from "react";
+
 // react icons
 import { CiInstagram } from "react-icons/ci";
 import { TfiEmail } from "react-icons/tfi";
 
+// redux
+import { useSelector } from "react-redux";
+
 const Contact = () => {
+  // redux & state
+  const staticState = useSelector((state) => state.staticTextSlice);
+
   return (
     <section className="container mx-auto h-[700px]">
       <div className="mt-32 w-ful">
@@ -13,13 +20,13 @@ const Contact = () => {
           </div>
           <div className=" flex justify-center gap-7 items-center text-3xl h-1/2">
             <a
-              href="mailto:matt.marotti@gmail.com"
+              href={`mailto:${staticState.contact.email}`}
               className="hover:text-slate-600"
             >
               <TfiEmail />
             </a>
             <a
-              href="https://www.instagram.com/martysville/"
+              href={staticState.contact.IGlink}
               target="_blank"
               className=" hover:text-slate-600"
             >

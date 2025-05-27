@@ -29,6 +29,10 @@ export const staticTextSlice = createSlice({
         "Matt Marotti is a painter whose work oscillates between witticism and dissidence. With agitated brushstrokes and a caustic sensibility, Marotti transforms familiar images into something more unnerving. Tongue in cheek, but layered with emotional nuance, his paintings walk a fine line between nonchalant absurdity and pointed critique, evoking discomfort and consolation in equal measure. Based in Toronto, Marotti continues to hone his skills and develop his provocative body of work.",
       cvSrcHref: "https://mattmarotticv.netlify.app/cv.pdf",
     },
+    contact: {
+      email: "matt.marotti@gmail.com",
+      IGlink: "https://www.instagram.com/martysville/",
+    },
   },
   reducers: {},
 });
