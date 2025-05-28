@@ -44,13 +44,10 @@ const SingleProd = () => {
             <p className="text-center">{product.title}</p>
           </div>
           <div>
-            <p className="text-center">{product.cost}</p>
+            <p className="text-center">{`${product.cost} CAD`}</p>
           </div>
           <div>
             <p className="text-center text-sm">{product.shortDesc}</p>
-          </div>
-          <div className="h-[150px] mt-8 flex flex-col items-center justify-center">
-            <p className="text-sm">{product.largeDesc}</p>
           </div>
         </div>
         <div className="my-8 text-center">
@@ -65,7 +62,7 @@ const SingleProd = () => {
             }
             disabled={!product.inStock}
           >
-            {product.inStock ? <p>Add to cart</p> : <p>Added to cart</p>}
+            {product.inStock ? <p>Add to cart</p> : <p>Sold</p>}
           </button>
         </div>
         <div className="my-8 text-center">

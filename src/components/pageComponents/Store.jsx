@@ -30,7 +30,7 @@ const Store = () => {
             </Link>
             <p className=" p-3 text-center text-xs h-5">{art.title}</p>
             <p className=" p-3 text-center text-xs h-5 mt-5">{art.shortDesc}</p>
-            <p className=" p-3 text-center text-xs h-5">{art.cost}</p>
+            <p className=" p-3 text-center text-xs h-5">{`${art.cost} CAD`}</p>
             <button
               className={`p-3 text-center text-sm h-5 font-extrabold ${
                 art.inStock
@@ -42,7 +42,7 @@ const Store = () => {
               }
               disabled={!art.inStock}
             >
-              {art.inStock ? <p>Add to cart</p> : <p>Added to cart</p>}
+              {art.inStock ? <p>Add to cart</p> : <p>Sold</p>}
             </button>
           </div>
         ))}

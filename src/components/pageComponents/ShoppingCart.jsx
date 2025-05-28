@@ -35,7 +35,7 @@ const ShoppingCart = () => {
                 <p className="text-center">{prod.title}</p>
               </div>
               <div className=" p-2"></div>
-              <div className=" p-2"> {prod.cost}</div>
+              <div className=" p-2"> {`${prod.cost} CAD`}</div>
 
               <div className=" p-2">
                 <button>
@@ -49,8 +49,11 @@ const ShoppingCart = () => {
           <div>Subtotal</div>
           <div>$0.00 CAD</div>
         </div>
-        <div className="h-[100px] mb-10 flex justify-center items-center">
+        <div className="h-[100px] mb-5 flex justify-center items-center">
           <Link className="font-extrabold hover:text-slate-700">checkout</Link>
+        </div>
+        <div className=" mb-10 text-center font-extrabold hover:text-slate-700">
+          <Link to="/store">Continue shopping</Link>
         </div>
       </div>
     </section>
