@@ -74,7 +74,7 @@ const Contact = () => {
       <div className="mt-32 w-ful">
         <div className="h-[150px] text-center border-b-[1px] border-b-slate-700">
           <div className="flex justify-center items-center text-3xl h-1/2">
-            Contact
+            Matt Marotti / Contact
           </div>
           <div className=" flex justify-center gap-7 items-center text-3xl h-1/2">
             <a

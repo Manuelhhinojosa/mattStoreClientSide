@@ -16,7 +16,7 @@ const ShoppingCart = () => {
     <section className="container mx-auto flex items-end lg:justify-center">
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
         <div className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
-          Shoping cart
+          Matt Marotti / Shoping cart
         </div>
         {storeState.shoppingCart.map((prod) => (
           <div className="mx-5 mb-8">
