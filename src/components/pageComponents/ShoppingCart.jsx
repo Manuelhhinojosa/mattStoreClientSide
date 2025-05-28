@@ -69,8 +69,6 @@ const ShoppingCart = () => {
               Checkout
             </span>
           )}
-
-          {/* <Link className="font-extrabold hover:text-slate-700">checkout</Link> */}
         </div>
         <div className=" mb-10 text-center font-extrabold hover:text-slate-700">
           <Link to="/store">Continue shopping</Link>

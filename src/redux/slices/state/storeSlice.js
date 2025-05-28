@@ -7,6 +7,7 @@ export const storeSlice = createSlice({
       {
         id: 1,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"Do You Think This Is A Game?"`,
         shortDesc: "9in x 12in Acrylic on Canvas Paper",
@@ -20,6 +21,7 @@ export const storeSlice = createSlice({
       {
         id: 2,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"Give And Take"`,
         shortDesc: "12in x 16in Acrylic on Canvas Paper",
@@ -33,6 +35,7 @@ export const storeSlice = createSlice({
       {
         id: 3,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"God, Just Let Her Have The Apple" `,
         shortDesc: "12in x 16in Acrylic on Canvas Paper",
@@ -46,6 +49,7 @@ export const storeSlice = createSlice({
       {
         id: 4,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"I'm Thinking About Letting Him Into My China Shop" `,
         shortDesc: "11in x 16in Acrylic on Canvas Paper",
@@ -59,6 +63,7 @@ export const storeSlice = createSlice({
       {
         id: 5,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"Like A Bee To A Bonnet"`,
         shortDesc: "9in x 12in Acrylic on Canvas Paper",
@@ -72,6 +77,7 @@ export const storeSlice = createSlice({
       {
         id: 6,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"Maybe A Bit Much, But That Is My Bread And Butter"`,
         shortDesc: "9in x 12in Acrylic on Canvas Paper",
@@ -85,6 +91,7 @@ export const storeSlice = createSlice({
       {
         id: 7,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"Okay Everybody Get Together, Let Me Take A Picture" `,
         shortDesc: "12in x 16 Acrylic on Canvas Paper",
@@ -98,6 +105,7 @@ export const storeSlice = createSlice({
       {
         id: 8,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"Partir, C'est Mourir Un Peu" `,
         shortDesc: "12in x 9in Acrylic on Canvas Paper",
@@ -111,6 +119,7 @@ export const storeSlice = createSlice({
       {
         id: 9,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"Venus In Surf"`,
         shortDesc: "12in x 16in Acrylic on Canvas Paper",
@@ -124,6 +133,7 @@ export const storeSlice = createSlice({
       {
         id: 10,
         inStock: true,
+        added: false,
         recentWork: false,
         title: `"When The Gravy Train Stops, Cold Turkey"`,
         shortDesc: "9in x 12in Acrylic on Canvas Paper",
@@ -137,6 +147,7 @@ export const storeSlice = createSlice({
       {
         id: 11,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"Blue Ruin"`,
         shortDesc: "Pending",
@@ -150,6 +161,7 @@ export const storeSlice = createSlice({
       {
         id: 12,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"Tossed Salads And Scambled Eggs"`,
         shortDesc: "Pending",
@@ -163,6 +175,7 @@ export const storeSlice = createSlice({
       {
         id: 13,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"Meditations In An Emergency"`,
         shortDesc: "Pending",
@@ -176,6 +189,7 @@ export const storeSlice = createSlice({
       {
         id: 14,
         inStock: false,
+        added: false,
         recentWork: true,
         title: `"Jolene Is Looking Beautiful Beyond Compare"`,
         shortDesc: "Pending",
@@ -189,6 +203,7 @@ export const storeSlice = createSlice({
       {
         id: 15,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"Getting Ahead Of Yourself"`,
         shortDesc: "Pending",
@@ -202,6 +217,7 @@ export const storeSlice = createSlice({
       {
         id: 16,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"Can You Fix My Hair?"`,
         shortDesc: "Pending",
@@ -215,6 +231,7 @@ export const storeSlice = createSlice({
       {
         id: 17,
         inStock: false,
+        added: false,
         recentWork: true,
         title: `"When Your Body Is A Wonderland"`,
         shortDesc: "Pending",
@@ -228,6 +245,7 @@ export const storeSlice = createSlice({
       {
         id: 18,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"Sorry, Didn't Mean To Cut You Off"`,
         shortDesc: "Pending",
@@ -241,6 +259,7 @@ export const storeSlice = createSlice({
       {
         id: 19,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"To A Sphinx With A Riddle, Everything Is A Complex"`,
         shortDesc: "Pending",
@@ -254,6 +273,7 @@ export const storeSlice = createSlice({
       {
         id: 20,
         inStock: true,
+        added: false,
         recentWork: true,
         title: `"They Don't Make Men Like They Used To"`,
         shortDesc: "Pending",
@@ -272,6 +292,7 @@ export const storeSlice = createSlice({
       let prod = state.artPieces.find((piece) => piece.id == action.payload);
       state.shoppingCart.push(prod);
       prod.inStock = false;
+      prod.added = true;
     },
   },
 });

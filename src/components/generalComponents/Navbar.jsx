@@ -63,7 +63,14 @@ const Navbar = () => {
               onClick={() => dispatch(toggleNavbar())}
               to={link.to}
             >
-              {link.text}
+              {link.id === 6 ? (
+                <p className="text-2xl font-light flex justify-center items-center">
+                  <CiShoppingCart />
+                  <sub>{storeState.shoppingCart.length}</sub>
+                </p>
+              ) : (
+                link.text
+              )}
             </Link>
           ))}
         </div>
