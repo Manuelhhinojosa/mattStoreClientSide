@@ -32,10 +32,17 @@ const Store = () => {
             <p className=" p-3 text-center text-xs h-5 mt-5">{art.shortDesc}</p>
             <p className=" p-3 text-center text-xs h-5">{art.cost}</p>
             <button
-              className=" p-3 text-center text-sm h-5 font-extrabold hover:text-slate-700"
-              onClick={() => dispatch(addProdShoppingCart(art.id))}
+              className={`p-3 text-center text-sm h-5 font-extrabold ${
+                art.inStock
+                  ? "hover:text-slate-700 cursor-pointer"
+                  : "text-gray-400 cursor-not-allowed"
+              }`}
+              onClick={() =>
+                art.inStock && dispatch(addProdShoppingCart(art.id))
+              }
+              disabled={!art.inStock}
             >
-              add to cart
+              {art.inStock ? <p>Add to cart</p> : <p>Added to cart</p>}
             </button>
           </div>
         ))}
