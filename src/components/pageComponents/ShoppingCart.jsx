@@ -12,6 +12,11 @@ import { useSelector } from "react-redux";
 const ShoppingCart = () => {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
+  let subtotal = 0;
+
+  storeState.shoppingCart.map((p) => {
+    subtotal = p.cost + subtotal;
+  });
   return (
     <section className="container mx-auto flex items-end lg:justify-center">
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
@@ -27,16 +32,17 @@ const ShoppingCart = () => {
                   <p className="text-center">1</p>
                 </div>
                 <div>
-                  <img
-                    src={prod.imgSrcHref}
-                    alt="prod img"
-                    className="h-[150px] p-2 rounded-xl"
-                  />
+                  <Link to={`/store/${prod.id}`}>
+                    <img
+                      src={prod.imgSrcHref}
+                      alt="prod img"
+                      className="h-[150px] p-2 rounded-xl"
+                    />
+                  </Link>
                 </div>
                 <div className="p-2 w-1/3">
                   <p className="text-center">{prod.title}</p>
                 </div>
-                <div className="p-2"></div>
                 <div className="p-2">{`${prod.cost} CAD`}</div>
                 <div className="p-2">
                   <button>
@@ -54,7 +60,7 @@ const ShoppingCart = () => {
 
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
           <div>Subtotal</div>
-          <div>$0.00 CAD</div>
+          <div>{`$${subtotal}.00 CAD`}</div>
         </div>
         <div className="h-[100px] mb-5 flex justify-center items-center">
           {storeState.shoppingCart.length > 0 ? (
