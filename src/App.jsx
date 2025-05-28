@@ -9,6 +9,7 @@ import RecentWork from "./components/pageComponents/RecentWork";
 import Contact from "./components/pageComponents/Contact";
 import Store from "./components/pageComponents/Store";
 import SingleProd from "./components/pageComponents/SingleProd";
+import ShoppingCart from "./components/pageComponents/ShoppingCart";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 
@@ -31,6 +32,7 @@ function App() {
         {storeState.artPieces.map((p) => (
           <Route key={p.id} path={`/store/${p.id}`} element={<SingleProd />} />
         ))}
+        <Route path="/cart" element={<ShoppingCart />} />
       </Routes>
     </main>
   );

@@ -266,8 +266,16 @@ export const storeSlice = createSlice({
         internationalDelivery: "$0.00 CAD",
       },
     ],
+    shoppingCart: [],
   },
-  reducers: {},
+  reducers: {
+    addProdShoppingCart: (state, action) => {
+      let prod = state.artPieces.find((piece) => piece.id == action.payload);
+      state.shoppingCart.push(prod);
+    },
+  },
 });
+
+export const { addProdShoppingCart } = storeSlice.actions;
 
 export default storeSlice.reducer;

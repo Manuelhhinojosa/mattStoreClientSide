@@ -4,10 +4,12 @@ import React from "react";
 import { useLocation, Link } from "react-router-dom";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addProdShoppingCart } from "../../redux/slices/state/storeSlice";
 
 const SingleProd = () => {
   // redux & state
+  const dispatch = useDispatch();
   const staticState = useSelector((state) => state.staticTextSlice);
   const storeState = useSelector((state) => state.storeSlice);
   const location = useLocation();
@@ -51,7 +53,10 @@ const SingleProd = () => {
           </div>
         </div>
         <div className="my-8 text-center">
-          <button className="text-xl font-extrabold hover:text-slate-700">
+          <button
+            className="text-xl font-extrabold hover:text-slate-700"
+            onClick={() => dispatch(addProdShoppingCart(product.id))}
+          >
             Add to cart
           </button>
         </div>
