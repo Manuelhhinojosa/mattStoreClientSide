@@ -5,6 +5,7 @@ import { useLocation, Link } from "react-router-dom";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
+// redux reducers
 import { addProdShoppingCart } from "../../redux/slices/state/storeSlice";
 
 const SingleProd = () => {

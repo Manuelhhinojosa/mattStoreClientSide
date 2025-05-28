@@ -4,10 +4,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+// redux reducers
+import { addProdShoppingCart } from "../../redux/slices/state/storeSlice";
 
 const Store = () => {
   // redux & state
+  const dispatch = useDispatch();
   const storeState = useSelector((state) => state.storeSlice);
 
   return (
@@ -28,7 +31,10 @@ const Store = () => {
             <p className=" p-3 text-center text-xs h-5">{art.title}</p>
             <p className=" p-3 text-center text-xs h-5 mt-5">{art.shortDesc}</p>
             <p className=" p-3 text-center text-xs h-5">{art.cost}</p>
-            <button className=" p-3 text-center text-sm h-5 font-extrabold hover:text-slate-700">
+            <button
+              className=" p-3 text-center text-sm h-5 font-extrabold hover:text-slate-700"
+              onClick={() => dispatch(addProdShoppingCart(art.id))}
+            >
               add to cart
             </button>
           </div>
