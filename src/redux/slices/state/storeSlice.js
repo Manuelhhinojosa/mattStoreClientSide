@@ -291,7 +291,6 @@ export const storeSlice = createSlice({
     addProdShoppingCart: (state, action) => {
       let prod = state.artPieces.find((piece) => piece.id == action.payload);
       state.shoppingCart.push(prod);
-      prod.inStock = false;
       prod.added = true;
     },
   },

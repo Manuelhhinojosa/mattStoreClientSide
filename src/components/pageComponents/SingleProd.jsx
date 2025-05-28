@@ -53,16 +53,22 @@ const SingleProd = () => {
         <div className="my-8 text-center">
           <button
             className={`p-3 text-center text-sm h-5 font-extrabold ${
-              product.inStock
+              !product.added
                 ? "hover:text-slate-700 cursor-pointer"
                 : "text-gray-400 cursor-not-allowed"
             }`}
             onClick={() =>
               product.inStock && dispatch(addProdShoppingCart(product.id))
             }
-            disabled={!product.inStock}
+            disabled={product.added}
           >
-            {product.inStock ? <p>Add to cart</p> : <p>Sold</p>}
+            {!product.inStock ? (
+              <p className="hover:cursor-not-allowed">sold</p>
+            ) : product.added ? (
+              <p>Added</p>
+            ) : (
+              <p>Add to cart</p>
+            )}
           </button>
         </div>
         <div className="my-8 text-center">
