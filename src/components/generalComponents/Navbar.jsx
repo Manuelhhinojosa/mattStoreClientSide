@@ -12,11 +12,13 @@ import {
 
 // react icons
 import { FaTimes, FaBars } from "react-icons/fa";
+import { CiShoppingCart } from "react-icons/ci";
 
 const Navbar = () => {
   // redux & state
   const dispatch = useDispatch();
   const staticText = useSelector((state) => state.staticTextSlice);
+  const storeState = useSelector((state) => state.storeSlice);
   const logic = useSelector((state) => state.logicSlice);
 
   return (
@@ -35,7 +37,14 @@ const Navbar = () => {
               onClick={() => dispatch(setShowNavbarToFalse())}
               to={link.to}
             >
-              {link.text}
+              {link.id === 6 ? (
+                <p className="text-xl font-light flex">
+                  <CiShoppingCart />
+                  <sub>{storeState.shoppingCart.length}</sub>
+                </p>
+              ) : (
+                link.text
+              )}
             </Link>
           ))}
         </div>
