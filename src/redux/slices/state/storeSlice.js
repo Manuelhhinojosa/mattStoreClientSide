@@ -300,6 +300,16 @@ export const storeSlice = createSlice({
       toast("Item added to your shopping cart", toastStyleObject());
     },
     removeProdShoppingCart: (state, action) => {
+      const idToRemove = action.payload;
+      state.shoppingCart = state.shoppingCart.filter(
+        (item) => item.id !== idToRemove
+      );
+
+      const prod = state.artPieces.find((piece) => piece.id === idToRemove);
+      if (prod) {
+        prod.added = false;
+      }
+
       toast("Item removed from your shopping cart", toastStyleObject());
     },
   },
