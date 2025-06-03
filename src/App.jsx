@@ -16,12 +16,16 @@ import Navbar from "./components/generalComponents/Navbar";
 // redux
 import { useSelector } from "react-redux";
 
+// Toastify for handling errors
+import { ToastContainer } from "react-toastify";
+
 function App() {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
 
   return (
     <main>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

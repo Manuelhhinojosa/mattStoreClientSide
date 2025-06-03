@@ -10,14 +10,21 @@ import { useRef } from "react";
 // emailJS
 import emailjs from "@emailjs/browser";
 
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
 // redux
 import { useSelector } from "react-redux";
 
 const Contact = () => {
   // redux & state
   const staticState = useSelector((state) => state.staticTextSlice);
+
   // form state ref
-  // Initial state
+  // Initial state (emply fields)
   const formRef = useRef(null);
   const nameRef = useRef(null);
   const subjectRef = useRef(null);
@@ -28,6 +35,7 @@ const Contact = () => {
   const handleUserData = (e) => {
     e.preventDefault();
     // handleling form filling error
+
     if (
       nameRef.current.value === "" ||
       subjectRef.current.value === "" ||
@@ -35,38 +43,32 @@ const Contact = () => {
       messageRef.current.value === ""
     ) {
       nameRef.current.focus();
-      // toast("*** Todos los campos son obligatorios ***", toastStyleObject());
-      alert("all fields are mandatory");
+      toast("All fields must be completed.", toastStyleObject());
       return;
-    } else {
-      alert("form sent");
     }
     // Send data
-    // emailjs
-    //   .sendForm(
-    //     "service_b3bqjep", // service ID
-    //     "template_ubefjka", // template ID
-    //     formRef.current, // form data
-    //     "7RhgiDzoqn1bPUjZk" // key
-    //   )
-    //   .then(
-    //     (result) => {
-    //       console.log("Success!! Result:", result);
-    //       nameRef.current.value = "";
-    //       subjectRef.current.value = "";
-    //       emailRef.current.value = "";
-    //       messageRef.current.value = "";
-    //       nameRef.current.focus();
-    //       toast(
-    //         "*** Tu mensaje me ha llegado. Pronto me pondré en contacto. :) ***",
-    //         toastStyleObject()
-    //       );
-    //     },
-    //     (error) => {
-    //       console.log("Failure. Error:", error);
-    //       toast(error.text, toastStyleObject());
-    //     }
-    //   );
+    emailjs
+      .sendForm(
+        "service_jmj41g7", // service ID
+        "template_9pokvbn", // template ID
+        formRef.current, // form data
+        "tYhN-ZrthmkJGHLfG" // key
+      )
+      .then(
+        (result) => {
+          console.log("Success. Result:", result);
+          nameRef.current.value = "";
+          subjectRef.current.value = "";
+          emailRef.current.value = "";
+          messageRef.current.value = "";
+          nameRef.current.focus();
+          toast("Message received. Thanks.", toastStyleObject());
+        },
+        (error) => {
+          console.log("Failure. Error:", error);
+          toast(error.text, toastStyleObject());
+        }
+      );
   };
 
   return (
@@ -74,7 +76,7 @@ const Contact = () => {
       <div className="mt-32 w-ful">
         <div className="h-[150px] text-center border-b-[1px] border-b-slate-700">
           <div className="flex justify-center items-center text-3xl h-1/2">
-            Matt Marotti / Contact
+            {staticState.home.homeMainTitle} / Contact
           </div>
           <div className=" flex justify-center gap-7 items-center text-3xl h-1/2">
             <a
@@ -98,25 +100,25 @@ const Contact = () => {
           ref={formRef}
         >
           <input
+            name="name"
             type="text"
             placeholder="Name"
-            name="name"
             autocomplete="off"
             className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent  hover:border-b-black"
             ref={nameRef}
           />
           <input
+            name="subject"
             type="text"
             placeholder="Subject"
-            name="subject"
             autocomplete="off"
             className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black"
             ref={subjectRef}
           />
           <input
+            name="email"
             type="text"
             placeholder="E-mail"
-            name="email"
             autocomplete="off"
             className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black"
             ref={emailRef}
