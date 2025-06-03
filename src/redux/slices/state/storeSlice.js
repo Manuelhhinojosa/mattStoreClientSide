@@ -1,4 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../../tostifyStyle";
 
 export const storeSlice = createSlice({
   name: "storeSlice",
@@ -292,6 +297,7 @@ export const storeSlice = createSlice({
       let prod = state.artPieces.find((piece) => piece.id == action.payload);
       state.shoppingCart.push(prod);
       prod.added = true;
+      toast("Item added to your shopping cart", toastStyleObject());
     },
   },
 });
