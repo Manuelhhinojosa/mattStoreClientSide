@@ -299,9 +299,13 @@ export const storeSlice = createSlice({
       prod.added = true;
       toast("Item added to your shopping cart", toastStyleObject());
     },
+    removeProdShoppingCart: (state, action) => {
+      toast("Item removed from your shopping cart", toastStyleObject());
+    },
   },
 });
 
-export const { addProdShoppingCart } = storeSlice.actions;
+export const { addProdShoppingCart, removeProdShoppingCart } =
+  storeSlice.actions;
 
 export default storeSlice.reducer;

@@ -7,15 +7,22 @@ import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
 
 const ShoppingCart = () => {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
+  const dispatch = useDispatch();
+
   let subtotal = 0;
+  let taxes = 0;
+  let total = 0;
 
   storeState.shoppingCart.map((p) => {
     subtotal = p.cost + subtotal;
+    taxes = subtotal * 0.13;
+    total = subtotal + taxes;
   });
   return (
     <section className="container mx-auto flex items-end lg:justify-center">
@@ -45,7 +52,9 @@ const ShoppingCart = () => {
                 </div>
                 <div className="p-2">{`${prod.cost} CAD`}</div>
                 <div className="p-2">
-                  <button>
+                  <button
+                    onClick={() => dispatch(removeProdShoppingCart(prod.id))}
+                  >
                     <FaTimes />
                   </button>
                 </div>
@@ -62,6 +71,19 @@ const ShoppingCart = () => {
           <div>Subtotal</div>
           <div>{`$${subtotal}.00 CAD`}</div>
         </div>
+        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
+          <div>taxes</div>
+          <div>{`$${taxes} CAD`}</div>
+        </div>
+        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
+          <div>Delivery fee</div>
+          <div>Confirm @ checkout</div>
+        </div>
+        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
+          <div>total</div>
+          <div>{`$${total} CAD`}</div>
+        </div>
+
         <div className="h-[100px] mb-5 flex justify-center items-center">
           {storeState.shoppingCart.length > 0 ? (
             <Link
