@@ -12,12 +12,11 @@ import SingleProd from "./components/pageComponents/SingleProd";
 import ShoppingCart from "./components/pageComponents/ShoppingCart";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
+// Toastify component for handling errors
+import { ToastContainer } from "react-toastify";
 
 // redux
 import { useSelector } from "react-redux";
-
-// Toastify for handling errors
-import { ToastContainer } from "react-toastify";
 
 function App() {
   // redux & state

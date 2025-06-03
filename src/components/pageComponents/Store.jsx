@@ -1,6 +1,6 @@
 import React from "react";
 
-// react router V^
+// react router V6
 import { Link } from "react-router-dom";
 
 // redux
