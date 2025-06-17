@@ -10,6 +10,8 @@ import Contact from "./components/pageComponents/Contact";
 import Store from "./components/pageComponents/Store";
 import SingleProd from "./components/pageComponents/SingleProd";
 import ShoppingCart from "./components/pageComponents/ShoppingCart";
+import Login from "./components/pageComponents/login";
+
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 // Toastify component for handling errors
@@ -36,6 +38,7 @@ function App() {
           <Route key={p.id} path={`/store/${p.id}`} element={<SingleProd />} />
         ))}
         <Route path="/cart" element={<ShoppingCart />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </main>
   );

@@ -10,7 +10,7 @@ export const staticTextSlice = createSlice({
       { text: "contact", id: 4, to: "contact" },
       { text: "store", id: 5, to: "store" },
       { text: "cart", id: 6, to: "cart" },
-      { text: "admin", id: 7, to: "admin" },
+      { text: "login", id: 7, to: "login" },
     ],
     navbar: {
       logoSrcHref:

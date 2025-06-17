@@ -14,7 +14,7 @@ export const toastStyleObject = () => {
       backgroundColor: "smoke",
       color: "white",
       fontSize: "12px",
-      width: "fitContent",
+      width: "200px",
       textAlign: "center",
       height: "auto",
       padding: isMobile ? null : "2rem",
