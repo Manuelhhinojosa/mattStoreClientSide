@@ -11,7 +11,7 @@ const Home = () => {
       <div className="absolute inset-0 -z-20 h-full w-full overflow-hidden">
         <img
           src={staticText.home.homeImgSrcHref}
-          alt=""
+          alt="home img"
           className="h-full w-full object-cover"
         />
       </div>

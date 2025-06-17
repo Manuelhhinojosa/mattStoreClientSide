@@ -12,12 +12,13 @@ const Store = () => {
   // redux & state
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state.storeSlice);
+  const staticState = useSelector((state) => state.staticTextSlice);
 
   return (
     <section className="container mx-auto flex overflow-hidden overflow-y-scroll">
       <div className="mt-32 w-full flex flex-row flex-wrap overflow-hidden p-8">
         <div className="ml-5 w-full text-2xl p-8 md:text-center md:text-3xl">
-          <p>Matt Marotti / Store</p>
+          <p> {staticState.home.homeMainTitle} / Store</p>
         </div>
         {storeState.artPieces.map((art) => (
           <div

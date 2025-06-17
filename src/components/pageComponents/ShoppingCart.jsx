@@ -13,6 +13,7 @@ import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
 const ShoppingCart = () => {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
+  const staticState = useSelector((state) => state.staticTextSlice);
   const dispatch = useDispatch();
 
   let subtotal = 0;
@@ -28,7 +29,7 @@ const ShoppingCart = () => {
     <section className="container mx-auto flex items-end lg:justify-center">
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
         <div className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
-          Matt Marotti / Shopping cart
+          {staticState.home.homeMainTitle} / Shopping cart
         </div>
 
         {storeState.shoppingCart.length > 0 ? (

@@ -9,11 +9,13 @@ import { useSelector } from "react-redux";
 const RecentWork = () => {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
+  const staticState = useSelector((state) => state.staticTextSlice);
+
   return (
     <section className="container mx-auto flex">
       <div className="mt-32 w-full flex flex-row flex-wrap mb-[150px]">
         <div className="ml-5 w-full text-2xl p-8 md:text-center md:text-3xl">
-          <p>Matt Marotti / Recent work</p>
+          <p>{staticState.home.homeMainTitle}/ Recent work</p>
         </div>
         {storeState.artPieces.map((work) =>
           work.recentWork ? (
