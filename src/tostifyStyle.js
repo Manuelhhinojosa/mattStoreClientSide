@@ -16,7 +16,7 @@ export const toastStyleObject = () => {
       fontSize: "12px",
       width: "200px",
       textAlign: "center",
-      height: "auto",
+      height: "125px",
       padding: isMobile ? null : "2rem",
       marginTop: isMobile ? "3rem" : null,
       borderRadius: isMobile ? "1rem" : null,
