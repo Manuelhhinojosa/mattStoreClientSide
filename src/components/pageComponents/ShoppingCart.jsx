@@ -28,7 +28,7 @@ const ShoppingCart = () => {
     <section className="container mx-auto flex items-end lg:justify-center">
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
         <div className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
-          Matt Marotti / Shoping cart
+          Matt Marotti / Shopping cart
         </div>
 
         {storeState.shoppingCart.length > 0 ? (
@@ -69,10 +69,10 @@ const ShoppingCart = () => {
 
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
           <div>Subtotal</div>
-          <div>{`$${subtotal}.00 CAD`}</div>
+          <div>{`$${subtotal} CAD`}</div>
         </div>
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
-          <div>taxes</div>
+          <div>Taxes</div>
           <div>{`$${taxes} CAD`}</div>
         </div>
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
@@ -80,7 +80,7 @@ const ShoppingCart = () => {
           <div>Confirm @ checkout</div>
         </div>
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
-          <div>total</div>
+          <div>Total</div>
           <div>{`$${total} CAD`}</div>
         </div>
 
