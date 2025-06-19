@@ -22,8 +22,9 @@ const login = () => {
   const navigate = useNavigate();
 
   // sign in function (temp)
-  const handleSignIn = async (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
+
     navigate("/admin");
     toast("Welcome Matt :)", toastStyleObject());
     dispatch(setisLoggedInToTrue());
