@@ -3,6 +3,12 @@ import React from "react";
 // React router V6
 import { useNavigate } from "react-router-dom";
 
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
 const login = () => {
   // React router V6
   const navigate = useNavigate();
@@ -10,6 +16,7 @@ const login = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     navigate("/admin");
+    toast("Welcome Matt :)", toastStyleObject());
   };
 
   return (

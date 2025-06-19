@@ -6,6 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 // React router V6
 import { useNavigate } from "react-router-dom";
 
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
+// Redux (functions)
 import {
   setShowAllProducts,
   setShowAddProduct,
@@ -23,7 +30,7 @@ const Admin = () => {
 
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
-      <div className="h-[100px] w-full flex flex-col justify-around items-center md:flex-row">
+      <div className="h-[100px] w-full flex flex-col justify-around items-center md:flex-row ">
         <div
           className="hover:cursor-pointer text-xl"
           onClick={() => dispatch(setShowAllProducts())}
@@ -93,7 +100,7 @@ const Admin = () => {
               </div>
               <div
                 className="text-red-900 hover:cursor-pointer mt-2"
-                onClick={() => alert("prod deleted")}
+                onClick={() => toast("Product deleted", toastStyleObject())}
               >
                 Delete product
               </div>
@@ -222,7 +229,22 @@ const Admin = () => {
 
       {/* see orders */}
       {logic.showViewOrders ? (
-        <div className="h-3/4 w-full bg-red-300">see orders</div>
+        <div className="w-full">
+          <div className="h-[100px] flex justify-center items-center text-3xl ">
+            <p>Orders</p>
+          </div>
+          <div className="h-auto">
+            {storeState.orders.length === 0 ? (
+              <div className="h-[500px] flex items-center justify-center text-3xl">
+                <p>There are no orders</p>
+              </div>
+            ) : (
+              <div>
+                <p>there are orders</p>
+              </div>
+            )}
+          </div>
+        </div>
       ) : null}
     </section>
   );

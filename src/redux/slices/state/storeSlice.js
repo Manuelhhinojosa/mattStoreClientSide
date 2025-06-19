@@ -291,6 +291,8 @@ export const storeSlice = createSlice({
       },
     ],
     shoppingCart: [],
+    // orders: [{ hello: "goodbye" }, { hello: "goodbye" }],
+    orders: [],
   },
   reducers: {
     addProdShoppingCart: (state, action) => {
