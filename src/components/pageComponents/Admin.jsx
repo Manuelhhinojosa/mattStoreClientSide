@@ -28,19 +28,40 @@ const Admin = () => {
           className="hover:cursor-pointer text-xl"
           onClick={() => dispatch(setShowAllProducts())}
         >
-          <p className="hover:text-slate-600"> see all products</p>
+          <p
+            className={`${
+              logic.showAllProducts ? "border-b-[2px] border-black" : ""
+            } hover:text-slate-600`}
+          >
+            see all products
+          </p>
         </div>
+
         <div
           className="hover:cursor-pointer  text-xl"
           onClick={() => dispatch(setShowAddProduct())}
         >
-          <p className="hover:text-slate-600"> add a product</p>
+          <p
+            className={`${
+              logic.showAddProduct ? "border-b-[2px] border-black" : ""
+            } hover:text-slate-600`}
+          >
+            {" "}
+            add a product
+          </p>
         </div>
+
         <div
           className="hover:cursor-pointer  text-xl"
           onClick={() => dispatch(setShowViewOrders())}
         >
-          <p className="hover:text-slate-600">see orders</p>
+          <p
+            className={`${
+              logic.showViewOrders ? "border-b-[2px] border-black" : ""
+            } hover:text-slate-600`}
+          >
+            see orders
+          </p>
         </div>
       </div>
 
