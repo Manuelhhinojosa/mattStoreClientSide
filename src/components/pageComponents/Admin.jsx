@@ -110,13 +110,13 @@ const Admin = () => {
                 </select>
               </div>
 
-              <div>
+              <div className="flex flex-col">
                 <label for="recentWork">Recent work?</label>
                 <select
                   name="recentWork"
                   id="recentWork"
                   required
-                  className="flex"
+                  className="border-[1px] border-black focus:outline-none"
                 >
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -126,8 +126,9 @@ const Admin = () => {
               <input
                 type="text"
                 placeholder="Title"
-                name=""
+                name="title"
                 autoComplete="off"
+                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
               />
 
               <input
@@ -135,16 +136,23 @@ const Admin = () => {
                 placeholder="Short description"
                 name="shortDesc"
                 autoComplete="off"
+                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
               />
 
               <div className="flex flex-col">
-                <label for="imgSrcHref">Image:</label>
+                <label
+                  className="text-center mb-[10px] hover:cursor-pointer hover:text-slate-600 border-b-[1px] border-b-black"
+                  for="imgSrcHref"
+                >
+                  Select image
+                </label>
                 <input
                   type="file"
                   accept="image/*"
                   name="imgSrcHref"
                   autoComplete="off"
                   id="imgSrcHref"
+                  className="hidden"
                 />
               </div>
 
@@ -153,6 +161,7 @@ const Admin = () => {
                 placeholder="Price"
                 name="cost"
                 autoComplete="off"
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
               />
 
               <input
@@ -160,6 +169,7 @@ const Admin = () => {
                 placeholder="Natiowide delivery cost"
                 name="nationwideDelivery"
                 autoComplete="off"
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
               />
 
               <input
@@ -167,11 +177,20 @@ const Admin = () => {
                 placeholder="International delivery cost"
                 name="internationalDelivery"
                 autoComplete="off"
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
               />
 
               <div className="flex flex-col">
-                <button>Add product</button>
-                <button onClick={() => dispatch(setShowAllProducts())}>
+                <button
+                  className="hover:text-slate-600 mb-[15px]"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Add product
+                </button>
+                <button
+                  className="hover:text-slate-600"
+                  onClick={() => dispatch(setShowAllProducts())}
+                >
                   Cancel
                 </button>
               </div>
