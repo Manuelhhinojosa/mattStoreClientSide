@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   toggleNavbar,
   setShowNavbarToFalse,
+  setisLoggedInToFalse,
 } from "../../redux/slices/staticState/logicSlice";
 
 // react icons
@@ -42,6 +43,16 @@ const Navbar = () => {
                   <CiShoppingCart />
                   <sub>{storeState.shoppingCart.length}</sub>
                 </p>
+              ) : link.id === 7 ? (
+                <div className="text-sm">
+                  {logic.isLoggedIn ? (
+                    <p onClick={() => dispatch(setisLoggedInToFalse())}>
+                      logout
+                    </p>
+                  ) : (
+                    <p>login</p>
+                  )}
+                </div>
               ) : (
                 link.text
               )}
@@ -64,10 +75,20 @@ const Navbar = () => {
               to={link.to}
             >
               {link.id === 6 ? (
-                <p className="text-2xl font-light flex justify-center items-center">
+                <p className="text-xl font-light flex justify-center">
                   <CiShoppingCart />
                   <sub>{storeState.shoppingCart.length}</sub>
                 </p>
+              ) : link.id === 7 ? (
+                <div className="text-sm">
+                  {logic.isLoggedIn ? (
+                    <p onClick={() => dispatch(setisLoggedInToFalse())}>
+                      logout
+                    </p>
+                  ) : (
+                    <p>login</p>
+                  )}
+                </div>
               ) : (
                 link.text
               )}

@@ -1,6 +1,12 @@
 // React Router V6
 import { Routes, Route } from "react-router-dom";
 
+// redux
+import { useSelector } from "react-redux";
+
+// Toastify component for handling errors
+import { ToastContainer } from "react-toastify";
+
 // Components
 // Page components
 import Home from "./components/pageComponents/Home";
@@ -13,18 +19,13 @@ import ShoppingCart from "./components/pageComponents/ShoppingCart";
 import Login from "./components/pageComponents/Login";
 import Admin from "./components/pageComponents/Admin";
 import Profile from "./components/pageComponents/Profile";
-
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
-// Toastify component for handling errors
-import { ToastContainer } from "react-toastify";
-
-// redux
-import { useSelector } from "react-redux";
 
 function App() {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
+  const logic = useSelector((state) => state.logicSlice);
 
   return (
     <main>
@@ -41,7 +42,7 @@ function App() {
         ))}
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Admin />} />
+        {logic.isLoggedIn ? <Route path="/admin" element={<Admin />} /> : null}
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </main>

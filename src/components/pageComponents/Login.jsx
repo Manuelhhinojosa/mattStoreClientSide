@@ -3,6 +3,11 @@ import React from "react";
 // React router V6
 import { useNavigate } from "react-router-dom";
 
+// redux
+import { useDispatch } from "react-redux";
+// redux reducers
+import { setisLoggedInToTrue } from "../../redux/slices/staticState/logicSlice";
+
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,13 +15,18 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastStyleObject } from "../../tostifyStyle";
 
 const login = () => {
+  // redux & state
+  const dispatch = useDispatch();
+
   // React router V6
   const navigate = useNavigate();
+
   // sign in function (temp)
   const handleSignIn = async (e) => {
     e.preventDefault();
     navigate("/admin");
     toast("Welcome Matt :)", toastStyleObject());
+    dispatch(setisLoggedInToTrue());
   };
 
   return (
@@ -50,7 +60,6 @@ const login = () => {
             Enter
           </button>
         </form>
-        {/*  */}
       </div>
     </section>
   );

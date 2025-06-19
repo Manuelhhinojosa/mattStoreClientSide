@@ -76,7 +76,7 @@ const Admin = () => {
       {logic.showAllProducts ? (
         <div className="h-3/4 w-full">
           <div className="h-[100px] flex justify-center items-center text-3xl ">
-            <p>All products</p>
+            <p className="border-b-[1px] border-b-black">All products</p>
           </div>
           {storeState.artPieces.map((p) => (
             <div className="mx-2 my-[25px] flex flex-col items-center">
@@ -118,7 +118,7 @@ const Admin = () => {
       {logic.showAddProduct ? (
         <div className="h-[600px] w-full">
           <div className="h-[100px] flex justify-center items-center text-3xl">
-            <p>Add a product</p>
+            <p className="border-b-[1px] border-b-black">Add a product</p>
           </div>
           <div className="h-full">
             <form
@@ -231,7 +231,7 @@ const Admin = () => {
       {logic.showViewOrders ? (
         <div className="w-full">
           <div className="h-[100px] flex justify-center items-center text-3xl ">
-            <p>Orders</p>
+            <p className="border-b-[1px] border-b-black">Orders</p>
           </div>
           <div className="h-auto">
             {storeState.orders.length === 0 ? (
@@ -240,7 +240,33 @@ const Admin = () => {
               </div>
             ) : (
               <div>
-                <p>there are orders</p>
+                {[...storeState.orders].reverse().map((order) => (
+                  <div className="p-[25px] my-[25px]">
+                    <p className="text-center text-xl mb-[25px]">
+                      Order ID: {order.orderId}
+                    </p>
+                    <p className="mb-[5px]">
+                      Order placed by: {order.fullName}
+                    </p>
+
+                    <p className="mb-[5px]">
+                      Contact email address: {order.contactEmail}
+                    </p>
+                    <p className="mb-[5px]">
+                      Contact phone number: {order.contactPhone}
+                    </p>
+                    <p className="mb-[5px]">{`Shiping Address: ${order.shippingAddress}. Unit ${order.shippingUnit}. ${order.shippingCountry}, ${order.shippingProviceState}, ${order.shippingCity}. ${order.shippingPostalCode}`}</p>
+                    <p className="mb-[5px]">
+                      Transaction date: {order.dateOfPurchase}
+                    </p>
+                    <p className="mb-[5px]">Piece ID: {order.pieceId}</p>
+                    <p className="mb-[5px]">Piece title: {order.pieceTitle}</p>
+                    <p className="mb-[5px]">
+                      Amount paid: {order.pieceCost} CAD
+                    </p>
+                    <p className="text-center mt-[25px]">+++ +++ +++</p>
+                  </div>
+                ))}
               </div>
             )}
           </div>
