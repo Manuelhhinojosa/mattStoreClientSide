@@ -4,6 +4,9 @@ export const logicSlice = createSlice({
   name: "logicSlice",
   initialState: {
     showNavbar: false,
+    showAllProducts: true,
+    showAddProduct: false,
+    showViewOrders: false,
   },
   reducers: {
     toggleNavbar: (state, action) => {
@@ -13,9 +16,32 @@ export const logicSlice = createSlice({
     setShowNavbarToFalse: (state, action) => {
       state.showNavbar = false;
     },
+    setShowAllProducts: (state, action) => {
+      state.showAllProducts = true;
+      state.showAddProduct = false;
+      state.showViewOrders = false;
+    },
+
+    setShowAddProduct: (state, action) => {
+      state.showAllProducts = false;
+      state.showAddProduct = true;
+      state.showViewOrders = false;
+    },
+
+    setShowViewOrders: (state, action) => {
+      state.showAllProducts = false;
+      state.showAddProduct = false;
+      state.showViewOrders = true;
+    },
   },
 });
 
-export const { toggleNavbar, setShowNavbarToFalse } = logicSlice.actions;
+export const {
+  toggleNavbar,
+  setShowNavbarToFalse,
+  setShowAllProducts,
+  setShowAddProduct,
+  setShowViewOrders,
+} = logicSlice.actions;
 
 export default logicSlice.reducer;

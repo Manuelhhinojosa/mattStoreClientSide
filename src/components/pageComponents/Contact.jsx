@@ -72,8 +72,8 @@ const Contact = () => {
   };
 
   return (
-    <section className="container mx-auto h-[700px]">
-      <div className="mt-32 w-ful">
+    <section className="container mx-auto h-[700px] mt-32 ">
+      <div className="w-full">
         <div className="h-[150px] text-center border-b-[1px] border-b-slate-700">
           <div className="flex justify-center items-center text-3xl h-1/2">
             {staticState.home.homeMainTitle} / Contact

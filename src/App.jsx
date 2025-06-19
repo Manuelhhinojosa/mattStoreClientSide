@@ -10,7 +10,9 @@ import Contact from "./components/pageComponents/Contact";
 import Store from "./components/pageComponents/Store";
 import SingleProd from "./components/pageComponents/SingleProd";
 import ShoppingCart from "./components/pageComponents/ShoppingCart";
-import Login from "./components/pageComponents/login";
+import Login from "./components/pageComponents/Login";
+import Admin from "./components/pageComponents/Admin";
+import Profile from "./components/pageComponents/Profile";
 
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
@@ -39,6 +41,8 @@ function App() {
         ))}
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </main>
   );

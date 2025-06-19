@@ -20,7 +20,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275640/MattMarottiClientSide/Do_You_Think_This_Is_A_Game_db63l3.jpg",
         cost: 200,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -34,7 +34,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275652/MattMarottiClientSide/Give_And_Take_vxkbmq.jpg",
         cost: 225,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -48,7 +48,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275676/MattMarottiClientSide/God_Just_Let_Her_Have_The_Apple_o048za.jpg",
         cost: 225,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -62,7 +62,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275689/MattMarottiClientSide/I_m_Thinking_About_Letting_Him_Into_My_China_Shop_u8mrur.jpg",
         cost: 250,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -76,7 +76,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275646/MattMarottiClientSide/Like_A_Bee_To_A_Bonnet_esc6l4.jpg",
         cost: 200,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -90,7 +90,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275658/MattMarottiClientSide/Maybe_A_Bit_Much_But_That_Is_My_Bread_And_Butter_eifdrk.jpg",
         cost: 200,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -104,7 +104,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275682/MattMarottiClientSide/Okay_Everybody_Get_Together_Let_Me_Take_A_Picture_xppwbl.jpg",
         cost: 250,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -118,7 +118,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275695/MattMarottiClientSide/Partir_C_est_Mourir_Un_Peu_yxqgmu.jpg",
         cost: 200,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -132,7 +132,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275664/MattMarottiClientSide/Venus_In_Surf_pbfdg4.jpg",
         cost: 250,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
@@ -146,7 +146,7 @@ export const storeSlice = createSlice({
         imgSrcHref:
           "https://res.cloudinary.com/mangud/image/upload/v1748275670/MattMarottiClientSide/When_The_Gravy_Train_Stops_Cold_Turkey_jt408e.jpg",
         cost: 200,
-        nationaWideDelivery: "$0.00 CAD",
+        nationwideDelivery: "$0.00 CAD",
         internationalDelivery: "$0.00 CAD",
       },
       {
