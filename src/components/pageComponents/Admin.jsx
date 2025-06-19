@@ -3,6 +3,9 @@ import React from "react";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 
+// React router V6
+import { useNavigate } from "react-router-dom";
+
 import {
   setShowAllProducts,
   setShowAddProduct,
@@ -14,6 +17,9 @@ const Admin = () => {
   const dispatch = useDispatch();
   const logic = useSelector((state) => state.logicSlice);
   const storeState = useSelector((state) => state.storeSlice);
+
+  // React router V6
+  const navigate = useNavigate();
 
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
@@ -42,7 +48,7 @@ const Admin = () => {
       {logic.showAllProducts ? (
         <div className="h-3/4 w-full">
           <div className="h-[100px] flex justify-center items-center text-3xl ">
-            <p className="">All products</p>
+            <p>All products</p>
           </div>
           {storeState.artPieces.map((p) => (
             <div className="mx-2 my-[25px] flex flex-col items-center">
@@ -58,8 +64,18 @@ const Admin = () => {
               <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
               <div>Natioal delivery cost: {p.nationwideDelivery}</div>
               <div>International delivery cost: {p.internationalDelivery}</div>
-              <div className="text-green-900 mt-[25px]">Edit product</div>
-              <div className="text-red-900">Delete product</div>
+              <div
+                className="text-green-900 mt-[25px] hover:cursor-pointer"
+                onClick={() => navigate("/editproduct")}
+              >
+                Edit product
+              </div>
+              <div
+                className="text-red-900 hover:cursor-pointer mt-2"
+                onClick={() => alert("prod deleted")}
+              >
+                Delete product
+              </div>
               <br />
               <br />
               <div>+++ +++ +++</div>
@@ -72,7 +88,96 @@ const Admin = () => {
 
       {/* add a product */}
       {logic.showAddProduct ? (
-        <div className="h-3/4 w-full bg-red-300">add product</div>
+        <div className="h-[600px] w-full">
+          <div className="h-[100px] flex justify-center items-center text-3xl">
+            <p>Add a product</p>
+          </div>
+          <div className="h-full">
+            <form
+              action=""
+              className="h-full flex flex-col items-center justify-evenly"
+            >
+              <div className="flex flex-col">
+                <label for="inStock">In Stock?</label>
+                <select
+                  name="inStock"
+                  id="inStock"
+                  required
+                  className="border-[1px] border-black focus:outline-none"
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="recentWork">Recent work?</label>
+                <select
+                  name="recentWork"
+                  id="recentWork"
+                  required
+                  className="flex"
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+
+              <input
+                type="text"
+                placeholder="Title"
+                name=""
+                autoComplete="off"
+              />
+
+              <input
+                type="text"
+                placeholder="Short description"
+                name="shortDesc"
+                autoComplete="off"
+              />
+
+              <div className="flex flex-col">
+                <label for="imgSrcHref">Image:</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="imgSrcHref"
+                  autoComplete="off"
+                  id="imgSrcHref"
+                />
+              </div>
+
+              <input
+                type="number"
+                placeholder="Price"
+                name="cost"
+                autoComplete="off"
+              />
+
+              <input
+                type="number"
+                placeholder="Natiowide delivery cost"
+                name="nationwideDelivery"
+                autoComplete="off"
+              />
+
+              <input
+                type="number"
+                placeholder="International delivery cost"
+                name="internationalDelivery"
+                autoComplete="off"
+              />
+
+              <div className="flex flex-col">
+                <button>Add product</button>
+                <button onClick={() => dispatch(setShowAllProducts())}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       ) : null}
 
       {/* see orders */}
