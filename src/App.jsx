@@ -22,6 +22,9 @@ import Profile from "./components/pageComponents/Profile";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 
+// Scroll top component
+import ScrollToTop from "./utils/ScrollTop";
+
 function App() {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
@@ -31,6 +34,7 @@ function App() {
     <main>
       <ToastContainer />
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
