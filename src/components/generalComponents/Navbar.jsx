@@ -53,6 +53,9 @@ const Navbar = () => {
                     <p>login</p>
                   )}
                 </div>
+              ) : // here
+              link.id === 8 ? (
+                <div>{logic.isLoggedIn ? link.text : null}</div>
               ) : (
                 link.text
               )}
@@ -89,6 +92,8 @@ const Navbar = () => {
                     <p>login</p>
                   )}
                 </div>
+              ) : link.id === 8 ? (
+                <div>{logic.isLoggedIn ? link.text : null}</div>
               ) : (
                 link.text
               )}
