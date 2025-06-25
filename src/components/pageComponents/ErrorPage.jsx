@@ -7,7 +7,7 @@ const ErrorPage = () => {
   return (
     <section className="relative  h-screen w-screen flex flex-col items-center justify-center">
       <div className="mb-10 text-2xl">
-        <p>This page does not exist</p>
+        <p>This URL does not exist</p>
       </div>
       <div>
         <Link

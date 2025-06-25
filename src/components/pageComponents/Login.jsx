@@ -66,7 +66,7 @@ const login = () => {
           />
 
           <button
-            onClick={handleSignIn2}
+            onClick={handleSignIn}
             className="hover:text-slate-600 ont-extrabold text-lg transition-all
             duration-500"
           >
