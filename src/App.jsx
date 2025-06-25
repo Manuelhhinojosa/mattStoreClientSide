@@ -19,6 +19,8 @@ import ShoppingCart from "./components/pageComponents/ShoppingCart";
 import Login from "./components/pageComponents/Login";
 import Admin from "./components/pageComponents/Admin";
 import Profile from "./components/pageComponents/Profile";
+import EditProduct from "./components/pageComponents/EditProduct";
+import ErrorPage from "./components/pageComponents/ErrorPage";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 
@@ -46,8 +48,21 @@ function App() {
         ))}
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/login" element={<Login />} />
-        {logic.isLoggedIn ? <Route path="/admin" element={<Admin />} /> : null}
-        <Route path="/profile" element={<Profile />} />
+
+        {logic.isLoggedIn && logic.isAdmin ? (
+          <Route path="/admin" element={<Admin />} />
+        ) : (
+          <Route path="/admin" element={<Login />} />
+        )}
+
+        {logic.isLoggedIn ? (
+          <Route path="/profile" element={<Profile />} />
+        ) : (
+          <Route path="/profile" element={<Login />} />
+        )}
+
+        <Route path="/editproduct" element={<EditProduct />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </main>
   );

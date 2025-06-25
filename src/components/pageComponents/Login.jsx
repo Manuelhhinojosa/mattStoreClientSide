@@ -4,9 +4,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 // redux
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // redux reducers
-import { setisLoggedInToTrue } from "../../redux/slices/staticState/logicSlice";
+import {
+  setisLoggedInToTrue,
+  setIsAdminToTrue,
+  setIsAdminToFalse,
+} from "../../redux/slices/staticState/logicSlice";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -16,18 +20,26 @@ import { toastStyleObject } from "../../tostifyStyle";
 
 const login = () => {
   // redux & state
+  const logic = useSelector((state) => state.logicSlice);
   const dispatch = useDispatch();
 
   // React router V6
   const navigate = useNavigate();
 
-  // sign in function (temp)
   const handleSignIn = (e) => {
     e.preventDefault();
-
+    dispatch(setisLoggedInToTrue());
+    dispatch(setIsAdminToTrue());
     navigate("/admin");
     toast("Welcome Matt :)", toastStyleObject());
+  };
+
+  // sign in function as non-admin (temp)
+  const handleSignIn2 = (e) => {
+    e.preventDefault();
     dispatch(setisLoggedInToTrue());
+    navigate("/profile");
+    toast("Welcome :)", toastStyleObject());
   };
 
   return (
@@ -54,7 +66,7 @@ const login = () => {
           />
 
           <button
-            onClick={handleSignIn}
+            onClick={handleSignIn2}
             className="hover:text-slate-600 ont-extrabold text-lg transition-all
             duration-500"
           >

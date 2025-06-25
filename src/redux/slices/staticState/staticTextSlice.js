@@ -11,6 +11,7 @@ export const staticTextSlice = createSlice({
       { text: "store", id: 5, to: "store" },
       { text: "cart", id: 6, to: "cart" },
       { text: "login", id: 7, to: "login" },
+      { text: "profile", id: 9, to: "profile" },
       { text: "admin", id: 8, to: "admin" },
     ],
     navbar: {

@@ -9,6 +9,7 @@ export const logicSlice = createSlice({
   name: "logicSlice",
   initialState: {
     isLoggedIn: false,
+    isAdmin: false,
     showNavbar: false,
     showAllProducts: true,
     showAddProduct: false,
@@ -44,7 +45,13 @@ export const logicSlice = createSlice({
     },
     setisLoggedInToFalse: (state, action) => {
       state.isLoggedIn = false;
-      toast("Goodbye Matt :)", toastStyleObject());
+      toast("Goodbye :)", toastStyleObject());
+    },
+    setIsAdminToTrue: (state, action) => {
+      state.isAdmin = true;
+    },
+    setIsAdminToFalse: (state, action) => {
+      state.isAdmin = false;
     },
   },
 });
@@ -57,6 +64,8 @@ export const {
   setShowViewOrders,
   setisLoggedInToTrue,
   setisLoggedInToFalse,
+  setIsAdminToTrue,
+  setIsAdminToFalse,
 } = logicSlice.actions;
 
 export default logicSlice.reducer;

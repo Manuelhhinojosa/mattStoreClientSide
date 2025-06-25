@@ -9,6 +9,7 @@ import {
   toggleNavbar,
   setShowNavbarToFalse,
   setisLoggedInToFalse,
+  setIsAdminToFalse,
 } from "../../redux/slices/staticState/logicSlice";
 
 // react icons
@@ -22,9 +23,16 @@ const Navbar = () => {
   const storeState = useSelector((state) => state.storeSlice);
   const logic = useSelector((state) => state.logicSlice);
 
+  // functions:
+  // handle sign out
+  const handleSignOut = () => {
+    dispatch(setisLoggedInToFalse());
+    dispatch(setIsAdminToFalse());
+  };
+
   return (
     <nav className="fixed top-4 z-50 w-full flex flex-col items-center">
-      <div className="flex w-full items-center justify-between overflow-hidden p-4 backdrop-blur-lg lg:m-2 lg:w-[50rem] lg:rounded-full lg:shadow-lg">
+      <div className="flex w-full my-1 items-center justify-between overflow-hidden p-4 backdrop-blur-lg lg:m-2 lg:w-[60rem] lg:rounded-full lg:shadow-lg ">
         <Link to="/">
           <img src={staticText.navbar.logoSrcHref} alt="logo" width={45} />
         </Link>
@@ -46,16 +54,16 @@ const Navbar = () => {
               ) : link.id === 7 ? (
                 <div className="text-sm">
                   {logic.isLoggedIn ? (
-                    <p onClick={() => dispatch(setisLoggedInToFalse())}>
-                      logout
-                    </p>
+                    <p onClick={handleSignOut}>logout</p>
                   ) : (
                     <p>login</p>
                   )}
                 </div>
               ) : // here
               link.id === 8 ? (
-                <div>{logic.isLoggedIn ? link.text : null}</div>
+                <div>
+                  {logic.isLoggedIn && logic.isAdmin ? link.text : null}
+                </div>
               ) : (
                 link.text
               )}
@@ -85,15 +93,15 @@ const Navbar = () => {
               ) : link.id === 7 ? (
                 <div className="text-sm">
                   {logic.isLoggedIn ? (
-                    <p onClick={() => dispatch(setisLoggedInToFalse())}>
-                      logout
-                    </p>
+                    <p onClick={handleSignOut}>logout</p>
                   ) : (
                     <p>login</p>
                   )}
                 </div>
               ) : link.id === 8 ? (
-                <div>{logic.isLoggedIn ? link.text : null}</div>
+                <div>
+                  {logic.isLoggedIn && logic.isAdmin ? link.text : null}
+                </div>
               ) : (
                 link.text
               )}
