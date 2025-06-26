@@ -92,7 +92,7 @@ const Navbar = () => {
                   <sub>{storeState.shoppingCart.length}</sub>
                 </p>
               ) : link.id === 7 ? (
-                <div className="text-sm">
+                <div>
                   {logic.isLoggedIn ? (
                     <p onClick={handleSignOut}>logout</p>
                   ) : (

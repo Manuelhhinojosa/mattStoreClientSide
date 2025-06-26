@@ -43,14 +43,17 @@ const Profile = () => {
             </Link>
           </div>
         </div>
-
         {/* Contact info */}
         <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
           <div className="mb-2">
             <p className="text-center text-xl">Contact info:</p>
           </div>
           <div>
-            <p>{`Address: ${logic.user.address}, Unit ${logic.user.addressUnit}. ${logic.user.city}, ${logic.user.proviceOrState}, ${logic.user.country}. ${logic.user.postalCode}`}</p>
+            <p>{`Address: ${logic.user.address}.  ${
+              logic.user.addressUnit ? `Unit ${logic.user.addressUnit}.` : ""
+            } ${logic.user.city}, ${logic.user.provinceOrState}, ${
+              logic.user.country
+            }. ${logic.user.postalCode}`}</p>
             <div className="flex justify-between">
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
               <Link to="/editProfile" className="border-b-[1px] border-b-black">
@@ -59,7 +62,6 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
         {/* Shipping info */}
         <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
           <div className="mb-2">
@@ -74,7 +76,15 @@ const Profile = () => {
             </div>
           ) : (
             <div>
-              <p>{`Address: ${logic.user.shippingAddress}, Unit ${logic.user.shippingAddressUnit}. ${logic.user.shippingCity}, ${logic.user.shippingProviceOrState}, ${logic.user.shippingCountry}. ${logic.user.shippingPostalCode}`}</p>
+              <p>{`Address: ${logic.user.shippingAddress}. ${
+                logic.user.shippingAddressUnit
+                  ? `Unit ${logic.user.shippingAddressUnit}.`
+                  : ""
+              } ${logic.user.shippingCity}, ${
+                logic.user.shippingProviceOrState
+              }, ${logic.user.shippingCountry}. ${
+                logic.user.shippingPostalCode
+              }`}</p>
               <div className="flex justify-between">
                 <p>{`Phone: ${logic.user.shippingtPhoneNumber}`}</p>
                 <Link
@@ -87,7 +97,6 @@ const Profile = () => {
             </div>
           )}
         </div>
-
         {/* Past orders */}
         <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
           <div className="mb-2">
@@ -101,9 +110,7 @@ const Profile = () => {
             )}
           </div>
         </div>
-
         {/* Shopping cart */}
-
         <div className="border-[1px] border-black rounded-md my-8">
           <div>
             <p className="text-center text-xl m-2">Shopping Cart:</p>
@@ -147,6 +154,16 @@ const Profile = () => {
               </Link>
             </div>
           )}
+        </div>
+        <div className="border-[1px] border-black rounded-md my-8">
+          <div>
+            <p className="text-center text-xl m-2">Danger zone:</p>
+          </div>
+          <div className="flex items-center justify-center h-[50px]">
+            <button className="text-red-900 hover:font-semibold">
+              Delete account
+            </button>
+          </div>
         </div>
       </div>
     </section>

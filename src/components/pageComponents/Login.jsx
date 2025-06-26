@@ -68,8 +68,8 @@ const login = () => {
           />
 
           <button
-            onClick={handleAdminSignIn}
-            // onClick={handleNonAdminSignIn}
+            // onClick={handleAdminSignIn}
+            onClick={handleNonAdminSignIn}
             className="hover:text-slate-600"
           >
             Login
