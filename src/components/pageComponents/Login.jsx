@@ -1,7 +1,7 @@
 import React from "react";
 
 // React router V6
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -46,7 +46,7 @@ const login = () => {
 
   return (
     <section className="container mx-auto flex items-end">
-      <div className="mt-32 w-full h-[700px] flex items-center justify-center">
+      <div className="mt-32 w-full h-[700px] flex flex-col items-center justify-center">
         {/*  */}
         <form
           action=""
@@ -70,12 +70,22 @@ const login = () => {
           <button
             onClick={handleAdminSignIn}
             // onClick={handleNonAdminSignIn}
-            className="hover:text-slate-600 ont-extrabold text-lg transition-all
-            duration-500"
+            className="hover:text-slate-600"
           >
-            Enter
+            Login
           </button>
         </form>
+        <div>
+          <p>
+            Don't have an account yet?{" "}
+            <Link
+              to="/signup"
+              className="hover:text-slate-600 border-b-[1px] border-b-black hover:border-b-slate-600"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </section>
   );

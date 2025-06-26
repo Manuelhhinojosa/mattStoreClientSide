@@ -20,7 +20,9 @@ import Login from "./components/pageComponents/Login";
 import Admin from "./components/pageComponents/Admin";
 import Profile from "./components/pageComponents/Profile";
 import EditProduct from "./components/pageComponents/EditProduct";
+import Signup from "./components/pageComponents/Signup";
 import ErrorPage from "./components/pageComponents/ErrorPage";
+
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 // Scroll top component
@@ -61,6 +63,7 @@ function App() {
         )}
 
         <Route path="/editproduct" element={<EditProduct />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </main>
