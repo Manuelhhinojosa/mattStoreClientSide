@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 // redux reducers
 import {
   setisLoggedInToTrue,
-  setIsAdminToTrue,
-  setIsAdminToFalse,
+  setAdminUser,
+  setNonAdminUser,
 } from "../../redux/slices/staticState/logicSlice";
 
 // Toastify for error and success message handling
@@ -26,20 +26,22 @@ const login = () => {
   // React router V6
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
+  // sign in function as admin (temp)
+  const handleAdminSignIn = (e) => {
     e.preventDefault();
     dispatch(setisLoggedInToTrue());
-    dispatch(setIsAdminToTrue());
+    dispatch(setAdminUser());
     navigate("/admin");
-    toast("Welcome Matt :)", toastStyleObject());
+    toast(`Welcome Matt :)`, toastStyleObject());
   };
 
   // sign in function as non-admin (temp)
-  const handleSignIn2 = (e) => {
+  const handleNonAdminSignIn = (e) => {
     e.preventDefault();
     dispatch(setisLoggedInToTrue());
+    dispatch(setNonAdminUser());
     navigate("/profile");
-    toast("Welcome :)", toastStyleObject());
+    toast(`Welcome TestName :)`, toastStyleObject());
   };
 
   return (
@@ -53,7 +55,7 @@ const login = () => {
           <input
             type="text"
             name="username"
-            placeholder="User"
+            placeholder="email"
             autoComplete="off"
             className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center"
           />
@@ -66,7 +68,8 @@ const login = () => {
           />
 
           <button
-            onClick={handleSignIn}
+            onClick={handleAdminSignIn}
+            // onClick={handleNonAdminSignIn}
             className="hover:text-slate-600 ont-extrabold text-lg transition-all
             duration-500"
           >

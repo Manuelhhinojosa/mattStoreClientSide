@@ -9,8 +9,9 @@ import {
   toggleNavbar,
   setShowNavbarToFalse,
   setisLoggedInToFalse,
-  setIsAdminToFalse,
+  setuserToNone,
 } from "../../redux/slices/staticState/logicSlice";
+import { emptyShoppingCart } from "../../redux/slices/state/storeSlice";
 
 // react icons
 import { FaTimes, FaBars } from "react-icons/fa";
@@ -27,7 +28,8 @@ const Navbar = () => {
   // handle sign out
   const handleSignOut = () => {
     dispatch(setisLoggedInToFalse());
-    dispatch(setIsAdminToFalse());
+    dispatch(setuserToNone());
+    dispatch(emptyShoppingCart());
   };
 
   return (
@@ -59,10 +61,9 @@ const Navbar = () => {
                     <p>login</p>
                   )}
                 </div>
-              ) : // here
-              link.id === 8 ? (
+              ) : link.id === 8 ? (
                 <div>
-                  {logic.isLoggedIn && logic.isAdmin ? link.text : null}
+                  {logic.isLoggedIn && logic.user.isAdmin ? link.text : null}
                 </div>
               ) : (
                 link.text
@@ -100,7 +101,7 @@ const Navbar = () => {
                 </div>
               ) : link.id === 8 ? (
                 <div>
-                  {logic.isLoggedIn && logic.isAdmin ? link.text : null}
+                  {logic.isLoggedIn && logic.user.isAdmin ? link.text : null}
                 </div>
               ) : (
                 link.text

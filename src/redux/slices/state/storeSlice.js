@@ -347,10 +347,16 @@ export const storeSlice = createSlice({
 
       toast("Item removed from your shopping cart", toastStyleObject());
     },
+    emptyShoppingCart: (state, action) => {
+      state.shoppingCart = [];
+    },
   },
 });
 
-export const { addProdShoppingCart, removeProdShoppingCart } =
-  storeSlice.actions;
+export const {
+  addProdShoppingCart,
+  removeProdShoppingCart,
+  emptyShoppingCart,
+} = storeSlice.actions;
 
 export default storeSlice.reducer;

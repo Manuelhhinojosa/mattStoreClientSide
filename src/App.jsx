@@ -23,7 +23,6 @@ import EditProduct from "./components/pageComponents/EditProduct";
 import ErrorPage from "./components/pageComponents/ErrorPage";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
-
 // Scroll top component
 import ScrollToTop from "./utils/ScrollTop";
 
@@ -49,7 +48,7 @@ function App() {
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/login" element={<Login />} />
 
-        {logic.isLoggedIn && logic.isAdmin ? (
+        {logic.isLoggedIn && logic.user.isAdmin ? (
           <Route path="/admin" element={<Admin />} />
         ) : (
           <Route path="/admin" element={<Login />} />
