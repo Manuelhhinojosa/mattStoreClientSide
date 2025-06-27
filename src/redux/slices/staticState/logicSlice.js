@@ -31,7 +31,6 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "Ontario",
       shippingCity: "Toronto",
       shippingPostalCode: "M6R3C2",
-
       // pastOrders: [{}],
       pastOrders: [],
     },
