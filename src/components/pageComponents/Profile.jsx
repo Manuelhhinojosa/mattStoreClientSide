@@ -2,8 +2,8 @@ import React from "react";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
-// import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
 import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
+import { setShowEditPasswordToTrue } from "../../redux/slices/staticState/logicSlice";
 
 //React Router 6
 import { Link } from "react-router-dom";
@@ -16,6 +16,11 @@ const Profile = () => {
   const logic = useSelector((state) => state.logicSlice);
   const storeState = useSelector((state) => state.storeSlice);
   const dispatch = useDispatch();
+
+  // functions
+  const navigateToEditPassword = () => {
+    dispatch(setShowEditPasswordToTrue());
+  };
 
   return (
     <section className="relative  h-screen w-screen flex flex-col items-center">
@@ -35,7 +40,11 @@ const Profile = () => {
           <div className="flex justify-between text-sm">
             <p>password: ******</p>
 
-            <Link to="/editprofile" className="border-b-[1px] border-b-black">
+            <Link
+              to="/editprofile"
+              className="border-b-[1px] border-b-black"
+              onClick={navigateToEditPassword}
+            >
               edit password
             </Link>
           </div>

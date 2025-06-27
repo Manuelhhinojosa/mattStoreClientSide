@@ -64,6 +64,9 @@ export const logicSlice = createSlice({
     showAllProducts: true,
     showAddProduct: false,
     showViewOrders: false,
+    showEditPassword: false,
+    showEditContactInfo: false,
+    showEditShippingInfo: false,
   },
   reducers: {
     // navbar
@@ -108,6 +111,12 @@ export const logicSlice = createSlice({
     setuserToNone: (state, action) => {
       state.user = {};
     },
+    setShowEditPasswordToTrue: (state, action) => {
+      state.showEditPassword = true;
+    },
+    setShowEditPasswordTofalse: (state, action) => {
+      state.showEditPassword = false;
+    },
   },
 });
 
@@ -122,6 +131,8 @@ export const {
   setAdminUser,
   setNonAdminUser,
   setuserToNone,
+  setShowEditPasswordToTrue,
+  setShowEditPasswordTofalse,
 } = logicSlice.actions;
 
 export default logicSlice.reducer;
