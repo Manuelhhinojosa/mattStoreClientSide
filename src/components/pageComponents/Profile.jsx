@@ -35,10 +35,7 @@ const Profile = () => {
           <div className="flex justify-between text-sm">
             <p>password: ******</p>
 
-            <Link
-              to="/changepassword"
-              className="border-b-[1px] border-b-black"
-            >
+            <Link to="/editprofile" className="border-b-[1px] border-b-black">
               edit password
             </Link>
           </div>
@@ -69,7 +66,7 @@ const Profile = () => {
           </div>
           {logic.user.contactEqualShipping ? (
             <div className="flex justify-between">
-              <p>Same as contact address</p>
+              <p>Same as contact info</p>
               <Link to="/editprofile" className="border-b-[1px] border-b-black">
                 edit
               </Link>
@@ -147,7 +144,7 @@ const Profile = () => {
             <div className="flex justify-between p-5 text-center mt-3 ">
               <p className="text-sm">Your shopping cart is empty</p>
               <Link
-                className="text-sm border-b-[1px] border-b-black"
+                className="text-sm border-b-[1px] border-b-black hover:text-slate-600 hover:border-slate-600"
                 to="/store"
               >
                 Continue shopping

@@ -20,6 +20,7 @@ import Login from "./components/pageComponents/Login";
 import Admin from "./components/pageComponents/Admin";
 import Profile from "./components/pageComponents/Profile";
 import EditProduct from "./components/pageComponents/EditProduct";
+import EditProfile from "./components/pageComponents/EditProfile";
 import Signup from "./components/pageComponents/Signup";
 import ErrorPage from "./components/pageComponents/ErrorPage";
 
@@ -63,6 +64,7 @@ function App() {
         )}
 
         <Route path="/editproduct" element={<EditProduct />} />
+        <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
