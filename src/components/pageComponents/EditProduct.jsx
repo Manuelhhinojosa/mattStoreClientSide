@@ -38,7 +38,7 @@ const EditProduct = () => {
               alt="productImage"
               className="w-[125px]"
             />
-
+            {/* in stock */}
             <div className="flex flex-col">
               <label for="inStock">In Stock?</label>
               <select
@@ -46,11 +46,21 @@ const EditProduct = () => {
                 id="inStock"
                 className="border-[1px] border-black focus:outline-none"
               >
-                <option value="true">yes</option>
-                <option value="false">No</option>
+                {product.inStock ? (
+                  <>
+                    <option value="true">yes</option>
+                    <option value="false">No</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="false">No</option>
+                    <option value="true">yes</option>
+                  </>
+                )}
               </select>
             </div>
 
+            {/* recent work */}
             <div className="flex flex-col">
               <label for="recentWork">Recent work?</label>
               <select
@@ -58,8 +68,17 @@ const EditProduct = () => {
                 id="recentWork"
                 className="border-[1px] border-black focus:outline-none"
               >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                {product.recentWork ? (
+                  <>
+                    <option value="true">yes</option>
+                    <option value="false">No</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="false">No</option>
+                    <option value="true">yes</option>
+                  </>
+                )}
               </select>
             </div>
 
