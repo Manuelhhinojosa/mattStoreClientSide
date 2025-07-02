@@ -8,8 +8,9 @@ import { toastStyleObject } from "../../../tostifyStyle";
 export const logicSlice = createSlice({
   name: "logicSlice",
   initialState: {
+    // user initial state
     user: {},
-    // for dev
+    // for dev (mock users: admin / non admin)
     adminUser: {
       isAdmin: true,
       name: "Matt",
@@ -59,6 +60,7 @@ export const logicSlice = createSlice({
       pastOrders: [],
     },
     // end for dev
+    // logic
     showPassword: false,
     isLoggedIn: false,
     showNavbar: false,
