@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // React router V6
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -24,9 +24,6 @@ const Admin = () => {
   const dispatch = useDispatch();
   const logic = useSelector((state) => state.logicSlice);
   const storeState = useSelector((state) => state.storeSlice);
-
-  // React router V6
-  const navigate = useNavigate();
 
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">

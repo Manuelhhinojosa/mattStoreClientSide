@@ -44,7 +44,6 @@ const EditProduct = () => {
               <select
                 name="inStock"
                 id="inStock"
-                required
                 className="border-[1px] border-black focus:outline-none"
               >
                 <option value="true">yes</option>
@@ -57,7 +56,6 @@ const EditProduct = () => {
               <select
                 name="recentWork"
                 id="recentWork"
-                required
                 className="border-[1px] border-black focus:outline-none"
               >
                 <option value="true">Yes</option>
