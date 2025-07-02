@@ -1,23 +1,44 @@
 import React from "react";
 
+// redux
+import { useSelector } from "react-redux";
+
 // React router V6
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const EditProduct = () => {
+  // redux & state
+  const storeState = useSelector((state) => state.storeSlice);
   // React router V6
   const navigate = useNavigate();
+  const location = useLocation();
+  // identifying single product by id in the url
+  let reference = location.pathname.slice(13);
+  let product = {};
+  storeState.artPieces.forEach((p) => {
+    if (p.id == reference) {
+      product = p;
+      return;
+    }
+  });
 
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
       <div className="h-[600px] w-full">
         <div className="h-[100px] flex justify-center items-center text-3xl">
-          <p className="border-b-[1px] border-b-black">Edit product</p>
+          <p className="border-b-[1px] border-b-black ">Edit product</p>
         </div>
         <div className="h-full">
           <form
             action=""
             className="h-full flex flex-col items-center justify-evenly"
           >
+            <img
+              src={product.imgSrcHref}
+              alt="productImage"
+              className="w-[125px] "
+            />
+
             <div className="flex flex-col">
               <label for="inStock">In Stock?</label>
               <select
@@ -46,7 +67,7 @@ const EditProduct = () => {
 
             <input
               type="text"
-              placeholder="Title"
+              placeholder={product.title}
               name="title"
               autoComplete="off"
               className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
@@ -54,32 +75,15 @@ const EditProduct = () => {
 
             <input
               type="text"
-              placeholder="Short description"
+              placeholder={product.shortDesc}
               name="shortDesc"
               autoComplete="off"
               className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
             />
 
-            <div className="flex flex-col">
-              <label
-                className="text-center mb-[10px] hover:cursor-pointer hover:text-slate-600 border-b-[1px] border-b-black"
-                for="imgSrcHref"
-              >
-                Select image
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                name="imgSrcHref"
-                autoComplete="off"
-                id="imgSrcHref"
-                className="hidden"
-              />
-            </div>
-
             <input
               type="number"
-              placeholder="Price"
+              placeholder={product.cost}
               name="cost"
               autoComplete="off"
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
@@ -87,7 +91,7 @@ const EditProduct = () => {
 
             <input
               type="number"
-              placeholder="Natiowide delivery cost"
+              placeholder={product.nationwideDelivery}
               name="nationwideDelivery"
               autoComplete="off"
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
@@ -95,7 +99,7 @@ const EditProduct = () => {
 
             <input
               type="number"
-              placeholder="International delivery cost"
+              placeholder={product.internationalDelivery}
               name="internationalDelivery"
               autoComplete="off"
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "

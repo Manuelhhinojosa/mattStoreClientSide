@@ -13,9 +13,10 @@ const SingleProd = () => {
   const dispatch = useDispatch();
   const staticState = useSelector((state) => state.staticTextSlice);
   const storeState = useSelector((state) => state.storeSlice);
+  // react router v6
   const location = useLocation();
-  let reference = location.pathname.slice(7);
   // identifying single product by id in the url
+  let reference = location.pathname.slice(7);
   let product = {};
   storeState.artPieces.forEach((p) => {
     if (p.id == reference) {
