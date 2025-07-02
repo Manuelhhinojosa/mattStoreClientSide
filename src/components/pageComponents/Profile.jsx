@@ -53,7 +53,7 @@ const Profile = () => {
           </div>
 
           <div className="flex justify-between text-sm">
-            <p>password: ******</p>
+            <p>password: {logic.user.password}</p>
 
             <Link
               to="/editprofile"

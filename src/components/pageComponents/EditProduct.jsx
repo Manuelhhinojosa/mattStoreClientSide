@@ -47,7 +47,7 @@ const EditProduct = () => {
                 required
                 className="border-[1px] border-black focus:outline-none"
               >
-                <option value="true">Yes</option>
+                <option value="true">yes</option>
                 <option value="false">No</option>
               </select>
             </div>
@@ -67,7 +67,7 @@ const EditProduct = () => {
 
             <input
               type="text"
-              placeholder={product.title}
+              placeholder={`Title: ${product.title}`}
               name="title"
               autoComplete="off"
               className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
@@ -75,7 +75,7 @@ const EditProduct = () => {
 
             <input
               type="text"
-              placeholder={product.shortDesc}
+              placeholder={`Description: ${product.shortDesc}`}
               name="shortDesc"
               autoComplete="off"
               className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
@@ -83,7 +83,7 @@ const EditProduct = () => {
 
             <input
               type="number"
-              placeholder={product.cost}
+              placeholder={`Price: ${product.cost}`}
               name="cost"
               autoComplete="off"
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
@@ -91,7 +91,7 @@ const EditProduct = () => {
 
             <input
               type="number"
-              placeholder={product.nationwideDelivery}
+              placeholder={`NDF: ${product.nationwideDelivery}`}
               name="nationwideDelivery"
               autoComplete="off"
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
@@ -99,7 +99,7 @@ const EditProduct = () => {
 
             <input
               type="number"
-              placeholder={product.internationalDelivery}
+              placeholder={`IDF: ${product.internationalDelivery}`}
               name="internationalDelivery"
               autoComplete="off"
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "

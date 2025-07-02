@@ -137,7 +137,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="contact phone number"
+                placeholder={logic.user.contactPhoneNumber}
                 name="contactPhoneNumber"
                 autocomplete="off"
               />
@@ -145,7 +145,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="address"
+                placeholder={logic.user.address}
                 name="address"
                 autocomplete="off"
               />
@@ -153,7 +153,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="unit"
+                placeholder={logic.user.addressUnit}
                 name="addressUnit"
                 autocomplete="off"
               />
@@ -161,7 +161,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="country"
+                placeholder={logic.user.country}
                 name="country"
                 autocomplete="off"
               />
@@ -169,15 +169,15 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="province or state"
-                name="proviceOrState"
+                placeholder={logic.user.provinceOrState}
+                name="provinceOrState"
                 autocomplete="off"
               />
 
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="city"
+                placeholder={logic.user.city}
                 name="city"
                 autocomplete="off"
               />
@@ -185,7 +185,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="postal code"
+                placeholder={logic.user.postalCode}
                 name="postalCode"
                 autocomplete="off"
               />
@@ -232,7 +232,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="shipping phone number"
+                placeholder={logic.user.shippingPhoneNumber}
                 name="shippingPhoneNumber"
                 autocomplete="off"
               />
@@ -240,7 +240,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="shipping address"
+                placeholder={logic.user.shippingAddress}
                 name="shippingAddress"
                 autocomplete="off"
               />
@@ -248,7 +248,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="shipping unit"
+                placeholder={logic.user.shippingAddressUnit}
                 name="shippingAddressUnit"
                 autocomplete="off"
               />
@@ -256,7 +256,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="shipping country"
+                placeholder={logic.user.shippingCountry}
                 name="shippingCountry"
                 autocomplete="off"
               />
@@ -264,7 +264,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="shipping province or state"
+                placeholder={logic.user.shippingProviceOrState}
                 name="shippingProviceOrState"
                 autocomplete="off"
               />
@@ -272,7 +272,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="shipping city"
+                placeholder={logic.user.shippingCity}
                 name="shippingCity"
                 autocomplete="off"
               />
@@ -280,7 +280,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder="shipping postal code"
+                placeholder={logic.user.shippingPostalCode}
                 name="shippingPostalCode"
                 autocomplete="off"
               />

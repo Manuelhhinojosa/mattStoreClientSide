@@ -45,28 +45,36 @@ function App() {
         <Route path="/recent" element={<RecentWork />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/store" element={<Store />} />
+
         {storeState.artPieces.map((p) => (
           <Route key={p.id} path={`/store/${p.id}`} element={<SingleProd />} />
         ))}
+
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/login" element={<Login />} />
+
         {logic.isLoggedIn && logic.user.isAdmin ? (
           <Route path="/admin" element={<Admin />} />
         ) : (
           <Route path="/admin" element={<Login />} />
         )}
+
         {logic.isLoggedIn ? (
           <Route path="/profile" element={<Profile />} />
         ) : (
           <Route path="/profile" element={<Login />} />
         )}
-        {storeState.artPieces.map((p) => (
-          <Route
-            key={p.id}
-            path={`/editproduct/${p.id}`}
-            element={<EditProduct />}
-          />
-        ))}
+
+        {logic.isLoggedIn && logic.user.isAdmin
+          ? storeState.artPieces.map((p) => (
+              <Route
+                key={p.id}
+                path={`/editproduct/${p.id}`}
+                element={<EditProduct />}
+              />
+            ))
+          : null}
+
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErrorPage />} />
