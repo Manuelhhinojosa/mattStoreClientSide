@@ -59,6 +59,7 @@ export const logicSlice = createSlice({
       pastOrders: [],
     },
     // end for dev
+    showPassword: false,
     isLoggedIn: false,
     showNavbar: false,
     showAllProducts: true,
@@ -139,6 +140,10 @@ export const logicSlice = createSlice({
     setShowEditShippingInfoTofalse: (state, action) => {
       state.showEditShippingInfo = false;
     },
+    // logic for showing / hiding password in profile page
+    toggleShowPassword: (state, action) => {
+      state.showPassword = !state.showPassword;
+    },
   },
 });
 
@@ -159,6 +164,7 @@ export const {
   setShowEditContactInfoTofalse,
   setShowEditShippingInfoToTrue,
   setShowEditShippingInfoTofalse,
+  toggleShowPassword,
 } = logicSlice.actions;
 
 export default logicSlice.reducer;

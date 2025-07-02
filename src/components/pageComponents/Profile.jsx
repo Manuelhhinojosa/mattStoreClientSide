@@ -7,6 +7,7 @@ import {
   setShowEditPasswordToTrue,
   setShowEditContactInfoToTrue,
   setShowEditShippingInfoToTrue,
+  toggleShowPassword,
 } from "../../redux/slices/staticState/logicSlice";
 
 //React Router 6
@@ -14,6 +15,9 @@ import { Link } from "react-router-dom";
 
 // react icons
 import { FaTimes } from "react-icons/fa";
+import { GoEyeClosed } from "react-icons/go";
+import { RxEyeOpen } from "react-icons/rx";
+import { MdOutlinePassword } from "react-icons/md";
 
 const Profile = () => {
   // redux & state
@@ -53,7 +57,25 @@ const Profile = () => {
           </div>
 
           <div className="flex justify-between text-sm">
-            <p>password: {logic.user.password}</p>
+            <div className="flex">
+              {logic.showPassword ? (
+                <p className="mr-5">password: {logic.user.password}</p>
+              ) : (
+                <p className="mr-5">password: *****</p>
+              )}
+
+              {logic.showPassword ? (
+                <GoEyeClosed
+                  className="text-xl hover:cursor-pointer"
+                  onClick={() => dispatch(toggleShowPassword())}
+                />
+              ) : (
+                <RxEyeOpen
+                  className="text-xl hover:cursor-pointer"
+                  onClick={() => dispatch(toggleShowPassword())}
+                />
+              )}
+            </div>
 
             <Link
               to="/editprofile"
