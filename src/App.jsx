@@ -63,7 +63,14 @@ function App() {
           <Route path="/profile" element={<Login />} />
         )}
 
-        <Route path="/editproduct" element={<EditProduct />} />
+        {storeState.artPieces.map((p) => (
+          <Route
+            key={p.id}
+            path={`/editproduct/${p.id}`}
+            element={<EditProduct />}
+          />
+        ))}
+
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErrorPage />} />

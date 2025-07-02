@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // React router V6
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -92,11 +92,8 @@ const Admin = () => {
               <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
               <div>Natioal delivery cost: {p.nationwideDelivery}</div>
               <div>International delivery cost: {p.internationalDelivery}</div>
-              <div
-                className="text-green-900 mt-[25px] hover:cursor-pointer"
-                onClick={() => navigate("/editproduct")}
-              >
-                Edit product
+              <div className="text-green-900 mt-[25px] hover:cursor-pointer">
+                <Link to={`/editproduct/${p.id}`}>Edit product</Link>
               </div>
               <div
                 className="text-red-900 hover:cursor-pointer mt-2"
