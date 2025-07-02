@@ -36,7 +36,7 @@ const EditProduct = () => {
             <img
               src={product.imgSrcHref}
               alt="productImage"
-              className="w-[125px] "
+              className="w-[125px]"
             />
 
             <div className="flex flex-col">
