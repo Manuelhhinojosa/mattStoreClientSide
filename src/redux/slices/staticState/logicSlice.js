@@ -24,8 +24,8 @@ export const logicSlice = createSlice({
       city: "Toronto",
       postalCode: "M6R3C2",
       contactEqualShipping: true,
-      shippingtPhoneNumber: "6472874494",
-      shippingAddress: "Address test Avenue",
+      shippingPhoneNumber: "6472874494",
+      shippingAddress: "000 Address Test Avenue",
       shippingAddressUnit: "301",
       shippingCountry: "Canada",
       shippingProviceOrState: "Ontario",
@@ -48,7 +48,7 @@ export const logicSlice = createSlice({
       city: "Toronto",
       postalCode: "M6R3C2",
       contactEqualShipping: false,
-      shippingtPhoneNumber: "6472874494",
+      shippingPhoneNumber: "6472874494",
       shippingAddress: "Address test Road",
       shippingAddressUnit: "498",
       shippingCountry: "USA",
@@ -111,11 +111,33 @@ export const logicSlice = createSlice({
     setuserToNone: (state, action) => {
       state.user = {};
     },
+    // edit profile component logic
+    // edit password page
     setShowEditPasswordToTrue: (state, action) => {
       state.showEditPassword = true;
+      state.showEditContactInfo = false;
+      state.showEditShippingInfo = false;
     },
     setShowEditPasswordTofalse: (state, action) => {
       state.showEditPassword = false;
+    },
+    // edit contact info page
+    setShowEditContactInfoToTrue: (state, action) => {
+      state.showEditPassword = false;
+      state.showEditContactInfo = true;
+      state.showEditShippingInfo = false;
+    },
+    setShowEditContactInfoTofalse: (state, action) => {
+      state.showEditContactInfo = false;
+    },
+    // edit shipping info page
+    setShowEditShippingInfoToTrue: (state, action) => {
+      state.showEditPassword = false;
+      state.showEditContactInfo = false;
+      state.showEditShippingInfo = true;
+    },
+    setShowEditShippingInfoTofalse: (state, action) => {
+      state.showEditShippingInfo = false;
     },
   },
 });
@@ -133,6 +155,10 @@ export const {
   setuserToNone,
   setShowEditPasswordToTrue,
   setShowEditPasswordTofalse,
+  setShowEditContactInfoToTrue,
+  setShowEditContactInfoTofalse,
+  setShowEditShippingInfoToTrue,
+  setShowEditShippingInfoTofalse,
 } = logicSlice.actions;
 
 export default logicSlice.reducer;

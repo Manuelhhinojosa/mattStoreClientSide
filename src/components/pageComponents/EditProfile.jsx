@@ -2,7 +2,11 @@ import React from "react";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import { setShowEditPasswordTofalse } from "../../redux/slices/staticState/logicSlice";
+import {
+  setShowEditPasswordTofalse,
+  setShowEditContactInfoTofalse,
+  setShowEditShippingInfoTofalse,
+} from "../../redux/slices/staticState/logicSlice";
 
 // React router V6
 import { useNavigate } from "react-router-dom";
@@ -22,20 +26,52 @@ const EditProfile = () => {
   const navigate = useNavigate();
 
   // functions
+  //   for edit password page
   const handleEditPassword = (e) => {
     e.preventDefault();
     dispatch(setShowEditPasswordTofalse());
     navigate("/profile");
     toast(`Password updated`, toastStyleObject());
   };
+
   const handleCancelEditPassword = (e) => {
     e.preventDefault();
     dispatch(setShowEditPasswordTofalse());
     navigate("/profile");
   };
 
+  //   for edit contact info page
+  const handleEditContactInfo = (e) => {
+    e.preventDefault();
+    dispatch(setShowEditContactInfoTofalse());
+    navigate("/profile");
+    toast(`Contact info updated`, toastStyleObject());
+  };
+
+  const handleCancelEditContactInfo = (e) => {
+    e.preventDefault();
+    dispatch(setShowEditContactInfoTofalse());
+    navigate("/profile");
+  };
+
+  // for edit shipping info page
+
+  const handleEditShippingInfo = (e) => {
+    e.preventDefault();
+    dispatch(setShowEditShippingInfoTofalse());
+    navigate("/profile");
+    toast(`Shipping info updated`, toastStyleObject());
+  };
+
+  const handleCancelEditShippingInfo = (e) => {
+    e.preventDefault();
+    dispatch(setShowEditShippingInfoTofalse());
+    navigate("/profile");
+  };
+
   return (
     <section className="container mx-auto h-auto mt-32">
+      {/* Edit password page */}
       {logic.showEditPassword ? (
         <>
           <div className="h-[100px] flex items-center justify-center">
@@ -76,7 +112,199 @@ const EditProfile = () => {
               >
                 Edit Password
               </button>
-              <button className="mt-5" onClick={handleCancelEditPassword}>
+              <button
+                className="mt-5 hover:text-slate-600"
+                onClick={handleCancelEditPassword}
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </>
+      ) : null}
+
+      {/* Edit contact info page */}
+      {logic.showEditContactInfo ? (
+        <>
+          <div className="h-[100px] flex items-center justify-center">
+            <p className="text-center text-3xl">Edit contact info</p>
+          </div>
+          <div className="h-[600px] w-full">
+            <form
+              action=""
+              className="h-full flex flex-col items-center justify-center"
+            >
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="contact phone number"
+                name="contactPhoneNumber"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="address"
+                name="address"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="unit"
+                name="addressUnit"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="country"
+                name="country"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="province or state"
+                name="proviceOrState"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="city"
+                name="city"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="postal code"
+                name="postalCode"
+                autocomplete="off"
+              />
+
+              <label htmlFor="contactSameShipping" className="mt-5">
+                Edit shipping info to match the new contact info?
+              </label>
+              <input
+                id="contactSameShipping"
+                type="checkbox"
+                name="contactEqualShipping"
+                className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
+              />
+
+              <button
+                className="mt-5 hover:text-slate-600"
+                onClick={handleEditContactInfo}
+              >
+                Edit contact info
+              </button>
+              <button
+                className="mt-5 hover:text-slate-600"
+                onClick={handleCancelEditContactInfo}
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </>
+      ) : null}
+
+      {/* Edit shipping info page */}
+
+      {logic.showEditShippingInfo ? (
+        <>
+          <div className="h-[100px] flex items-center justify-center">
+            <p className="text-center text-3xl">Edit Shipping info</p>
+          </div>
+          <div className="h-[600px] w-full">
+            <form
+              action=""
+              className="h-full flex flex-col items-center justify-center"
+            >
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="shipping phone number"
+                name="shippingPhoneNumber"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="shipping address"
+                name="shippingAddress"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="shipping unit"
+                name="shippingAddressUnit"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="shipping country"
+                name="shippingCountry"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="shipping province or state"
+                name="shippingProviceOrState"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="shipping city"
+                name="shippingCity"
+                autocomplete="off"
+              />
+
+              <input
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                type="text"
+                placeholder="shipping postal code"
+                name="shippingPostalCode"
+                autocomplete="off"
+              />
+
+              <label htmlFor="contactSameShipping" className="mt-5">
+                Edit contact info to match the new shipping info?
+              </label>
+              <input
+                id="contactSameShipping"
+                type="checkbox"
+                name="contactEqualShipping"
+                className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
+              />
+
+              <button
+                className="mt-5 hover:text-slate-600"
+                onClick={handleEditShippingInfo}
+              >
+                Edit shipping info
+              </button>
+              <button
+                className="mt-5 hover:text-slate-600"
+                onClick={handleCancelEditShippingInfo}
+              >
                 Cancel
               </button>
             </form>

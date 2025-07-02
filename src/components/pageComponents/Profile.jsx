@@ -3,7 +3,11 @@ import React from "react";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
-import { setShowEditPasswordToTrue } from "../../redux/slices/staticState/logicSlice";
+import {
+  setShowEditPasswordToTrue,
+  setShowEditContactInfoToTrue,
+  setShowEditShippingInfoToTrue,
+} from "../../redux/slices/staticState/logicSlice";
 
 //React Router 6
 import { Link } from "react-router-dom";
@@ -18,8 +22,19 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   // functions
+  // go to edit password page
   const navigateToEditPassword = () => {
     dispatch(setShowEditPasswordToTrue());
+  };
+
+  // go to edit contact info page
+  const navigateToEditContactInfo = () => {
+    dispatch(setShowEditContactInfoToTrue());
+  };
+
+  // go to edit shipping info page
+  const navigateToEditShippingInfo = () => {
+    dispatch(setShowEditShippingInfoToTrue());
   };
 
   return (
@@ -62,7 +77,11 @@ const Profile = () => {
             }. ${logic.user.postalCode}`}</p>
             <div className="flex justify-between">
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
-              <Link to="/editProfile" className="border-b-[1px] border-b-black">
+              <Link
+                to="/editProfile"
+                className="border-b-[1px] border-b-black"
+                onClick={navigateToEditContactInfo}
+              >
                 edit
               </Link>
             </div>
@@ -76,7 +95,11 @@ const Profile = () => {
           {logic.user.contactEqualShipping ? (
             <div className="flex justify-between">
               <p>Same as contact info</p>
-              <Link to="/editprofile" className="border-b-[1px] border-b-black">
+              <Link
+                to="/editprofile"
+                className="border-b-[1px] border-b-black"
+                onClick={navigateToEditShippingInfo}
+              >
                 edit
               </Link>
             </div>
@@ -92,10 +115,11 @@ const Profile = () => {
                 logic.user.shippingPostalCode
               }`}</p>
               <div className="flex justify-between">
-                <p>{`Phone: ${logic.user.shippingtPhoneNumber}`}</p>
+                <p>{`Phone: ${logic.user.shippingPhoneNumber}`}</p>
                 <Link
                   to="/editprofile"
                   className="border-b-[1px] border-b-black"
+                  onClick={navigateToEditShippingInfo}
                 >
                   edit
                 </Link>
