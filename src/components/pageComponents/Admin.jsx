@@ -17,6 +17,7 @@ import {
   setShowAllProducts,
   setShowAddProduct,
   setShowViewOrders,
+  setShowMembersInfo,
 } from "../../redux/slices/staticState/logicSlice";
 
 const Admin = () => {
@@ -24,10 +25,20 @@ const Admin = () => {
   const dispatch = useDispatch();
   const logic = useSelector((state) => state.logicSlice);
   const storeState = useSelector((state) => state.storeSlice);
+  // for dev (to build front end of users info page)
+  const users = [];
+  users.push(
+    logic.adminUser,
+    logic.nonAdminUser,
+    logic.nonAdminUser2,
+    logic.nonAdminUser3
+  );
 
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
+      {/* navbar */}
       <div className="h-[100px] w-full flex flex-col justify-around items-center md:flex-row ">
+        {/* see all prods */}
         <div
           className="hover:cursor-pointer text-xl"
           onClick={() => dispatch(setShowAllProducts())}
@@ -41,6 +52,7 @@ const Admin = () => {
           </p>
         </div>
 
+        {/* add a prod */}
         <div
           className="hover:cursor-pointer  text-xl"
           onClick={() => dispatch(setShowAddProduct())}
@@ -50,11 +62,11 @@ const Admin = () => {
               logic.showAddProduct ? "border-b-[2px] border-black" : ""
             } hover:text-slate-600`}
           >
-            {" "}
             add a product
           </p>
         </div>
 
+        {/* see orders */}
         <div
           className="hover:cursor-pointer  text-xl"
           onClick={() => dispatch(setShowViewOrders())}
@@ -65,6 +77,20 @@ const Admin = () => {
             } hover:text-slate-600`}
           >
             see orders
+          </p>
+        </div>
+
+        {/* see users info */}
+        <div
+          className="hover:cursor-pointer  text-xl"
+          onClick={() => dispatch(setShowMembersInfo())}
+        >
+          <p
+            className={`${
+              logic.showMembersInfo ? "border-b-[2px] border-black" : ""
+            } hover:text-slate-600`}
+          >
+            see members info
           </p>
         </div>
       </div>
@@ -259,6 +285,92 @@ const Admin = () => {
                       Amount paid: {order.pieceCost} CAD
                     </p>
                     <p className="text-center mt-[25px]">+++ +++ +++</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ) : null}
+
+      {/* see users info */}
+      {logic.showMembersInfo ? (
+        <div className="w-full">
+          <div className="h-[100px] flex justify-center items-center text-3xl ">
+            <p className="border-b-[1px] border-b-black">Members' info</p>
+          </div>
+          <div className="h-auto">
+            {users.length === 0 ? (
+              <div className="h-[500px] flex items-center justify-center text-3xl">
+                <p>There are no members yet</p>
+              </div>
+            ) : (
+              <div>
+                {users.map((user) => (
+                  <div className="p-[25px] my-[50px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10">
+                    <p className="text-center mb-[25px] border-[1px] border-black rounded-xl text-3xl p-4">
+                      {`${user.name} ${user.lastname}`}
+                    </p>
+
+                    <div className="border-[1px] border-black rounded-xl p-5 flex flex-col items-center justify-center lg:flex-row lg:justify-between">
+                      <p className="">{user.username}</p>
+
+                      {user.contactPhoneNumber ? (
+                        <p className="mt-5 lg:mt-0">
+                          {user.contactPhoneNumber}
+                        </p>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+
+                    {user.address ? (
+                      <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
+                        Contact address:{" "}
+                        {`${user.address}. ${
+                          user.addressUnit ? `Unit ${user.addressUnit}.` : ""
+                        } ${user.city}, ${user.provinceOrState}. ${
+                          user.country
+                        }. ${user.postalCode} `}
+                      </p>
+                    ) : (
+                      ""
+                    )}
+
+                    {user.contactEqualShipping ? (
+                      <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
+                        shipping info is the same as contact info
+                      </p>
+                    ) : user.shippingPhoneNumber ? (
+                      <div className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
+                        <p className="">
+                          shipping phone number: {user.shippingPhoneNumber}
+                        </p>
+
+                        <p className="mt-5">
+                          Shipping address:{" "}
+                          {`${user.shippingAddress}. ${
+                            user.shippingAddressUnit
+                              ? `Unit ${user.shippingAddressUnit}.`
+                              : ""
+                          }   ${user.shippingCity}, ${
+                            user.shippingProviceOrState
+                          }. ${user.shippingCountry}. ${
+                            user.shippingPostalCode
+                          } `}
+                        </p>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    <div className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
+                      <p>Past orders:</p>
+                      {user.pastOrders.length > 0 ? (
+                        <p>there are past oders</p>
+                      ) : (
+                        <p>there aren't any past orders</p>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

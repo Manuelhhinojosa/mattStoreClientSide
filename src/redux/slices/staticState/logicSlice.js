@@ -27,7 +27,7 @@ export const logicSlice = createSlice({
       contactEqualShipping: true,
       shippingPhoneNumber: "6472874494",
       shippingAddress: "000 Address Test Avenue",
-      shippingAddressUnit: "301",
+      shippingAddressUnit: "",
       shippingCountry: "Canada",
       shippingProviceOrState: "Ontario",
       shippingCity: "Toronto",
@@ -43,30 +43,84 @@ export const logicSlice = createSlice({
       password: "userPassword",
       contactPhoneNumber: "6472874494",
       address: "87 Address test Avenue",
-      addressUnit: "",
+      addressUnit: "456",
       country: "Canada",
       provinceOrState: "Ontario",
       city: "Toronto",
       postalCode: "M6R3C2",
       contactEqualShipping: false,
       shippingPhoneNumber: "6472874494",
-      shippingAddress: "Address test Road",
-      shippingAddressUnit: "498",
+      shippingAddress: "376 Address test Road",
+      shippingAddressUnit: "",
       shippingCountry: "USA",
       shippingProviceOrState: "California",
       shippingCity: "San Francisco",
       shippingPostalCode: "123456",
+      pastOrders: [{}],
+      // pastOrders: [],
+    },
+    nonAdminUser2: {
+      isAdmin: false,
+      name: "TestName",
+      lastname: "TestLastName",
+      username: "testname.testlastname@gmail.com",
+      password: "userPassword",
+      contactPhoneNumber: "",
+      address: "",
+      addressUnit: "",
+      country: "",
+      provinceOrState: "",
+      city: "",
+      postalCode: "",
+      contactEqualShipping: false,
+      shippingPhoneNumber: "",
+      shippingAddress: "",
+      shippingAddressUnit: "",
+      shippingCountry: "",
+      shippingProviceOrState: "",
+      shippingCity: "",
+      shippingPostalCode: "",
+      // pastOrders: [{}],
+      pastOrders: [],
+    },
+    nonAdminUser3: {
+      isAdmin: false,
+      name: "TestName",
+      lastname: "TestLastName",
+      username: "testname.testlastname@gmail.com",
+      password: "userPassword",
+      contactPhoneNumber: "1234567890",
+      address: "",
+      addressUnit: "",
+      country: "",
+      provinceOrState: "",
+      city: "",
+      postalCode: "",
+      contactEqualShipping: false,
+      shippingPhoneNumber: "",
+      shippingAddress: "",
+      shippingAddressUnit: "",
+      shippingCountry: "",
+      shippingProviceOrState: "",
+      shippingCity: "",
+      shippingPostalCode: "",
       // pastOrders: [{}],
       pastOrders: [],
     },
     // end for dev
+    //
     // logic
-    showPassword: false,
     isLoggedIn: false,
     showNavbar: false,
+    // profile page
+    showPassword: false,
+
+    // admin page
     showAllProducts: true,
     showAddProduct: false,
     showViewOrders: false,
+    showMembersInfo: false,
+    // edit profile page
     showEditPassword: false,
     showEditContactInfo: false,
     showEditShippingInfo: false,
@@ -85,16 +139,25 @@ export const logicSlice = createSlice({
       state.showAllProducts = true;
       state.showAddProduct = false;
       state.showViewOrders = false;
+      state.showMembersInfo = false;
     },
     setShowAddProduct: (state, action) => {
       state.showAllProducts = false;
       state.showAddProduct = true;
       state.showViewOrders = false;
+      state.showMembersInfo = false;
     },
     setShowViewOrders: (state, action) => {
       state.showAllProducts = false;
       state.showAddProduct = false;
       state.showViewOrders = true;
+      state.showMembersInfo = false;
+    },
+    setShowMembersInfo: (state, action) => {
+      state.showAllProducts = false;
+      state.showAddProduct = false;
+      state.showViewOrders = false;
+      state.showMembersInfo = true;
     },
     // setting logged in status
     setisLoggedInToTrue: (state, action) => {
@@ -155,6 +218,7 @@ export const {
   setShowAllProducts,
   setShowAddProduct,
   setShowViewOrders,
+  setShowMembersInfo,
   setisLoggedInToTrue,
   setisLoggedInToFalse,
   setAdminUser,
