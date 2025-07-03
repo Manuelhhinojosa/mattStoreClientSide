@@ -33,7 +33,7 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "Ontario",
       shippingCity: "Toronto",
       shippingPostalCode: "M6R3C2",
-      // pastOrders: [{}],
+
       pastOrders: [],
     },
     nonAdminUser: {
@@ -58,8 +58,38 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "California",
       shippingCity: "San Francisco",
       shippingPostalCode: "123456",
-      pastOrders: [{}],
-      // pastOrders: [],
+      pastOrders: [
+        {
+          id: 19,
+          date: "date",
+          inStock: true,
+          added: false,
+          recentWork: true,
+          title: `"To A Sphinx With A Riddle, Everything Is A Complex"`,
+          shortDesc: "Pending",
+          largeDesc: "Pending",
+          imgSrcHref:
+            "https://res.cloudinary.com/mangud/image/upload/v1748265574/MattMarottiClientSide/To_A_Sphinx_With_A_Riddle_Everything_Is_A_Complex_o3azkm.jpg",
+          cost: 200,
+          nationwideDelivery: 40,
+          internationalDelivery: 50,
+        },
+        {
+          id: 20,
+          date: "date",
+          inStock: true,
+          added: false,
+          recentWork: true,
+          title: `"They Don't Make Men Like They Used To"`,
+          shortDesc: "Pending",
+          largeDesc: "Pending",
+          imgSrcHref:
+            "https://res.cloudinary.com/mangud/image/upload/v1748265570/MattMarottiClientSide/They_Don_t_Make_Men_Like_They_Used_To_fe4gao.jpg",
+          cost: 200,
+          nationwideDelivery: 40,
+          internationalDelivery: 50,
+        },
+      ],
     },
     nonAdminUser2: {
       isAdmin: false,
@@ -83,7 +113,7 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "",
       shippingCity: "",
       shippingPostalCode: "",
-      // pastOrders: [{}],
+
       pastOrders: [],
     },
     nonAdminUser3: {
@@ -108,8 +138,48 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "",
       shippingCity: "",
       shippingPostalCode: "",
-      // pastOrders: [{}],
+
       pastOrders: [],
+    },
+    nonAdminUser4: {
+      isAdmin: false,
+      isActive: true,
+      name: "TestName",
+      lastname: "TestLastName",
+      username: "testname.testlastname@gmail.com",
+      password: "userPassword",
+      contactPhoneNumber: "6472874494",
+      address: "87 Address test Avenue",
+      addressUnit: "456",
+      country: "Canada",
+      provinceOrState: "Ontario",
+      city: "Toronto",
+      postalCode: "M6R3C2",
+      contactEqualShipping: false,
+      shippingPhoneNumber: "6472874494",
+      shippingAddress: "376 Address test Road",
+      shippingAddressUnit: "",
+      shippingCountry: "USA",
+      shippingProviceOrState: "California",
+      shippingCity: "San Francisco",
+      shippingPostalCode: "123456",
+      pastOrders: [
+        {
+          id: 18,
+          date: "date",
+          inStock: true,
+          added: false,
+          recentWork: true,
+          title: `"Sorry, Didn't Mean To Cut You Off"`,
+          shortDesc: "Pending",
+          largeDesc: "Pending",
+          imgSrcHref:
+            "https://res.cloudinary.com/mangud/image/upload/v1748265583/MattMarottiClientSide/Sorry_Didn_t_Mean_To_Cut_You_Off_gotsme.jpg",
+          cost: 200,
+          nationwideDelivery: 40,
+          internationalDelivery: 50,
+        },
+      ],
     },
     // end for dev
     //

@@ -31,7 +31,8 @@ const Admin = () => {
     logic.adminUser,
     logic.nonAdminUser,
     logic.nonAdminUser2,
-    logic.nonAdminUser3
+    logic.nonAdminUser3,
+    logic.nonAdminUser4
   );
 
   return (
@@ -261,31 +262,13 @@ const Admin = () => {
             ) : (
               <div>
                 {[...storeState.orders].reverse().map((order) => (
-                  <div className="p-[25px] my-[25px]">
-                    <p className="text-center text-xl mb-[25px]">
-                      Order ID: {order.orderId}
-                    </p>
-                    <p className="mb-[5px]">
-                      Order placed by: {order.fullName}
-                    </p>
-
-                    <p className="mb-[5px]">
-                      Contact email address: {order.contactEmail}
-                    </p>
-                    <p className="mb-[5px]">
-                      Contact phone number: {order.contactPhone}
-                    </p>
-                    <p className="mb-[5px]">{`Shiping Address: ${order.shippingAddress}. Unit ${order.shippingUnit}. ${order.shippingCountry}, ${order.shippingProviceState}, ${order.shippingCity}. ${order.shippingPostalCode}`}</p>
-                    <p className="mb-[5px]">
-                      Transaction date: {order.dateOfPurchase}
-                    </p>
-                    <p className="mb-[5px]">Piece ID: {order.pieceId}</p>
-                    <p className="mb-[5px]">Piece title: {order.pieceTitle}</p>
-                    <p className="mb-[5px]">
-                      Amount paid: {order.pieceCost} CAD
-                    </p>
-                    <p className="text-center mt-[25px]">+++ +++ +++</p>
-                  </div>
+                  // here !!!!!!!!!!!!!!!!!!!!!!!!!!!
+                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                  <p className="p-[25px] my-[25px]">there are orders</p>
+                  // here !!!!!!!!!!!!!!!!!!!!!!!!!!!
+                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 ))}
               </div>
             )}
@@ -369,10 +352,35 @@ const Admin = () => {
                     ) : (
                       ""
                     )}
-                    <div className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
-                      <p>Past orders:</p>
+                    <div className="border-[2px] border-black rounded-lg my-5 p-10 text-center">
+                      <p className="text-xl">Past orders:</p>
                       {user.pastOrders.length > 0 ? (
-                        <p>there are past oders</p>
+                        // here !!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        user.pastOrders.map((order) => (
+                          <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
+                            <p className="pt-5">{`Date of purcharse: ${order.date}`}</p>
+                            <div className="flex flex-col items-center md:flex-row justify-between lg:justify-around p-5">
+                              <img
+                                src={order.imgSrcHref}
+                                alt="productImg"
+                                className="w-[125px] my-5"
+                              />
+
+                              <div>
+                                <p className="text-sm py-1">{`${order.title}`}</p>
+                                <p className="text-sm py-1">{`${order.shortDesc}`}</p>
+                                <p className="text-sm py-1">{`Total amount paid: $${
+                                  (order.cost + order.nationwideDelivery) *
+                                    0.13 +
+                                  order.cost +
+                                  order.nationwideDelivery
+                                } CAD`}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))
                       ) : (
                         <p>there aren't any past orders</p>
                       )}

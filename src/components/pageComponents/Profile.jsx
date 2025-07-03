@@ -150,15 +150,41 @@ const Profile = () => {
           )}
         </div>
         {/* Past orders */}
-        <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
+        <div className="p-2 mt-3 border-[2px] border-black rounded-md text-sm">
           <div className="mb-2">
             <p className="text-center text-xl">Past orders:</p>
           </div>
           <div>
-            {logic.user.pastOrders.length === 0 ? (
-              <p className="text-center">No past orders</p>
+            {logic.user.pastOrders.length > 0 ? (
+              logic.user.pastOrders.map((order) => (
+                <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
+                  <p className="pt-5 text-center">{`Date of purcharse: ${order.date}`}</p>
+                  <div className="flex flex-col items-center md:flex-row md:justify-between p-5">
+                    <img
+                      src={order.imgSrcHref}
+                      alt="productImg"
+                      className="w-[125px] my-5"
+                    />
+
+                    <div>
+                      <p className="text-sm py-1 text-center">{`${order.title}`}</p>
+                      <p className="text-sm py-1 text-center">{`${order.shortDesc}`}</p>
+                      <p className="text-sm py-1 text-center">{`Total amount paid: $${
+                        (order.cost + order.nationwideDelivery) * 0.13 +
+                        order.cost +
+                        order.nationwideDelivery
+                      } CAD`}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
             ) : (
-              <p>There are past orders</p>
+              <p
+                className="flex items-center justify-center border-[1px] border-black rounded-lg h-[70px] text-xl
+              "
+              >
+                There aren't past orders
+              </p>
             )}
           </div>
         </div>
