@@ -308,8 +308,14 @@ const Admin = () => {
               <div>
                 {users.map((user) => (
                   <div className="p-[25px] my-[50px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10">
-                    <p className="text-center mb-[25px] border-[1px] border-black rounded-xl text-3xl p-4">
-                      {`${user.name} ${user.lastname}`}
+                    <p className="text-center mb-[25px] border-[1px] border-black rounded-xl text-3xl p-4 text-pretty">
+                      {`${user.name} ${user.lastname}
+
+                         ${
+                           user.isActive
+                             ? "(active member)"
+                             : "(inactive member)"
+                         }`}
                     </p>
 
                     <div className="border-[1px] border-black rounded-xl p-5 flex flex-col items-center justify-center lg:flex-row lg:justify-between">

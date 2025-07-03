@@ -13,6 +13,7 @@ export const logicSlice = createSlice({
     // for dev (mock users: admin / non admin)
     adminUser: {
       isAdmin: true,
+      isActive: true,
       name: "Matt",
       lastname: "Marotti",
       username: "matt.marotti@gmail.com",
@@ -37,6 +38,7 @@ export const logicSlice = createSlice({
     },
     nonAdminUser: {
       isAdmin: false,
+      isActive: true,
       name: "TestName",
       lastname: "TestLastName",
       username: "testname.testlastname@gmail.com",
@@ -61,6 +63,7 @@ export const logicSlice = createSlice({
     },
     nonAdminUser2: {
       isAdmin: false,
+      isActive: false,
       name: "TestName",
       lastname: "TestLastName",
       username: "testname.testlastname@gmail.com",
@@ -85,6 +88,7 @@ export const logicSlice = createSlice({
     },
     nonAdminUser3: {
       isAdmin: false,
+      isActive: true,
       name: "TestName",
       lastname: "TestLastName",
       username: "testname.testlastname@gmail.com",
