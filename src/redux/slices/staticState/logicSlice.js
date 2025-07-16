@@ -113,7 +113,6 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "",
       shippingCity: "",
       shippingPostalCode: "",
-
       pastOrders: [],
     },
     nonAdminUser3: {
@@ -138,7 +137,6 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "",
       shippingCity: "",
       shippingPostalCode: "",
-
       pastOrders: [],
     },
     nonAdminUser4: {
