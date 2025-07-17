@@ -260,30 +260,97 @@ const Admin = () => {
                 <p>There are no orders</p>
               </div>
             ) : (
-              <div className="bg-red-400 flex flex-col justify-center items-center">
+              <div className="flex flex-col justify-center items-center">
                 {[...storeState.orders].reverse().map((order) => (
                   //  ID & date
                   <div className="w-3/4 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl">
-                    <div className="flex flex-col md:flex-row md:justify-between bg-slate-900">
+                    <div className="flex flex-col md:flex-row md:justify-between">
                       <p className="text-center font-semibold">{`Order ID: ${order.orderId}`}</p>
                       <p className="text-center">{`Date: ${order.date}`}</p>
                     </div>
 
-                    <div className="text-center mt-[10px] font-semibold">
+                    <div className="text-center mt-[10px] text-lg">
                       <p className="mb-[10px]">Items purchased:</p>
                     </div>
 
                     {/* products */}
                     {order.products.map((product) => (
-                      <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 bg-red-900">
+                      <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-[1px] border-black rounded-lg">
                         <img
-                          className="w-[150px] mb-[20px]"
+                          className="w-[150px] p-3"
                           src={product.imgSrcHref}
                           alt="productImage"
                         />
-                        <p className="bg-slate-300 text-center text-sm">{`${product.title}`}</p>
+                        <p className=" text-center text-sm">{`${product.title}`}</p>
                       </div>
                     ))}
+                    <div className="text-center text-xl">Customer's info:</div>
+
+                    {/* here */}
+                    {/* here */}
+                    {/* here */}
+
+                    <div className="p-2 w-full md:full mt-[25px]">
+                      {/* client's info */}
+                      <div className="p-3 border-[1px] border-black rounded-md  ">
+                        <div className="lg:flex justify-between mb-2 text-sm">
+                          <p>{`Full name: ${order.user.name} ${order.user.lastname}`}</p>
+                          <p>{`E-mail/Username: ${order.user.username}`}</p>
+                        </div>
+                      </div>
+
+                      {/* Contact info */}
+                      <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
+                        <div className="mb-2">
+                          <p className="text-center">Contact info:</p>
+                        </div>
+                        <div>
+                          <p>{`Address: ${order.user.address}.  ${
+                            order.user.addressUnit
+                              ? `Unit ${order.user.addressUnit}.`
+                              : ""
+                          } ${order.user.city}, ${
+                            order.user.provinceOrState
+                          }, ${order.user.country}. ${
+                            order.user.postalCode
+                          }`}</p>
+                          <div className="flex justify-between">
+                            <p>{`Phone: ${order.user.contactPhoneNumber}`}</p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Shipping info */}
+                      <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
+                        <div className="mb-2">
+                          <p className="text-center ">Shipping info:</p>
+                        </div>
+                        {order.user.contactEqualShipping ? (
+                          <div className="flex justify-between">
+                            <p>Same as contact info</p>
+                          </div>
+                        ) : (
+                          <div>
+                            <p>{`Address: ${order.user.shippingAddress}. ${
+                              order.user.shippingAddressUnit
+                                ? `Unit ${order.user.shippingAddressUnit}.`
+                                : ""
+                            } ${order.user.shippingCity}, ${
+                              order.user.shippingProviceOrState
+                            }, ${order.user.shippingCountry}. ${
+                              order.user.shippingPostalCode
+                            }`}</p>
+                            <div className="flex justify-between">
+                              <p>{`Phone: ${order.user.shippingPhoneNumber}`}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="mt-5 text-center">{`Amount paid: ${"000.00 CAD"}`}</div>
+                    </div>
+
+                    {/* here */}
+                    {/* here */}
+                    {/* here */}
                   </div>
                 ))}
               </div>
