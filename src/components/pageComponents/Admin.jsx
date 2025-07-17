@@ -256,19 +256,35 @@ const Admin = () => {
           </div>
           <div className="h-auto">
             {storeState.orders.length === 0 ? (
-              <div className="h-[500px] flex items-center justify-center text-3xl">
+              <div className="h-[500px] flex justify-center text-3xl">
                 <p>There are no orders</p>
               </div>
             ) : (
-              <div>
+              <div className="bg-red-400 flex flex-col justify-center items-center">
                 {[...storeState.orders].reverse().map((order) => (
-                  // here !!!!!!!!!!!!!!!!!!!!!!!!!!!
-                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                  <p className="p-[25px] my-[25px]">there are orders</p>
-                  // here !!!!!!!!!!!!!!!!!!!!!!!!!!!
-                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                  //  ID & date
+                  <div className="w-3/4 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl">
+                    <div className="flex flex-col md:flex-row md:justify-between bg-slate-900">
+                      <p className="text-center font-semibold">{`Order ID: ${order.orderId}`}</p>
+                      <p className="text-center">{`Date: ${order.date}`}</p>
+                    </div>
+
+                    <div className="text-center mt-[10px] font-semibold">
+                      <p className="mb-[10px]">Items purchased:</p>
+                    </div>
+
+                    {/* products */}
+                    {order.products.map((product) => (
+                      <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 bg-red-900">
+                        <img
+                          className="w-[150px] mb-[20px]"
+                          src={product.imgSrcHref}
+                          alt="productImage"
+                        />
+                        <p className="bg-slate-300 text-center text-sm">{`${product.title}`}</p>
+                      </div>
+                    ))}
+                  </div>
                 ))}
               </div>
             )}
@@ -355,9 +371,6 @@ const Admin = () => {
                     <div className="border-[2px] border-black rounded-lg my-5 p-10 text-center">
                       <p className="text-xl">Past orders:</p>
                       {user.pastOrders.length > 0 ? (
-                        // here !!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         user.pastOrders.map((order) => (
                           <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
                             <p className="pt-5">{`Date of purcharse: ${order.date}`}</p>
