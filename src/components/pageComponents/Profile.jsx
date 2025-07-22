@@ -53,7 +53,7 @@ const Profile = () => {
         <div className="p-3 border-[1px] border-black rounded-md ">
           <div className="lg:flex justify-between mb-2">
             <p>{`Full name: ${logic.user.name} ${logic.user.lastname}`}</p>
-            <p>{`E-mail/Username: ${logic.user.username}`}</p>
+            <p>{`User: ${logic.user.username}`}</p>
           </div>
 
           <div className="flex justify-between text-sm">
@@ -82,7 +82,7 @@ const Profile = () => {
               className="border-b-[1px] border-b-black"
               onClick={navigateToEditPassword}
             >
-              edit password
+              edit
             </Link>
           </div>
         </div>
@@ -224,11 +224,12 @@ const Profile = () => {
           ) : (
             <div className="flex justify-between p-5 text-center mt-3 ">
               <p className="text-sm">Your shopping cart is empty</p>
+
               <Link
                 className="text-sm border-b-[1px] border-b-black hover:text-slate-600 hover:border-slate-600"
                 to="/store"
               >
-                Continue shopping
+                Store
               </Link>
             </div>
           )}

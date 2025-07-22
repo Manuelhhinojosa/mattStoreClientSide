@@ -103,19 +103,19 @@ const Admin = () => {
             <p className="border-b-[1px] border-b-black">All products</p>
           </div>
           {storeState.artPieces.map((p) => (
-            <div className="mx-2 my-[25px] flex flex-col items-center">
+            <div className="mx-2 py-5 my-[25px] flex flex-col items-center border-[1px] border-black rounded-xl">
               <img
                 src={p.imgSrcHref}
                 alt="product image"
                 className="w-[200px] md:w-[500px] h-auto"
               />
               <div className="mt-[25px]">Title: {p.title}</div>
-              <div>Description: {p.shortDesc}</div>
+              <div className="text-center">Description: {p.shortDesc}</div>
               <div>Price: {`${p.cost} CAD`}</div>
               <div>{p.inStock ? "In Stock" : "Not in Stock"}</div>
               <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
-              <div>Natioal delivery cost: {p.nationwideDelivery}</div>
-              <div>International delivery cost: {p.internationalDelivery}</div>
+              <div>NDF: {p.nationwideDelivery}</div>
+              <div>IDF: {p.internationalDelivery}</div>
               <div className="text-green-900 mt-[25px] hover:cursor-pointer">
                 <Link to={`/editproduct/${p.id}`}>Edit product</Link>
               </div>
@@ -125,11 +125,6 @@ const Admin = () => {
               >
                 Delete product
               </div>
-              <br />
-              <br />
-              <div>+++ +++ +++</div>
-              <br />
-              <br />
             </div>
           ))}
         </div>
@@ -250,7 +245,7 @@ const Admin = () => {
 
       {/* see orders */}
       {logic.showViewOrders ? (
-        <div className="w-full">
+        <div className="w-full  mt-5">
           <div className="h-[100px] flex justify-center items-center text-3xl ">
             <p className="border-b-[1px] border-b-black">Orders</p>
           </div>
@@ -263,7 +258,7 @@ const Admin = () => {
               <div className="flex flex-col justify-center items-center">
                 {[...storeState.orders].reverse().map((order) => (
                   //  ID & date
-                  <div className="w-3/4 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl">
+                  <div className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl">
                     <div className="flex flex-col md:flex-row md:justify-between">
                       <p className="text-center font-semibold">{`Order ID: ${order.orderId}`}</p>
                       <p className="text-center">{`Date: ${order.date}`}</p>
@@ -286,16 +281,12 @@ const Admin = () => {
                     ))}
                     <div className="text-center text-xl">Customer's info:</div>
 
-                    {/* here */}
-                    {/* here */}
-                    {/* here */}
-
                     <div className="p-2 w-full md:full mt-[25px]">
                       {/* client's info */}
                       <div className="p-3 border-[1px] border-black rounded-md  ">
                         <div className="lg:flex justify-between mb-2 text-sm">
                           <p>{`Full name: ${order.user.name} ${order.user.lastname}`}</p>
-                          <p>{`E-mail/Username: ${order.user.username}`}</p>
+                          <p>User: {order.user.username} </p>
                         </div>
                       </div>
 
@@ -361,7 +352,7 @@ const Admin = () => {
 
       {/* see users info */}
       {logic.showMembersInfo ? (
-        <div className="w-full">
+        <div className="w-full mt-10">
           <div className="h-[100px] flex justify-center items-center text-3xl ">
             <p className="border-b-[1px] border-b-black">Members' info</p>
           </div>
