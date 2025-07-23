@@ -131,12 +131,19 @@ const Admin = () => {
       ) : null}
 
       {/* add a product */}
+      {/* here */}
+      {/* here */}
+      {/* here */}
+
       {logic.showAddProduct ? (
         <div className="h-[600px] w-full">
           <div className="h-[100px] flex justify-center items-center text-3xl">
             <p className="border-b-[1px] border-b-black">Add a product</p>
           </div>
           <div className="h-full">
+            {/* here is the form */}
+            {/* here is the form */}
+            {/* here is the form */}
             <form
               action=""
               className="h-full flex flex-col items-center justify-evenly"
@@ -338,10 +345,6 @@ const Admin = () => {
                       </div>
                       <div className="mt-5 text-center">{`Amount paid: ${"000.00 CAD"}`}</div>
                     </div>
-
-                    {/* here */}
-                    {/* here */}
-                    {/* here */}
                   </div>
                 ))}
               </div>
