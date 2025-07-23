@@ -20,6 +20,7 @@ import {
   setShowMembersInfo,
 } from "../../redux/slices/staticState/logicSlice";
 
+// compoonent function
 const Admin = () => {
   // redux || state || reducers
   const dispatch = useDispatch();
@@ -145,7 +146,7 @@ const Admin = () => {
             {/* here is the form */}
             {/* here is the form */}
             <form
-              action=""
+              encType="multipart/form-data"
               className="h-full flex flex-col items-center justify-evenly"
             >
               <div className="flex flex-col">
