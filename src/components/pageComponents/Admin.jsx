@@ -81,18 +81,6 @@ const Admin = () => {
       alert("all fields must be completed");
       return;
     }
-    // for dev
-    // console.log(storeState.reference);
-    // console.log(storeState.inStock);
-    // console.log(storeState.added);
-    // console.log(storeState.recentWork);
-    // console.log(storeState.title);
-    // console.log(storeState.shortDesc);
-    // console.log(storeState.largeDesc);
-    // console.log(storeState.media);
-    // console.log(storeState.cost);
-    // console.log(storeState.nationwideDelivery);
-    // console.log(storeState.internationalDelivery);
 
     // create object to be sento to API
     const formData = new FormData();
@@ -110,9 +98,31 @@ const Admin = () => {
 
     // API URL
     const createPostUrl = "http://localhost:3000/posts/create";
+    // const createPostUrl = process.env.REACT_APP_DATABASE_URL_CREATE_POST;
 
     // API call
-    axios.post(createPostUrl, formData);
+    axios
+      .post(createPostUrl, formData)
+      .then((result) => {
+        console.log(result);
+        console.log("SUCCESS! Post added. Result:", {
+          config: result.config,
+          data: result.data,
+          status: result.status,
+          headers: result.headers,
+        });
+
+        // Reseting to initial values so app can add another post
+        titleRef.current.value = "";
+        shortDescRef.current.value = "";
+        mediaRef.current.value = "";
+        costRef.current.value = "";
+        nationwideDeliveryRef.current.value = "";
+        internationalDeliveryRef.current.value = "";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -295,7 +305,7 @@ const Admin = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  name="imgSrcHref"
+                  name="media"
                   autoComplete="off"
                   id="imgSrcHref"
                   className="hidden"
