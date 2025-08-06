@@ -1,10 +1,16 @@
 import React from "react";
 
+// React hooks
+import { useRef } from "react";
+
 // redux
 import { useSelector, useDispatch } from "react-redux";
 
 // React router V6
 import { Link } from "react-router-dom";
+
+// Axios
+import axios from "axios";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -20,12 +26,34 @@ import {
   setShowMembersInfo,
 } from "../../redux/slices/staticState/logicSlice";
 
+import {
+  setInStock,
+  setRecentWork,
+  setTitle,
+  setShortDesc,
+  setMedia,
+  setCost,
+  setNationwideDelivery,
+  setInternationalDelivery,
+} from "../../redux/slices/state/storeSlice";
+
 // compoonent function
 const Admin = () => {
   // redux || state || reducers
   const dispatch = useDispatch();
   const logic = useSelector((state) => state.logicSlice);
   const storeState = useSelector((state) => state.storeSlice);
+
+  // useRef hook for adding product form
+  const inStockRef = useRef("");
+  const recentWorkRef = useRef("");
+  const titleRef = useRef("");
+  const shortDescRef = useRef("");
+  const mediaRef = useRef("");
+  const costRef = useRef(0);
+  const nationwideDeliveryRef = useRef(0);
+  const internationalDeliveryRef = useRef(0);
+
   // for dev (to build front end of users info page)
   const users = [];
   users.push(
@@ -35,6 +63,57 @@ const Admin = () => {
     logic.nonAdminUser3,
     logic.nonAdminUser4
   );
+
+  // add post function
+  // add post function
+  // add post function
+  const addPost = (e) => {
+    e.preventDefault();
+    // form error handling
+    if (
+      storeState.title === "" ||
+      storeState.shortDesc === "" ||
+      storeState.media === "" ||
+      storeState.cost == false ||
+      storeState.nationwideDelivery == false ||
+      storeState.internationalDelivery == false
+    ) {
+      alert("all fields must be completed");
+      return;
+    }
+    // for dev
+    // console.log(storeState.reference);
+    // console.log(storeState.inStock);
+    // console.log(storeState.added);
+    // console.log(storeState.recentWork);
+    // console.log(storeState.title);
+    // console.log(storeState.shortDesc);
+    // console.log(storeState.largeDesc);
+    // console.log(storeState.media);
+    // console.log(storeState.cost);
+    // console.log(storeState.nationwideDelivery);
+    // console.log(storeState.internationalDelivery);
+
+    // create object to be sento to API
+    const formData = new FormData();
+    formData.append("reference", storeState.reference);
+    formData.append("inStock", storeState.inStock);
+    formData.append("added", storeState.added);
+    formData.append("recentWork", storeState.recentWork);
+    formData.append("title", storeState.title);
+    formData.append("shortDesc", storeState.shortDesc);
+    formData.append("largeDesc", storeState.largeDesc);
+    formData.append("media", storeState.media);
+    formData.append("cost", storeState.cost);
+    formData.append("nationwideDelivery", storeState.nationwideDelivery);
+    formData.append("internationalDelivery", storeState.internationalDelivery);
+
+    // API URL
+    const createPostUrl = "http://localhost:3000/posts/create";
+
+    // API call
+    axios.post(createPostUrl, formData);
+  };
 
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
@@ -104,7 +183,10 @@ const Admin = () => {
             <p className="border-b-[1px] border-b-black">All products</p>
           </div>
           {storeState.artPieces.map((p) => (
-            <div className="mx-2 py-5 my-[25px] flex flex-col items-center border-[1px] border-black rounded-xl">
+            <div
+              key={p.id}
+              className="mx-2 py-5 my-[25px] flex flex-col items-center border-[1px] border-black rounded-xl"
+            >
               <img
                 src={p.imgSrcHref}
                 alt="product image"
@@ -156,6 +238,10 @@ const Admin = () => {
                   id="inStock"
                   required
                   className="border-[1px] border-black focus:outline-none"
+                  onChange={(e) =>
+                    dispatch(setInStock(e.target.value === "true"))
+                  }
+                  ref={inStockRef}
                 >
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -169,6 +255,10 @@ const Admin = () => {
                   id="recentWork"
                   required
                   className="border-[1px] border-black focus:outline-none"
+                  onChange={(e) =>
+                    dispatch(setRecentWork(e.target.value === "true"))
+                  }
+                  ref={recentWorkRef}
                 >
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -181,6 +271,8 @@ const Admin = () => {
                 name="title"
                 autoComplete="off"
                 className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+                onChange={(e) => dispatch(setTitle(e.target.value))}
+                ref={titleRef}
               />
 
               <input
@@ -189,6 +281,8 @@ const Admin = () => {
                 name="shortDesc"
                 autoComplete="off"
                 className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+                onChange={(e) => dispatch(setShortDesc(e.target.value))}
+                ref={shortDescRef}
               />
 
               <div className="flex flex-col">
@@ -205,6 +299,8 @@ const Admin = () => {
                   autoComplete="off"
                   id="imgSrcHref"
                   className="hidden"
+                  ref={mediaRef}
+                  onChange={(e) => dispatch(setMedia(e.target.files[0]))}
                 />
               </div>
 
@@ -214,6 +310,8 @@ const Admin = () => {
                 name="cost"
                 autoComplete="off"
                 className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                onChange={(e) => dispatch(setCost(e.target.value))}
+                ref={costRef}
               />
 
               <input
@@ -222,6 +320,10 @@ const Admin = () => {
                 name="nationwideDelivery"
                 autoComplete="off"
                 className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                onChange={(e) =>
+                  dispatch(setNationwideDelivery(e.target.value))
+                }
+                ref={nationwideDeliveryRef}
               />
 
               <input
@@ -230,12 +332,16 @@ const Admin = () => {
                 name="internationalDelivery"
                 autoComplete="off"
                 className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                onChange={(e) =>
+                  dispatch(setInternationalDelivery(e.target.value))
+                }
+                ref={internationalDeliveryRef}
               />
 
               <div className="flex flex-col">
                 <button
                   className="hover:text-slate-600 mb-[15px]"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={addPost}
                 >
                   Add product
                 </button>

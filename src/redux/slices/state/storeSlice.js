@@ -8,6 +8,20 @@ import { toastStyleObject } from "../../../tostifyStyle";
 export const storeSlice = createSlice({
   name: "storeSlice",
   initialState: {
+    // new product initial state
+    reference: Math.floor(Math.random() * 10000000000).toString(),
+    inStock: true,
+    added: false,
+    recentWork: true,
+    title: "",
+    shortDesc: "",
+    largeDesc: "N/A",
+    media: "",
+    cost: 0,
+    nationwideDelivery: 0,
+    internationalDelivery: 0,
+
+    // products state (for development)
     artPieces: [
       {
         id: 1,
@@ -290,7 +304,10 @@ export const storeSlice = createSlice({
         internationalDelivery: "$0.00 CAD",
       },
     ],
+    // shopping cart
     shoppingCart: [],
+
+    // orders
     // orders: [],
     orders: [
       {
@@ -395,13 +412,17 @@ export const storeSlice = createSlice({
       },
     ],
   },
+  // functions
   reducers: {
+    // add product to shopping cart
     addProdShoppingCart: (state, action) => {
       let prod = state.artPieces.find((piece) => piece.id == action.payload);
       state.shoppingCart.push(prod);
       prod.added = true;
       toast("Item added to your shopping cart", toastStyleObject());
     },
+
+    // remove product from shopping cart
     removeProdShoppingCart: (state, action) => {
       const idToRemove = action.payload;
       state.shoppingCart = state.shoppingCart.filter(
@@ -415,8 +436,36 @@ export const storeSlice = createSlice({
 
       toast("Item removed from your shopping cart", toastStyleObject());
     },
+
+    // empty shopping cart
     emptyShoppingCart: (state, action) => {
       state.shoppingCart = [];
+    },
+
+    // setting state for creating new product
+    setInStock: (state, action) => {
+      state.inStock = action.payload;
+    },
+    setRecentWork: (state, action) => {
+      state.recentWork = action.payload;
+    },
+    setTitle: (state, action) => {
+      state.title = action.payload;
+    },
+    setShortDesc: (state, action) => {
+      state.shortDesc = action.payload;
+    },
+    setMedia: (state, action) => {
+      state.media = action.payload;
+    },
+    setCost: (state, action) => {
+      state.cost = action.payload;
+    },
+    setNationwideDelivery: (state, action) => {
+      state.nationwideDelivery = action.payload;
+    },
+    setInternationalDelivery: (state, action) => {
+      state.internationalDelivery = action.payload;
     },
   },
 });
@@ -425,6 +474,15 @@ export const {
   addProdShoppingCart,
   removeProdShoppingCart,
   emptyShoppingCart,
+  // functions for setting state for creating a new post (product)
+  setInStock,
+  setRecentWork,
+  setTitle,
+  setShortDesc,
+  setMedia,
+  setCost,
+  setNationwideDelivery,
+  setInternationalDelivery,
 } = storeSlice.actions;
 
 export default storeSlice.reducer;
