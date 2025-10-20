@@ -317,10 +317,14 @@ const Admin = () => {
                   onChange={(e) => dispatch(setMedia(e.target.files[0]))}
                 />
               </div>
-              <p>
+              <p
+                className={`${
+                  storeState.media === "" ? "text-red-400" : "text-green-400"
+                }`}
+              >
                 {storeState.media === ""
                   ? "Not image selected yet."
-                  : "Image selected succesfully"}
+                  : "Image selected succesfully."}
               </p>
 
               <input
