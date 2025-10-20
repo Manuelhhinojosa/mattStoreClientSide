@@ -1,10 +1,10 @@
 import React from "react";
 
-// React hooks
-import { useRef } from "react";
-
 // redux
 import { useSelector, useDispatch } from "react-redux";
+
+// react hooks
+import { useRef } from "react";
 
 // React router V6
 import { Link } from "react-router-dom";
@@ -36,6 +36,7 @@ import {
   setNationwideDelivery,
   setInternationalDelivery,
 } from "../../redux/slices/state/storeSlice";
+import store from "../../redux/store";
 
 // compoonent function
 const Admin = () => {
@@ -44,15 +45,9 @@ const Admin = () => {
   const logic = useSelector((state) => state.logicSlice);
   const storeState = useSelector((state) => state.storeSlice);
 
-  // useRef hook for adding product form
-  const inStockRef = useRef("");
-  const recentWorkRef = useRef("");
-  const titleRef = useRef("");
-  const shortDescRef = useRef("");
-  const mediaRef = useRef("");
-  const costRef = useRef(0);
-  const nationwideDeliveryRef = useRef(0);
-  const internationalDeliveryRef = useRef(0);
+  // react hooks
+  // useRef for image field (to clear field after submission)
+  const fileInputRef = useRef(null);
 
   // for dev (to build front end of users info page)
   const users = [];
@@ -74,11 +69,14 @@ const Admin = () => {
       storeState.title === "" ||
       storeState.shortDesc === "" ||
       storeState.media === "" ||
-      storeState.cost == false ||
-      storeState.nationwideDelivery == false ||
-      storeState.internationalDelivery == false
+      storeState.cost === 0 ||
+      storeState.cost < 0 ||
+      storeState.nationwideDelivery === 0 ||
+      storeState.nationwideDelivery < 0 ||
+      storeState.internationalDelivery === 0 ||
+      storeState.internationalDelivery < 0
     ) {
-      alert("all fields must be completed");
+      alert("all fields must be completed or ....");
       return;
     }
 
@@ -100,7 +98,7 @@ const Admin = () => {
     const createPostUrl = "http://localhost:3000/posts/create";
     // const createPostUrl = process.env.REACT_APP_DATABASE_URL_CREATE_POST;
 
-    // API call
+    // // API call
     axios
       .post(createPostUrl, formData)
       .then((result) => {
@@ -113,12 +111,18 @@ const Admin = () => {
         });
 
         // Reseting to initial values so app can add another post
-        titleRef.current.value = "";
-        shortDescRef.current.value = "";
-        mediaRef.current.value = "";
-        costRef.current.value = "";
-        nationwideDeliveryRef.current.value = "";
-        internationalDeliveryRef.current.value = "";
+        dispatch(setInStock(true));
+        dispatch(setRecentWork(true));
+        dispatch(setTitle(""));
+        dispatch(setShortDesc(""));
+        dispatch(setMedia(""));
+        dispatch(setCost(0));
+        dispatch(setNationwideDelivery(0));
+        dispatch(setInternationalDelivery(0));
+
+        if (fileInputRef.current) {
+          fileInputRef.current.value = null; // clears file input
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -242,16 +246,16 @@ const Admin = () => {
               className="h-full flex flex-col items-center justify-evenly"
             >
               <div className="flex flex-col">
-                <label for="inStock">In Stock?</label>
+                <label htmlFor="inStock">In Stock?</label>
                 <select
                   name="inStock"
                   id="inStock"
                   required
                   className="border-[1px] border-black focus:outline-none"
+                  value={storeState.inStock}
                   onChange={(e) =>
                     dispatch(setInStock(e.target.value === "true"))
                   }
-                  ref={inStockRef}
                 >
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -259,16 +263,16 @@ const Admin = () => {
               </div>
 
               <div className="flex flex-col">
-                <label for="recentWork">Recent work?</label>
+                <label htmlFor="recentWork">Recent work?</label>
                 <select
                   name="recentWork"
                   id="recentWork"
                   required
                   className="border-[1px] border-black focus:outline-none"
+                  value={storeState.recentWork}
                   onChange={(e) =>
                     dispatch(setRecentWork(e.target.value === "true"))
                   }
-                  ref={recentWorkRef}
                 >
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -281,8 +285,8 @@ const Admin = () => {
                 name="title"
                 autoComplete="off"
                 className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+                value={storeState.title}
                 onChange={(e) => dispatch(setTitle(e.target.value))}
-                ref={titleRef}
               />
 
               <input
@@ -291,28 +295,33 @@ const Admin = () => {
                 name="shortDesc"
                 autoComplete="off"
                 className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+                value={storeState.shortDesc}
                 onChange={(e) => dispatch(setShortDesc(e.target.value))}
-                ref={shortDescRef}
               />
 
               <div className="flex flex-col">
                 <label
                   className="text-center mb-[10px] hover:cursor-pointer hover:text-slate-600 border-b-[1px] border-b-black"
-                  for="imgSrcHref"
+                  htmlFor="imgSrcHref"
                 >
                   Select image
                 </label>
                 <input
+                  ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   name="media"
                   autoComplete="off"
                   id="imgSrcHref"
                   className="hidden"
-                  ref={mediaRef}
                   onChange={(e) => dispatch(setMedia(e.target.files[0]))}
                 />
               </div>
+              <p>
+                {storeState.media === ""
+                  ? "Not image selected yet."
+                  : "Image selected succesfully"}
+              </p>
 
               <input
                 type="number"
@@ -320,8 +329,8 @@ const Admin = () => {
                 name="cost"
                 autoComplete="off"
                 className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                value={storeState.cost === 0 ? "" : storeState.cost}
                 onChange={(e) => dispatch(setCost(e.target.value))}
-                ref={costRef}
               />
 
               <input
@@ -330,10 +339,14 @@ const Admin = () => {
                 name="nationwideDelivery"
                 autoComplete="off"
                 className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                value={
+                  storeState.nationwideDelivery === 0
+                    ? ""
+                    : storeState.nationwideDelivery
+                }
                 onChange={(e) =>
                   dispatch(setNationwideDelivery(e.target.value))
                 }
-                ref={nationwideDeliveryRef}
               />
 
               <input
@@ -342,19 +355,26 @@ const Admin = () => {
                 name="internationalDelivery"
                 autoComplete="off"
                 className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                value={
+                  storeState.internationalDelivery === 0
+                    ? ""
+                    : storeState.internationalDelivery
+                }
                 onChange={(e) =>
                   dispatch(setInternationalDelivery(e.target.value))
                 }
-                ref={internationalDeliveryRef}
               />
 
               <div className="flex flex-col">
+                {/* add product button */}
                 <button
                   className="hover:text-slate-600 mb-[15px]"
                   onClick={addPost}
                 >
                   Add product
                 </button>
+
+                {/* cancel add product button */}
                 <button
                   className="hover:text-slate-600"
                   onClick={() => dispatch(setShowAllProducts())}
