@@ -10,7 +10,7 @@ const Signup = () => {
         <p>Sign up</p>
       </div>
       <div>
-        <form action="" className="flex flex-col items-center">
+        <form className="flex flex-col items-center">
           <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px]">
             {/* name and lastname */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
@@ -218,9 +218,14 @@ const Signup = () => {
             </div>
           </div>
 
-          <button className="text-lg hover:text-slate-600">sign up</button>
+          {/* sign up button */}
+          <button type="submit" className="text-lg hover:text-slate-600">
+            sign up
+          </button>
         </form>
       </div>
+
+      {/* cancel sing up request button */}
       <div className="flex items-center justify-center my-8 hover:text-slate-600">
         <Link to="/store">Cancel</Link>
       </div>
