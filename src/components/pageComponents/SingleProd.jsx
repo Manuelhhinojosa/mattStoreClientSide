@@ -19,7 +19,7 @@ const SingleProd = () => {
   let reference = location.pathname.slice(7);
   let product = {};
   storeState.artPieces.forEach((p) => {
-    if (p.id == reference) {
+    if (p._id == reference) {
       product = p;
       return;
     }
@@ -35,8 +35,8 @@ const SingleProd = () => {
         </div>
         <div className="flex justify-center items-center">
           <img
-            src={product.imgSrcHref}
-            alt="product image"
+            src={product.media.url}
+            alt="Product image"
             className="p-8 lg:w-1/2"
           />
         </div>
@@ -59,7 +59,7 @@ const SingleProd = () => {
                 : "text-gray-400 cursor-not-allowed"
             }`}
             onClick={() =>
-              product.inStock && dispatch(addProdShoppingCart(product.id))
+              product.inStock && dispatch(addProdShoppingCart(product._id))
             }
             disabled={product.added}
           >

@@ -20,14 +20,15 @@ const Store = () => {
         <div className="ml-5 w-full text-2xl p-8 md:text-center md:text-3xl">
           <p> {staticState.home.homeMainTitle} / Store</p>
         </div>
-        {storeState.artPieces.map((art) => (
+
+        {[...storeState.artPieces].reverse().map((art) => (
           <div
             key={art.id}
             className="flex flex-col items-center justify-center mt-8 md:w-1/2 lg:w-1/3"
           >
-            <Link to={`/store/${art.id}`}>
+            <Link to={`/store/${art._id}`}>
               <img
-                src={art.imgSrcHref}
+                src={art.media.url}
                 alt="art piece img"
                 className="p-2 rounded-3xl"
               />
@@ -42,7 +43,7 @@ const Store = () => {
                   : "text-gray-400 cursor-not-allowed"
               }`}
               onClick={() =>
-                art.inStock && dispatch(addProdShoppingCart(art.id))
+                art.inStock && dispatch(addProdShoppingCart(art._id))
               }
               disabled={art.added}
             >

@@ -1,8 +1,14 @@
 // React Router V6
 import { Routes, Route } from "react-router-dom";
 
+// react hooks
+import { useEffect } from "react";
+
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// fething products fucntion
+import { fetchArtPieces } from "./redux/slices/state/storeSlice";
 
 // Toastify component for handling errors
 import { ToastContainer } from "react-toastify";
@@ -30,9 +36,16 @@ import Navbar from "./components/generalComponents/Navbar";
 import ScrollToTop from "./utils/ScrollTop";
 
 function App() {
+  // redux hooks
+  const dispatch = useDispatch();
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
   const logic = useSelector((state) => state.logicSlice);
+
+  // ???
+  useEffect(() => {
+    dispatch(fetchArtPieces());
+  }, [dispatch]);
 
   return (
     <main>
@@ -47,7 +60,7 @@ function App() {
         <Route path="/store" element={<Store />} />
 
         {storeState.artPieces.map((p) => (
-          <Route key={p.id} path={`/store/${p.id}`} element={<SingleProd />} />
+          <Route key={p.id} path={`/store/${p._id}`} element={<SingleProd />} />
         ))}
 
         <Route path="/cart" element={<ShoppingCart />} />
@@ -69,7 +82,7 @@ function App() {
           ? storeState.artPieces.map((p) => (
               <Route
                 key={p.id}
-                path={`/editproduct/${p.id}`}
+                path={`/editproduct/${p._id}`}
                 element={<EditProduct />}
               />
             ))

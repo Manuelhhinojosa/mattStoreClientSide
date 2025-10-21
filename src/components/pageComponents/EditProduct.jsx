@@ -16,7 +16,7 @@ const EditProduct = () => {
   let reference = location.pathname.slice(13);
   let product = {};
   storeState.artPieces.forEach((p) => {
-    if (p.id == reference) {
+    if (p._id == reference) {
       product = p;
       return;
     }
@@ -34,7 +34,7 @@ const EditProduct = () => {
             className="h-full flex flex-col items-center justify-evenly"
           >
             <img
-              src={product.imgSrcHref}
+              src={product.media.url}
               alt="productImage"
               className="w-[125px]"
             />

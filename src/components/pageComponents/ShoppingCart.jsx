@@ -40,9 +40,9 @@ const ShoppingCart = () => {
                   <p className="text-center">1</p>
                 </div>
                 <div>
-                  <Link to={`/store/${prod.id}`}>
+                  <Link to={`/store/${prod._id}`}>
                     <img
-                      src={prod.imgSrcHref}
+                      src={prod.media.url}
                       alt="prod img"
                       className="h-[150px] p-2 rounded-xl"
                     />
@@ -54,7 +54,7 @@ const ShoppingCart = () => {
                 <div className="p-2">{`${prod.cost} CAD`}</div>
                 <div className="p-2">
                   <button
-                    onClick={() => dispatch(removeProdShoppingCart(prod.id))}
+                    onClick={() => dispatch(removeProdShoppingCart(prod._id))}
                   >
                     <FaTimes />
                   </button>

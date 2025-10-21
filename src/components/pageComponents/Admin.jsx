@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastStyleObject } from "../../tostifyStyle";
 
 // Redux (functions)
+// logic
 import {
   setShowAllProducts,
   setShowAddProduct,
@@ -26,6 +27,7 @@ import {
   setShowMembersInfo,
 } from "../../redux/slices/staticState/logicSlice";
 
+// handle store state (product)
 import {
   setInStock,
   setRecentWork,
@@ -36,7 +38,9 @@ import {
   setNationwideDelivery,
   setInternationalDelivery,
 } from "../../redux/slices/state/storeSlice";
-import store from "../../redux/store";
+
+// fetching products function
+import { fetchArtPieces } from "../../redux/slices/state/storeSlice";
 
 // compoonent function
 const Admin = () => {
@@ -59,8 +63,6 @@ const Admin = () => {
     logic.nonAdminUser4
   );
 
-  // add post function
-  // add post function
   // add post function
   const addPost = (e) => {
     e.preventDefault();
@@ -115,6 +117,9 @@ const Admin = () => {
           status: result.status,
           headers: result.headers,
         });
+
+        // re-setting products array in sotreState slice
+        dispatch(fetchArtPieces());
 
         // Reseting to initial values so app can add another post
         dispatch(setInStock(true));
@@ -205,13 +210,13 @@ const Admin = () => {
           <div className="h-[100px] flex justify-center items-center text-3xl ">
             <p className="border-b-[1px] border-b-black">All products</p>
           </div>
-          {storeState.artPieces.map((p) => (
+          {[...storeState.artPieces].reverse().map((p) => (
             <div
               key={p.id}
               className="mx-2 py-5 my-[25px] flex flex-col items-center border-[1px] border-black rounded-xl"
             >
               <img
-                src={p.imgSrcHref}
+                src={p.media.url}
                 alt="product image"
                 className="w-[200px] md:w-[500px] h-auto"
               />
@@ -223,7 +228,7 @@ const Admin = () => {
               <div>NDF: {p.nationwideDelivery}</div>
               <div>IDF: {p.internationalDelivery}</div>
               <div className="text-green-900 mt-[25px] hover:cursor-pointer">
-                <Link to={`/editproduct/${p.id}`}>Edit product</Link>
+                <Link to={`/editproduct/${p._id}`}>Edit product</Link>
               </div>
               <div
                 className="text-red-900 hover:cursor-pointer mt-2"
