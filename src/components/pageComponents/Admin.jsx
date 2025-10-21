@@ -65,18 +65,24 @@ const Admin = () => {
   const addPost = (e) => {
     e.preventDefault();
     // form error handling
+    const {
+      title,
+      shortDesc,
+      media,
+      cost,
+      nationwideDelivery,
+      internationalDelivery,
+    } = storeState;
+
     if (
-      storeState.title === "" ||
-      storeState.shortDesc === "" ||
-      storeState.media === "" ||
-      storeState.cost === 0 ||
-      storeState.cost < 0 ||
-      storeState.nationwideDelivery === 0 ||
-      storeState.nationwideDelivery < 0 ||
-      storeState.internationalDelivery === 0 ||
-      storeState.internationalDelivery < 0
+      !title ||
+      !shortDesc ||
+      !media ||
+      cost <= 0 ||
+      nationwideDelivery <= 0 ||
+      internationalDelivery <= 0
     ) {
-      alert("all fields must be completed or ....");
+      alert("Fill all the fields correctly");
       return;
     }
 
@@ -102,7 +108,7 @@ const Admin = () => {
     axios
       .post(createPostUrl, formData)
       .then((result) => {
-        console.log(result);
+        console.log("Result: ", result);
         console.log("SUCCESS! Post added. Result:", {
           config: result.config,
           data: result.data,
@@ -123,6 +129,9 @@ const Admin = () => {
         if (fileInputRef.current) {
           fileInputRef.current.value = null; // clears file input
         }
+
+        // directs admin user to all products admin page
+        dispatch(setShowAllProducts());
       })
       .catch((error) => {
         console.log(error);
@@ -228,9 +237,6 @@ const Admin = () => {
       ) : null}
 
       {/* add a product */}
-      {/* here */}
-      {/* here */}
-      {/* here */}
 
       {logic.showAddProduct ? (
         <div className="h-[600px] w-full">
@@ -238,9 +244,7 @@ const Admin = () => {
             <p className="border-b-[1px] border-b-black">Add a product</p>
           </div>
           <div className="h-full">
-            {/* here is the form */}
-            {/* here is the form */}
-            {/* here is the form */}
+            {/* form */}
             <form
               encType="multipart/form-data"
               className="h-full flex flex-col items-center justify-evenly"
@@ -319,7 +323,7 @@ const Admin = () => {
               </div>
               <p
                 className={`${
-                  storeState.media === "" ? "text-red-400" : "text-green-400"
+                  storeState.media === "" ? "text-red-500" : "text-green-500"
                 }`}
               >
                 {storeState.media === ""
@@ -334,7 +338,7 @@ const Admin = () => {
                 autoComplete="off"
                 className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
                 value={storeState.cost === 0 ? "" : storeState.cost}
-                onChange={(e) => dispatch(setCost(e.target.value))}
+                onChange={(e) => dispatch(setCost(Number(e.target.value)))}
               />
 
               <input
@@ -349,7 +353,7 @@ const Admin = () => {
                     : storeState.nationwideDelivery
                 }
                 onChange={(e) =>
-                  dispatch(setNationwideDelivery(e.target.value))
+                  dispatch(setNationwideDelivery(Number(e.target.value)))
                 }
               />
 
@@ -365,7 +369,7 @@ const Admin = () => {
                     : storeState.internationalDelivery
                 }
                 onChange={(e) =>
-                  dispatch(setInternationalDelivery(e.target.value))
+                  dispatch(setInternationalDelivery(Number(e.target.value)))
                 }
               />
 
