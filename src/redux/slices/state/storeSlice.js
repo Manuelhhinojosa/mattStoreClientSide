@@ -1,4 +1,6 @@
+// Redux
 import { createSlice } from "@reduxjs/toolkit";
+
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
