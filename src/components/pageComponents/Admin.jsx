@@ -104,7 +104,7 @@ const Admin = () => {
 
     // API URL
     const createPostUrl = "http://localhost:3000/posts/create";
-    // const createPostUrl = process.env.REACT_APP_DATABASE_URL_CREATE_POST;
+    // const createPostUrl = process.env.REACT_APP_CREATE_POST_URL;
 
     // // API call
     axios
@@ -137,6 +137,27 @@ const Admin = () => {
 
         // directs admin user to all products admin page
         dispatch(setShowAllProducts());
+
+        // confirmation message
+        toast("Product added", toastStyleObject());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // handle delete Product
+  const handleDeleteProduct = (id) => {
+    const deletePostUrl = "http://localhost:3000/posts";
+    // const deletePostUrl = process.env.REACT_APP_DELETE_POST_URL;
+
+    axios
+      .delete(`http://localhost:3000/posts/${id}`)
+      .then((result) => {
+        console.log(result);
+        toast("Product deleted", toastStyleObject());
+
+        dispatch(fetchArtPieces());
       })
       .catch((error) => {
         console.log(error);
@@ -232,7 +253,7 @@ const Admin = () => {
               </div>
               <div
                 className="text-red-900 hover:cursor-pointer mt-2"
-                onClick={() => toast("Product deleted", toastStyleObject())}
+                onClick={() => handleDeleteProduct(p._id)}
               >
                 Delete product
               </div>
@@ -328,12 +349,12 @@ const Admin = () => {
               </div>
               <p
                 className={`${
-                  storeState.media === "" ? "text-red-500" : "text-green-500"
+                  storeState.media === "" ? "text-red-500" : "text-black"
                 }`}
               >
                 {storeState.media === ""
                   ? "Not image selected yet."
-                  : "Image selected succesfully."}
+                  : `Image selected succesfully: ${storeState.media.name}`}
               </p>
 
               <input
