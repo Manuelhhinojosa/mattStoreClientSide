@@ -22,6 +22,12 @@ const EditProduct = () => {
     }
   });
 
+  // functions
+  // handle edit product
+  const handleEditProduct = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
       <div className="h-[600px] w-full">
@@ -29,10 +35,7 @@ const EditProduct = () => {
           <p className="border-b-[1px] border-b-black ">Edit product</p>
         </div>
         <div className="h-full">
-          <form
-            action=""
-            className="h-full flex flex-col items-center justify-evenly"
-          >
+          <form className="h-full flex flex-col items-center justify-evenly">
             <img
               src={product.media.url}
               alt="productImage"
@@ -125,7 +128,7 @@ const EditProduct = () => {
             <div className="flex flex-col">
               <button
                 className="hover:text-slate-600 mb-[15px]"
-                onClick={(e) => e.preventDefault()}
+                onClick={(e) => handleEditProduct(e)}
               >
                 Edit product
               </button>
