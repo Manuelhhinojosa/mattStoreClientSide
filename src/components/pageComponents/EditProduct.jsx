@@ -1,14 +1,31 @@
 import React from "react";
 
+// react hooks
+import { useState } from "react";
+
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // React router V6
 import { useNavigate, useLocation } from "react-router-dom";
 
+// Axios
+import axios from "axios";
+
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
+import { fetchArtPieces } from "../../redux/slices/state/storeSlice";
+import { setShowAllProducts } from "../../redux/slices/staticState/logicSlice";
+
 const EditProduct = () => {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
+  // redux hooks
+  const dispatch = useDispatch();
   // React router V6
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,10 +39,78 @@ const EditProduct = () => {
     }
   });
 
+  const [newProductSate, setNewProductState] = useState(product);
+
   // functions
   // handle edit product
   const handleEditProduct = (e) => {
     e.preventDefault();
+
+    // form validation
+    const {
+      title,
+      shortDesc,
+      cost,
+      nationwideDelivery,
+      internationalDelivery,
+    } = newProductSate;
+
+    if (
+      !title ||
+      !shortDesc ||
+      cost <= 0 ||
+      nationwideDelivery <= 0 ||
+      internationalDelivery <= 0
+    ) {
+      toast("Make sure all the fields are filled.", toastStyleObject());
+      return;
+    }
+
+    // create object to send to API
+    const formData = new FormData();
+
+    formData.append("_id", newProductSate._id);
+    formData.append("inStock", newProductSate.inStock);
+    formData.append("recentWork", newProductSate.recentWork);
+    formData.append("title", newProductSate.title);
+    formData.append("shortDesc", newProductSate.shortDesc);
+    formData.append("cost", newProductSate.cost);
+    formData.append("nationwideDelivery", newProductSate.nationwideDelivery);
+    formData.append(
+      "internationalDelivery",
+      newProductSate.internationalDelivery
+    );
+
+    // api url
+    const editproductUrl = "http://localhost:3000/posts";
+    // const editPostUrl = process.env.REACT_APP_EDIT_POST_URL;
+    const config = { headers: { "Content-Type": "application/json" } };
+
+    // axios call
+    axios
+      .put(`${editproductUrl}/${product._id}`, formData, config)
+      .then((result) => {
+        console.log("Result: ", result.data);
+        console.log("SUCCESS! Post edited. Result:", {
+          config: result.config,
+          data: result.data,
+          status: result.status,
+          headers: result.headers,
+        });
+
+        // setting artpieces after edit
+        dispatch(fetchArtPieces());
+        // making sure admin will show list of all products after edit
+        dispatch(setShowAllProducts());
+        // navigate to admin pate
+        navigate("/admin");
+
+        // confirmation message
+        toast("Product edited", toastStyleObject());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -35,19 +120,29 @@ const EditProduct = () => {
           <p className="border-b-[1px] border-b-black ">Edit product</p>
         </div>
         <div className="h-full">
-          <form className="h-full flex flex-col items-center justify-evenly">
+          <form
+            encType="multipart/form-data"
+            className="h-full flex flex-col items-center justify-evenly"
+          >
             <img
               src={product.media.url}
               alt="productImage"
               className="w-[125px]"
             />
+
             {/* in stock */}
             <div className="flex flex-col">
-              <label for="inStock">In Stock?</label>
+              <label htmlFor="inStock">In Stock?</label>
               <select
                 name="inStock"
                 id="inStock"
+                required
                 className="border-[1px] border-black focus:outline-none"
+                onChange={(e) => {
+                  const newValue = e.target.value;
+
+                  setNewProductState({ ...newProductSate, inStock: newValue });
+                }}
               >
                 {product.inStock ? (
                   <>
@@ -69,7 +164,16 @@ const EditProduct = () => {
               <select
                 name="recentWork"
                 id="recentWork"
+                required
                 className="border-[1px] border-black focus:outline-none"
+                onChange={(e) => {
+                  const newValue = e.target.value;
+
+                  setNewProductState({
+                    ...newProductSate,
+                    recentWork: newValue,
+                  });
+                }}
               >
                 {product.recentWork ? (
                   <>
@@ -90,7 +194,13 @@ const EditProduct = () => {
               placeholder={`Title: ${product.title}`}
               name="title"
               autoComplete="off"
+              required
               className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+              onChange={(e) => {
+                const newValue = e.target.value;
+
+                setNewProductState({ ...newProductSate, title: newValue });
+              }}
             />
 
             <input
@@ -98,7 +208,13 @@ const EditProduct = () => {
               placeholder={`Description: ${product.shortDesc}`}
               name="shortDesc"
               autoComplete="off"
+              required
               className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+              onChange={(e) => {
+                const newValue = e.target.value;
+
+                setNewProductState({ ...newProductSate, shortDesc: newValue });
+              }}
             />
 
             <input
@@ -106,7 +222,13 @@ const EditProduct = () => {
               placeholder={`Price: ${product.cost}`}
               name="cost"
               autoComplete="off"
+              required
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+              onChange={(e) => {
+                const newValue = e.target.value;
+
+                setNewProductState({ ...newProductSate, cost: newValue });
+              }}
             />
 
             <input
@@ -114,7 +236,16 @@ const EditProduct = () => {
               placeholder={`NDF: ${product.nationwideDelivery}`}
               name="nationwideDelivery"
               autoComplete="off"
+              required
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+              onChange={(e) => {
+                const newValue = e.target.value;
+
+                setNewProductState({
+                  ...newProductSate,
+                  nationwideDelivery: newValue,
+                });
+              }}
             />
 
             <input
@@ -122,7 +253,16 @@ const EditProduct = () => {
               placeholder={`IDF: ${product.internationalDelivery}`}
               name="internationalDelivery"
               autoComplete="off"
+              required
               className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+              onChange={(e) => {
+                const newValue = e.target.value;
+
+                setNewProductState({
+                  ...newProductSate,
+                  internationalDelivery: newValue,
+                });
+              }}
             />
 
             <div className="flex flex-col">

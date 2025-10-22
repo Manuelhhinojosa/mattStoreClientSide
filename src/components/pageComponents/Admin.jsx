@@ -84,7 +84,7 @@ const Admin = () => {
       nationwideDelivery <= 0 ||
       internationalDelivery <= 0
     ) {
-      alert("Fill all the fields correctly");
+      toast("Make sure all the fields are filled.", toastStyleObject());
       return;
     }
 
