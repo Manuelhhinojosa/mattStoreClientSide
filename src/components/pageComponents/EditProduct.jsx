@@ -127,7 +127,7 @@ const EditProduct = () => {
             <img
               src={product.media.url}
               alt="productImage"
-              className="w-[125px]"
+              className="w-[125px] rounded-lg"
             />
 
             {/* in stock */}
