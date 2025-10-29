@@ -528,18 +528,22 @@ const Admin = () => {
       {logic.showMembersInfo ? (
         <div className="w-full mt-10">
           <div className="h-[100px] flex justify-center items-center text-3xl ">
-            <p className="border-b-[1px] border-b-black">Members' info</p>
+            <p className="border-b-[1px] border-b-black">Members info</p>
           </div>
           <div className="h-auto">
             {users.length === 0 ? (
               <div className="h-[500px] flex items-center justify-center text-3xl">
-                <p>There are no members yet</p>
+                <p>There aren't any members yet</p>
               </div>
             ) : (
               <div>
                 {users.map((user) => (
                   <div className="p-[25px] my-[50px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10">
-                    <p className="text-center mb-[25px] border-[1px] border-black rounded-xl text-3xl p-4 text-pretty">
+                    <p
+                      className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-3xl p-4 text-pretty ${
+                        user.isActive ? "text-green-500" : "text-red-400"
+                      }`}
+                    >
                       {`${user.name} ${user.lastname}
 
                          ${
@@ -554,7 +558,7 @@ const Admin = () => {
 
                       {user.contactPhoneNumber ? (
                         <p className="mt-5 lg:mt-0">
-                          {user.contactPhoneNumber}
+                          Phone number: {user.contactPhoneNumber}
                         </p>
                       ) : (
                         ""
@@ -563,7 +567,7 @@ const Admin = () => {
 
                     {user.address ? (
                       <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
-                        Contact address:{" "}
+                        Contact info:{" "}
                         {`${user.address}. ${
                           user.addressUnit ? `Unit ${user.addressUnit}.` : ""
                         } ${user.city}, ${user.provinceOrState}. ${
@@ -576,16 +580,16 @@ const Admin = () => {
 
                     {user.contactEqualShipping ? (
                       <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
-                        shipping info is the same as contact info
+                        Shipping info is the same as contact info
                       </p>
                     ) : user.shippingPhoneNumber ? (
                       <div className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
                         <p className="">
-                          shipping phone number: {user.shippingPhoneNumber}
+                          Shipping phone number: {user.shippingPhoneNumber}
                         </p>
 
                         <p className="mt-5">
-                          Shipping address:{" "}
+                          Shipping info:{" "}
                           {`${user.shippingAddress}. ${
                             user.shippingAddressUnit
                               ? `Unit ${user.shippingAddressUnit}.`
