@@ -233,7 +233,7 @@ const Admin = () => {
           </div>
           {[...storeState.artPieces].reverse().map((p) => (
             <div
-              key={p.id}
+              key={p._id}
               className="mx-2 py-5 my-[25px] flex flex-col items-center border-[1px] border-black rounded-xl"
             >
               <img
@@ -552,7 +552,6 @@ const Admin = () => {
                              : "(inactive member)"
                          }`}
                     </p>
-
                     <div className="border-[1px] border-black rounded-xl p-5 flex flex-col items-center justify-center lg:flex-row lg:justify-between">
                       <p className="">{user.username}</p>
 
@@ -564,7 +563,6 @@ const Admin = () => {
                         ""
                       )}
                     </div>
-
                     {user.address ? (
                       <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
                         Contact info:{" "}
@@ -577,7 +575,6 @@ const Admin = () => {
                     ) : (
                       ""
                     )}
-
                     {user.contactEqualShipping ? (
                       <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
                         Shipping info is the same as contact info
@@ -604,10 +601,11 @@ const Admin = () => {
                     ) : (
                       ""
                     )}
+
                     <div className="border-[2px] border-black rounded-lg my-5 p-10 text-center">
-                      <p className="text-xl">Past orders:</p>
-                      {user.pastOrders.length > 0 ? (
-                        user.pastOrders.map((order) => (
+                      <p className="text-xl">orders:</p>
+                      {user.orders.length > 0 ? (
+                        user.orders.map((order) => (
                           <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
                             <p className="pt-5">{`Date of purcharse: ${order.date}`}</p>
                             <div className="flex flex-col items-center md:flex-row justify-between lg:justify-around p-5">
@@ -631,8 +629,16 @@ const Admin = () => {
                           </div>
                         ))
                       ) : (
-                        <p>there aren't any past orders</p>
+                        <p>there aren't any orders</p>
                       )}
+                    </div>
+
+                    {/* delete profile */}
+
+                    <div className=" mt-5 flex justify-center">
+                      <button className="text-red-600 text-2xl">
+                        Delete account
+                      </button>
                     </div>
                   </div>
                 ))}

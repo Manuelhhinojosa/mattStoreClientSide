@@ -33,7 +33,7 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "Ontario",
       shippingCity: "Toronto",
       shippingPostalCode: "M6R3C2",
-      pastOrders: [],
+      orders: [],
     },
     nonAdminUser: {
       isAdmin: false,
@@ -57,7 +57,7 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "California",
       shippingCity: "San Francisco",
       shippingPostalCode: "123456",
-      pastOrders: [
+      orders: [
         {
           id: 19,
           date: "date",
@@ -112,7 +112,7 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "",
       shippingCity: "",
       shippingPostalCode: "",
-      pastOrders: [],
+      orders: [],
     },
     nonAdminUser3: {
       isAdmin: false,
@@ -136,7 +136,7 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "",
       shippingCity: "",
       shippingPostalCode: "",
-      pastOrders: [],
+      orders: [],
     },
     nonAdminUser4: {
       isAdmin: false,
@@ -160,7 +160,7 @@ export const logicSlice = createSlice({
       shippingProviceOrState: "California",
       shippingCity: "San Francisco",
       shippingPostalCode: "123456",
-      pastOrders: [
+      orders: [
         {
           id: 18,
           date: "date",

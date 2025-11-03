@@ -2,6 +2,7 @@ import React from "react";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
+// functions
 import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
 import {
   setShowEditPasswordToTrue,
@@ -17,7 +18,6 @@ import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
-import { MdOutlinePassword } from "react-icons/md";
 
 const Profile = () => {
   // redux & state
@@ -41,51 +41,30 @@ const Profile = () => {
     dispatch(setShowEditShippingInfoToTrue());
   };
 
+  // Renders if profile is not active
+
+  if (!logic.user.isActive) {
+    return (
+      <section className="relative h-screen w-screen flex items-center justify-center">
+        <div className="mt-[125px]  flex flex-col justify-center items-center">
+          <p className="text-2xl mb-10">This account has been inactivated.</p>
+          <button className="rounded-lg  w-1/2 p-2 bg-black text-white hover:bg-gray-500 hover:text-black">
+            Reactivate my account
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  // renders if profile is active
   return (
     <section className="relative  h-screen w-screen flex flex-col items-center">
       {/* Headding */}
-      <div className="mt-[125px]">
+      <div className="mt-[125px] ">
         <p className="text-3xl">Profile</p>
       </div>
       {/* profile info container */}
       <div className="p-2 w-full lg:w-2/3 mt-[25px]">
-        {/* User & password */}
-        <div className="p-3 border-[1px] border-black rounded-md ">
-          <div className="lg:flex justify-between mb-2">
-            <p>{`Full name: ${logic.user.name} ${logic.user.lastname}`}</p>
-            <p>{`User: ${logic.user.username}`}</p>
-          </div>
-
-          <div className="flex justify-between text-sm">
-            <div className="flex">
-              {logic.showPassword ? (
-                <p className="mr-5">password: {logic.user.password}</p>
-              ) : (
-                <p className="mr-5">password: *****</p>
-              )}
-
-              {logic.showPassword ? (
-                <GoEyeClosed
-                  className="text-xl hover:cursor-pointer"
-                  onClick={() => dispatch(toggleShowPassword())}
-                />
-              ) : (
-                <RxEyeOpen
-                  className="text-xl hover:cursor-pointer"
-                  onClick={() => dispatch(toggleShowPassword())}
-                />
-              )}
-            </div>
-
-            <Link
-              to="/editprofile"
-              className="border-b-[1px] border-b-black"
-              onClick={navigateToEditPassword}
-            >
-              edit
-            </Link>
-          </div>
-        </div>
         {/* Contact info */}
         <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
           <div className="mb-2">
@@ -155,8 +134,8 @@ const Profile = () => {
             <p className="text-center text-xl">Past orders:</p>
           </div>
           <div>
-            {logic.user.pastOrders.length > 0 ? (
-              logic.user.pastOrders.map((order) => (
+            {logic.user.orders.length > 0 ? (
+              logic.user.orders.map((order) => (
                 <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
                   <p className="pt-5 text-center">{`Date of purcharse: ${order.date}`}</p>
                   <div className="flex flex-col items-center md:flex-row md:justify-between p-5">
@@ -240,7 +219,7 @@ const Profile = () => {
           </div>
           <div className="flex items-center justify-center h-[50px]">
             <button className="text-red-900 hover:font-semibold">
-              Delete account
+              Inactivate account
             </button>
           </div>
         </div>
