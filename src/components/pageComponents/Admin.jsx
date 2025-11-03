@@ -132,7 +132,7 @@ const Admin = () => {
         dispatch(setInternationalDelivery(0));
 
         if (fileInputRef.current) {
-          fileInputRef.current.value = null; // clears file input
+          fileInputRef.current.value = null;
         }
 
         // directs admin user to all products admin page
@@ -162,6 +162,11 @@ const Admin = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleStatusChange = (id, newStatus) => {
+    alert(id);
+    alert(newStatus);
   };
 
   return (
@@ -514,7 +519,26 @@ const Admin = () => {
                           </div>
                         )}
                       </div>
-                      <div className="mt-5 text-center">{`Amount paid: ${"000.00 CAD"}`}</div>
+                      <div className="mt-5 text-center flex flex-col items-center md:flex-row md:justify-between">
+                        {/* Amount paid info */}
+                        <div className="mb-5">{`Amount paid: ${"000.00 CAD"}`}</div>
+
+                        {/* status button */}
+                        <div>
+                          <select
+                            value={order.status}
+                            onChange={(e) =>
+                              handleStatusChange(order._id, e.target.value)
+                            }
+                            className="focus:outline-none focus:ring-0 block p-2.5"
+                          >
+                            <option value="Processing">Processing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}

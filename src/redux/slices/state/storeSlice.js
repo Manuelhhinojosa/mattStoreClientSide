@@ -53,7 +53,8 @@ export const storeSlice = createSlice({
     // orders: [],
     orders: [
       {
-        orderId: 1,
+        _id: 1,
+        status: "Processing",
         user: {
           isAdmin: false,
           isActive: true,
@@ -110,7 +111,8 @@ export const storeSlice = createSlice({
         date: "this is the date",
       },
       {
-        orderId: 2,
+        _id: 2,
+        status: "Processing",
         user: {
           isAdmin: false,
           isActive: true,
