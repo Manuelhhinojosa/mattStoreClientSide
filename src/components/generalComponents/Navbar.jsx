@@ -10,6 +10,7 @@ import {
   setShowNavbarToFalse,
   setisLoggedInToFalse,
   setuserToNone,
+  setUserTokenEmpty,
 } from "../../redux/slices/staticState/logicSlice";
 import { emptyShoppingCart } from "../../redux/slices/state/storeSlice";
 
@@ -29,6 +30,8 @@ const Navbar = () => {
   const handleSignOut = () => {
     dispatch(setisLoggedInToFalse());
     dispatch(setuserToNone());
+    dispatch(setUserTokenEmpty());
+
     dispatch(emptyShoppingCart());
   };
 
@@ -63,7 +66,9 @@ const Navbar = () => {
                 </div>
               ) : link.id === 8 ? (
                 <div>
-                  {logic.isLoggedIn && logic.user.isAdmin ? link.text : null}
+                  {logic.isLoggedIn && logic.user.role === "admin"
+                    ? link.text
+                    : null}
                 </div>
               ) : (
                 link.text
@@ -101,7 +106,9 @@ const Navbar = () => {
                 </div>
               ) : link.id === 8 ? (
                 <div>
-                  {logic.isLoggedIn && logic.user.isAdmin ? link.text : null}
+                  {logic.isLoggedIn && logic.user.role === "admin"
+                    ? link.text
+                    : null}
                 </div>
               ) : (
                 link.text

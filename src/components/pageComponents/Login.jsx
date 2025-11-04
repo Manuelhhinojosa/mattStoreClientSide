@@ -3,13 +3,20 @@ import React from "react";
 // React router V6
 import { Link, useNavigate } from "react-router-dom";
 
+// Axios
+import axios from "axios";
+
 // redux
 import { useSelector, useDispatch } from "react-redux";
 // redux reducers
 import {
   setisLoggedInToTrue,
-  setAdminUser,
-  setNonAdminUser,
+  setUser,
+  setUserToken,
+  setEnteredUsername,
+  setEnteredUsernameEmpty,
+  setEnteredUserpassword,
+  setEnteredUserpasswordEmpty,
 } from "../../redux/slices/staticState/logicSlice";
 
 // Toastify for error and success message handling
@@ -27,21 +34,49 @@ const login = () => {
   const navigate = useNavigate();
 
   // sign in function as admin (temp)
-  const handleAdminSignIn = (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
-    dispatch(setisLoggedInToTrue());
-    dispatch(setAdminUser());
-    navigate("/admin");
-    toast(`Welcome Matt :)`, toastStyleObject());
-  };
 
-  // sign in function as non-admin (temp)
-  const handleNonAdminSignIn = (e) => {
-    e.preventDefault();
-    dispatch(setisLoggedInToTrue());
-    dispatch(setNonAdminUser());
-    navigate("/profile");
-    toast(`Welcome TestName :)`, toastStyleObject());
+    const { enteredUserUsername, enteredUserPassword } = logic;
+
+    if (!enteredUserUsername || !enteredUserPassword) {
+      toast("Make sure all the fields are filled", toastStyleObject());
+      return;
+    }
+
+    const data = { email: enteredUserUsername, password: enteredUserPassword };
+
+    const loginUrl = "http://localhost:3000/users/login";
+
+    // API call
+    axios
+      .post(loginUrl, data)
+      .then((result) => {
+        console.log("Result: ", result);
+        console.log("SUCCESS! user loged in. Result:", {
+          config: result.config,
+          data: result.data,
+          status: result.status,
+          headers: result.headers,
+        });
+
+        const logedInUser = result.data.user;
+
+        dispatch(setisLoggedInToTrue());
+        dispatch(setUser(logedInUser));
+        dispatch(setUserToken(result.data.token));
+
+        dispatch(setEnteredUsernameEmpty());
+        dispatch(setEnteredUserpasswordEmpty());
+
+        logedInUser.role === "admin"
+          ? navigate("/admin")
+          : navigate("/profile");
+        toast(`Welcome ${logedInUser.name}`, toastStyleObject());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -49,29 +84,29 @@ const login = () => {
       <div className="mt-32 w-full h-[700px] flex flex-col items-center justify-center">
         {/*  */}
         <form
-          action=""
+          encType="multipart/form-data"
           className="flex flex-col items-center justify-around h-1/3"
         >
           <input
             type="text"
-            name="username"
             placeholder="email"
+            name="username"
             autoComplete="off"
             className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center"
+            value={logic.enteredUserUsername}
+            onChange={(e) => dispatch(setEnteredUsername(e.target.value))}
           />
           <input
             type="password"
-            name="password"
             placeholder="password"
+            name="password"
             autoComplete="off"
             className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center"
+            value={logic.enteredUserPassword}
+            onChange={(e) => dispatch(setEnteredUserpassword(e.target.value))}
           />
 
-          <button
-            onClick={handleAdminSignIn}
-            // onClick={handleNonAdminSignIn}
-            className="hover:text-slate-600"
-          >
+          <button onClick={handleSignIn} className="hover:text-slate-600">
             Login
           </button>
         </form>

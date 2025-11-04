@@ -65,17 +65,57 @@ const Profile = () => {
       </div>
       {/* profile info container */}
       <div className="p-2 w-full lg:w-2/3 mt-[25px]">
+        {/* User & password */}
+        <div className="p-3 border-[1px] border-black rounded-md ">
+          <div className="lg:flex justify-between mb-2">
+            <p>{`Full name: ${logic.user.name} ${logic.user.lastname}`}</p>
+            <p>{`Email: ${logic.user.email}`}</p>
+          </div>
+
+          <div className="flex justify-between text-sm">
+            <div className="flex">
+              {logic.showPassword ? (
+                <p className="mr-5">Password: {logic.user.password}</p>
+              ) : (
+                <p className="mr-5">Password: *****</p>
+              )}
+
+              {logic.showPassword ? (
+                <GoEyeClosed
+                  className="text-xl hover:cursor-pointer"
+                  onClick={() => dispatch(toggleShowPassword())}
+                />
+              ) : (
+                <RxEyeOpen
+                  className="text-xl hover:cursor-pointer"
+                  onClick={() => dispatch(toggleShowPassword())}
+                />
+              )}
+            </div>
+
+            <Link
+              to="/editprofile"
+              className="border-b-[1px] border-b-black"
+              onClick={navigateToEditPassword}
+            >
+              edit
+            </Link>
+          </div>
+        </div>
+
         {/* Contact info */}
         <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
           <div className="mb-2">
             <p className="text-center text-xl">Contact info:</p>
           </div>
           <div>
-            <p>{`Address: ${logic.user.address}.  ${
-              logic.user.addressUnit ? `Unit ${logic.user.addressUnit}.` : ""
-            } ${logic.user.city}, ${logic.user.provinceOrState}, ${
-              logic.user.country
-            }. ${logic.user.postalCode}`}</p>
+            <p>{`Address: ${logic.user.contactAddress}.  ${
+              logic.user.contactUnit ? `Unit ${logic.user.contactUnit}.` : ""
+            } ${logic.user.contactCity}, ${
+              logic.user.contactProvinceOrState
+            }, ${logic.user.contactCountry}. ${
+              logic.user.contactPostalCode
+            }`}</p>
             <div className="flex justify-between">
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
               <Link
@@ -93,9 +133,9 @@ const Profile = () => {
           <div className="mb-2">
             <p className="text-center text-xl">Shipping info:</p>
           </div>
-          {logic.user.contactEqualShipping ? (
+          {logic.user.shippingSameAsContactInfo ? (
             <div className="flex justify-between">
-              <p>Same as contact info</p>
+              <p className="text-center ">Same as contact info</p>
               <Link
                 to="/editprofile"
                 className="border-b-[1px] border-b-black"
@@ -107,11 +147,11 @@ const Profile = () => {
           ) : (
             <div>
               <p>{`Address: ${logic.user.shippingAddress}. ${
-                logic.user.shippingAddressUnit
-                  ? `Unit ${logic.user.shippingAddressUnit}.`
+                logic.user.shippingUnit
+                  ? `Unit ${logic.user.shippingUnit}.`
                   : ""
               } ${logic.user.shippingCity}, ${
-                logic.user.shippingProviceOrState
+                logic.user.shippingProvinceOrState
               }, ${logic.user.shippingCountry}. ${
                 logic.user.shippingPostalCode
               }`}</p>

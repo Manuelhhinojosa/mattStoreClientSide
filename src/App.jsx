@@ -66,7 +66,7 @@ function App() {
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/login" element={<Login />} />
 
-        {logic.isLoggedIn && logic.user.isAdmin ? (
+        {logic.isLoggedIn && logic.user.role ? (
           <Route path="/admin" element={<Admin />} />
         ) : (
           <Route path="/admin" element={<Login />} />
@@ -78,7 +78,7 @@ function App() {
           <Route path="/profile" element={<Login />} />
         )}
 
-        {logic.isLoggedIn && logic.user.isAdmin
+        {logic.isLoggedIn && logic.user.role
           ? storeState.artPieces.map((p) => (
               <Route
                 key={p.id}
