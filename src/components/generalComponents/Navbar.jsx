@@ -12,7 +12,10 @@ import {
   setuserToNone,
   setUserTokenEmpty,
 } from "../../redux/slices/staticState/logicSlice";
-import { emptyShoppingCart } from "../../redux/slices/state/storeSlice";
+import {
+  emptyShoppingCart,
+  removeProdShoppingCart,
+} from "../../redux/slices/state/storeSlice";
 
 // react icons
 import { FaTimes, FaBars } from "react-icons/fa";
@@ -28,11 +31,15 @@ const Navbar = () => {
   // functions:
   // handle sign out
   const handleSignOut = () => {
+    if (storeState.shoppingCart.length > 0) {
+      storeState.shoppingCart.map((prod) => {
+        dispatch(removeProdShoppingCart(prod._id));
+      });
+    }
+    dispatch(emptyShoppingCart());
     dispatch(setisLoggedInToFalse());
     dispatch(setuserToNone());
     dispatch(setUserTokenEmpty());
-
-    dispatch(emptyShoppingCart());
   };
 
   return (

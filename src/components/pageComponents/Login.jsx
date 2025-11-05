@@ -19,6 +19,8 @@ import {
   setEnteredUserpasswordEmpty,
 } from "../../redux/slices/staticState/logicSlice";
 
+import { setUsers } from "../../redux/slices/state/storeSlice";
+
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +35,7 @@ const login = () => {
   // React router V6
   const navigate = useNavigate();
 
-  // sign in function as admin (temp)
+  // sign in function
   const handleSignIn = (e) => {
     e.preventDefault();
 
@@ -51,7 +53,7 @@ const login = () => {
     // API call
     axios
       .post(loginUrl, data)
-      .then((result) => {
+      .then(async (result) => {
         console.log("Result: ", result);
         console.log("SUCCESS! user loged in. Result:", {
           config: result.config,
@@ -69,9 +71,23 @@ const login = () => {
         dispatch(setEnteredUsernameEmpty());
         dispatch(setEnteredUserpasswordEmpty());
 
-        logedInUser.role === "admin"
-          ? navigate("/admin")
-          : navigate("/profile");
+        if (logedInUser.role === "admin") {
+          navigate("/admin");
+
+          const usersData = await axios.get(
+            "http://localhost:3000/users/allusers",
+            {
+              headers: {
+                Authorization: `Bearer ${result.data.token}`,
+              },
+            }
+          );
+
+          dispatch(setUsers(usersData.data));
+        } else {
+          navigate("/profile");
+        }
+
         toast(`Welcome ${logedInUser.name}`, toastStyleObject());
       })
       .catch((error) => {

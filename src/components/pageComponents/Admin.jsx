@@ -37,6 +37,7 @@ import {
   setCost,
   setNationwideDelivery,
   setInternationalDelivery,
+  setUsers,
 } from "../../redux/slices/state/storeSlice";
 
 // fetching products function
@@ -52,16 +53,6 @@ const Admin = () => {
   // react hooks
   // useRef for image field (to clear field after submission)
   const fileInputRef = useRef(null);
-
-  // for dev (to build front end of users info page)
-  const users = [];
-  users.push(
-    logic.adminUser,
-    logic.nonAdminUser,
-    logic.nonAdminUser2,
-    logic.nonAdminUser3,
-    logic.nonAdminUser4
-  );
 
   // add post function
   const addPost = (e) => {
@@ -164,9 +155,40 @@ const Admin = () => {
       });
   };
 
+  // handle order status update
   const handleStatusChange = (id, newStatus) => {
     alert(id);
     alert(newStatus);
+    // make api call to update
+  };
+
+  // handle delete user (account)
+  const handleDeleteAcc = async (id) => {
+    axios
+      .delete(`http://localhost:3000/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${logic.userToken}`,
+        },
+      })
+      .then((result) => {
+        const accDeleted = result.data;
+        console.log("this is the account deleted:", accDeleted);
+
+        axios
+          .get(`http://localhost:3000/users/allusers`, {
+            headers: {
+              Authorization: `Bearer ${logic.userToken}`,
+            },
+          })
+          .then((res) => {
+            const newUsersArr = res.data;
+            console.log("this is the new array of users", newUsersArr);
+            dispatch(setUsers(newUsersArr));
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -555,16 +577,19 @@ const Admin = () => {
             <p className="border-b-[1px] border-b-black">Members info</p>
           </div>
           <div className="h-auto">
-            {users.length === 0 ? (
+            {storeState.users.length === 0 ? (
               <div className="h-[500px] flex items-center justify-center text-3xl">
                 <p>There aren't any members yet</p>
               </div>
             ) : (
               <div>
-                {users.map((user) => (
-                  <div className="p-[25px] my-[50px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10">
+                {storeState.users.map((user) => (
+                  <div
+                    key={user._id}
+                    className="p-[25px] my-[50px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10"
+                  >
                     <p
-                      className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-3xl p-4 text-pretty ${
+                      className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-xl p-4 text-pretty ${
                         user.isActive ? "text-green-500" : "text-red-400"
                       }`}
                     >
@@ -576,56 +601,54 @@ const Admin = () => {
                              : "(inactive member)"
                          }`}
                     </p>
-                    <div className="border-[1px] border-black rounded-xl p-5 flex flex-col items-center justify-center lg:flex-row lg:justify-between">
-                      <p className="">{user.username}</p>
+                    <div className="border-[1px] border-black rounded-xl p-5 flex flex-col items-center justify-center">
+                      <p>
+                        Email: <span className="underline"> {user.email}</span>
+                      </p>
+                    </div>
+                    <div className=" flex flex-col md:flex-row md:justify-evenly">
+                      <div className="border-[1px] border-black rounded-lg my-5 p-5 text-left">
+                        <div>
+                          <p className="mb-2 underline">Contact info</p>
+                        </div>
+                        <div>
+                          <p>Phone number: {user.contactPhoneNumber}</p>
+                          <p>Address: {`${user.contactAddress}`}</p>
+                          <p>Unit: {`${user.contactUnit}`}</p>
+                          <p>Country: {`${user.contactCountry}`}</p>
+                          <p>
+                            Province or State:{" "}
+                            {`${user.contactProvinceOrState}`}
+                          </p>
+                          <p>City: {`${user.contactCity}`}</p>
+                          <p>Postal Code: {`${user.contactPostalCode}`}</p>
+                        </div>
+                      </div>
 
-                      {user.contactPhoneNumber ? (
-                        <p className="mt-5 lg:mt-0">
-                          Phone number: {user.contactPhoneNumber}
+                      {user.shippingSameAsContactInfo ? (
+                        <p className="border-[1px] border-black rounded-lg my-5 p-5 flex items-center justify-center">
+                          Shipping info is the same as contact info
                         </p>
                       ) : (
-                        ""
+                        <div className="border-[1px] border-black rounded-lg my-5 p-5 text-left">
+                          <div>
+                            <p className="mb-2 underline">Shipping info</p>
+                          </div>
+                          <div>
+                            <p>Phone number: {user.shippingPhoneNumber}</p>
+                            <p>Address: {`${user.shippingAddress}`}</p>
+                            <p>Unit: {`${user.shippingUnit}`}</p>
+                            <p>Country: {`${user.shippingCountry}`}</p>
+                            <p>
+                              Province or State:{" "}
+                              {`${user.shippingProvinceOrState}`}
+                            </p>
+                            <p>City: {`${user.shippingCity}`}</p>
+                            <p>Postal Code: {`${user.shippingPostalCode}`}</p>
+                          </div>
+                        </div>
                       )}
                     </div>
-                    {user.address ? (
-                      <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
-                        Contact info:{" "}
-                        {`${user.address}. ${
-                          user.addressUnit ? `Unit ${user.addressUnit}.` : ""
-                        } ${user.city}, ${user.provinceOrState}. ${
-                          user.country
-                        }. ${user.postalCode} `}
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                    {user.contactEqualShipping ? (
-                      <p className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
-                        Shipping info is the same as contact info
-                      </p>
-                    ) : user.shippingPhoneNumber ? (
-                      <div className="border-[1px] border-black rounded-lg my-5 p-5 text-center">
-                        <p className="">
-                          Shipping phone number: {user.shippingPhoneNumber}
-                        </p>
-
-                        <p className="mt-5">
-                          Shipping info:{" "}
-                          {`${user.shippingAddress}. ${
-                            user.shippingAddressUnit
-                              ? `Unit ${user.shippingAddressUnit}.`
-                              : ""
-                          }   ${user.shippingCity}, ${
-                            user.shippingProviceOrState
-                          }. ${user.shippingCountry}. ${
-                            user.shippingPostalCode
-                          } `}
-                        </p>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-
                     <div className="border-[2px] border-black rounded-lg my-5 p-10 text-center">
                       <p className="text-xl">orders:</p>
                       {user.orders.length > 0 ? (
@@ -656,11 +679,12 @@ const Admin = () => {
                         <p>there aren't any orders</p>
                       )}
                     </div>
-
                     {/* delete profile */}
-
                     <div className=" mt-5 flex justify-center">
-                      <button className="text-red-600 text-2xl">
+                      <button
+                        className="hover:text-red-600 text-xl underline"
+                        onClick={() => handleDeleteAcc(user._id)}
+                      >
                         Delete account
                       </button>
                     </div>

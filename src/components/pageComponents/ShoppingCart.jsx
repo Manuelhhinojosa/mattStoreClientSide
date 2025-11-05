@@ -34,7 +34,7 @@ const ShoppingCart = () => {
 
         {storeState.shoppingCart.length > 0 ? (
           storeState.shoppingCart.map((prod) => (
-            <div key={prod.id} className="mx-5 mb-8">
+            <div key={prod._id} className=" m-5  border-b-[1px] border-b-black">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-center">1</p>

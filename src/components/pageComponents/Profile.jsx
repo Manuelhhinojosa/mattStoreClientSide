@@ -104,18 +104,17 @@ const Profile = () => {
         </div>
 
         {/* Contact info */}
-        <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
+        <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm ">
           <div className="mb-2">
             <p className="text-center text-xl">Contact info:</p>
           </div>
           <div>
-            <p>{`Address: ${logic.user.contactAddress}.  ${
-              logic.user.contactUnit ? `Unit ${logic.user.contactUnit}.` : ""
-            } ${logic.user.contactCity}, ${
-              logic.user.contactProvinceOrState
-            }, ${logic.user.contactCountry}. ${
-              logic.user.contactPostalCode
-            }`}</p>
+            <p>Address: {`${logic.user.contactAddress}.`}</p>
+            <p>Unit: {`${logic.user.contactUnit}.`}</p>
+            <p>Country: {`${logic.user.contactCountry}.`}</p>
+            <p>Province or State: {`${logic.user.contactProvinceOrState}.`}</p>
+            <p>City: {`${logic.user.contactCity}.`}</p>
+            <p>Postal Code: {`${logic.user.contactPostalCode}.`}</p>
             <div className="flex justify-between">
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
               <Link
@@ -123,7 +122,7 @@ const Profile = () => {
                 className="border-b-[1px] border-b-black"
                 onClick={navigateToEditContactInfo}
               >
-                edit
+                update contact info
               </Link>
             </div>
           </div>
@@ -141,20 +140,19 @@ const Profile = () => {
                 className="border-b-[1px] border-b-black"
                 onClick={navigateToEditShippingInfo}
               >
-                edit
+                update shipping info
               </Link>
             </div>
           ) : (
             <div>
-              <p>{`Address: ${logic.user.shippingAddress}. ${
-                logic.user.shippingUnit
-                  ? `Unit ${logic.user.shippingUnit}.`
-                  : ""
-              } ${logic.user.shippingCity}, ${
-                logic.user.shippingProvinceOrState
-              }, ${logic.user.shippingCountry}. ${
-                logic.user.shippingPostalCode
-              }`}</p>
+              <p>Address: {`${logic.user.shippingAddress}.`}</p>
+              <p>Unit: {`${logic.user.shippingUnit}.`}</p>
+              <p>Country: {`${logic.user.shippingCountry}.`}</p>
+              <p>
+                Province or State: {`${logic.user.shippingProvinceOrState}.`}
+              </p>
+              <p>City: {`${logic.user.shippingCity}.`}</p>
+              <p>Postal Code: {`${logic.user.shippingPostalCode}.`}</p>
               <div className="flex justify-between">
                 <p>{`Phone: ${logic.user.shippingPhoneNumber}`}</p>
                 <Link
@@ -162,7 +160,7 @@ const Profile = () => {
                   className="border-b-[1px] border-b-black"
                   onClick={navigateToEditShippingInfo}
                 >
-                  edit
+                  update shipping info
                 </Link>
               </div>
             </div>
@@ -215,12 +213,15 @@ const Profile = () => {
 
           {storeState.shoppingCart.length > 0 ? (
             storeState.shoppingCart.map((prod) => (
-              <div key={prod.id} className="mt-5 mb-8 ">
+              <div
+                key={prod.id}
+                className="m-5 mb-8 border-b-[1px] border-b-black"
+              >
                 <div className="flex items-center justify-between">
                   <div>
                     <Link to={`/store/${prod.id}`}>
                       <img
-                        src={prod.imgSrcHref}
+                        src={prod.media.url}
                         alt="prod img"
                         className="h-[150px] p-2 rounded-xl"
                       />
@@ -232,7 +233,7 @@ const Profile = () => {
                   <div className="p-2">{`${prod.cost} CAD`}</div>
                   <div className="p-2">
                     <button
-                      onClick={() => dispatch(removeProdShoppingCart(prod.id))}
+                      onClick={() => dispatch(removeProdShoppingCart(prod._id))}
                     >
                       <FaTimes />
                     </button>
@@ -248,7 +249,7 @@ const Profile = () => {
                 className="text-sm border-b-[1px] border-b-black hover:text-slate-600 hover:border-slate-600"
                 to="/store"
               >
-                Store
+                shop
               </Link>
             </div>
           )}

@@ -10,36 +10,10 @@ export const logicSlice = createSlice({
   initialState: {
     // user initial state
     user: {},
-    userToken: "",
+    userToken: "hello",
     enteredUserUsername: "",
     enteredUserPassword: "",
-    // for dev (mock users: admin / non admin)
-    adminUser: {
-      isAdmin: true,
-      isActive: true,
-      name: "Matt",
-      lastname: "Marotti",
-      username: "matt.marotti@gmail.com",
-      password: "adminPassword",
-      contactPhoneNumber: "6472874494",
-      address: "000 Address Test Avenue",
-      addressUnit: "301",
-      country: "Canada",
-      provinceOrState: "Ontario",
-      city: "Toronto",
-      postalCode: "M6R3C2",
-      contactEqualShipping: true,
-      shippingPhoneNumber: "6472874494",
-      shippingAddress: "000 Address Test Avenue",
-      shippingAddressUnit: "",
-      shippingCountry: "Canada",
-      shippingProviceOrState: "Ontario",
-      shippingCity: "Toronto",
-      shippingPostalCode: "M6R3C2",
-      orders: [],
-    },
-    // end for dev
-    //
+
     // logic
     isLoggedIn: false,
     showNavbar: false,
@@ -109,7 +83,7 @@ export const logicSlice = createSlice({
     },
     // set token
     setUserToken: (state, action) => {
-      state.token = action.payload;
+      state.userToken = action.payload;
     },
     setUserTokenEmpty: (state, action) => {
       state.userToken = "";

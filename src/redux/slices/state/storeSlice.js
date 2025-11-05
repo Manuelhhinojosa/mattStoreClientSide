@@ -49,6 +49,9 @@ export const storeSlice = createSlice({
     // shopping cart
     shoppingCart: [],
 
+    // users
+    users: [],
+
     // orders
     // orders: [],
     orders: [
@@ -211,6 +214,9 @@ export const storeSlice = createSlice({
     setInternationalDelivery: (state, action) => {
       state.internationalDelivery = action.payload;
     },
+    setUsers: (state, action) => {
+      state.users = action.payload;
+    },
   },
   // extra reducers
   extraReducers: (builder) => {
@@ -242,6 +248,7 @@ export const {
   setCost,
   setNationwideDelivery,
   setInternationalDelivery,
+  setUsers,
 } = storeSlice.actions;
 
 export default storeSlice.reducer;
