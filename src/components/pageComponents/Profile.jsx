@@ -3,27 +3,45 @@ import React from "react";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 // functions
-import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
+import {
+  removeProdShoppingCart,
+  emptyShoppingCart,
+} from "../../redux/slices/state/storeSlice";
 import {
   setShowEditPasswordToTrue,
   setShowEditContactInfoToTrue,
   setShowEditShippingInfoToTrue,
   toggleShowPassword,
+  setisLoggedInToFalse,
+  setuserToNone,
+  setUserTokenEmpty,
+  setUser,
 } from "../../redux/slices/staticState/logicSlice";
 
 //React Router 6
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+// Axios
+import axios from "axios";
 
 // react icons
 import { FaTimes } from "react-icons/fa";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
 const Profile = () => {
   // redux & state
   const logic = useSelector((state) => state.logicSlice);
   const storeState = useSelector((state) => state.storeSlice);
   const dispatch = useDispatch();
+  // react router hooks
+  const navigate = useNavigate();
 
   // functions
   // go to edit password page
@@ -41,14 +59,78 @@ const Profile = () => {
     dispatch(setShowEditShippingInfoToTrue());
   };
 
-  // Renders if profile is not active
+  // handle inactivation account
+  const handleAccInactivation = async (id) => {
+    try {
+      const res = await axios.patch(
+        "http://localhost:3000/users/inactivateprofile",
+        { _id: id },
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      );
+      console.log("User inactivated:", res.data);
+      toast("User successfully inactivated", toastStyleObject());
 
+      if (storeState.shoppingCart.length > 0) {
+        storeState.shoppingCart.map((prod) => {
+          dispatch(removeProdShoppingCart(prod._id));
+        });
+      }
+      dispatch(emptyShoppingCart());
+      dispatch(setisLoggedInToFalse());
+      dispatch(setuserToNone());
+      dispatch(setUserTokenEmpty());
+    } catch (error) {
+      console.error("Error inactivating user:", error);
+      toast("Error inactivating user", toastStyleObject());
+    }
+  };
+
+  // handle reactivation acc
+  const handleAccReactivation = async (id) => {
+    try {
+      const res = await axios.patch(
+        "http://localhost:3000/users/reactivateprofile",
+        { _id: id },
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      );
+      console.log("User reactivated:", res.data);
+      toast("User successfully reactivated", toastStyleObject());
+
+      const refreshedUserRes = await axios.get(
+        `http://localhost:3000/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      );
+
+      dispatch(setUser(refreshedUserRes.data));
+      navigate("/profile");
+    } catch (error) {
+      console.error("Error inactivating user:", error);
+      toast("Error inactivating user", toastStyleObject());
+    }
+  };
+
+  // Renders if profile is not active
   if (!logic.user.isActive) {
     return (
       <section className="relative h-screen w-screen flex items-center justify-center">
         <div className="mt-[125px]  flex flex-col justify-center items-center">
           <p className="text-2xl mb-10">This account has been inactivated.</p>
-          <button className="rounded-lg  w-1/2 p-2 bg-black text-white hover:bg-gray-500 hover:text-black">
+          <button
+            className="rounded-lg  w-1/2 p-2 bg-black text-white hover:bg-gray-500 hover:text-black"
+            onClick={() => handleAccReactivation(logic.user._id)}
+          >
             Reactivate my account
           </button>
         </div>
@@ -172,7 +254,7 @@ const Profile = () => {
             <p className="text-center text-xl">Past orders:</p>
           </div>
           <div>
-            {logic.user.orders.length > 0 ? (
+            {logic.user?.orders?.length > 0 ? (
               logic.user.orders.map((order) => (
                 <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
                   <p className="pt-5 text-center">{`Date of purcharse: ${order.date}`}</p>
@@ -259,7 +341,10 @@ const Profile = () => {
             <p className="text-center text-xl m-2">Danger zone:</p>
           </div>
           <div className="flex items-center justify-center h-[50px]">
-            <button className="text-red-900 hover:font-semibold">
+            <button
+              className="text-red-900 hover:font-semibold"
+              onClick={() => handleAccInactivation(logic.user._id)}
+            >
               Inactivate account
             </button>
           </div>

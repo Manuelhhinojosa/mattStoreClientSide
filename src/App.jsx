@@ -78,7 +78,7 @@ function App() {
           <Route path="/profile" element={<Login />} />
         )}
 
-        {logic.isLoggedIn && logic.user.role
+        {logic.isLoggedIn && logic.user.role === "admin"
           ? storeState.artPieces.map((p) => (
               <Route
                 key={p.id}
