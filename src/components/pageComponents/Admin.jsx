@@ -99,7 +99,12 @@ const Admin = () => {
 
     // // API call
     axios
-      .post(createPostUrl, formData)
+      .post(createPostUrl, formData, {
+        headers: {
+          Authorization: `Bearer ${logic.userToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((result) => {
         console.log("Result: ", result);
         console.log("SUCCESS! Post added. Result:", {
@@ -143,7 +148,11 @@ const Admin = () => {
     // const deletePostUrl = process.env.REACT_APP_DELETE_POST_URL;
 
     axios
-      .delete(`http://localhost:3000/posts/${id}`)
+      .delete(`http://localhost:3000/posts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${logic.userToken}`,
+        },
+      })
       .then((result) => {
         console.log(result);
         toast("Product deleted", toastStyleObject());
@@ -192,9 +201,9 @@ const Admin = () => {
   };
 
   return (
-    <section className="container mx-auto h-auto mt-32 flex flex-col">
+    <section className="container mx-auto h-screen mt-32 flex flex-col">
       {/* navbar */}
-      <div className="h-[100px] w-full flex flex-col justify-around items-center md:flex-row ">
+      <div className="  h-[100px] w-full flex flex-col justify-around items-center md:flex-row  ">
         {/* see all prods */}
         <div
           className="hover:cursor-pointer text-xl"
@@ -463,35 +472,41 @@ const Admin = () => {
               <div className="flex flex-col justify-center items-center">
                 {[...storeState.orders].reverse().map((order) => (
                   //  ID & date
-                  <div className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl">
+                  <div className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl ">
                     <div className="flex flex-col md:flex-row md:justify-between">
-                      <p className="text-center font-semibold">{`Order ID: ${order.orderId}`}</p>
-                      <p className="text-center">{`Date: ${order.date}`}</p>
+                      <p className="text-center font-semibold">{`Order ID: ${order._id}`}</p>
+                      <p className="text-center">{`Date: ${order.createdAt.slice(
+                        0,
+                        10
+                      )}`}</p>
                     </div>
 
                     <div className="text-center mt-[10px] text-lg">
-                      <p className="mb-[10px]">Items purchased:</p>
+                      <p className="mb-[10px] mt-7">Items purchased:</p>
                     </div>
 
                     {/* products */}
                     {order.products.map((product) => (
-                      <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-[1px] border-black rounded-lg">
+                      <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-b border-black ">
                         <img
-                          className="w-[150px] p-3"
-                          src={product.imgSrcHref}
+                          className="w-[100px] p-3 "
+                          src={product.media.url}
                           alt="productImage"
                         />
                         <p className=" text-center text-sm">{`${product.title}`}</p>
                       </div>
                     ))}
-                    <div className="text-center text-xl">Customer's info:</div>
+
+                    <div className="text-center text-xl mt-5">
+                      Customer's info:
+                    </div>
 
                     <div className="p-2 w-full md:full mt-[25px]">
                       {/* client's info */}
                       <div className="p-3 border-[1px] border-black rounded-md  ">
                         <div className="lg:flex justify-between mb-2 text-sm">
                           <p>{`Full name: ${order.user.name} ${order.user.lastname}`}</p>
-                          <p>User: {order.user.username} </p>
+                          <p>Email: {order.user.email} </p>
                         </div>
                       </div>
 
@@ -501,18 +516,18 @@ const Admin = () => {
                           <p className="text-center">Contact info:</p>
                         </div>
                         <div>
-                          <p>{`Address: ${order.user.address}.  ${
-                            order.user.addressUnit
-                              ? `Unit ${order.user.addressUnit}.`
-                              : ""
-                          } ${order.user.city}, ${
-                            order.user.provinceOrState
-                          }, ${order.user.country}. ${
-                            order.user.postalCode
-                          }`}</p>
-                          <div className="flex justify-between">
-                            <p>{`Phone: ${order.user.contactPhoneNumber}`}</p>
-                          </div>
+                          <p>Phone number: {order.user.contactPhoneNumber}</p>
+                          <p>Address: {`${order.user.contactAddress}`}</p>
+                          <p>Unit: {`${order.user.contactUnit}`}</p>
+                          <p>Country: {`${order.user.contactCountry}`}</p>
+                          <p>
+                            Province or State:{" "}
+                            {`${order.user.contactProvinceOrState}`}
+                          </p>
+                          <p>City: {`${order.user.contactCity}`}</p>
+                          <p>
+                            Postal Code: {`${order.user.contactPostalCode}`}
+                          </p>
                         </div>
                       </div>
                       {/* Shipping info */}
@@ -520,24 +535,26 @@ const Admin = () => {
                         <div className="mb-2">
                           <p className="text-center ">Shipping info:</p>
                         </div>
-                        {order.user.contactEqualShipping ? (
+                        {order.user.shippingSameAsContactInfo ? (
                           <div className="flex justify-between">
                             <p>Same as contact info</p>
                           </div>
                         ) : (
                           <div>
-                            <p>{`Address: ${order.user.shippingAddress}. ${
-                              order.user.shippingAddressUnit
-                                ? `Unit ${order.user.shippingAddressUnit}.`
-                                : ""
-                            } ${order.user.shippingCity}, ${
-                              order.user.shippingProviceOrState
-                            }, ${order.user.shippingCountry}. ${
-                              order.user.shippingPostalCode
-                            }`}</p>
-                            <div className="flex justify-between">
-                              <p>{`Phone: ${order.user.shippingPhoneNumber}`}</p>
-                            </div>
+                            <p>
+                              Phone number: {order.user.shippingPhoneNumber}
+                            </p>
+                            <p>Address: {`${order.user.shippingAddress}`}</p>
+                            <p>Unit: {`${order.user.shippingUnit}`}</p>
+                            <p>Country: {`${order.user.shippingCountry}`}</p>
+                            <p>
+                              Province or State:{" "}
+                              {`${order.user.shippingProvinceOrState}`}
+                            </p>
+                            <p>City: {`${order.user.shippingCity}`}</p>
+                            <p>
+                              Postal Code: {`${order.user.shippingPostalCode}`}
+                            </p>
                           </div>
                         )}
                       </div>
@@ -653,7 +670,7 @@ const Admin = () => {
                       <p className="text-xl">orders:</p>
                       {user.orders.length > 0 ? (
                         user.orders.map((order) => (
-                          <div className="border-[1px] border-black rounded-lg my-10 flex flex-col items-center h-[500px] overflow-hidden overflow-y-scroll shadow-2xl">
+                          <div className="border-[1px] border-black rounded-lg my-10 flex flex-col items-center h-[500px] overflow-hidden overflow-y-scroll">
                             <p className="pt-5 underline">{`Date of purcharse: ${order.createdAt.slice(
                               0,
                               10

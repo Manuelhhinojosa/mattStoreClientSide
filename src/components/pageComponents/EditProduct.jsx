@@ -24,6 +24,7 @@ import { setShowAllProducts } from "../../redux/slices/staticState/logicSlice";
 const EditProduct = () => {
   // redux & state
   const storeState = useSelector((state) => state.storeSlice);
+  const logic = useSelector((state) => state.logicSlice);
   // redux hooks
   const dispatch = useDispatch();
   // React router V6
@@ -55,40 +56,19 @@ const EditProduct = () => {
       internationalDelivery,
     } = newProductSate;
 
-    if (
-      !title ||
-      !shortDesc ||
-      cost <= 0 ||
-      nationwideDelivery <= 0 ||
-      internationalDelivery <= 0
-    ) {
-      toast("Make sure all the fields are filled.", toastStyleObject());
-      return;
-    }
-
-    // create object to send to API
-    const formData = new FormData();
-
-    formData.append("_id", newProductSate._id);
-    formData.append("inStock", newProductSate.inStock);
-    formData.append("recentWork", newProductSate.recentWork);
-    formData.append("title", newProductSate.title);
-    formData.append("shortDesc", newProductSate.shortDesc);
-    formData.append("cost", newProductSate.cost);
-    formData.append("nationwideDelivery", newProductSate.nationwideDelivery);
-    formData.append(
-      "internationalDelivery",
-      newProductSate.internationalDelivery
-    );
-
     // api url
     const editproductUrl = "http://localhost:3000/posts";
     // const editPostUrl = process.env.REACT_APP_EDIT_POST_URL;
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${logic.userToken}`,
+        "Content-Type": "application/json",
+      },
+    };
 
     // axios call
     axios
-      .put(`${editproductUrl}/${product._id}`, formData, config)
+      .put(`${editproductUrl}/${product._id}`, newProductSate, config)
       .then((result) => {
         console.log("Result: ", result.data);
         console.log("SUCCESS! Post edited. Result:", {

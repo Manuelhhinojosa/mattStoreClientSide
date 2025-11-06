@@ -251,12 +251,12 @@ const Profile = () => {
         {/* Past orders */}
         <div className="p-2 mt-3 border-[2px] border-black rounded-md text-sm">
           <div className="mb-2">
-            <p className="text-center text-xl">Past orders:</p>
+            <p className="text-center text-xl">Orders:</p>
           </div>
           <div>
             {logic.user?.orders?.length > 0 ? (
               logic.user.orders.map((order) => (
-                <div className="my-10 flex flex-col items-center border-[1px] border-black rounded-xl  h-[350px] overflow-hidden overflow-y-scroll shadow-2xl p-3">
+                <div className="my-10 flex flex-col items-center border-[1px] border-black rounded-xl  h-[350px] overflow-hidden overflow-y-scroll p-3">
                   <p className="pt-5 text-center">{`Date of purcharse: ${order.createdAt.slice(
                     0,
                     10
