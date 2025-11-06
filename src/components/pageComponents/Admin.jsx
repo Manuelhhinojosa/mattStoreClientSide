@@ -649,30 +649,51 @@ const Admin = () => {
                         </div>
                       )}
                     </div>
-                    <div className="border-[2px] border-black rounded-lg my-5 p-10 text-center">
+                    <div className="rounded-lg my-5 p-10 text-center">
                       <p className="text-xl">orders:</p>
                       {user.orders.length > 0 ? (
                         user.orders.map((order) => (
-                          <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
-                            <p className="pt-5">{`Date of purcharse: ${order.date}`}</p>
-                            <div className="flex flex-col items-center md:flex-row justify-between lg:justify-around p-5">
-                              <img
-                                src={order.imgSrcHref}
-                                alt="productImg"
-                                className="w-[125px] my-5"
-                              />
+                          <div className="border-[1px] border-black rounded-lg my-10 flex flex-col items-center h-[500px] overflow-hidden overflow-y-scroll shadow-2xl">
+                            <p className="pt-5 underline">{`Date of purcharse: ${order.createdAt.slice(
+                              0,
+                              10
+                            )}`}</p>
+                            <p className="text-sm">Order ID: {order._id}</p>
+                            <p className="text-sm">
+                              Total items: {order.products.length}
+                            </p>
+                            <p className="text-sm">Status: {order.status}</p>
+                            <p className="text-sm">
+                              Shipped to: Shipping address at the time of
+                              purchase
+                            </p>
+                            <p className="text-sm">
+                              Total amount paid: 123 CAD
+                            </p>
+                            <br />
+                            <p className="underline">Items:</p>
 
-                              <div>
-                                <p className="text-sm py-1">{`${order.title}`}</p>
-                                <p className="text-sm py-1">{`${order.shortDesc}`}</p>
-                                <p className="text-sm py-1">{`Total amount paid: $${
-                                  (order.cost + order.nationwideDelivery) *
-                                    0.13 +
-                                  order.cost +
-                                  order.nationwideDelivery
-                                } CAD`}</p>
+                            {order.products.map((product) => (
+                              <div className="flex flex-col items-center md:flex-row justify-between lg:justify-around p-5 w-[90%] border-b border-black m-5">
+                                <img
+                                  src={product.media.url}
+                                  alt="productImg"
+                                  className="w-[125px] my-5 rounded"
+                                />
+
+                                <div>
+                                  <p className="text-sm py-1">{`${product.title}`}</p>
+                                  <p className="text-sm py-1">{`${product.shortDesc}`}</p>
+                                  <p className="text-sm py-1">{`Amount paid: $${
+                                    (product.cost +
+                                      product.nationwideDelivery) *
+                                      0.13 +
+                                    product.cost +
+                                    product.nationwideDelivery
+                                  } CAD`}</p>
+                                </div>
                               </div>
-                            </div>
+                            ))}
                           </div>
                         ))
                       ) : (

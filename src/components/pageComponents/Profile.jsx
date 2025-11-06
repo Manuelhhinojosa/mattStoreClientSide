@@ -256,25 +256,41 @@ const Profile = () => {
           <div>
             {logic.user?.orders?.length > 0 ? (
               logic.user.orders.map((order) => (
-                <div className="border-[1px] border-black rounded-lg my-10 flex flex-col">
-                  <p className="pt-5 text-center">{`Date of purcharse: ${order.date}`}</p>
-                  <div className="flex flex-col items-center md:flex-row md:justify-between p-5">
-                    <img
-                      src={order.imgSrcHref}
-                      alt="productImg"
-                      className="w-[125px] my-5"
-                    />
+                <div className="my-10 flex flex-col items-center border-[1px] border-black rounded-xl  h-[350px] overflow-hidden overflow-y-scroll shadow-2xl p-3">
+                  <p className="pt-5 text-center">{`Date of purcharse: ${order.createdAt.slice(
+                    0,
+                    10
+                  )}`}</p>
+                  <p className="text-sm">Order ID: {order._id}</p>
+                  <p className="text-sm">
+                    Total items: {order.products.length}
+                  </p>
+                  <p className="text-sm">Status: {order.status}</p>
+                  <p className="text-sm">
+                    Shipped to: Shipping address at the time of purchase
+                  </p>
+                  <p className="text-sm">Total amount paid: 123 CAD</p>
+                  <br />
+                  <p className="underline">Items:</p>
+                  {order.products.map((product) => (
+                    <div className="w-[90%] flex flex-col items-center md:flex-row md:justify-between p-5 border-b border-black">
+                      <img
+                        src={product.media.url}
+                        alt="productImg"
+                        className="w-[125px] my-5"
+                      />
 
-                    <div>
-                      <p className="text-sm py-1 text-center">{`${order.title}`}</p>
-                      <p className="text-sm py-1 text-center">{`${order.shortDesc}`}</p>
-                      <p className="text-sm py-1 text-center">{`Total amount paid: $${
-                        (order.cost + order.nationwideDelivery) * 0.13 +
-                        order.cost +
-                        order.nationwideDelivery
-                      } CAD`}</p>
+                      <div>
+                        <p className="text-sm py-1 text-center">{`${product.title}`}</p>
+                        <p className="text-sm py-1 text-center">{`${product.shortDesc}`}</p>
+                        <p className="text-sm py-1 text-center">{`Amount paid: ${
+                          (product.cost + product.nationwideDelivery) * 0.13 +
+                          product.cost +
+                          product.nationwideDelivery
+                        } CAD`}</p>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               ))
             ) : (
