@@ -19,7 +19,7 @@ import {
   setEnteredUserpasswordEmpty,
 } from "../../redux/slices/staticState/logicSlice";
 
-import { setUsers } from "../../redux/slices/state/storeSlice";
+import { setUsers, setOrders } from "../../redux/slices/state/storeSlice";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -84,6 +84,17 @@ const login = () => {
           );
 
           dispatch(setUsers(usersData.data));
+
+          const ordersData = await axios.get(
+            "http://localhost:3000/orders/allorders",
+            {
+              headers: {
+                Authorization: `Bearer ${result.data.token}`,
+              },
+            }
+          );
+
+          dispatch(setOrders(ordersData.data));
         } else {
           navigate("/profile");
         }

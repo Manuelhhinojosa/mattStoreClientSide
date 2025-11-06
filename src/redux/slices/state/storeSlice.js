@@ -53,111 +53,7 @@ export const storeSlice = createSlice({
     users: [],
 
     // orders
-    // orders: [],
-    orders: [
-      {
-        _id: 1,
-        status: "Processing",
-        user: {
-          isAdmin: false,
-          isActive: true,
-          name: "TestName",
-          lastname: "TestLastName",
-          username: "testname.testlastname@gmail.com",
-          password: "userPassword",
-          contactPhoneNumber: "6472874494",
-          address: "87 Address test Avenue",
-          addressUnit: "456",
-          country: "Canada",
-          provinceOrState: "Ontario",
-          city: "Toronto",
-          postalCode: "M6R3C2",
-          contactEqualShipping: false,
-          shippingPhoneNumber: "6472874494",
-          shippingAddress: "376 Address test Road",
-          shippingAddressUnit: "",
-          shippingCountry: "USA",
-          shippingProviceOrState: "California",
-          shippingCity: "San Francisco",
-          shippingPostalCode: "123456",
-        },
-        products: [
-          {
-            id: 19,
-            inStock: true,
-            added: false,
-            recentWork: true,
-            title: `"To A Sphinx With A Riddle, Everything Is A Complex"`,
-            shortDesc: "Pending",
-            largeDesc: "Pending",
-            imgSrcHref:
-              "https://res.cloudinary.com/mangud/image/upload/v1748265574/MattMarottiClientSide/To_A_Sphinx_With_A_Riddle_Everything_Is_A_Complex_o3azkm.jpg",
-            cost: 200,
-            nationwideDelivery: "$0.00 CAD",
-            internationalDelivery: "$0.00 CAD",
-          },
-          {
-            id: 20,
-            inStock: true,
-            added: false,
-            recentWork: true,
-            title: `"They Don't Make Men Like They Used To"`,
-            shortDesc: "Pending",
-            largeDesc: "Pending",
-            imgSrcHref:
-              "https://res.cloudinary.com/mangud/image/upload/v1748265570/MattMarottiClientSide/They_Don_t_Make_Men_Like_They_Used_To_fe4gao.jpg",
-            cost: 200,
-            nationwideDelivery: "$0.00 CAD",
-            internationalDelivery: "$0.00 CAD",
-          },
-        ],
-        date: "this is the date",
-      },
-      {
-        _id: 2,
-        status: "Processing",
-        user: {
-          isAdmin: false,
-          isActive: true,
-          name: "TestName",
-          lastname: "TestLastName",
-          username: "testname.testlastname@gmail.com",
-          password: "userPassword",
-          contactPhoneNumber: "6472874494",
-          address: "87 Address test Avenue",
-          addressUnit: "456",
-          country: "Canada",
-          provinceOrState: "Ontario",
-          city: "Toronto",
-          postalCode: "M6R3C2",
-          contactEqualShipping: false,
-          shippingPhoneNumber: "6472874494",
-          shippingAddress: "376 Address test Road",
-          shippingAddressUnit: "",
-          shippingCountry: "USA",
-          shippingProviceOrState: "California",
-          shippingCity: "San Francisco",
-          shippingPostalCode: "123456",
-        },
-        products: [
-          {
-            id: 18,
-            inStock: true,
-            added: false,
-            recentWork: true,
-            title: `"Sorry, Didn't Mean To Cut You Off"`,
-            shortDesc: "Pending",
-            largeDesc: "Pending",
-            imgSrcHref:
-              "https://res.cloudinary.com/mangud/image/upload/v1748265583/MattMarottiClientSide/Sorry_Didn_t_Mean_To_Cut_You_Off_gotsme.jpg",
-            cost: 200,
-            nationwideDelivery: "$0.00 CAD",
-            internationalDelivery: "$0.00 CAD",
-          },
-        ],
-        date: "this is the date",
-      },
-    ],
+    orders: [],
   },
   // functions
   reducers: {
@@ -217,6 +113,9 @@ export const storeSlice = createSlice({
     setUsers: (state, action) => {
       state.users = action.payload;
     },
+    setOrders: (state, action) => {
+      state.orders = action.payload;
+    },
   },
   // extra reducers
   extraReducers: (builder) => {
@@ -249,6 +148,7 @@ export const {
   setNationwideDelivery,
   setInternationalDelivery,
   setUsers,
+  setOrders,
 } = storeSlice.actions;
 
 export default storeSlice.reducer;
