@@ -11,7 +11,7 @@ const Signup = () => {
       </div>
       <div>
         <form className="flex flex-col items-center">
-          <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px]">
+          <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px] shadow-xl">
             {/* name and lastname */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
@@ -68,7 +68,7 @@ const Signup = () => {
           </div>
 
           {/* contact info */}
-          <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px]">
+          <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px] shadow-xl">
             <div className="flex items-center justify-center">
               <p className="text-xl">Contact info (optional)</p>
             </div>
@@ -139,7 +139,7 @@ const Signup = () => {
           </div>
 
           {/* shipping info */}
-          <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px]">
+          <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px] shadow-xl">
             <div className="flex items-center justify-center">
               <p className="text-xl">Shipping info (optional)</p>
             </div>
@@ -219,7 +219,7 @@ const Signup = () => {
           </div>
 
           {/* sign up button */}
-          <button type="submit" className="text-lg hover:text-slate-600">
+          <button type="submit" className="text-lg hover:text-slate-600 mt-10">
             sign up
           </button>
         </form>

@@ -119,7 +119,7 @@ const login = () => {
             placeholder="email"
             name="username"
             autoComplete="off"
-            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center"
+            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center min-w-[350px]"
             value={logic.enteredUserUsername}
             onChange={(e) => dispatch(setEnteredUsername(e.target.value))}
           />
@@ -128,7 +128,7 @@ const login = () => {
             placeholder="password"
             name="password"
             autoComplete="off"
-            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center"
+            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center min-w-[350px]"
             value={logic.enteredUserPassword}
             onChange={(e) => dispatch(setEnteredUserpassword(e.target.value))}
           />
