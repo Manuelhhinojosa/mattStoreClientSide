@@ -107,11 +107,11 @@ const EditProduct = () => {
             <img
               src={product.media.url}
               alt="productImage"
-              className="w-[125px] rounded-lg"
+              className="w-[150px] rounded-lg shadow-lg"
             />
 
             {/* in stock */}
-            <div className="flex flex-col">
+            <div className="flex flex-col text-sm">
               <label htmlFor="inStock">In Stock?</label>
               <select
                 name="inStock"
@@ -139,7 +139,7 @@ const EditProduct = () => {
             </div>
 
             {/* recent work */}
-            <div className="flex flex-col">
+            <div className="flex flex-col text-sm">
               <label for="recentWork">Recent work?</label>
               <select
                 name="recentWork"
@@ -175,7 +175,7 @@ const EditProduct = () => {
               name="title"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none text-sm"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -189,7 +189,7 @@ const EditProduct = () => {
               name="shortDesc"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none text-sm"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -203,7 +203,7 @@ const EditProduct = () => {
               name="cost"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -217,7 +217,7 @@ const EditProduct = () => {
               name="nationwideDelivery"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -234,7 +234,7 @@ const EditProduct = () => {
               name="internationalDelivery"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm"
               onChange={(e) => {
                 const newValue = e.target.value;
 

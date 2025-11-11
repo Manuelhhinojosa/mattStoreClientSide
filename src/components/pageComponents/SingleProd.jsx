@@ -37,12 +37,12 @@ const SingleProd = () => {
           <img
             src={product.media.url}
             alt="Product image"
-            className="p-8 lg:w-1/2"
+            className="mb-10 max-h-[700px] shadow-2xl "
           />
         </div>
         <div>
           <div className="mb-8">
-            <p className="text-center">{product.title}</p>
+            <p className="text-center font-bold">{product.title}</p>
           </div>
           <div>
             <p className="text-center">{`${product.cost} CAD`}</p>

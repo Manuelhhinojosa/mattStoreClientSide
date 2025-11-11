@@ -10,11 +10,11 @@ const About = () => {
   return (
     <section className="container mx-auto  flex items-end">
       <div className="mt-32 w-full flex flex-col items-center">
-        <div className="mt-8 h-96 ">
+        <div className="mt-8 h-96">
           <img
             src={staticState.about.aboutImgSrcHref}
             alt="about image"
-            className="h-full rounded-xl"
+            className="h-full rounded-xl shadow-2xl"
           />
         </div>
         <div className="w-full flex flex-col items-center">

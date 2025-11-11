@@ -148,13 +148,13 @@ const Profile = () => {
       {/* profile info container */}
       <div className="p-2 w-full lg:w-2/3 mt-[25px]">
         {/* User & password */}
-        <div className="p-3 border-[1px] border-black rounded-md ">
+        <div className="p-3 border-[1px] border-black rounded-md shadow">
           <div className="lg:flex justify-between mb-2">
             <p>{`Full name: ${logic.user.name} ${logic.user.lastname}`}</p>
             <p>{`Email: ${logic.user.email}`}</p>
           </div>
 
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-sm ">
             <div className="flex">
               {logic.showPassword ? (
                 <p className="mr-5">Password: {logic.user.password}</p>
@@ -186,7 +186,7 @@ const Profile = () => {
         </div>
 
         {/* Contact info */}
-        <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm ">
+        <div className="p-2 mt-10 border-[1px] border-black rounded-md text-sm shadow">
           <div className="mb-2">
             <p className="text-center text-xl">Contact info:</p>
           </div>
@@ -210,7 +210,7 @@ const Profile = () => {
           </div>
         </div>
         {/* Shipping info */}
-        <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
+        <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm shadow">
           <div className="mb-2">
             <p className="text-center text-xl">Shipping info:</p>
           </div>
@@ -249,7 +249,7 @@ const Profile = () => {
           )}
         </div>
         {/* Past orders */}
-        <div className="p-2 mt-3 border-[2px] border-black rounded-md text-sm">
+        <div className="p-2 mt-10 border-[2px] border-black rounded-md text-sm shadow ">
           <div className="mb-2">
             <p className="text-center text-xl">Orders:</p>
           </div>
@@ -304,7 +304,7 @@ const Profile = () => {
           </div>
         </div>
         {/* Shopping cart */}
-        <div className="border-[1px] border-black rounded-md my-8">
+        <div className="border-[1px] border-black rounded-md my-8 shadow">
           <div>
             <p className="text-center text-xl m-2">Shopping Cart:</p>
           </div>
@@ -352,7 +352,7 @@ const Profile = () => {
             </div>
           )}
         </div>
-        <div className="border-[1px] border-black rounded-md my-8">
+        <div className="border-[1px] border-black rounded-md my-8 shadow">
           <div>
             <p className="text-center text-xl m-2">Danger zone:</p>
           </div>

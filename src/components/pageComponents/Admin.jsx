@@ -270,28 +270,30 @@ const Admin = () => {
           {[...storeState.artPieces].reverse().map((p) => (
             <div
               key={p._id}
-              className="mx-2 py-5 my-[25px] flex flex-col items-center border-[1px] border-black rounded-xl"
+              className=" py-12 mx-10 my-[50px] flex flex-col items-center border-[1px] border-black rounded-xl text-sm md:flex-row justify-evenly shadow-xl"
             >
               <img
                 src={p.media.url}
                 alt="product image"
-                className="w-[200px] md:w-[500px] h-auto"
+                className="max-h-[350px] rounded-3xl shadow"
               />
-              <div className="mt-[25px]">Title: {p.title}</div>
-              <div className="text-center">Description: {p.shortDesc}</div>
-              <div>Price: {`${p.cost} CAD`}</div>
-              <div>{p.inStock ? "In Stock" : "Not in Stock"}</div>
-              <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
-              <div>NDF: {p.nationwideDelivery}</div>
-              <div>IDF: {p.internationalDelivery}</div>
-              <div className="text-green-900 mt-[25px] hover:cursor-pointer">
-                <Link to={`/editproduct/${p._id}`}>Edit product</Link>
-              </div>
-              <div
-                className="text-red-900 hover:cursor-pointer mt-2"
-                onClick={() => handleDeleteProduct(p._id)}
-              >
-                Delete product
+              <div className="text-center">
+                <div className="mt-[25px]">Title: {p.title}</div>
+                <div className="text-center">Description: {p.shortDesc}</div>
+                <div>Price: {`${p.cost} CAD`}</div>
+                <div>{p.inStock ? "In Stock" : "Not in Stock"}</div>
+                <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
+                <div>NDF: {p.nationwideDelivery}</div>
+                <div>IDF: {p.internationalDelivery}</div>
+                <div className="mt-[25px] hover:cursor-pointer hover:text-gray-500 underline">
+                  <Link to={`/editproduct/${p._id}`}>Edit product</Link>
+                </div>
+                <div
+                  className="hover:text-red-900 hover:cursor-pointer mt-2 underline"
+                  onClick={() => handleDeleteProduct(p._id)}
+                >
+                  Delete product
+                </div>
               </div>
             </div>
           ))}
@@ -472,7 +474,7 @@ const Admin = () => {
               <div className="flex flex-col justify-center items-center">
                 {[...storeState.orders].reverse().map((order) => (
                   //  ID & date
-                  <div className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl ">
+                  <div className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl shadow-2xl">
                     <div className="flex flex-col md:flex-row md:justify-between">
                       <p className="text-center font-semibold">{`Order ID: ${order._id}`}</p>
                       <p className="text-center">{`Date: ${order.createdAt.slice(
@@ -489,7 +491,7 @@ const Admin = () => {
                     {order.products.map((product) => (
                       <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-b border-black ">
                         <img
-                          className="w-[100px] p-3 "
+                          className="w-[100px] mb-5 rounded shadow"
                           src={product.media.url}
                           alt="productImage"
                         />
@@ -603,7 +605,7 @@ const Admin = () => {
                 {storeState.users.map((user) => (
                   <div
                     key={user._id}
-                    className="p-[25px] my-[50px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10"
+                    className="p-[25px] my-[70px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10 shadow-lg"
                   >
                     <p
                       className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-xl p-4 text-pretty ${
@@ -670,7 +672,7 @@ const Admin = () => {
                       <p className="text-xl">orders:</p>
                       {user.orders.length > 0 ? (
                         user.orders.map((order) => (
-                          <div className="border-[1px] border-black rounded-lg my-10 flex flex-col items-center h-[500px] overflow-hidden overflow-y-scroll">
+                          <div className="border-[1px] border-black rounded-lg my-10 flex flex-col items-center h-[500px] overflow-hidden overflow-y-scroll shadow-2xl">
                             <p className="pt-5 underline">{`Date of purcharse: ${order.createdAt.slice(
                               0,
                               10
@@ -695,7 +697,7 @@ const Admin = () => {
                                 <img
                                   src={product.media.url}
                                   alt="productImg"
-                                  className="w-[125px] my-5 rounded"
+                                  className="w-[125px] my-5 rounded shadow"
                                 />
 
                                 <div>
