@@ -25,6 +25,7 @@ import {
   setShowAddProduct,
   setShowViewOrders,
   setShowMembersInfo,
+  setUser,
 } from "../../redux/slices/staticState/logicSlice";
 
 // handle store state (product)
@@ -38,6 +39,7 @@ import {
   setNationwideDelivery,
   setInternationalDelivery,
   setUsers,
+  setOrders,
 } from "../../redux/slices/state/storeSlice";
 
 // fetching products function
@@ -54,6 +56,11 @@ const Admin = () => {
   // useRef for image field (to clear field after submission)
   const fileInputRef = useRef(null);
 
+  // functions
+  // functions
+  // functions
+  //
+  //
   // add post function
   const addPost = (e) => {
     e.preventDefault();
@@ -158,6 +165,18 @@ const Admin = () => {
         toast("Product deleted", toastStyleObject());
 
         dispatch(fetchArtPieces());
+
+        // get all orders
+        axios
+          .get("http://localhost:3000/orders/allorders", {
+            headers: {
+              Authorization: `Bearer ${logic.userToken}`,
+            },
+          })
+          .then((res) => {
+            const orders = res.data;
+            dispatch(setOrders(orders));
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -165,10 +184,71 @@ const Admin = () => {
   };
 
   // handle order status update
-  const handleStatusChange = (id, newStatus) => {
-    alert(id);
-    alert(newStatus);
-    // make api call to update
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      // API URL
+      const updateOrderUrl = "http://localhost:3000/orders/editorderstatus";
+
+      // data
+      const data = {
+        _id: id,
+        status: newStatus,
+      };
+
+      // headers
+      const config = {
+        headers: {
+          Authorization: `Bearer ${logic.userToken}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      // make the API call
+      const response = await axios.patch(updateOrderUrl, data, config);
+
+      console.log("Order status updated successfully:", response.data);
+      toast("Order status updated", toastStyleObject());
+
+      // refresh users, orders and artpieces arrs
+
+      const usersData = await axios.get(
+        "http://localhost:3000/users/allusers",
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      );
+
+      dispatch(setUsers(usersData.data));
+
+      const ordersData = await axios.get(
+        "http://localhost:3000/orders/allorders",
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      );
+
+      dispatch(setOrders(ordersData.data));
+
+      dispatch(fetchArtPieces());
+
+      axios
+        .get(`http://localhost:3000/users/${logic.user._id}`, {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        })
+        .then((res) => {
+          const updatedUser = res.data;
+          dispatch(setUser(updatedUser));
+        });
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      toast("Failed to update order status", toastStyleObject());
+    }
   };
 
   // handle delete user (account)
@@ -193,6 +273,18 @@ const Admin = () => {
             const newUsersArr = res.data;
             console.log("this is the new array of users", newUsersArr);
             dispatch(setUsers(newUsersArr));
+          });
+
+        // get all orders
+        axios
+          .get("http://localhost:3000/orders/allorders", {
+            headers: {
+              Authorization: `Bearer ${logic.userToken}`,
+            },
+          })
+          .then((res) => {
+            const orders = res.data;
+            dispatch(setOrders(orders));
           });
       })
       .catch((error) => {
@@ -488,14 +580,21 @@ const Admin = () => {
                     </div>
 
                     {/* products */}
-                    {order.products.map((product) => (
+                    {order.productsInfoAtTimeOfPurchase.map((product) => (
                       <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-b border-black ">
                         <img
                           className="w-[100px] mb-5 rounded shadow"
-                          src={product.media.url}
+                          src={product.imgUrl}
                           alt="productImage"
                         />
-                        <p className=" text-center text-sm">{`${product.title}`}</p>
+
+                        <div>
+                          <p className=" text-center text-sm font-bold">{`"${product.title}"`}</p>
+                          <p className=" text-center text-sm">{`${product.shortDesc}`}</p>
+                          <p className=" text-center text-sm">{`${product.cost}`}</p>
+                          <p className=" text-center text-sm">{`${product.deliveryCost}`}</p>
+                          <p className=" text-center text-sm">{`${product.totalAmountPaid}`}</p>
+                        </div>
                       </div>
                     ))}
 
@@ -507,58 +606,42 @@ const Admin = () => {
                       {/* client's info */}
                       <div className="p-3 border-[1px] border-black rounded-md  ">
                         <div className="lg:flex justify-between mb-2 text-sm">
-                          <p>{`Full name: ${order.user.name} ${order.user.lastname}`}</p>
-                          <p>Email: {order.user.email} </p>
+                          <p>
+                            {`Full name: ${order.custInfoAtTimeOfPurchase.name} ${order.custInfoAtTimeOfPurchase.lastname}`}{" "}
+                            <span>
+                              {order.user.isActive ? "(Active)" : "(Inactive)"}
+                            </span>
+                          </p>
+                          <p>Email: {order.custInfoAtTimeOfPurchase.email} </p>
                         </div>
                       </div>
 
                       {/* Contact info */}
                       <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
                         <div className="mb-2">
-                          <p className="text-center">Contact info:</p>
+                          <p className="text-center">
+                            Contact info at the time of purchase:
+                          </p>
                         </div>
                         <div>
-                          <p>Phone number: {order.user.contactPhoneNumber}</p>
-                          <p>Address: {`${order.user.contactAddress}`}</p>
-                          <p>Unit: {`${order.user.contactUnit}`}</p>
-                          <p>Country: {`${order.user.contactCountry}`}</p>
-                          <p>
-                            Province or State:{" "}
-                            {`${order.user.contactProvinceOrState}`}
-                          </p>
-                          <p>City: {`${order.user.contactCity}`}</p>
-                          <p>
-                            Postal Code: {`${order.user.contactPostalCode}`}
+                          <p className="text-center">
+                            {order.contactInfoAtTimeOfPurchase}
                           </p>
                         </div>
                       </div>
+
                       {/* Shipping info */}
                       <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm">
                         <div className="mb-2">
-                          <p className="text-center ">Shipping info:</p>
+                          <p className="text-center ">
+                            Shipping info at the time of purchase:
+                          </p>
                         </div>
-                        {order.user.shippingSameAsContactInfo ? (
-                          <div className="flex justify-between">
-                            <p>Same as contact info</p>
-                          </div>
-                        ) : (
-                          <div>
-                            <p>
-                              Phone number: {order.user.shippingPhoneNumber}
-                            </p>
-                            <p>Address: {`${order.user.shippingAddress}`}</p>
-                            <p>Unit: {`${order.user.shippingUnit}`}</p>
-                            <p>Country: {`${order.user.shippingCountry}`}</p>
-                            <p>
-                              Province or State:{" "}
-                              {`${order.user.shippingProvinceOrState}`}
-                            </p>
-                            <p>City: {`${order.user.shippingCity}`}</p>
-                            <p>
-                              Postal Code: {`${order.user.shippingPostalCode}`}
-                            </p>
-                          </div>
-                        )}
+                        <div>
+                          <p className="text-center">
+                            {order.shippingInfoAtTimeOfPurchase}
+                          </p>
+                        </div>
                       </div>
                       <div className="mt-5 text-center flex flex-col items-center md:flex-row md:justify-between">
                         {/* Amount paid info */}
@@ -605,12 +688,10 @@ const Admin = () => {
                 {storeState.users.map((user) => (
                   <div
                     key={user._id}
-                    className="p-[25px] my-[70px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10 shadow-lg"
+                    className="p-[25px] my-[70px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10 shadow-2xl"
                   >
                     <p
-                      className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-xl p-4 text-pretty ${
-                        user.isActive ? "text-green-500" : "text-red-400"
-                      }`}
+                      className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-xl p-4 text-pretty`}
                     >
                       {`${user.name} ${user.lastname}
 
@@ -628,7 +709,9 @@ const Admin = () => {
                     <div className=" flex flex-col md:flex-row md:justify-evenly">
                       <div className="border-[1px] border-black rounded-lg my-5 p-5 text-left">
                         <div>
-                          <p className="mb-2 underline">Contact info</p>
+                          <p className="mb-2 underline">
+                            Current contact info:
+                          </p>
                         </div>
                         <div>
                           <p>Phone number: {user.contactPhoneNumber}</p>
@@ -651,7 +734,9 @@ const Admin = () => {
                       ) : (
                         <div className="border-[1px] border-black rounded-lg my-5 p-5 text-left">
                           <div>
-                            <p className="mb-2 underline">Shipping info</p>
+                            <p className="mb-2 underline">
+                              Current shipping info
+                            </p>
                           </div>
                           <div>
                             <p>Phone number: {user.shippingPhoneNumber}</p>
@@ -683,8 +768,10 @@ const Admin = () => {
                             </p>
                             <p className="text-sm">Status: {order.status}</p>
                             <p className="text-sm">
-                              Shipped to: Shipping address at the time of
-                              purchase
+                              Shipped to: {order.shippingInfoAtTimeOfPurchase}
+                            </p>
+                            <p className="text-sm">
+                              Contact info: {order.contactInfoAtTimeOfPurchase}
                             </p>
                             <p className="text-sm">
                               Total amount paid: 123 CAD
@@ -692,27 +779,25 @@ const Admin = () => {
                             <br />
                             <p className="underline">Items:</p>
 
-                            {order.products.map((product) => (
-                              <div className="flex flex-col items-center md:flex-row justify-between lg:justify-around p-5 w-[90%] border-b border-black m-5">
-                                <img
-                                  src={product.media.url}
-                                  alt="productImg"
-                                  className="w-[125px] my-5 rounded shadow"
-                                />
+                            {order.productsInfoAtTimeOfPurchase.map(
+                              (product) => (
+                                <div className="flex flex-col items-center md:flex-row justify-between lg:justify-around p-5 w-[90%] border-b border-black m-5">
+                                  <img
+                                    src={product.imgUrl}
+                                    alt="productImg"
+                                    className="w-[125px] my-5 rounded shadow"
+                                  />
 
-                                <div>
-                                  <p className="text-sm py-1">{`${product.title}`}</p>
-                                  <p className="text-sm py-1">{`${product.shortDesc}`}</p>
-                                  <p className="text-sm py-1">{`Amount paid: $${
-                                    (product.cost +
-                                      product.nationwideDelivery) *
-                                      0.13 +
-                                    product.cost +
-                                    product.nationwideDelivery
-                                  } CAD`}</p>
+                                  <div>
+                                    <p className="text-sm py-1">{`"${product.title}"`}</p>
+                                    <p className="text-sm py-1">{`${product.shortDesc}`}</p>
+                                    <p className="text-sm py-1">{`Cost: ${product.cost}`}</p>
+                                    <p className="text-sm py-1">{`Delivery cost: ${product.deliveryCost}`}</p>
+                                    <p className="text-sm py-1">{`Total (Including taxes): ${product.deliveryCost}`}</p>
+                                  </div>
                                 </div>
-                              </div>
-                            ))}
+                              )
+                            )}
                           </div>
                         ))
                       ) : (

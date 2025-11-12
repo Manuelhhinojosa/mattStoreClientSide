@@ -66,7 +66,7 @@ function App() {
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/login" element={<Login />} />
 
-        {logic.isLoggedIn && logic.user.role ? (
+        {logic.isLoggedIn && logic.user.role === "admin" ? (
           <Route path="/admin" element={<Admin />} />
         ) : (
           <Route path="/admin" element={<Login />} />

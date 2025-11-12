@@ -18,7 +18,11 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
-import { fetchArtPieces } from "../../redux/slices/state/storeSlice";
+import {
+  fetchArtPieces,
+  setOrders,
+  setUsers,
+} from "../../redux/slices/state/storeSlice";
 import { setShowAllProducts } from "../../redux/slices/staticState/logicSlice";
 
 const EditProduct = () => {
@@ -82,6 +86,19 @@ const EditProduct = () => {
         dispatch(fetchArtPieces());
         // making sure admin will show list of all products after edit
         dispatch(setShowAllProducts());
+        // fetching orders
+        axios
+          .get("http://localhost:3000/orders/allorders", config)
+          .then((res) => {
+            const orders = res.data;
+            dispatch(setOrders(orders));
+          });
+
+        // fetching users
+        axios.get("http://localhost:3000/users/allusers", config).then((r) => {
+          const users = r.data;
+          dispatch(setUsers(users));
+        });
         // navigate to admin pate
         navigate("/admin");
 
