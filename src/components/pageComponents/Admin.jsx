@@ -293,17 +293,17 @@ const Admin = () => {
   };
 
   return (
-    <section className="container mx-auto h-screen mt-32 flex flex-col">
+    <section className="container mx-auto h-auto mt-32 flex flex-col">
       {/* navbar */}
-      <div className="  h-[100px] w-full flex flex-col justify-around items-center md:flex-row  ">
+      <div className=" w-full flex flex-col justify-around items-center md:flex-row mb-5 ">
         {/* see all prods */}
         <div
-          className="hover:cursor-pointer text-xl"
+          className="hover:cursor-pointer  "
           onClick={() => dispatch(setShowAllProducts())}
         >
           <p
             className={`${
-              logic.showAllProducts ? "border-b-[2px] border-black" : ""
+              logic.showAllProducts ? "underline text-xl font-semibold" : ""
             } hover:text-slate-600`}
           >
             see all products
@@ -312,12 +312,12 @@ const Admin = () => {
 
         {/* add a prod */}
         <div
-          className="hover:cursor-pointer  text-xl"
+          className="hover:cursor-pointer  "
           onClick={() => dispatch(setShowAddProduct())}
         >
           <p
             className={`${
-              logic.showAddProduct ? "border-b-[2px] border-black" : ""
+              logic.showAddProduct ? "underline text-xl font-semibold" : ""
             } hover:text-slate-600`}
           >
             add a product
@@ -326,12 +326,12 @@ const Admin = () => {
 
         {/* see orders */}
         <div
-          className="hover:cursor-pointer  text-xl"
+          className="hover:cursor-pointer "
           onClick={() => dispatch(setShowViewOrders())}
         >
           <p
             className={`${
-              logic.showViewOrders ? "border-b-[2px] border-black" : ""
+              logic.showViewOrders ? "underline text-xl font-semibold" : ""
             } hover:text-slate-600`}
           >
             see orders
@@ -340,12 +340,12 @@ const Admin = () => {
 
         {/* see users info */}
         <div
-          className="hover:cursor-pointer  text-xl"
+          className="hover:cursor-pointer  "
           onClick={() => dispatch(setShowMembersInfo())}
         >
           <p
             className={`${
-              logic.showMembersInfo ? "border-b-[2px] border-black" : ""
+              logic.showMembersInfo ? "underline text-xl font-semibold" : ""
             } hover:text-slate-600`}
           >
             see members info
@@ -355,14 +355,11 @@ const Admin = () => {
 
       {/* all products */}
       {logic.showAllProducts ? (
-        <div className="h-3/4 w-full">
-          <div className="h-[100px] flex justify-center items-center text-3xl ">
-            <p className="border-b-[1px] border-b-black">All products</p>
-          </div>
+        <div className=" w-full ">
           {[...storeState.artPieces].reverse().map((p) => (
             <div
               key={p._id}
-              className=" py-12 mx-10 my-[50px] flex flex-col items-center border-[1px] border-black rounded-xl text-sm md:flex-row justify-evenly shadow-xl"
+              className=" py-12 mx-10 my-[50px] flex flex-col items-center border-[1px] border-black rounded-xl text-sm md:flex-row justify-evenly shadow-xl "
             >
               <img
                 src={p.media.url}
@@ -393,12 +390,8 @@ const Admin = () => {
       ) : null}
 
       {/* add a product */}
-
       {logic.showAddProduct ? (
-        <div className="h-[600px] w-full">
-          <div className="h-[100px] flex justify-center items-center text-3xl">
-            <p className="border-b-[1px] border-b-black">Add a product</p>
-          </div>
+        <div className="h-[550px] w-full">
           <div className="h-full">
             {/* form */}
             <form
@@ -554,9 +547,6 @@ const Admin = () => {
       {/* see orders */}
       {logic.showViewOrders ? (
         <div className="w-full  mt-5">
-          <div className="h-[100px] flex justify-center items-center text-3xl ">
-            <p className="border-b-[1px] border-b-black">Orders</p>
-          </div>
           <div className="h-auto">
             {storeState.orders.length === 0 ? (
               <div className="h-[500px] flex justify-center text-3xl">
@@ -678,9 +668,6 @@ const Admin = () => {
       {/* see users info */}
       {logic.showMembersInfo ? (
         <div className="w-full mt-10">
-          <div className="h-[100px] flex justify-center items-center text-3xl ">
-            <p className="border-b-[1px] border-b-black">Members info</p>
-          </div>
           <div className="h-auto">
             {storeState.users.length === 0 ? (
               <div className="h-[500px] flex items-center justify-center text-3xl">
