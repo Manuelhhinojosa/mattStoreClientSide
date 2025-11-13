@@ -10,11 +10,37 @@ export const logicSlice = createSlice({
   initialState: {
     // user initial state
     user: {},
-    userToken: "hello",
+    userToken: "",
+    // for signing in
     enteredUserUsername: "",
     enteredUserPassword: "",
 
-    // logic
+    // for signing up
+    signupState: {
+      name: "",
+      lastname: "",
+      email: "",
+      confirmationEmail: "",
+      password: "",
+      confirmationPassword: "",
+      contactPhoneNumber: "",
+      contactAddress: "",
+      contactUnit: "",
+      contactCountry: "",
+      contactProvinceOrState: "",
+      contactCity: "",
+      contactPostalCode: "",
+      shippingSameAsContactInfo: false,
+      shippingPhoneNumber: "",
+      shippingAddress: "",
+      shippingUnit: "",
+      shippingCountry: "",
+      shippingProvinceOrState: "",
+      shippingCity: "",
+      shippingPostalCode: "",
+    },
+
+    // login logic
     isLoggedIn: false,
     showNavbar: false,
 
@@ -138,6 +164,64 @@ export const logicSlice = createSlice({
     toggleShowPassword: (state, action) => {
       state.showPassword = !state.showPassword;
     },
+    setSignUpState: (state, action) => {
+      state.signupState = {
+        ...state.signupState,
+        [action.payload.key]: action.payload.value,
+      };
+    },
+    toggleAddress: (state, action) => {
+      state.signupState.shippingSameAsContactInfo =
+        !state.signupState.shippingSameAsContactInfo;
+
+      if (state.signupState.shippingSameAsContactInfo === true) {
+        state.signupState.shippingPhoneNumber =
+          state.signupState.contactPhoneNumber;
+        state.signupState.shippingAddress = state.signupState.contactAddress;
+        state.signupState.shippingUnit = state.signupState.contactUnit;
+        state.signupState.shippingCountry = state.signupState.contactCountry;
+        state.signupState.shippingProvinceOrState =
+          state.signupState.contactProvinceOrState;
+        state.signupState.shippingCity = state.signupState.contactCity;
+        state.signupState.shippingPostalCode =
+          state.signupState.contactPostalCode;
+      }
+
+      if (state.signupState.shippingSameAsContactInfo === false) {
+        state.signupState.shippingPhoneNumber = "";
+        state.signupState.shippingAddress = "";
+        state.signupState.shippingUnit = "";
+        state.signupState.shippingCountry = "";
+        state.signupState.shippingProvinceOrState = "";
+        state.signupState.shippingCity = "";
+        state.signupState.shippingPostalCode = "";
+      }
+    },
+    resetSignupState: (state) => {
+      state.signupState = {
+        name: "",
+        lastname: "",
+        email: "",
+        confirmationEmail: "",
+        password: "",
+        confirmationPassword: "",
+        contactPhoneNumber: "",
+        contactAddress: "",
+        contactUnit: "",
+        contactCountry: "",
+        contactProvinceOrState: "",
+        contactCity: "",
+        contactPostalCode: "",
+        shippingSameAsContactInfo: false,
+        shippingPhoneNumber: "",
+        shippingAddress: "",
+        shippingUnit: "",
+        shippingCountry: "",
+        shippingProvinceOrState: "",
+        shippingCity: "",
+        shippingPostalCode: "",
+      };
+    },
   },
 });
 
@@ -165,6 +249,9 @@ export const {
   setShowEditShippingInfoToTrue,
   setShowEditShippingInfoTofalse,
   toggleShowPassword,
+  setSignUpState,
+  toggleAddress,
+  resetSignupState,
 } = logicSlice.actions;
 
 export default logicSlice.reducer;
