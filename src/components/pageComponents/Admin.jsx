@@ -609,8 +609,11 @@ const Admin = () => {
                           <p>
                             {`Full name: ${order.custInfoAtTimeOfPurchase.name} ${order.custInfoAtTimeOfPurchase.lastname}`}{" "}
                             <span>
-                              {order.user.isActive ? "(Active)" : "(Inactive)"}
+                              {order.user && order.user.isActive
+                                ? "(Active)"
+                                : "(Inactive)"}
                             </span>
+                            <span>{!order.user ? "(Acc deleted)" : ""}</span>
                           </p>
                           <p>Email: {order.custInfoAtTimeOfPurchase.email} </p>
                         </div>

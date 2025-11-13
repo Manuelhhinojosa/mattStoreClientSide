@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   removeProdShoppingCart,
   emptyShoppingCart,
+  setOrders,
+  setUsers,
 } from "../../redux/slices/state/storeSlice";
 import {
   setShowEditPasswordToTrue,
@@ -114,6 +116,33 @@ const Profile = () => {
       );
 
       dispatch(setUser(refreshedUserRes.data));
+
+      if (logic.user.role === "admin") {
+        axios
+          .get("http://localhost:3000/orders/allorders", {
+            headers: {
+              Authorization: `Bearer ${logic.userToken}`,
+            },
+          })
+          .then((res) => {
+            const refreshedOrders = res.data;
+            dispatch(setOrders(refreshedOrders));
+          });
+      }
+
+      if (logic.user.role === "admin") {
+        axios
+          .get("http://localhost:3000/users/allusers", {
+            headers: {
+              Authorization: `Bearer ${logic.userToken}`,
+            },
+          })
+          .then((res) => {
+            const refreshedUsers = res.data;
+            dispatch(setUsers(refreshedUsers));
+          });
+      }
+
       navigate("/profile");
     } catch (error) {
       console.error("Error inactivating user:", error);

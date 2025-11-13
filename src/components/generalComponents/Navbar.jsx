@@ -46,7 +46,12 @@ const Navbar = () => {
     <nav className="fixed top-4 z-50 w-full flex flex-col items-center">
       <div className="flex w-full my-1 items-center justify-between overflow-hidden p-4 backdrop-blur-lg lg:m-2 lg:w-[60rem] lg:rounded-full lg:shadow-lg ">
         <Link to="/">
-          <img src={staticText.navbar.logoSrcHref} alt="logo" width={45} />
+          <img
+            src={staticText.navbar.logoSrcHref}
+            alt="logo"
+            width={45}
+            className="rounded-lg"
+          />
         </Link>
         <div className="hidden  space-x-6 lg:flex">
           {staticText.links.map((link, index) => (
