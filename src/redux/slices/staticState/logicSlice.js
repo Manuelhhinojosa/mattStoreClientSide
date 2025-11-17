@@ -40,6 +40,9 @@ export const logicSlice = createSlice({
       shippingPostalCode: "",
     },
 
+    // for user update
+    editUserState: {},
+
     // login logic
     isLoggedIn: false,
     showNavbar: false,

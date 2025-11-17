@@ -130,10 +130,7 @@ const EditProfile = () => {
             <p className="text-center text-3xl">Edit contact info</p>
           </div>
           <div className="h-[600px] w-full">
-            <form
-              action=""
-              className="h-full flex flex-col items-center justify-center"
-            >
+            <form className="h-full flex flex-col items-center justify-center">
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
@@ -145,7 +142,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.address}
+                placeholder={logic.user.contactAddress}
                 name="address"
                 autocomplete="off"
               />
@@ -153,40 +150,40 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.addressUnit}
-                name="addressUnit"
+                placeholder={logic.user.contactUnit}
+                name="contactUnit"
                 autocomplete="off"
               />
 
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.country}
-                name="country"
+                placeholder={logic.user.contactCountry}
+                name="contactCountry"
                 autocomplete="off"
               />
 
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.provinceOrState}
-                name="provinceOrState"
+                placeholder={logic.user.contactProvinceOrState}
+                name="contactProvinceOrState"
                 autocomplete="off"
               />
 
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.city}
-                name="city"
+                placeholder={logic.user.contactCity}
+                name="contactCity"
                 autocomplete="off"
               />
 
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.postalCode}
-                name="postalCode"
+                placeholder={logic.user.contactPostalCode}
+                name="contactPostalCode"
                 autocomplete="off"
               />
 
@@ -248,7 +245,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.shippingAddressUnit}
+                placeholder={logic.user.shippingUnit}
                 name="shippingAddressUnit"
                 autocomplete="off"
               />
@@ -264,7 +261,7 @@ const EditProfile = () => {
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
-                placeholder={logic.user.shippingProviceOrState}
+                placeholder={logic.user.shippingProvinceOrState}
                 name="shippingProviceOrState"
                 autocomplete="off"
               />
