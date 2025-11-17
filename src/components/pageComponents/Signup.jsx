@@ -262,7 +262,6 @@ const Signup = () => {
                 name="shippingSameAsContactInfo"
                 className="accent-black w-5 h-5 rounded focus:outline-none"
                 value={logic.signupState.contactPostalCode}
-                // onChange={dispatch(toggleAddress())}
                 onChange={() => dispatch(toggleAddress())}
               />
             </div>
