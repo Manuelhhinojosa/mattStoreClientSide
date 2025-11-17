@@ -220,12 +220,12 @@ const Profile = () => {
             <p className="text-center text-xl">Contact info:</p>
           </div>
           <div>
-            <p>Address: {`${logic.user.contactAddress}.`}</p>
-            <p>Unit: {`${logic.user.contactUnit}.`}</p>
-            <p>Country: {`${logic.user.contactCountry}.`}</p>
-            <p>Province or State: {`${logic.user.contactProvinceOrState}.`}</p>
-            <p>City: {`${logic.user.contactCity}.`}</p>
-            <p>Postal Code: {`${logic.user.contactPostalCode}.`}</p>
+            <p>Address: {`${logic.user.contactAddress}`}</p>
+            <p>Unit: {`${logic.user.contactUnit}`}</p>
+            <p>Country: {`${logic.user.contactCountry}`}</p>
+            <p>Province or State: {`${logic.user.contactProvinceOrState}`}</p>
+            <p>City: {`${logic.user.contactCity}`}</p>
+            <p>Postal Code: {`${logic.user.contactPostalCode}`}</p>
             <div className="flex justify-between">
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
               <Link
@@ -256,14 +256,14 @@ const Profile = () => {
             </div>
           ) : (
             <div>
-              <p>Address: {`${logic.user.shippingAddress}.`}</p>
-              <p>Unit: {`${logic.user.shippingUnit}.`}</p>
-              <p>Country: {`${logic.user.shippingCountry}.`}</p>
+              <p>Address: {`${logic.user.shippingAddress}`}</p>
+              <p>Unit: {`${logic.user.shippingUnit}`}</p>
+              <p>Country: {`${logic.user.shippingCountry}`}</p>
               <p>
-                Province or State: {`${logic.user.shippingProvinceOrState}.`}
+                Province or State: {`${logic.user.shippingProvinceOrState}`}
               </p>
               <p>City: {`${logic.user.shippingCity}.`}</p>
-              <p>Postal Code: {`${logic.user.shippingPostalCode}.`}</p>
+              <p>Postal Code: {`${logic.user.shippingPostalCode}`}</p>
               <div className="flex justify-between">
                 <p>{`Phone: ${logic.user.shippingPhoneNumber}`}</p>
                 <Link
