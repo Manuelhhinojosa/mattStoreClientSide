@@ -10,7 +10,8 @@ import {
   setShowEditContactInfoTofalse,
   setShowEditShippingInfoTofalse,
   setEditUserState,
-  toggleEditUserAddress,
+  toggleEditUserContactAddress,
+  toggleEditUsershippingAddress,
   resetEditUserState,
   setUser,
 } from "../../redux/slices/staticState/logicSlice";
@@ -36,7 +37,7 @@ const EditProfile = () => {
   // functions
   // functions
 
-  // handle edit user state
+  // handle edit user state object in redux store
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setEditUserState({ key: name, value: value }));
@@ -51,13 +52,7 @@ const EditProfile = () => {
     toast(`Password updated`, toastStyleObject());
   };
 
-  const handleCancelEditPassword = (e) => {
-    e.preventDefault();
-    dispatch(setShowEditPasswordTofalse());
-    navigate("/profile");
-  };
-
-  //   for edit contact info page
+  //   for edit contact info
   const handleEditContactInfo = (e) => {
     e.preventDefault();
     const userNewData = logic.editUserState;
@@ -112,19 +107,71 @@ const EditProfile = () => {
     dispatch(resetEditUserState());
   };
 
+  const handleEditShippingInfo = (e) => {
+    e.preventDefault();
+    const userNewData = logic.editUserState;
+
+    if (
+      logic.editUserState.shippingPhoneNumber === "" ||
+      logic.editUserState.shippingAddress === "" ||
+      logic.editUserState.shippingCountry === "" ||
+      logic.editUserState.shippingProvinceOrState === "" ||
+      logic.editUserState.shippingCity === "" ||
+      logic.editUserState.shippingPostalCode === ""
+    ) {
+      toast(
+        "Phone number, Address, Country, Province or State, City, and Postal code are required fields",
+        toastStyleObject()
+      );
+      return;
+    }
+
+    axios
+      .put(
+        `http://localhost:3000/users/editshipping/${logic.user._id}`,
+        logic.editUserState,
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      )
+      .then((result) => {
+        const newUserInfo = result.data;
+        console.log("here", newUserInfo);
+
+        axios
+          .get(`http://localhost:3000/users/${logic.user._id}`, {
+            headers: {
+              Authorization: `Bearer ${logic.userToken}`,
+            },
+          })
+          .then((res) => {
+            const updatedUser = res.data;
+            dispatch(setUser(updatedUser));
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    dispatch(setShowEditContactInfoTofalse());
+    navigate("/profile");
+    toast(`Profile info updated`, toastStyleObject());
+    dispatch(resetEditUserState());
+  };
+
+  // fix repeated functions
+  const handleCancelEditPassword = (e) => {
+    e.preventDefault();
+    dispatch(setShowEditPasswordTofalse());
+    navigate("/profile");
+  };
+
   const handleCancelEditContactInfo = (e) => {
     e.preventDefault();
     dispatch(setShowEditContactInfoTofalse());
     navigate("/profile");
-  };
-
-  // for edit shipping info page
-
-  const handleEditShippingInfo = (e) => {
-    e.preventDefault();
-    dispatch(setShowEditShippingInfoTofalse());
-    navigate("/profile");
-    toast(`Shipping info updated`, toastStyleObject());
   };
 
   const handleCancelEditShippingInfo = (e) => {
@@ -277,7 +324,7 @@ const EditProfile = () => {
                 name="shippingSameAsContactInfo"
                 className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
                 value={logic.editUserState.shippinSameAsContactInfo}
-                onChange={() => dispatch(toggleEditUserAddress())}
+                onChange={() => dispatch(toggleEditUserContactAddress())}
               />
 
               <button
@@ -298,23 +345,21 @@ const EditProfile = () => {
       ) : null}
 
       {/* Edit shipping info page */}
-
       {logic.showEditShippingInfo ? (
         <>
           <div className="h-[100px] flex items-center justify-center">
             <p className="text-center text-3xl">Edit Shipping info</p>
           </div>
           <div className="h-[600px] w-full">
-            <form
-              action=""
-              className="h-full flex flex-col items-center justify-center"
-            >
+            <form className="h-full flex flex-col items-center justify-center">
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
                 placeholder={logic.user.shippingPhoneNumber}
                 name="shippingPhoneNumber"
                 autocomplete="off"
+                value={logic.editUserState.shippingPhoneNumber}
+                onChange={handleChange}
               />
 
               <input
@@ -323,14 +368,18 @@ const EditProfile = () => {
                 placeholder={logic.user.shippingAddress}
                 name="shippingAddress"
                 autocomplete="off"
+                value={logic.editUserState.shippingAddress}
+                onChange={handleChange}
               />
 
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
                 placeholder={logic.user.shippingUnit}
-                name="shippingAddressUnit"
+                name="shippingUnit"
                 autocomplete="off"
+                value={logic.editUserState.shippingUnit}
+                onChange={handleChange}
               />
 
               <input
@@ -339,14 +388,18 @@ const EditProfile = () => {
                 placeholder={logic.user.shippingCountry}
                 name="shippingCountry"
                 autocomplete="off"
+                value={logic.editUserState.shippingCountry}
+                onChange={handleChange}
               />
 
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
                 type="text"
                 placeholder={logic.user.shippingProvinceOrState}
-                name="shippingProviceOrState"
+                name="shippingProvinceOrState"
                 autocomplete="off"
+                value={logic.editUserState.shippingProvinceOrState}
+                onChange={handleChange}
               />
 
               <input
@@ -355,6 +408,8 @@ const EditProfile = () => {
                 placeholder={logic.user.shippingCity}
                 name="shippingCity"
                 autocomplete="off"
+                value={logic.editUserState.shippingCity}
+                onChange={handleChange}
               />
 
               <input
@@ -363,6 +418,8 @@ const EditProfile = () => {
                 placeholder={logic.user.shippingPostalCode}
                 name="shippingPostalCode"
                 autocomplete="off"
+                value={logic.editUserState.shippingPostalCode}
+                onChange={handleChange}
               />
 
               <label htmlFor="contactSameShipping" className="mt-5">
@@ -373,6 +430,8 @@ const EditProfile = () => {
                 type="checkbox"
                 name="contactEqualShipping"
                 className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
+                value={logic.editUserState.shippinSameAsContactInfo}
+                onChange={() => dispatch(toggleEditUsershippingAddress())}
               />
 
               <button

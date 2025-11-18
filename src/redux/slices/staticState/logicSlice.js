@@ -254,7 +254,7 @@ export const logicSlice = createSlice({
         shippingPostalCode: "",
       };
     },
-    toggleEditUserAddress: (state, action) => {
+    toggleEditUserContactAddress: (state, action) => {
       state.editUserState.shippingSameAsContactInfo =
         !state.editUserState.shippingSameAsContactInfo;
 
@@ -281,6 +281,35 @@ export const logicSlice = createSlice({
         state.editUserState.shippingProvinceOrState = "";
         state.editUserState.shippingCity = "";
         state.editUserState.shippingPostalCode = "";
+      }
+    },
+    toggleEditUsershippingAddress: (state, action) => {
+      state.editUserState.shippingSameAsContactInfo =
+        !state.editUserState.shippingSameAsContactInfo;
+
+      if (state.editUserState.shippingSameAsContactInfo === true) {
+        state.editUserState.contactPhoneNumber =
+          state.editUserState.shippingPhoneNumber;
+        state.editUserState.contactAddress =
+          state.editUserState.shippingAddress;
+        state.editUserState.contactUnit = state.editUserState.shippingUnit;
+        state.editUserState.contactCountry =
+          state.editUserState.shippingCountry;
+        state.editUserState.contactProvinceOrState =
+          state.editUserState.shippingProvinceOrState;
+        state.editUserState.contactCity = state.editUserState.shippingCity;
+        state.editUserState.contactPostalCode =
+          state.editUserState.shippingPostalCode;
+      }
+
+      if (state.editUserState.shippingSameAsContactInfo === false) {
+        state.editUserState.contactPhoneNumber = "";
+        state.editUserState.contactAddress = "";
+        state.editUserState.contactUnit = "";
+        state.editUserState.contactCountry = "";
+        state.editUserState.contactProvinceOrState = "";
+        state.editUserState.contactCity = "";
+        state.editUserState.contactPostalCode = "";
       }
     },
     resetEditUserState: (state) => {
@@ -340,7 +369,8 @@ export const {
   toggleAddress,
   resetSignupState,
   setEditUserState,
-  toggleEditUserAddress,
+  toggleEditUserContactAddress,
+  toggleEditUsershippingAddress,
   resetEditUserState,
 } = logicSlice.actions;
 
