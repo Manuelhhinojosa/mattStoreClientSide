@@ -11,6 +11,7 @@ import {
   setisLoggedInToFalse,
   setuserToNone,
   setUserTokenEmpty,
+  resetEditUserState,
 } from "../../redux/slices/staticState/logicSlice";
 import {
   emptyShoppingCart,
@@ -40,6 +41,7 @@ const Navbar = () => {
     dispatch(setisLoggedInToFalse());
     dispatch(setuserToNone());
     dispatch(setUserTokenEmpty());
+    dispatch(resetEditUserState());
   };
 
   return (

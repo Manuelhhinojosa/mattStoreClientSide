@@ -88,7 +88,12 @@ function App() {
             ))
           : null}
 
-        <Route path="/editprofile" element={<EditProfile />} />
+        {logic.isLoggedIn ? (
+          <Route path="/editprofile" element={<EditProfile />} />
+        ) : (
+          <Route path="/editprofile" element={<Login />} />
+        )}
+
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>

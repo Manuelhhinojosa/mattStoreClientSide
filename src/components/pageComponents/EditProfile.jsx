@@ -49,10 +49,69 @@ const EditProfile = () => {
   const handleEditPassword = (e) => {
     e.preventDefault();
 
-    // after edit call
-    dispatch(setShowEditPasswordTofalse());
-    navigate("/profile");
-    toast(`Password updated`, toastStyleObject());
+    // form validation
+    if (
+      logic.editUserState.oldPassword === "" ||
+      logic.editUserState.newPassword === "" ||
+      logic.editUserState.confirmationNewPassword === ""
+    ) {
+      toast("All fields are mandatory.", toastStyleObject());
+      return;
+    }
+
+    if (
+      logic.editUserState.newPassword !==
+      logic.editUserState.confirmationNewPassword
+    ) {
+      toast("New passwords do not match.", toastStyleObject());
+      return;
+    }
+
+    if (logic.editUserState.newPassword.length < 6) {
+      toast(
+        "New password must be at leaert 6 characters long.",
+        toastStyleObject()
+      );
+      return;
+    }
+
+    // API call to edit user
+    axios
+      .patch(
+        `http://localhost:3000/users/editpassword/${logic.user._id}`,
+        logic.editUserState,
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      )
+      .then((result) => {
+        const newUserData = result.data;
+        console.log("result: (updated user)", newUserData);
+
+        axios
+          .get(`http://localhost:3000/users/${logic.user._id}`, {
+            headers: {
+              Authorization: `Bearer ${logic.userToken}`,
+            },
+          })
+          .then((res) => {
+            const updatedUser = res.data;
+            dispatch(setUser(updatedUser));
+            // resetting
+            dispatch(setShowEditPasswordTofalse());
+            navigate("/profile");
+            toast(`Password updated`, toastStyleObject());
+            dispatch(resetEditUserState());
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast("incorrect old password.", toastStyleObject());
+        dispatch(resetEditUserState());
+        return;
+      });
   };
 
   //   for edit contact info
@@ -100,20 +159,20 @@ const EditProfile = () => {
             const updatedUser = res.data;
             // setting user's new info in redux
             dispatch(setUser(updatedUser));
+            // resetting
+            dispatch(setShowEditContactInfoTofalse());
+            navigate("/profile");
+            toast(`Profile info updated`, toastStyleObject());
+            dispatch(resetEditUserState());
           });
       })
       .catch((error) => {
         console.log(error);
+        dispatch(resetEditUserState());
       });
-
-    // resetting
-    dispatch(setShowEditContactInfoTofalse());
-    navigate("/profile");
-    toast(`Profile info updated`, toastStyleObject());
-    dispatch(resetEditUserState());
   };
 
-  //   for edit contact info
+  //   for edit shipping info
   const handleEditShippingInfo = (e) => {
     e.preventDefault();
 
@@ -158,35 +217,38 @@ const EditProfile = () => {
             const updatedUser = res.data;
             // setting user's new info in redux
             dispatch(setUser(updatedUser));
+            // resetting
+            dispatch(setShowEditContactInfoTofalse());
+            navigate("/profile");
+            toast(`Profile info updated`, toastStyleObject());
+            dispatch(resetEditUserState());
           });
       })
       .catch((error) => {
         console.log(error);
+        dispatch(resetEditUserState());
       });
-
-    // resetting
-    dispatch(setShowEditContactInfoTofalse());
-    navigate("/profile");
-    toast(`Profile info updated`, toastStyleObject());
-    dispatch(resetEditUserState());
   };
 
   // go back to profile page (cancel edit page)
   const handleCancelEditPassword = (e) => {
     e.preventDefault();
     dispatch(setShowEditPasswordTofalse());
+    dispatch(resetEditUserState());
     navigate("/profile");
   };
 
   const handleCancelEditContactInfo = (e) => {
     e.preventDefault();
     dispatch(setShowEditContactInfoTofalse());
+    dispatch(resetEditUserState());
     navigate("/profile");
   };
 
   const handleCancelEditShippingInfo = (e) => {
     e.preventDefault();
     dispatch(setShowEditShippingInfoTofalse());
+    dispatch(resetEditUserState());
     navigate("/profile");
   };
 

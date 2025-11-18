@@ -209,7 +209,7 @@ const Profile = () => {
               className="border-b-[1px] border-b-black"
               onClick={navigateToEditPassword}
             >
-              edit
+              edit password
             </Link>
           </div>
         </div>
