@@ -4,7 +4,9 @@ import React from "react";
 import axios from "axios";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
+// functions from logic slice
 import {
   setShowEditPasswordTofalse,
   setShowEditContactInfoTofalse,
@@ -26,27 +28,28 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastStyleObject } from "../../tostifyStyle";
 
 const EditProfile = () => {
-  // redux & state
+  // redux hooks & state
   const dispatch = useDispatch();
+  // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
-
-  // react router v6
+  // react router v6 hooks
   const navigate = useNavigate();
 
   // functions
   // functions
   // functions
 
-  // handle edit user state object in redux store
+  // handle edit user state object in redux logic slice
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setEditUserState({ key: name, value: value }));
   };
-  //   for edit password page
+
+  //   for edit password info
   const handleEditPassword = (e) => {
     e.preventDefault();
 
-    // afet edit call
+    // after edit call
     dispatch(setShowEditPasswordTofalse());
     navigate("/profile");
     toast(`Password updated`, toastStyleObject());
@@ -55,8 +58,8 @@ const EditProfile = () => {
   //   for edit contact info
   const handleEditContactInfo = (e) => {
     e.preventDefault();
-    const userNewData = logic.editUserState;
 
+    // form validation
     if (
       logic.editUserState.contactPhoneNumber === "" ||
       logic.editUserState.contactAddress === "" ||
@@ -72,6 +75,7 @@ const EditProfile = () => {
       return;
     }
 
+    // API call to edit user
     axios
       .put(
         `http://localhost:3000/users/editcontact/${logic.user._id}`,
@@ -84,8 +88,8 @@ const EditProfile = () => {
       )
       .then((result) => {
         const newUserInfo = result.data;
-        console.log("here", newUserInfo);
-
+        console.log("result: (updated user)", newUserInfo);
+        // API call to get updated user
         axios
           .get(`http://localhost:3000/users/${logic.user._id}`, {
             headers: {
@@ -94,6 +98,7 @@ const EditProfile = () => {
           })
           .then((res) => {
             const updatedUser = res.data;
+            // setting user's new info in redux
             dispatch(setUser(updatedUser));
           });
       })
@@ -101,16 +106,18 @@ const EditProfile = () => {
         console.log(error);
       });
 
+    // resetting
     dispatch(setShowEditContactInfoTofalse());
     navigate("/profile");
     toast(`Profile info updated`, toastStyleObject());
     dispatch(resetEditUserState());
   };
 
+  //   for edit contact info
   const handleEditShippingInfo = (e) => {
     e.preventDefault();
-    const userNewData = logic.editUserState;
 
+    // form validation
     if (
       logic.editUserState.shippingPhoneNumber === "" ||
       logic.editUserState.shippingAddress === "" ||
@@ -126,6 +133,7 @@ const EditProfile = () => {
       return;
     }
 
+    // API call to edit user
     axios
       .put(
         `http://localhost:3000/users/editshipping/${logic.user._id}`,
@@ -139,7 +147,7 @@ const EditProfile = () => {
       .then((result) => {
         const newUserInfo = result.data;
         console.log("here", newUserInfo);
-
+        // API call to get updated user
         axios
           .get(`http://localhost:3000/users/${logic.user._id}`, {
             headers: {
@@ -148,6 +156,7 @@ const EditProfile = () => {
           })
           .then((res) => {
             const updatedUser = res.data;
+            // setting user's new info in redux
             dispatch(setUser(updatedUser));
           });
       })
@@ -155,13 +164,14 @@ const EditProfile = () => {
         console.log(error);
       });
 
+    // resetting
     dispatch(setShowEditContactInfoTofalse());
     navigate("/profile");
     toast(`Profile info updated`, toastStyleObject());
     dispatch(resetEditUserState());
   };
 
-  // fix repeated functions
+  // go back to profile page (cancel edit page)
   const handleCancelEditPassword = (e) => {
     e.preventDefault();
     dispatch(setShowEditPasswordTofalse());
@@ -180,6 +190,9 @@ const EditProfile = () => {
     navigate("/profile");
   };
 
+  // return
+  // return
+  // return
   return (
     <section className="container mx-auto h-auto mt-32">
       {/* Edit password page */}
