@@ -1,21 +1,25 @@
+// redux
 import { createSlice } from "@reduxjs/toolkit";
+
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// error handling state (for styling)
 import { toastStyleObject } from "../../../tostifyStyle";
 
+// logic slice
 export const logicSlice = createSlice({
   name: "logicSlice",
   initialState: {
     // user initial state
+    // user state
     user: {},
     userToken: "",
-    // for signing in
+
+    // sgning user in state
     enteredUserUsername: "",
     enteredUserPassword: "",
 
-    // for signing up
+    // signing user up state
     signupState: {
       name: "",
       lastname: "",
@@ -40,7 +44,7 @@ export const logicSlice = createSlice({
       shippingPostalCode: "",
     },
 
-    // for user update
+    // updating user state
     editUserState: {
       // password
       oldPassword: "",
@@ -68,83 +72,111 @@ export const logicSlice = createSlice({
 
     // login logic
     isLoggedIn: false,
+
+    // navbar logic
     showNavbar: false,
 
-    // profile page
+    // profile page logic
     showPassword: false,
 
-    // admin page
+    // admin page logic
     showAllProducts: true,
     showAddProduct: false,
     showViewOrders: false,
     showMembersInfo: false,
 
-    // edit profile page
+    // edit profile page logic
     showEditPassword: false,
     showEditContactInfo: false,
     showEditShippingInfo: false,
   },
+  // functions
+  // functions
+  // functions
   reducers: {
     // navbar
+    // hide show navbar
     toggleNavbar: (state, action) => {
       state.showNavbar = !state.showNavbar;
     },
 
+    // hide navbar
     setShowNavbarToFalse: (state, action) => {
       state.showNavbar = false;
     },
-    // admin
+
+    // admin page logic
+    // show all products page
     setShowAllProducts: (state, action) => {
       state.showAllProducts = true;
       state.showAddProduct = false;
       state.showViewOrders = false;
       state.showMembersInfo = false;
     },
+
+    // show add a product page
     setShowAddProduct: (state, action) => {
       state.showAllProducts = false;
       state.showAddProduct = true;
       state.showViewOrders = false;
       state.showMembersInfo = false;
     },
+
+    // show view orders page
     setShowViewOrders: (state, action) => {
       state.showAllProducts = false;
       state.showAddProduct = false;
       state.showViewOrders = true;
       state.showMembersInfo = false;
     },
+
+    // show members info page
     setShowMembersInfo: (state, action) => {
       state.showAllProducts = false;
       state.showAddProduct = false;
       state.showViewOrders = false;
       state.showMembersInfo = true;
     },
-    // setting logged in status
+
+    // login logic
+    // setting logged in status to true
     setisLoggedInToTrue: (state, action) => {
       state.isLoggedIn = true;
     },
+
+    // setting loging satus to false
     setisLoggedInToFalse: (state, action) => {
       state.isLoggedIn = false;
       toast(`Goodbye ${state.user.name} :)`, toastStyleObject());
     },
-    // set user for dev
+
+    // set user state
     setUser: (state, action) => {
       state.user = action.payload;
     },
+
+    // reset user (empty user state)
     setuserToNone: (state, action) => {
       state.user = {};
     },
+
     // set token
     setUserToken: (state, action) => {
       state.userToken = action.payload;
     },
+
+    // reset token (empty token state)
     setUserTokenEmpty: (state, action) => {
       state.userToken = "";
     },
+
+    // login state managment
     // set user username
     setEnteredUsername: (state, action) => {
       state.enteredUserUsername = action.payload;
     },
 
+    // empty entered user name
     setEnteredUsernameEmpty: (state, action) => {
       state.enteredUserUsername = "";
     },
@@ -154,54 +186,72 @@ export const logicSlice = createSlice({
       state.enteredUserPassword = action.payload;
     },
 
+    // empty entred password
     setEnteredUserpasswordEmpty: (state, action) => {
       state.enteredUserPassword = "";
     },
 
     // edit profile component logic
-    // edit password page
+    // show edit password page
     setShowEditPasswordToTrue: (state, action) => {
       state.showEditPassword = true;
       state.showEditContactInfo = false;
       state.showEditShippingInfo = false;
     },
+
+    // hide edit password page
     setShowEditPasswordTofalse: (state, action) => {
       state.showEditPassword = false;
     },
-    // edit contact info page
+
+    // show edit contact info page
     setShowEditContactInfoToTrue: (state, action) => {
       state.showEditPassword = false;
       state.showEditContactInfo = true;
       state.showEditShippingInfo = false;
     },
+
+    // hide edit contact info page
     setShowEditContactInfoTofalse: (state, action) => {
       state.showEditContactInfo = false;
     },
-    // edit shipping info page
+
+    // show edit shipping info page
     setShowEditShippingInfoToTrue: (state, action) => {
       state.showEditPassword = false;
       state.showEditContactInfo = false;
       state.showEditShippingInfo = true;
     },
+
+    // hide edit shipping info page
     setShowEditShippingInfoTofalse: (state, action) => {
       state.showEditShippingInfo = false;
     },
-    // logic for showing / hiding password in profile page
+
+    // show / hide password
     toggleShowPassword: (state, action) => {
       state.showPassword = !state.showPassword;
     },
+
+    // sign up page logic
+    // handling sign up state
     setSignUpState: (state, action) => {
       state.signupState = {
         ...state.signupState,
         [action.payload.key]: action.payload.value,
       };
     },
+
+    // edit user page logic
+    // handling editing user state state
     setEditUserState: (state, action) => {
       state.editUserState = {
         ...state.editUserState,
         [action.payload.key]: action.payload.value,
       };
     },
+
+    // toggle address and handling same/different shipping info from contact info
     toggleAddress: (state, action) => {
       state.signupState.shippingSameAsContactInfo =
         !state.signupState.shippingSameAsContactInfo;
@@ -229,6 +279,8 @@ export const logicSlice = createSlice({
         state.signupState.shippingPostalCode = "";
       }
     },
+
+    // reset sign up state (emtpy sign up state)
     resetSignupState: (state) => {
       state.signupState = {
         name: "",
@@ -254,6 +306,9 @@ export const logicSlice = createSlice({
         shippingPostalCode: "",
       };
     },
+
+    // edit user page logic
+    // toggle address & handle shipping same as contact info
     toggleEditUserContactAddress: (state, action) => {
       state.editUserState.shippingSameAsContactInfo =
         !state.editUserState.shippingSameAsContactInfo;
@@ -283,6 +338,8 @@ export const logicSlice = createSlice({
         state.editUserState.shippingPostalCode = "";
       }
     },
+
+    // toggle address & handle contact same as shipping info
     toggleEditUsershippingAddress: (state, action) => {
       state.editUserState.shippingSameAsContactInfo =
         !state.editUserState.shippingSameAsContactInfo;
@@ -312,6 +369,8 @@ export const logicSlice = createSlice({
         state.editUserState.contactPostalCode = "";
       }
     },
+
+    // reseting edit user state (empty edit user state)
     resetEditUserState: (state) => {
       state.editUserState = {
         // password
@@ -341,6 +400,7 @@ export const logicSlice = createSlice({
   },
 });
 
+// functions exports
 export const {
   toggleNavbar,
   setShowNavbarToFalse,

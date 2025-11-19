@@ -8,10 +8,9 @@ import axios from "axios";
 // for error and success message handling
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// error handling state (for styling)
 import { toastStyleObject } from "../../../tostifyStyle";
 
-// Fetching products
+// Fetching products function
 export const fetchArtPieces = createAsyncThunk(
   "store/fetchArtPieces",
   async (_, { rejectWithValue }) => {
@@ -30,6 +29,9 @@ export const fetchArtPieces = createAsyncThunk(
 export const storeSlice = createSlice({
   name: "storeSlice",
   initialState: {
+    // admin page state
+    // admin page / add product page
+    // new product state
     // new product initial state
     reference: Math.floor(Math.random() * 10000000000).toString(),
     inStock: true,
@@ -43,20 +45,25 @@ export const storeSlice = createSlice({
     nationwideDelivery: 0,
     internationalDelivery: 0,
 
-    // products state
+    // products array state for store and admin pages
     artPieces: [],
 
-    // shopping cart
+    // shopping cart array (products) for shoppign cart, admin pages
     shoppingCart: [],
 
-    // users
+    // users array (users) for admin page
     users: [],
 
-    // orders
+    // orders array (orders) for admin and profile pages
     orders: [],
   },
+
   // functions
+  // functions
+  // functions
+
   reducers: {
+    // shopping cart
     // add product to shopping cart
     addProdShoppingCart: (state, action) => {
       let prod = state.artPieces.find((piece) => piece._id == action.payload);
@@ -85,7 +92,8 @@ export const storeSlice = createSlice({
       state.shoppingCart = [];
     },
 
-    // setting state for creating new product
+    // add a product
+    // setting inital state for creating new product
     setInStock: (state, action) => {
       state.inStock = action.payload;
     },
@@ -110,14 +118,21 @@ export const storeSlice = createSlice({
     setInternationalDelivery: (state, action) => {
       state.internationalDelivery = action.payload;
     },
+
+    // admin page
+    // setting array of users
     setUsers: (state, action) => {
       state.users = action.payload;
     },
+
+    // setting array of orders
     setOrders: (state, action) => {
       state.orders = action.payload;
     },
   },
+
   // extra reducers
+  // loading products
   extraReducers: (builder) => {
     builder
       .addCase(fetchArtPieces.pending, (state) => {
@@ -134,7 +149,9 @@ export const storeSlice = createSlice({
   },
 });
 
+// functions exports
 export const {
+  // shopping cart related
   addProdShoppingCart,
   removeProdShoppingCart,
   emptyShoppingCart,
@@ -147,7 +164,9 @@ export const {
   setCost,
   setNationwideDelivery,
   setInternationalDelivery,
+  // seeting users
   setUsers,
+  // setting ordders
   setOrders,
 } = storeSlice.actions;
 
