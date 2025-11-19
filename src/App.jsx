@@ -7,9 +7,11 @@ import { useEffect } from "react";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 
-// fething products fucntion
+// Redux functions
+// fetch products
 import { fetchArtPieces } from "./redux/slices/state/storeSlice";
 
+// Toastify (messages to user)
 // Toastify component for handling errors
 import { ToastContainer } from "react-toastify";
 
@@ -35,18 +37,23 @@ import Navbar from "./components/generalComponents/Navbar";
 // Scroll top component
 import ScrollToTop from "./utils/ScrollTop";
 
+// App functio component
 function App() {
   // redux hooks
   const dispatch = useDispatch();
-  // redux & state
+  // redux hooks & state
   const storeState = useSelector((state) => state.storeSlice);
   const logic = useSelector((state) => state.logicSlice);
 
-  // ???
+  // functions
+  // functions
+  // functions
+  // load products upon opening site
   useEffect(() => {
     dispatch(fetchArtPieces());
   }, [dispatch]);
 
+  // return
   return (
     <main>
       <ToastContainer />
