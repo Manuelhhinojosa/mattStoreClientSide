@@ -16,6 +16,13 @@ export const fetchArtPieces = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get("http://localhost:3000/posts/allposts");
+      console.log("result to call fetch all products:", response);
+      console.log("art pieces info loaded successfully:", {
+        config: response.config,
+        data: response.data,
+        status: response.status,
+        headers: response.headers,
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(

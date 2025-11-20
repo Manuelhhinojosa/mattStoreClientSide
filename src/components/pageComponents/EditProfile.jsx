@@ -99,7 +99,13 @@ const EditProfile = () => {
 
       // success after updating user's password api call
 
-      console.log("Password updated successfully", result.data);
+      console.log("Result to update password call: ", result);
+      console.log("SUCCESS!", {
+        config: result.config,
+        data: result.data,
+        status: result.status,
+        headers: result.headers,
+      });
 
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
@@ -172,7 +178,13 @@ const EditProfile = () => {
       );
 
       // success after editing user's contact info api call
-      console.log("Contact info updated successfully", result.data);
+      console.log("Result to edit user's contact info call: ", result);
+      console.log("SUCCESS!", {
+        config: result.config,
+        data: result.data,
+        status: result.status,
+        headers: result.headers,
+      });
 
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
@@ -245,7 +257,13 @@ const EditProfile = () => {
       );
 
       // success after editing shipping info api call
-      console.log("Shipping info updated successfully", result.data);
+      console.log("Result to update user's shippng info call: ", result);
+      console.log("SUCCESS!", {
+        config: result.config,
+        data: result.data,
+        status: result.status,
+        headers: result.headers,
+      });
 
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);

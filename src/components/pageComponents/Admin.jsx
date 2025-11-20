@@ -1,12 +1,43 @@
 import React from "react";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
+// functions from redux / logic slice
+import {
+  setShowAllProducts,
+  setShowAddProduct,
+  setShowViewOrders,
+  setShowMembersInfo,
+  setUser,
+} from "../../redux/slices/staticState/logicSlice";
+// functions from redux / store slice
+import {
+  // for new product
+  setInStock,
+  setRecentWork,
+  setTitle,
+  setShortDesc,
+  setMedia,
+  setCost,
+  setNationwideDelivery,
+  setInternationalDelivery,
+  // users
+  setUsers,
+  // orders
+  setOrders,
+} from "../../redux/slices/state/storeSlice";
+// fetching products function
+import { fetchArtPieces } from "../../redux/slices/state/storeSlice";
+
+// utils functions
+import { refreshOrdersData } from "../../utils/helpers";
 
 // react hooks
 import { useRef } from "react";
 
 // React router V6
+// react router hooks
 import { Link } from "react-router-dom";
 
 // Axios
@@ -18,53 +49,30 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
-// Redux (functions)
-// logic
-import {
-  setShowAllProducts,
-  setShowAddProduct,
-  setShowViewOrders,
-  setShowMembersInfo,
-  setUser,
-} from "../../redux/slices/staticState/logicSlice";
-
-// handle store state (product)
-import {
-  setInStock,
-  setRecentWork,
-  setTitle,
-  setShortDesc,
-  setMedia,
-  setCost,
-  setNationwideDelivery,
-  setInternationalDelivery,
-  setUsers,
-  setOrders,
-} from "../../redux/slices/state/storeSlice";
-
-// fetching products function
-import { fetchArtPieces } from "../../redux/slices/state/storeSlice";
-
-// compoonent function
+// Admin compoonent function
+// Admin compoonent function
+// Admin compoonent function
 const Admin = () => {
-  // redux || state || reducers
+  // redux hooks and state
   const dispatch = useDispatch();
+  // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
 
   // react hooks
-  // useRef for image field (to clear field after submission)
   const fileInputRef = useRef(null);
 
   // functions
   // functions
   // functions
-  //
-  //
+
   // add post function
-  const addPost = (e) => {
+  // add post function
+  // add post function
+  const addPost = async (e) => {
     e.preventDefault();
-    // form error handling
+
     const {
       title,
       shortDesc,
@@ -74,6 +82,7 @@ const Admin = () => {
       internationalDelivery,
     } = storeState;
 
+    // form validation
     if (
       !title ||
       !shortDesc ||
@@ -86,7 +95,7 @@ const Admin = () => {
       return;
     }
 
-    // create object to be sento to API
+    // create object to be sent to API
     const formData = new FormData();
     formData.append("reference", storeState.reference);
     formData.append("inStock", storeState.inStock);
@@ -100,89 +109,111 @@ const Admin = () => {
     formData.append("nationwideDelivery", storeState.nationwideDelivery);
     formData.append("internationalDelivery", storeState.internationalDelivery);
 
-    // API URL
-    const createPostUrl = "http://localhost:3000/posts/create";
-    // const createPostUrl = process.env.REACT_APP_CREATE_POST_URL;
-
-    // // API call
-    axios
-      .post(createPostUrl, formData, {
-        headers: {
-          Authorization: `Bearer ${logic.userToken}`,
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((result) => {
-        console.log("Result: ", result);
-        console.log("SUCCESS! Post added. Result:", {
-          config: result.config,
-          data: result.data,
-          status: result.status,
-          headers: result.headers,
-        });
-
-        // re-setting products array in sotreState slice
-        dispatch(fetchArtPieces());
-
-        // Reseting to initial values so app can add another post
-        dispatch(setInStock(true));
-        dispatch(setRecentWork(true));
-        dispatch(setTitle(""));
-        dispatch(setShortDesc(""));
-        dispatch(setMedia(""));
-        dispatch(setCost(0));
-        dispatch(setNationwideDelivery(0));
-        dispatch(setInternationalDelivery(0));
-
-        if (fileInputRef.current) {
-          fileInputRef.current.value = null;
+    try {
+      // API call to add new post
+      const result = await axios.post(
+        `${import.meta.env.VITE_API_POSTS_URL}/create`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+            "Content-Type": "multipart/form-data",
+          },
         }
+      );
 
-        // directs admin user to all products admin page
-        dispatch(setShowAllProducts());
-
-        // confirmation message
-        toast("Product added", toastStyleObject());
-      })
-      .catch((error) => {
-        console.log(error);
+      // success after adding post api call
+      console.log("result to call create a product:", result);
+      console.log("Post added successfully:", {
+        config: result.config,
+        data: result.data,
+        status: result.status,
+        headers: result.headers,
       });
+
+      // re-fetch products array in storeState slice
+      dispatch(fetchArtPieces());
+
+      // reset fields to initial values so admin can add another post
+      dispatch(setInStock(true));
+      dispatch(setRecentWork(true));
+      dispatch(setTitle(""));
+      dispatch(setShortDesc(""));
+      dispatch(setMedia(""));
+      dispatch(setCost(0));
+      dispatch(setNationwideDelivery(0));
+      dispatch(setInternationalDelivery(0));
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
+
+      // redirect admin to all products page  within admin page
+      dispatch(setShowAllProducts());
+
+      // confirmation message
+      toast("Product added", toastStyleObject());
+    } catch (error) {
+      // error handling
+      console.log("Error adding post:", error);
+
+      const msg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        "Something went wrong.";
+
+      toast(msg, toastStyleObject());
+    }
   };
 
-  // handle delete Product
-  const handleDeleteProduct = (id) => {
-    const deletePostUrl = "http://localhost:3000/posts";
-    // const deletePostUrl = process.env.REACT_APP_DELETE_POST_URL;
+  // handle delete product
+  // handle delete product
+  // handle delete product
+  const handleDeleteProduct = async (id) => {
+    try {
+      // delete product API call
+      const result = await axios.delete(
+        `${import.meta.env.VITE_API_POSTS_URL}/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${logic.userToken}`,
+          },
+        }
+      );
 
-    axios
-      .delete(`http://localhost:3000/posts/${id}`, {
-        headers: {
-          Authorization: `Bearer ${logic.userToken}`,
-        },
-      })
-      .then((result) => {
-        console.log(result);
-        toast("Product deleted", toastStyleObject());
-
-        dispatch(fetchArtPieces());
-
-        // get all orders
-        axios
-          .get("http://localhost:3000/orders/allorders", {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const orders = res.data;
-            dispatch(setOrders(orders));
-          });
-      })
-      .catch((error) => {
-        console.log(error);
+      // success message after deleting product
+      console.log("result to call delete one product:", result);
+      console.log("Product deleted successfully:", {
+        config: result.config,
+        data: result.data,
+        status: result.status,
+        headers: result.headers,
       });
+
+      // success message
+      toast("Product deleted", toastStyleObject());
+
+      // refresh products in storeState slice
+      dispatch(fetchArtPieces());
+
+      // refresh orders API call
+      await refreshOrdersData(logic.userToken, dispatch, setOrders);
+    } catch (error) {
+      // error handling
+      console.log("Error:", error);
+
+      // error message
+      const msg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        "Something went wrong.";
+
+      // faliure message
+      toast(msg, toastStyleObject());
+    }
   };
 
+  // handle order status update
+  // handle order status update
   // handle order status update
   const handleStatusChange = async (id, newStatus) => {
     try {
