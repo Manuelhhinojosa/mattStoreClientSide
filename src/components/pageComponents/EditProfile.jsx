@@ -18,6 +18,9 @@ import {
   setUser,
 } from "../../redux/slices/staticState/logicSlice";
 
+// utils functions
+import { refreshUserData } from "../../utils/helpers";
+
 // React router V6
 // react router hooks
 import { useNavigate } from "react-router-dom";
@@ -95,19 +98,11 @@ const EditProfile = () => {
       );
 
       // success after updating user's password api call
+
       console.log("Password updated successfully", result.data);
 
-      // get updated user api call
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_USERS_URL}/${logic.user._id}`,
-        {
-          headers: { Authorization: `Bearer ${logic.userToken}` },
-        }
-      );
-
-      // success after getting updated user api call
-      const updatedUser = response.data;
-      dispatch(setUser(updatedUser));
+      // get updated user api call / setting user to updated user
+      await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
 
       // resetting
       dispatch(setShowEditPasswordTofalse());
@@ -179,17 +174,8 @@ const EditProfile = () => {
       // success after editing user's contact info api call
       console.log("Contact info updated successfully", result.data);
 
-      // get updated user api call
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_USERS_URL}/${logic.user._id}`,
-        {
-          headers: { Authorization: `Bearer ${logic.userToken}` },
-        }
-      );
-
-      // success after getting updated user api call
-      const updatedUser = response.data;
-      dispatch(setUser(updatedUser));
+      // get updated user api call / setting user to updated user
+      await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
 
       // resetting
       dispatch(setShowEditContactInfoTofalse());
@@ -261,17 +247,8 @@ const EditProfile = () => {
       // success after editing shipping info api call
       console.log("Shipping info updated successfully", result.data);
 
-      // get updated user api call
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_USERS_URL}/${logic.user._id}`,
-        {
-          headers: { Authorization: `Bearer ${logic.userToken}` },
-        }
-      );
-
-      // success after getting updated user api call
-      const updatedUser = response.data;
-      dispatch(setUser(updatedUser));
+      // get updated user api call / setting user to updated user
+      await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
 
       // resetting
       dispatch(setShowEditShippingInfoTofalse());
@@ -302,23 +279,9 @@ const EditProfile = () => {
   // go back to profile page from edit profile page
   // go back to profile page from edit profile page
   // go back to profile page from edit profile page
-  const handleCancelEditPassword = (e) => {
-    e.preventDefault();
-    dispatch(setShowEditPasswordTofalse());
-    dispatch(resetEditUserState());
-    navigate("/profile");
-  };
 
-  const handleCancelEditContactInfo = (e) => {
-    e.preventDefault();
-    dispatch(setShowEditContactInfoTofalse());
-    dispatch(resetEditUserState());
-    navigate("/profile");
-  };
-
-  const handleCancelEditShippingInfo = (e) => {
-    e.preventDefault();
-    dispatch(setShowEditShippingInfoTofalse());
+  const handleCancel = (setter) => {
+    dispatch(setter());
     dispatch(resetEditUserState());
     navigate("/profile");
   };
@@ -377,7 +340,7 @@ const EditProfile = () => {
               </button>
               <button
                 className="mt-5 hover:text-slate-600"
-                onClick={handleCancelEditPassword}
+                onClick={() => handleCancel(setShowEditPasswordTofalse)}
               >
                 Cancel
               </button>
@@ -401,7 +364,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.contactPhoneNumber}
                 name="contactPhoneNumber"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.contactPhoneNumber}
                 onChange={handleChange}
               />
@@ -411,7 +374,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.contactAddress}
                 name="contactAddress"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.contactAddress}
                 onChange={handleChange}
               />
@@ -421,7 +384,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.contactUnit}
                 name="contactUnit"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.contactUnit}
                 onChange={handleChange}
               />
@@ -431,7 +394,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.contactCountry}
                 name="contactCountry"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.contactCountry}
                 onChange={handleChange}
               />
@@ -441,7 +404,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.contactProvinceOrState}
                 name="contactProvinceOrState"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.contactProvinceOrState}
                 onChange={handleChange}
               />
@@ -451,7 +414,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.contactCity}
                 name="contactCity"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.contactCity}
                 onChange={handleChange}
               />
@@ -461,7 +424,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.contactPostalCode}
                 name="contactPostalCode"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.contactPostalCode}
                 onChange={handleChange}
               />
@@ -474,7 +437,7 @@ const EditProfile = () => {
                 type="checkbox"
                 name="shippingSameAsContactInfo"
                 className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
-                value={logic.editUserState.shippinSameAsContactInfo}
+                value={logic.editUserState.shippingSameAsContactInfo}
                 onChange={() => dispatch(toggleEditUserContactAddress())}
               />
 
@@ -486,7 +449,7 @@ const EditProfile = () => {
               </button>
               <button
                 className="mt-5 hover:text-slate-600"
-                onClick={handleCancelEditContactInfo}
+                onClick={() => handleCancel(setShowEditContactInfoTofalse)}
               >
                 Cancel
               </button>
@@ -510,7 +473,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.shippingPhoneNumber}
                 name="shippingPhoneNumber"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.shippingPhoneNumber}
                 onChange={handleChange}
               />
@@ -520,7 +483,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.shippingAddress}
                 name="shippingAddress"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.shippingAddress}
                 onChange={handleChange}
               />
@@ -530,7 +493,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.shippingUnit}
                 name="shippingUnit"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.shippingUnit}
                 onChange={handleChange}
               />
@@ -540,7 +503,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.shippingCountry}
                 name="shippingCountry"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.shippingCountry}
                 onChange={handleChange}
               />
@@ -550,7 +513,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.shippingProvinceOrState}
                 name="shippingProvinceOrState"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.shippingProvinceOrState}
                 onChange={handleChange}
               />
@@ -560,7 +523,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.shippingCity}
                 name="shippingCity"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.shippingCity}
                 onChange={handleChange}
               />
@@ -570,7 +533,7 @@ const EditProfile = () => {
                 type="text"
                 placeholder={logic.user.shippingPostalCode}
                 name="shippingPostalCode"
-                autocomplete="off"
+                autoComplete="off"
                 value={logic.editUserState.shippingPostalCode}
                 onChange={handleChange}
               />
@@ -583,7 +546,7 @@ const EditProfile = () => {
                 type="checkbox"
                 name="contactEqualShipping"
                 className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
-                value={logic.editUserState.shippinSameAsContactInfo}
+                value={logic.editUserState.shippingSameAsContactInfo}
                 onChange={() => dispatch(toggleEditUsershippingAddress())}
               />
 
@@ -595,7 +558,7 @@ const EditProfile = () => {
               </button>
               <button
                 className="mt-5 hover:text-slate-600"
-                onClick={handleCancelEditShippingInfo}
+                onClick={() => handleCancel(setShowEditShippingInfoTofalse)}
               >
                 Cancel
               </button>
