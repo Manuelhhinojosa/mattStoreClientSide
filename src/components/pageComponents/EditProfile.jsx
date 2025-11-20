@@ -6,7 +6,7 @@ import axios from "axios";
 // redux
 // redux hooks
 import { useSelector, useDispatch } from "react-redux";
-// functions from logic slice
+// functions from redux / logic slice
 import {
   setShowEditPasswordTofalse,
   setShowEditContactInfoTofalse,
@@ -19,6 +19,7 @@ import {
 } from "../../redux/slices/staticState/logicSlice";
 
 // React router V6
+// react router hooks
 import { useNavigate } from "react-router-dom";
 
 // Toastify for error and success message handling
@@ -27,12 +28,18 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
+//
+//
+// Edit profile function component
+// Edit profile function component
+// Edit profile function component
 const EditProfile = () => {
   // redux hooks & state
   const dispatch = useDispatch();
   // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
-  // react router v6 hooks
+
+  // react router hooks
   const navigate = useNavigate();
 
   // functions
@@ -40,92 +47,117 @@ const EditProfile = () => {
   // functions
 
   // handle edit user state object in redux logic slice
+  // handle edit user state object in redux logic slice
+  // handle edit user state object in redux logic slice
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setEditUserState({ key: name, value: value }));
   };
 
-  //   for edit password info
-  const handleEditPassword = (e) => {
+  // edit user's password
+  // edit user's password
+  // edit user's password
+  const handleEditPassword = async (e) => {
     e.preventDefault();
 
+    const { oldPassword, newPassword, confirmationNewPassword } =
+      logic.editUserState;
+
     // form validation
-    if (
-      logic.editUserState.oldPassword === "" ||
-      logic.editUserState.newPassword === "" ||
-      logic.editUserState.confirmationNewPassword === ""
-    ) {
+    if (!oldPassword || !newPassword || !confirmationNewPassword) {
       toast("All fields are mandatory.", toastStyleObject());
       return;
     }
 
-    if (
-      logic.editUserState.newPassword !==
-      logic.editUserState.confirmationNewPassword
-    ) {
+    // new password validation (length)
+    if (newPassword.length < 6) {
+      toast(
+        "New password must be at least 6 characters long.",
+        toastStyleObject()
+      );
+      return;
+    }
+
+    // matching new password validation
+    if (newPassword !== confirmationNewPassword) {
       toast("New passwords do not match.", toastStyleObject());
       return;
     }
 
-    if (logic.editUserState.newPassword.length < 6) {
-      toast(
-        "New password must be at leaert 6 characters long.",
-        toastStyleObject()
-      );
-      return;
-    }
-
-    // API call to edit user
-    axios
-      .patch(
-        `http://localhost:3000/users/editpassword/${logic.user._id}`,
+    try {
+      // update user's password api call
+      const result = await axios.patch(
+        `${import.meta.env.VITE_API_USERS_URL}/editpassword/${logic.user._id}`,
         logic.editUserState,
         {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
+          headers: { Authorization: `Bearer ${logic.userToken}` },
         }
-      )
-      .then((result) => {
-        const newUserData = result.data;
-        console.log("result: (updated user)", newUserData);
+      );
 
-        axios
-          .get(`http://localhost:3000/users/${logic.user._id}`, {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const updatedUser = res.data;
-            dispatch(setUser(updatedUser));
-            // resetting
-            dispatch(setShowEditPasswordTofalse());
-            navigate("/profile");
-            toast(`Password updated`, toastStyleObject());
-            dispatch(resetEditUserState());
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-        toast("incorrect old password.", toastStyleObject());
-        dispatch(resetEditUserState());
-        return;
-      });
+      // success after updating user's password api call
+      console.log("Password updated successfully", result.data);
+
+      // get updated user api call
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_USERS_URL}/${logic.user._id}`,
+        {
+          headers: { Authorization: `Bearer ${logic.userToken}` },
+        }
+      );
+
+      // success after getting updated user api call
+      const updatedUser = response.data;
+      dispatch(setUser(updatedUser));
+
+      // resetting
+      dispatch(setShowEditPasswordTofalse());
+      dispatch(resetEditUserState());
+      navigate("/profile");
+
+      // success message
+      toast("Password updated", toastStyleObject());
+    } catch (error) {
+      // error hadling
+      console.log("Password update error:", error);
+
+      // error message variable
+      const msg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        "Something went wrong.";
+
+      // faliure message
+      toast(msg, toastStyleObject());
+
+      // resetting fields and editUserState object
+      dispatch(resetEditUserState());
+      return;
+    }
   };
 
-  //   for edit contact info
-  const handleEditContactInfo = (e) => {
+  // edit user's contact info
+  // edit user's contact info
+  // edit user's contact info
+  const handleEditContactInfo = async (e) => {
     e.preventDefault();
+
+    const {
+      contactPhoneNumber,
+      contactAddress,
+      contactCountry,
+      contactProvinceOrState,
+      contactCity,
+      contactPostalCode,
+    } = logic.editUserState;
 
     // form validation
     if (
-      logic.editUserState.contactPhoneNumber === "" ||
-      logic.editUserState.contactAddress === "" ||
-      logic.editUserState.contactCountry === "" ||
-      logic.editUserState.contactProvinceOrState === "" ||
-      logic.editUserState.contactCity === "" ||
-      logic.editUserState.contactPostalCode === ""
+      !contactPhoneNumber ||
+      !contactAddress ||
+      !contactCountry ||
+      !contactProvinceOrState ||
+      !contactCity ||
+      !contactPostalCode
     ) {
       toast(
         "Phone number, Address, Country, Province or State, City, and Postal code are required fields",
@@ -134,56 +166,80 @@ const EditProfile = () => {
       return;
     }
 
-    // API call to edit user
-    axios
-      .put(
-        `http://localhost:3000/users/editcontact/${logic.user._id}`,
+    try {
+      // update user's contact info api call
+      const result = await axios.put(
+        `${import.meta.env.VITE_API_USERS_URL}/editcontact/${logic.user._id}`,
         logic.editUserState,
         {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
+          headers: { Authorization: `Bearer ${logic.userToken}` },
         }
-      )
-      .then((result) => {
-        const newUserInfo = result.data;
-        console.log("result: (updated user)", newUserInfo);
-        // API call to get updated user
-        axios
-          .get(`http://localhost:3000/users/${logic.user._id}`, {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const updatedUser = res.data;
-            // setting user's new info in redux
-            dispatch(setUser(updatedUser));
-            // resetting
-            dispatch(setShowEditContactInfoTofalse());
-            navigate("/profile");
-            toast(`Profile info updated`, toastStyleObject());
-            dispatch(resetEditUserState());
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(resetEditUserState());
-      });
+      );
+
+      // success after editing user's contact info api call
+      console.log("Contact info updated successfully", result.data);
+
+      // get updated user api call
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_USERS_URL}/${logic.user._id}`,
+        {
+          headers: { Authorization: `Bearer ${logic.userToken}` },
+        }
+      );
+
+      // success after getting updated user api call
+      const updatedUser = response.data;
+      dispatch(setUser(updatedUser));
+
+      // resetting
+      dispatch(setShowEditContactInfoTofalse());
+      dispatch(resetEditUserState());
+      navigate("/profile");
+
+      // success message
+      toast("Profile info updated", toastStyleObject());
+    } catch (error) {
+      // error handling
+      console.log("Contact info update error:", error);
+
+      // error message variable
+      const msg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        "Something went wrong.";
+
+      // faliure message
+      toast(msg, toastStyleObject());
+
+      // resetting fields and editUserState object
+      dispatch(resetEditUserState());
+      return;
+    }
   };
 
-  //   for edit shipping info
-  const handleEditShippingInfo = (e) => {
+  // edit user's shipping info
+  // edit user's shipping info
+  // edit user's shipping info
+  const handleEditShippingInfo = async (e) => {
     e.preventDefault();
+
+    const {
+      shippingPhoneNumber,
+      shippingAddress,
+      shippingCountry,
+      shippingProvinceOrState,
+      shippingCity,
+      shippingPostalCode,
+    } = logic.editUserState;
 
     // form validation
     if (
-      logic.editUserState.shippingPhoneNumber === "" ||
-      logic.editUserState.shippingAddress === "" ||
-      logic.editUserState.shippingCountry === "" ||
-      logic.editUserState.shippingProvinceOrState === "" ||
-      logic.editUserState.shippingCity === "" ||
-      logic.editUserState.shippingPostalCode === ""
+      !shippingPhoneNumber ||
+      !shippingAddress ||
+      !shippingCountry ||
+      !shippingProvinceOrState ||
+      !shippingCity ||
+      !shippingPostalCode
     ) {
       toast(
         "Phone number, Address, Country, Province or State, City, and Postal code are required fields",
@@ -192,45 +248,60 @@ const EditProfile = () => {
       return;
     }
 
-    // API call to edit user
-    axios
-      .put(
-        `http://localhost:3000/users/editshipping/${logic.user._id}`,
+    try {
+      // update user's shipping info api call
+      const result = await axios.put(
+        `${import.meta.env.VITE_API_USERS_URL}/editshipping/${logic.user._id}`,
         logic.editUserState,
         {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
+          headers: { Authorization: `Bearer ${logic.userToken}` },
         }
-      )
-      .then((result) => {
-        const newUserInfo = result.data;
-        console.log("here", newUserInfo);
-        // API call to get updated user
-        axios
-          .get(`http://localhost:3000/users/${logic.user._id}`, {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const updatedUser = res.data;
-            // setting user's new info in redux
-            dispatch(setUser(updatedUser));
-            // resetting
-            dispatch(setShowEditContactInfoTofalse());
-            navigate("/profile");
-            toast(`Profile info updated`, toastStyleObject());
-            dispatch(resetEditUserState());
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(resetEditUserState());
-      });
+      );
+
+      // success after editing shipping info api call
+      console.log("Shipping info updated successfully", result.data);
+
+      // get updated user api call
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_USERS_URL}/${logic.user._id}`,
+        {
+          headers: { Authorization: `Bearer ${logic.userToken}` },
+        }
+      );
+
+      // success after getting updated user api call
+      const updatedUser = response.data;
+      dispatch(setUser(updatedUser));
+
+      // resetting
+      dispatch(setShowEditShippingInfoTofalse());
+      dispatch(resetEditUserState());
+      navigate("/profile");
+
+      // success message
+      toast("Profile info updated", toastStyleObject());
+    } catch (error) {
+      // error handling
+      console.log("Shipping info update error:", error);
+
+      // error message variable
+      const msg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        "Something went wrong.";
+
+      // failure message
+      toast(msg, toastStyleObject());
+
+      // resetting fields and editUserState object
+      dispatch(resetEditUserState());
+      return;
+    }
   };
 
-  // go back to profile page (cancel edit page)
+  // go back to profile page from edit profile page
+  // go back to profile page from edit profile page
+  // go back to profile page from edit profile page
   const handleCancelEditPassword = (e) => {
     e.preventDefault();
     dispatch(setShowEditPasswordTofalse());
@@ -256,7 +327,10 @@ const EditProfile = () => {
   // return
   // return
   return (
+    // main container
     <section className="container mx-auto h-auto mt-32">
+      {/* Edit password page */}
+      {/* Edit password page */}
       {/* Edit password page */}
       {logic.showEditPassword ? (
         <>
@@ -312,6 +386,8 @@ const EditProfile = () => {
         </>
       ) : null}
 
+      {/* Edit contact info page */}
+      {/* Edit contact info page */}
       {/* Edit contact info page */}
       {logic.showEditContactInfo ? (
         <>
@@ -419,6 +495,8 @@ const EditProfile = () => {
         </>
       ) : null}
 
+      {/* Edit shipping info page */}
+      {/* Edit shipping info page */}
       {/* Edit shipping info page */}
       {logic.showEditShippingInfo ? (
         <>
