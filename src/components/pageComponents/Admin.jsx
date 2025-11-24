@@ -31,7 +31,11 @@ import {
 import { fetchArtPieces } from "../../redux/slices/state/storeSlice";
 
 // utils functions
-import { refreshOrdersData } from "../../utils/helpers";
+import {
+  refreshOrdersData,
+  refreshUsersData,
+  refreshUserData,
+} from "../../utils/helpers";
 
 // react hooks
 import { useRef } from "react";
@@ -48,6 +52,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
+
+// helper vars
+// headers config
+import { getHeadersConfig } from "../../utils/vars";
 
 // Admin compoonent function
 // Admin compoonent function
@@ -114,12 +122,7 @@ const Admin = () => {
       const result = await axios.post(
         `${import.meta.env.VITE_API_POSTS_URL}/create`,
         formData,
-        {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        getHeadersConfig()
       );
 
       // success after adding post api call
@@ -173,11 +176,7 @@ const Admin = () => {
       // delete product API call
       const result = await axios.delete(
         `${import.meta.env.VITE_API_POSTS_URL}/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
-        }
+        getHeadersConfig()
       );
 
       // success message after deleting product
@@ -217,71 +216,40 @@ const Admin = () => {
   // handle order status update
   const handleStatusChange = async (id, newStatus) => {
     try {
-      // API URL
-      const updateOrderUrl = "http://localhost:3000/orders/editorderstatus";
-
       // data
       const data = {
         _id: id,
         status: newStatus,
       };
 
-      // headers
-      const config = {
-        headers: {
-          Authorization: `Bearer ${logic.userToken}`,
-          "Content-Type": "application/json",
-        },
-      };
-
-      // make the API call
-      const response = await axios.patch(updateOrderUrl, data, config);
+      // update status API call
+      const response = await axios.patch(
+        `${import.meta.env.VITE_API_ORDERS_URL}/editorderstatus`,
+        data,
+        getHeadersConfig()
+      );
 
       console.log("Order status updated successfully:", response.data);
       toast("Order status updated", toastStyleObject());
 
-      // refresh users, orders and artpieces arrs
+      // refresh users API call
+      await refreshUsersData(logic.userToken, dispatch, setUsers);
 
-      const usersData = await axios.get(
-        "http://localhost:3000/users/allusers",
-        {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
-        }
-      );
-
-      dispatch(setUsers(usersData.data));
-
-      const ordersData = await axios.get(
-        "http://localhost:3000/orders/allorders",
-        {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
-        }
-      );
-
-      dispatch(setOrders(ordersData.data));
+      // refresh orders API call
+      await refreshOrdersData(logic.userToken, dispatch, setOrders);
 
       dispatch(fetchArtPieces());
 
-      axios
-        .get(`http://localhost:3000/users/${logic.user._id}`, {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
-        })
-        .then((res) => {
-          const updatedUser = res.data;
-          dispatch(setUser(updatedUser));
-        });
+      // refresh user API call
+      await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
     } catch (error) {
       console.error("Error updating order status:", error);
       toast("Failed to update order status", toastStyleObject());
     }
   };
 
+  // handle delete user (account)
+  // handle delete user (account)
   // handle delete user (account)
   const handleDeleteAcc = async (id) => {
     axios

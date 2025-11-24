@@ -21,6 +21,10 @@ import {
 // utils functions
 import { refreshUserData } from "../../utils/helpers";
 
+// helper vars
+// headers config
+import { getHeadersConfig } from "../../utils/vars";
+
 // React router V6
 // react router hooks
 import { useNavigate } from "react-router-dom";
@@ -92,9 +96,7 @@ const EditProfile = () => {
       const result = await axios.patch(
         `${import.meta.env.VITE_API_USERS_URL}/editpassword/${logic.user._id}`,
         logic.editUserState,
-        {
-          headers: { Authorization: `Bearer ${logic.userToken}` },
-        }
+        getHeadersConfig()
       );
 
       // success after updating user's password api call
@@ -172,9 +174,7 @@ const EditProfile = () => {
       const result = await axios.put(
         `${import.meta.env.VITE_API_USERS_URL}/editcontact/${logic.user._id}`,
         logic.editUserState,
-        {
-          headers: { Authorization: `Bearer ${logic.userToken}` },
-        }
+        getHeadersConfig()
       );
 
       // success after editing user's contact info api call
@@ -251,9 +251,7 @@ const EditProfile = () => {
       const result = await axios.put(
         `${import.meta.env.VITE_API_USERS_URL}/editshipping/${logic.user._id}`,
         logic.editUserState,
-        {
-          headers: { Authorization: `Bearer ${logic.userToken}` },
-        }
+        getHeadersConfig()
       );
 
       // success after editing shipping info api call

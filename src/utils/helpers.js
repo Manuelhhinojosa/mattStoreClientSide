@@ -65,3 +65,35 @@ export const refreshOrdersData = async (userToken, dispatch, setOrders) => {
     toast(msg, toastStyleObject());
   }
 };
+
+// refresh users
+// refresh users
+// refresh users
+export const refreshUsersData = async (userToken, dispatch, setUsers) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_USERS_URL}/allusers`,
+      {
+        headers: { Authorization: `Bearer ${userToken}` },
+      }
+    );
+
+    console.log("result to call get all users:", response);
+    console.log("Users info loaded successfully:", {
+      config: response.config,
+      data: response.data,
+      status: response.status,
+      headers: response.headers,
+    });
+
+    const updatedUsers = response.data;
+    dispatch(setUsers(updatedUsers));
+  } catch (error) {
+    console.log("Error refreshing users data:", error);
+    const msg =
+      error?.response?.data?.message ||
+      error?.response?.data?.error ||
+      "Something went wrong.";
+    toast(msg, toastStyleObject());
+  }
+};
