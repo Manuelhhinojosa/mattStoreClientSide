@@ -32,6 +32,8 @@ const Contact = () => {
   const messageRef = useRef(null);
 
   // handle send form function
+  // handle send form function
+  // handle send form function
   const handleUserData = (e) => {
     e.preventDefault();
     // handleling form filling error
