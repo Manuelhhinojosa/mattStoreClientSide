@@ -4,27 +4,45 @@ import React from "react";
 import { FaTimes } from "react-icons/fa";
 
 // React Router V6
+// react router hooks
 import { Link } from "react-router-dom";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
+// functions in redux store slice
 import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
 
+// shopping cart function component
+// shopping cart function component
+// shopping cart function component
 const ShoppingCart = () => {
   // redux & state
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
+  // state in logic slice
+  const logicState = useSelector((state) => state.logicSlice);
+  // state in static text slice
   const staticState = useSelector((state) => state.staticTextSlice);
+  // redux hooks
   const dispatch = useDispatch();
 
+  // helper vars
   let subtotal = 0;
   let taxes = 0;
-  let total = 0;
+  let newSubTotal = 0;
 
+  // helper functions
+  // calculate subtotal
   storeState.shoppingCart.map((p) => {
     subtotal = p.cost + subtotal;
     taxes = subtotal * 0.13;
-    total = subtotal + taxes;
+    newSubTotal = subtotal + taxes;
   });
+
+  // return
+  // return
+  // return
   return (
     <section className="container mx-auto flex items-end lg:justify-center">
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
@@ -78,11 +96,11 @@ const ShoppingCart = () => {
         </div>
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
           <div>Delivery fee</div>
-          <div>Confirm @ checkout</div>
+          <div>Calculated @ checkout</div>
         </div>
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
-          <div>Total</div>
-          <div>{`$${total} CAD`}</div>
+          <div>New subtotal</div>
+          <div>{`$${newSubTotal} CAD`}</div>
         </div>
 
         <div className="h-[100px] mb-5 flex justify-center items-center">

@@ -52,6 +52,10 @@ export const storeSlice = createSlice({
     nationwideDelivery: 0,
     internationalDelivery: 0,
 
+    // delivery fees
+    nationalDeliveryFee: 50,
+    internationalDeliveryFee: 100,
+
     // products array state for store and admin pages
     artPieces: [],
 
