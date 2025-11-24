@@ -1,14 +1,16 @@
 import React from "react";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
-// functions
+// functions in store slice
 import {
   removeProdShoppingCart,
   emptyShoppingCart,
   setOrders,
   setUsers,
 } from "../../redux/slices/state/storeSlice";
+// functions in logic slice
 import {
   setShowEditPasswordToTrue,
   setShowEditContactInfoToTrue,
@@ -20,7 +22,8 @@ import {
   setUser,
 } from "../../redux/slices/staticState/logicSlice";
 
-//React Router 6
+//React Router v6
+// react router hooks
 import { Link, useNavigate } from "react-router-dom";
 
 // Axios
@@ -37,119 +40,141 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
+// helper vars
+// headers config
+import { getHeadersConfig } from "../../utils/vars";
+
+// utils functions
+import {
+  getApiErrorMessage,
+  getApiSuccessMessage,
+  refreshUsersData,
+  refreshOrdersData,
+  refreshUserData,
+} from "../../utils/helpers";
+
+// profile function component
+// profile function component
+// profile function component
 const Profile = () => {
   // redux & state
+  // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
+  // redux hooks
   const dispatch = useDispatch();
+
   // react router hooks
   const navigate = useNavigate();
 
   // functions
+  // functions
+  // functions
+
+  // go to edit password page
+  // go to edit password page
   // go to edit password page
   const navigateToEditPassword = () => {
     dispatch(setShowEditPasswordToTrue());
   };
 
   // go to edit contact info page
+  // go to edit contact info page
+  // go to edit contact info page
   const navigateToEditContactInfo = () => {
     dispatch(setShowEditContactInfoToTrue());
   };
 
+  // go to edit shipping info page
+  // go to edit shipping info page
   // go to edit shipping info page
   const navigateToEditShippingInfo = () => {
     dispatch(setShowEditShippingInfoToTrue());
   };
 
   // handle inactivation account
+  // handle inactivation account
+  // handle inactivation account
   const handleAccInactivation = async (id) => {
     try {
-      const res = await axios.patch(
-        "http://localhost:3000/users/inactivateprofile",
+      // API call – inactivate user
+      const result = await axios.patch(
+        `${import.meta.env.VITE_API_USERS_URL}/inactivateprofile`,
         { _id: id },
-        {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
-        }
+        getHeadersConfig()
       );
-      console.log("User inactivated:", res.data);
+
+      // after success api call
+
+      // console.log result
+      getApiSuccessMessage(result);
+
+      // success message
       toast("User successfully inactivated", toastStyleObject());
 
+      // empty user cart if there are items
       if (storeState.shoppingCart.length > 0) {
-        storeState.shoppingCart.map((prod) => {
+        storeState.shoppingCart.forEach((prod) => {
           dispatch(removeProdShoppingCart(prod._id));
         });
       }
       dispatch(emptyShoppingCart());
+
+      // reset state
       dispatch(setisLoggedInToFalse());
       dispatch(setuserToNone());
       dispatch(setUserTokenEmpty());
     } catch (error) {
-      console.error("Error inactivating user:", error);
-      toast("Error inactivating user", toastStyleObject());
+      // error handling
+      console.log("Error:", error);
+      //
+      toast(getApiErrorMessage(error), toastStyleObject());
     }
   };
 
   // handle reactivation acc
+  // handle reactivation acc
+  // handle reactivation acc
   const handleAccReactivation = async (id) => {
     try {
-      const res = await axios.patch(
-        "http://localhost:3000/users/reactivateprofile",
+      // reactivate user API call
+      const result = await axios.patch(
+        `${import.meta.env.VITE_API_USERS_URL}/reactivateprofile`,
         { _id: id },
-        {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
-        }
-      );
-      console.log("User reactivated:", res.data);
-      toast("User successfully reactivated", toastStyleObject());
-
-      const refreshedUserRes = await axios.get(
-        `http://localhost:3000/users/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${logic.userToken}`,
-          },
-        }
+        getHeadersConfig()
       );
 
-      dispatch(setUser(refreshedUserRes.data));
+      // after success api call
 
+      // console result
+      getApiSuccessMessage(result);
+
+      // refresh the logged-in user
+      await refreshUserData(id, logic.userToken, dispatch, setUser);
+
+      // admin-only refreshes
       if (logic.user.role === "admin") {
-        axios
-          .get("http://localhost:3000/orders/allorders", {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const refreshedOrders = res.data;
-            dispatch(setOrders(refreshedOrders));
-          });
+        await refreshOrdersData(logic.userToken, dispatch, setOrders);
+        await refreshUsersData(logic.userToken, dispatch, setUsers);
       }
 
-      if (logic.user.role === "admin") {
-        axios
-          .get("http://localhost:3000/users/allusers", {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const refreshedUsers = res.data;
-            dispatch(setUsers(refreshedUsers));
-          });
-      }
-
+      // redirect user
       navigate("/profile");
+
+      // success message
+      toast("User successfully reactivated", toastStyleObject());
     } catch (error) {
-      console.error("Error inactivating user:", error);
-      toast("Error inactivating user", toastStyleObject());
+      console.log("Error reactivating user:", error);
+      toast(getApiErrorMessage(error), toastStyleObject());
     }
   };
 
+  // return
+  // return
+  // return
+  // Renders if profile is not active
+  // Renders if profile is not active
   // Renders if profile is not active
   if (!logic.user.isActive) {
     return (
@@ -167,6 +192,11 @@ const Profile = () => {
     );
   }
 
+  // return
+  // return
+  // return
+  // renders if profile is active
+  // renders if profile is active
   // renders if profile is active
   return (
     <section className="relative  h-screen w-screen flex flex-col items-center">
