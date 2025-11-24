@@ -35,6 +35,8 @@ import {
   refreshOrdersData,
   refreshUsersData,
   refreshUserData,
+  getApiErrorMessage,
+  getApiSuccessMessage,
 } from "../../utils/helpers";
 
 // react hooks
@@ -125,14 +127,10 @@ const Admin = () => {
         getHeadersConfig()
       );
 
-      // success after adding post api call
-      console.log("result to call create a product:", result);
-      console.log("Post added successfully:", {
-        config: result.config,
-        data: result.data,
-        status: result.status,
-        headers: result.headers,
-      });
+      // success after api call
+
+      // console log result
+      getApiSuccessMessage(result);
 
       // re-fetch products array in storeState slice
       dispatch(fetchArtPieces());
@@ -159,12 +157,8 @@ const Admin = () => {
       // error handling
       console.log("Error adding post:", error);
 
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong.";
-
-      toast(msg, toastStyleObject());
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
     }
   };
 
@@ -180,13 +174,9 @@ const Admin = () => {
       );
 
       // success message after deleting product
-      console.log("result to call delete one product:", result);
-      console.log("Product deleted successfully:", {
-        config: result.config,
-        data: result.data,
-        status: result.status,
-        headers: result.headers,
-      });
+
+      // console log result
+      getApiSuccessMessage(result);
 
       // success message
       toast("Product deleted", toastStyleObject());
@@ -201,13 +191,7 @@ const Admin = () => {
       console.log("Error:", error);
 
       // error message
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong.";
-
-      // faliure message
-      toast(msg, toastStyleObject());
+      toast(getApiErrorMessage(error), toastStyleObject());
     }
   };
 
@@ -223,7 +207,7 @@ const Admin = () => {
 
     try {
       // update status API call
-      const response = await axios.patch(
+      const result = await axios.patch(
         `${import.meta.env.VITE_API_ORDERS_URL}/editorderstatus`,
         data,
         getHeadersConfig()
@@ -231,13 +215,8 @@ const Admin = () => {
 
       // success after updating order status
 
-      console.log("Result to update order status call:", response);
-      console.log("SUCCESS!", {
-        config: response.config,
-        data: response.data,
-        status: response.status,
-        headers: response.headers,
-      });
+      // console log result
+      getApiSuccessMessage(result);
 
       // success message
       toast("Order status updated", toastStyleObject());
@@ -257,14 +236,8 @@ const Admin = () => {
       // error handling
       console.log("Order status update error:", error);
 
-      // error message variable
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong.";
-
-      // faliure message
-      toast(msg, toastStyleObject());
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
     }
   };
 
@@ -272,43 +245,33 @@ const Admin = () => {
   // handle delete user (account)
   // handle delete user (account)
   const handleDeleteAcc = async (id) => {
-    axios
-      .delete(`http://localhost:3000/users/${id}`, {
-        headers: {
-          Authorization: `Bearer ${logic.userToken}`,
-        },
-      })
-      .then((result) => {
-        const accDeleted = result.data;
-        console.log("this is the account deleted:", accDeleted);
+    try {
+      // delete user API call
+      const result = await axios.delete(
+        `${import.meta.env.VITE_API_USERS_URL}/${id}`,
+        getHeadersConfig()
+      );
 
-        axios
-          .get(`http://localhost:3000/users/allusers`, {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const newUsersArr = res.data;
-            console.log("this is the new array of users", newUsersArr);
-            dispatch(setUsers(newUsersArr));
-          });
+      // success after delete acc call
 
-        // get all orders
-        axios
-          .get("http://localhost:3000/orders/allorders", {
-            headers: {
-              Authorization: `Bearer ${logic.userToken}`,
-            },
-          })
-          .then((res) => {
-            const orders = res.data;
-            dispatch(setOrders(orders));
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      // console log result
+      getApiSuccessMessage(result);
+
+      // success message
+      toast("User account deleted", toastStyleObject());
+
+      // refresh users API call
+      await refreshUsersData(logic.userToken, dispatch, setUsers);
+
+      // refresh orders API call
+      await refreshOrdersData(logic.userToken, dispatch, setOrders);
+    } catch (error) {
+      // error handling
+      console.log("Delete account error:", error);
+
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
+    }
   };
 
   return (

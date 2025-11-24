@@ -97,3 +97,28 @@ export const refreshUsersData = async (userToken, dispatch, setUsers) => {
     toast(msg, toastStyleObject());
   }
 };
+
+// error handling (error message)
+// error handling (error message)
+// error handling (error message)
+export const getApiErrorMessage = (error) => {
+  return (
+    error?.response?.data?.message ||
+    error?.response?.data?.error ||
+    error?.message ||
+    "Something went wrong."
+  );
+};
+
+// success handling message
+// success handling message
+// success handling message
+export const getApiSuccessMessage = (result, message = "Success") => {
+  console.log("result:", result);
+  console.log(message, {
+    config: result?.config,
+    data: result?.data,
+    status: result?.status,
+    headers: result?.headers,
+  });
+};

@@ -19,7 +19,11 @@ import {
 } from "../../redux/slices/staticState/logicSlice";
 
 // utils functions
-import { refreshUserData } from "../../utils/helpers";
+import {
+  refreshUserData,
+  getApiErrorMessage,
+  getApiSuccessMessage,
+} from "../../utils/helpers";
 
 // helper vars
 // headers config
@@ -101,13 +105,8 @@ const EditProfile = () => {
 
       // success after updating user's password api call
 
-      console.log("Result to update password call: ", result);
-      console.log("SUCCESS!", {
-        config: result.config,
-        data: result.data,
-        status: result.status,
-        headers: result.headers,
-      });
+      // console log result
+      getApiSuccessMessage(result);
 
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
@@ -123,14 +122,8 @@ const EditProfile = () => {
       // error hadling
       console.log("Password update error:", error);
 
-      // error message variable
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong.";
-
-      // faliure message
-      toast(msg, toastStyleObject());
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
 
       // resetting fields and editUserState object
       dispatch(resetEditUserState());
@@ -178,13 +171,9 @@ const EditProfile = () => {
       );
 
       // success after editing user's contact info api call
-      console.log("Result to edit user's contact info call: ", result);
-      console.log("SUCCESS!", {
-        config: result.config,
-        data: result.data,
-        status: result.status,
-        headers: result.headers,
-      });
+
+      // console log result
+      getApiSuccessMessage(result);
 
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
@@ -200,14 +189,8 @@ const EditProfile = () => {
       // error handling
       console.log("Contact info update error:", error);
 
-      // error message variable
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong.";
-
-      // faliure message
-      toast(msg, toastStyleObject());
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
 
       // resetting fields and editUserState object
       dispatch(resetEditUserState());
@@ -255,13 +238,9 @@ const EditProfile = () => {
       );
 
       // success after editing shipping info api call
-      console.log("Result to update user's shippng info call: ", result);
-      console.log("SUCCESS!", {
-        config: result.config,
-        data: result.data,
-        status: result.status,
-        headers: result.headers,
-      });
+
+      // console log result
+      getApiSuccessMessage(result);
 
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
@@ -277,14 +256,8 @@ const EditProfile = () => {
       // error handling
       console.log("Shipping info update error:", error);
 
-      // error message variable
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong.";
-
-      // failure message
-      toast(msg, toastStyleObject());
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
 
       // resetting fields and editUserState object
       dispatch(resetEditUserState());
