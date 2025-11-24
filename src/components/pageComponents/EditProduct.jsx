@@ -18,11 +18,14 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
+// redux
+// functions from redux store slice
 import {
   fetchArtPieces,
   setOrders,
   setUsers,
 } from "../../redux/slices/state/storeSlice";
+// functions from redux logic slice
 import { setShowAllProducts } from "../../redux/slices/staticState/logicSlice";
 
 // helper vars
