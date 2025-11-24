@@ -1,14 +1,16 @@
 import React from "react";
 
 // React router V6
+// react router hooks
 import { Link, useNavigate } from "react-router-dom";
 
 // Axios
 import axios from "axios";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
-// redux reducers
+// redux functions from logic slice
 import {
   setisLoggedInToTrue,
   setUser,
@@ -18,7 +20,7 @@ import {
   setEnteredUserpassword,
   setEnteredUserpasswordEmpty,
 } from "../../redux/slices/staticState/logicSlice";
-
+// redux functions from store slice
 import { setUsers, setOrders } from "../../redux/slices/state/storeSlice";
 
 // Toastify for error and success message handling
@@ -27,83 +29,91 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
+// utils functions
+import {
+  refreshOrdersData,
+  refreshUsersData,
+  getApiErrorMessage,
+  getApiSuccessMessage,
+} from "../../utils/helpers";
+
+// login function component
+// login function component
+// login function component
 const login = () => {
   // redux & state
+  // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
+  // redux hooks
   const dispatch = useDispatch();
 
-  // React router V6
+  // React router hooks
   const navigate = useNavigate();
 
-  // sign in function
-  const handleSignIn = (e) => {
+  // functions
+  // functions
+  // functions
+
+  // sign in
+  // sign in
+  // sign in
+  const handleSignIn = async (e) => {
     e.preventDefault();
 
     const { enteredUserUsername, enteredUserPassword } = logic;
 
+    // form validation
     if (!enteredUserUsername || !enteredUserPassword) {
       toast("Make sure all the fields are filled", toastStyleObject());
       return;
     }
 
-    const data = { email: enteredUserUsername, password: enteredUserPassword };
+    try {
+      const data = {
+        email: enteredUserUsername,
+        password: enteredUserPassword,
+      };
 
-    const loginUrl = "http://localhost:3000/users/login";
+      // API call - user login
+      const result = await axios.post(
+        `${import.meta.env.VITE_API_USERS_URL}/login`,
+        data
+      );
 
-    // API call
-    axios
-      .post(loginUrl, data)
-      .then(async (result) => {
-        console.log("Result: ", result);
-        console.log("SUCCESS! user loged in. Result:", {
-          config: result.config,
-          data: result.data,
-          status: result.status,
-          headers: result.headers,
-        });
+      // API success
+      getApiSuccessMessage(result);
 
-        const logedInUser = result.data.user;
+      const loggedInUser = result.data.user;
 
-        dispatch(setisLoggedInToTrue());
-        dispatch(setUser(logedInUser));
-        dispatch(setUserToken(result.data.token));
+      // store user + auth state
+      dispatch(setisLoggedInToTrue());
+      dispatch(setUser(loggedInUser));
+      dispatch(setUserToken(result.data.token));
 
-        dispatch(setEnteredUsernameEmpty());
-        dispatch(setEnteredUserpasswordEmpty());
+      dispatch(setEnteredUsernameEmpty());
+      dispatch(setEnteredUserpasswordEmpty());
 
-        if (logedInUser.role === "admin") {
-          navigate("/admin");
+      // if admin, load admin dashboard data
+      if (loggedInUser.role === "admin") {
+        // refresh users
+        await refreshUsersData(result.data.token, dispatch, setUsers);
 
-          const usersData = await axios.get(
-            "http://localhost:3000/users/allusers",
-            {
-              headers: {
-                Authorization: `Bearer ${result.data.token}`,
-              },
-            }
-          );
+        // refresh orders
+        await refreshOrdersData(result.data.token, dispatch, setOrders);
 
-          dispatch(setUsers(usersData.data));
+        navigate("/admin");
+      } else {
+        navigate("/profile");
+      }
 
-          const ordersData = await axios.get(
-            "http://localhost:3000/orders/allorders",
-            {
-              headers: {
-                Authorization: `Bearer ${result.data.token}`,
-              },
-            }
-          );
+      toast(`Welcome ${loggedInUser.name}`, toastStyleObject());
+    } catch (error) {
+      // error handling
+      console.log("Error logging in:", error);
 
-          dispatch(setOrders(ordersData.data));
-        } else {
-          navigate("/profile");
-        }
-
-        toast(`Welcome ${logedInUser.name}`, toastStyleObject());
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
+    }
   };
 
   return (
