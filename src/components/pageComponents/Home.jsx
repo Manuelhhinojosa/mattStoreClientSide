@@ -1,10 +1,12 @@
 import React from "react";
 
 // redux
+// redux hooks
 import { useSelector } from "react-redux";
 
 const Home = () => {
   // redux
+  // state in staticText slice
   const staticText = useSelector((state) => state.staticTextSlice);
   return (
     <section className="relative flex h-screen w-screen items-center justify-center">
