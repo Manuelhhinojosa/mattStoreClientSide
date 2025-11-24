@@ -25,15 +25,31 @@ import {
 } from "../../redux/slices/state/storeSlice";
 import { setShowAllProducts } from "../../redux/slices/staticState/logicSlice";
 
+// helper vars
+// headers config
+import { getHeadersConfig } from "../../utils/vars";
+
+// utils functions
+import {
+  getApiSuccessMessage,
+  refreshOrdersData,
+  refreshUsersData,
+  getApiErrorMessage,
+} from "../../utils/helpers";
+
 const EditProduct = () => {
   // redux & state
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
+  // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
   // redux hooks
   const dispatch = useDispatch();
-  // React router V6
+
+  // React router V6 hooks
   const navigate = useNavigate();
   const location = useLocation();
+
   // identifying single product by id in the url
   let reference = location.pathname.slice(13);
   let product = {};
@@ -47,11 +63,15 @@ const EditProduct = () => {
   const [newProductSate, setNewProductState] = useState(product);
 
   // functions
+  // functions
+  // functions
+
   // handle edit product
-  const handleEditProduct = (e) => {
+  // handle edit product
+  // handle edit product
+  const handleEditProduct = async (e) => {
     e.preventDefault();
 
-    // form validation
     const {
       title,
       shortDesc,
@@ -60,54 +80,53 @@ const EditProduct = () => {
       internationalDelivery,
     } = newProductSate;
 
-    // api url
-    const editproductUrl = "http://localhost:3000/posts";
-    // const editPostUrl = process.env.REACT_APP_EDIT_POST_URL;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${logic.userToken}`,
-        "Content-Type": "application/json",
-      },
-    };
+    // form validation
+    if (
+      !title ||
+      !shortDesc ||
+      cost <= 0 ||
+      nationwideDelivery <= 0 ||
+      internationalDelivery <= 0
+    ) {
+      toast("Please fill in all required fields.", toastStyleObject());
+      return;
+    }
 
-    // axios call
-    axios
-      .put(`${editproductUrl}/${product._id}`, newProductSate, config)
-      .then((result) => {
-        console.log("Result: ", result.data);
-        console.log("SUCCESS! Post edited. Result:", {
-          config: result.config,
-          data: result.data,
-          status: result.status,
-          headers: result.headers,
-        });
+    try {
+      // edit product API call
+      const result = await axios.put(
+        `${import.meta.env.VITE_API_POSTS_URL}/${product._id}`,
+        newProductSate,
+        getHeadersConfig()
+      );
 
-        // setting artpieces after edit
-        dispatch(fetchArtPieces());
-        // making sure admin will show list of all products after edit
-        dispatch(setShowAllProducts());
-        // fetching orders
-        axios
-          .get("http://localhost:3000/orders/allorders", config)
-          .then((res) => {
-            const orders = res.data;
-            dispatch(setOrders(orders));
-          });
+      // success after editing product
+      getApiSuccessMessage(result);
 
-        // fetching users
-        axios.get("http://localhost:3000/users/allusers", config).then((r) => {
-          const users = r.data;
-          dispatch(setUsers(users));
-        });
-        // navigate to admin pate
-        navigate("/admin");
+      // refresh products in storeState slice
+      dispatch(fetchArtPieces());
 
-        // confirmation message
-        toast("Product edited", toastStyleObject());
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      // refresh orders API call
+      await refreshOrdersData(logic.userToken, dispatch, setOrders);
+
+      // refresh users API call
+      await refreshUsersData(logic.userToken, dispatch, setUsers);
+
+      // make sure admin shows list of all products after edit
+      dispatch(setShowAllProducts());
+
+      // navigate to admin page
+      navigate("/admin");
+
+      // confirmation message
+      toast("Product edited", toastStyleObject());
+    } catch (error) {
+      // error handling
+      console.log("Error editing product:", error);
+
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
+    }
   };
 
   return (
@@ -116,7 +135,9 @@ const EditProduct = () => {
         <div className="h-[100px] flex justify-center items-center text-3xl">
           <p className="border-b-[1px] border-b-black ">Edit product</p>
         </div>
+        {/* form container */}
         <div className="h-full">
+          {/* form */}
           <form
             encType="multipart/form-data"
             className="h-full flex flex-col items-center justify-evenly"
@@ -186,6 +207,7 @@ const EditProduct = () => {
               </select>
             </div>
 
+            {/* title */}
             <input
               type="text"
               placeholder={`Title: ${product.title}`}
@@ -200,6 +222,7 @@ const EditProduct = () => {
               }}
             />
 
+            {/* short desc */}
             <input
               type="text"
               placeholder={`Description: ${product.shortDesc}`}
@@ -214,6 +237,7 @@ const EditProduct = () => {
               }}
             />
 
+            {/* cost */}
             <input
               type="number"
               placeholder={`Price: ${product.cost}`}
@@ -228,6 +252,7 @@ const EditProduct = () => {
               }}
             />
 
+            {/* national delivery fee */}
             <input
               type="number"
               placeholder={`NDF: ${product.nationwideDelivery}`}
@@ -245,6 +270,7 @@ const EditProduct = () => {
               }}
             />
 
+            {/* international delivery fee */}
             <input
               type="number"
               placeholder={`IDF: ${product.internationalDelivery}`}
@@ -262,6 +288,7 @@ const EditProduct = () => {
               }}
             />
 
+            {/* button */}
             <div className="flex flex-col">
               <button
                 className="hover:text-slate-600 mb-[15px]"
@@ -269,6 +296,8 @@ const EditProduct = () => {
               >
                 Edit product
               </button>
+
+              {/* cancel button */}
               <button
                 className="hover:text-slate-600"
                 onClick={() => navigate("/admin")}
