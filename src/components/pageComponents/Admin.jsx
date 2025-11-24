@@ -215,13 +215,13 @@ const Admin = () => {
   // handle order status update
   // handle order status update
   const handleStatusChange = async (id, newStatus) => {
-    try {
-      // data
-      const data = {
-        _id: id,
-        status: newStatus,
-      };
+    // data
+    const data = {
+      _id: id,
+      status: newStatus,
+    };
 
+    try {
       // update status API call
       const response = await axios.patch(
         `${import.meta.env.VITE_API_ORDERS_URL}/editorderstatus`,
@@ -229,7 +229,17 @@ const Admin = () => {
         getHeadersConfig()
       );
 
-      console.log("Order status updated successfully:", response.data);
+      // success after updating order status
+
+      console.log("Result to update order status call:", response);
+      console.log("SUCCESS!", {
+        config: response.config,
+        data: response.data,
+        status: response.status,
+        headers: response.headers,
+      });
+
+      // success message
       toast("Order status updated", toastStyleObject());
 
       // refresh users API call
@@ -238,13 +248,23 @@ const Admin = () => {
       // refresh orders API call
       await refreshOrdersData(logic.userToken, dispatch, setOrders);
 
+      // refresh posts
       dispatch(fetchArtPieces());
 
       // refresh user API call
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
     } catch (error) {
-      console.error("Error updating order status:", error);
-      toast("Failed to update order status", toastStyleObject());
+      // error handling
+      console.log("Order status update error:", error);
+
+      // error message variable
+      const msg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        "Something went wrong.";
+
+      // faliure message
+      toast(msg, toastStyleObject());
     }
   };
 
