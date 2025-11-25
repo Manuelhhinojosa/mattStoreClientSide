@@ -288,7 +288,7 @@ const EditProfile = () => {
       {logic.showEditPassword ? (
         <>
           <div className="h-[100px] flex items-center justify-center">
-            <p className="text-center text-3xl">Edit password</p>
+            <p className="text-center text-3xl underline">Edit password</p>
           </div>
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
@@ -323,13 +323,13 @@ const EditProfile = () => {
               />
 
               <button
-                className="mt-5 hover:text-slate-600"
+                className="mt-5 hover:text-blue-500"
                 onClick={handleEditPassword}
               >
                 Edit Password
               </button>
               <button
-                className="mt-5 hover:text-slate-600"
+                className="mt-5 hover:text-blue-500"
                 onClick={() => handleCancel(setShowEditPasswordTofalse)}
               >
                 Cancel
@@ -345,7 +345,7 @@ const EditProfile = () => {
       {logic.showEditContactInfo ? (
         <>
           <div className="h-[100px] flex items-center justify-center">
-            <p className="text-center text-3xl">Edit contact info</p>
+            <p className="text-center text-3xl underline">Edit contact info</p>
           </div>
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
@@ -426,19 +426,19 @@ const EditProfile = () => {
                 id="contactSameShipping"
                 type="checkbox"
                 name="shippingSameAsContactInfo"
-                className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
+                className="accent-blue-500 w-5 h-5 rounded focus:outline-none mt-3"
                 value={logic.editUserState.shippingSameAsContactInfo}
                 onChange={() => dispatch(toggleEditUserContactAddress())}
               />
 
               <button
-                className="mt-5 hover:text-slate-600"
+                className="mt-5 hover:text-blue-500"
                 onClick={handleEditContactInfo}
               >
                 Edit contact info
               </button>
               <button
-                className="mt-5 hover:text-slate-600"
+                className="mt-5 hover:text-blue-500"
                 onClick={() => handleCancel(setShowEditContactInfoTofalse)}
               >
                 Cancel
@@ -454,7 +454,7 @@ const EditProfile = () => {
       {logic.showEditShippingInfo ? (
         <>
           <div className="h-[100px] flex items-center justify-center">
-            <p className="text-center text-3xl">Edit Shipping info</p>
+            <p className="text-center text-3xl underline">Edit Shipping info</p>
           </div>
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
@@ -535,19 +535,19 @@ const EditProfile = () => {
                 id="contactSameShipping"
                 type="checkbox"
                 name="contactEqualShipping"
-                className="accent-black w-5 h-5 rounded focus:outline-none mt-3"
+                className="accent-blue-500 w-5 h-5 rounded focus:outline-none mt-3"
                 value={logic.editUserState.shippingSameAsContactInfo}
                 onChange={() => dispatch(toggleEditUsershippingAddress())}
               />
 
               <button
-                className="mt-5 hover:text-slate-600"
+                className="mt-5 hover:text-blue-500"
                 onClick={handleEditShippingInfo}
               >
                 Edit shipping info
               </button>
               <button
-                className="mt-5 hover:text-slate-600"
+                className="mt-5 hover:text-blue-500"
                 onClick={() => handleCancel(setShowEditShippingInfoTofalse)}
               >
                 Cancel

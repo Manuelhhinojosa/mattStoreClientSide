@@ -87,7 +87,7 @@ const Navbar = () => {
               key={index}
               className={`text-sm ${
                 index !== 0 ? "border-l-2 border-neutral-300/20 pl-2" : ""
-              } hover:opacity-50`}
+              } hover:text-blue-500`}
               onClick={() => dispatch(setShowNavbarToFalse())}
               to={link.to}
             >

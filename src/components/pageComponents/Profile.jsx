@@ -206,8 +206,8 @@ const Profile = () => {
   return (
     <section className="relative  h-screen w-screen flex flex-col items-center">
       {/* Headding */}
-      <div className="mt-[125px] ">
-        <p className="text-3xl">Profile</p>
+      <div className="mt-[175px] ">
+        <p className="text-3xl underline">Profile</p>
       </div>
       {/* profile info container */}
       <div className="p-2 w-full lg:w-2/3 mt-[25px]">
@@ -241,7 +241,7 @@ const Profile = () => {
 
             <Link
               to="/editprofile"
-              className="border-b-[1px] border-b-black"
+              className="underline hover:text-blue-500"
               onClick={navigateToEditPassword}
             >
               edit password
@@ -265,7 +265,7 @@ const Profile = () => {
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
               <Link
                 to="/editProfile"
-                className="border-b-[1px] border-b-black"
+                className="underline hover:text-blue-500"
                 onClick={navigateToEditContactInfo}
               >
                 update contact info
@@ -283,7 +283,7 @@ const Profile = () => {
               <p className="text-center ">Same as contact info</p>
               <Link
                 to="/editprofile"
-                className="border-b-[1px] border-b-black"
+                className="underline hover:text-blue-500"
                 onClick={navigateToEditShippingInfo}
               >
                 update shipping info
@@ -303,7 +303,7 @@ const Profile = () => {
                 <p>{`Phone: ${logic.user.shippingPhoneNumber}`}</p>
                 <Link
                   to="/editprofile"
-                  className="border-b-[1px] border-b-black"
+                  className="underline hover:text-blue-500"
                   onClick={navigateToEditShippingInfo}
                 >
                   update shipping info
@@ -315,7 +315,7 @@ const Profile = () => {
         {/* Past orders */}
         <div className="p-2 mt-10  text-sm  ">
           <div className="mb-2">
-            <p className="text-center text-xl">Orders:</p>
+            <p className="text-center text-xl underline">Orders</p>
           </div>
           <div>
             {logic.user?.orders?.length > 0 ? (
@@ -370,7 +370,7 @@ const Profile = () => {
         {/* Shopping cart */}
         <div className="border-[1px] border-black rounded-md my-8 shadow">
           <div>
-            <p className="text-center text-xl m-2">Shopping Cart:</p>
+            <p className="text-center text-xl m-2">Shopping Cart</p>
           </div>
 
           {storeState.shoppingCart.length > 0 ? (
@@ -408,7 +408,7 @@ const Profile = () => {
               <p className="text-sm">Your shopping cart is empty</p>
 
               <Link
-                className="text-sm border-b-[1px] border-b-black hover:text-slate-600 hover:border-slate-600"
+                className="text-sm underline hover:text-blue-500"
                 to="/store"
               >
                 shop
@@ -418,11 +418,11 @@ const Profile = () => {
         </div>
         <div className="border-[1px] border-black rounded-md my-8 shadow">
           <div>
-            <p className="text-center text-xl m-2">Danger zone:</p>
+            <p className="text-center text-xl m-2">Danger zone</p>
           </div>
           <div className="flex items-center justify-center h-[50px]">
             <button
-              className="text-red-900 hover:font-semibold"
+              className="hover:text-red-500 underline"
               onClick={() => handleAccInactivation(logic.user._id)}
             >
               Inactivate account

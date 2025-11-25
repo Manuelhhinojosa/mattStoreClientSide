@@ -153,7 +153,10 @@ const login = () => {
           />
 
           {/* login button */}
-          <button onClick={handleSignIn} className="hover:text-slate-600">
+          <button
+            onClick={handleSignIn}
+            className="hover:text-blue-500 underline"
+          >
             Login
           </button>
         </form>
@@ -161,10 +164,7 @@ const login = () => {
           {/* sign up link */}
           <p>
             Don't have an account yet?{" "}
-            <Link
-              to="/signup"
-              className="hover:text-slate-600 border-b-[1px] border-b-black hover:border-b-slate-600"
-            >
+            <Link to="/signup" className="hover:text-blue-500 underline">
               Sign up
             </Link>
           </p>

@@ -152,7 +152,7 @@ const EditProduct = () => {
     <section className="container mx-auto h-auto mt-32 flex flex-col">
       <div className="h-[600px] w-full">
         <div className="h-[100px] flex justify-center items-center text-3xl">
-          <p className="border-b-[1px] border-b-black ">Edit product</p>
+          <p className="underline ">Edit product</p>
         </div>
         {/* form container */}
         <div className="h-full">
@@ -310,7 +310,7 @@ const EditProduct = () => {
             {/* button */}
             <div className="flex flex-col">
               <button
-                className="hover:text-slate-600 mb-[15px]"
+                className="hover:text-blue-500 mb-[15px]"
                 onClick={(e) => handleEditProduct(e)}
               >
                 Edit product
@@ -318,7 +318,7 @@ const EditProduct = () => {
 
               {/* cancel button */}
               <button
-                className="hover:text-slate-600"
+                className="hover:text-blue-500"
                 onClick={() => navigate("/admin")}
               >
                 Cancel

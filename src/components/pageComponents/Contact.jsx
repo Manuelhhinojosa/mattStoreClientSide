@@ -94,24 +94,24 @@ const Contact = () => {
   return (
     <section className="container mx-auto h-[700px] mt-32 ">
       <div className="w-full">
-        <div className="h-[150px] text-center border-b-[1px] border-b-slate-700">
+        <div className="h-[150px] text-center border-b-[1px] border-b-black">
           {/* header */}
-          <div className="flex justify-center items-center text-3xl h-1/2">
+          <div className="flex justify-center items-center text-3xl h-1/2 ">
             {staticState.home.homeMainTitle} / Contact
           </div>
 
           {/* social media navbar */}
-          <div className=" flex justify-center gap-7 items-center text-3xl h-1/2">
+          <div className=" flex justify-center gap-7 items-center text-4xl h-1/2">
             <a
               href={`mailto:${staticState.contact.email}`}
-              className="hover:text-slate-600"
+              className="hover:text-blue-500"
             >
               <TfiEmail />
             </a>
             <a
               href={staticState.contact.IGlink}
               target="_blank"
-              className=" hover:text-slate-600"
+              className=" hover:text-blue-500"
             >
               <CiInstagram />
             </a>
@@ -156,7 +156,7 @@ const Contact = () => {
           ></textarea>
           <button
             onClick={handleUserData}
-            className="h-10 hover:text-slate-600 font-extrabold text-lg transition-all duration-500"
+            className="h-10 hover:text-blue-500 font-extrabold text-lg transition-all duration-500"
           >
             send
           </button>

@@ -14,10 +14,7 @@ const ErrorPage = () => {
         <p>This URL does not exist</p>
       </div>
       <div>
-        <Link
-          className="border-b-[1px] border-trasnparent hover:text-slate-600 hover:border-slate-600"
-          to="/store"
-        >
+        <Link className="underline hover:text-blue-500 " to="/store">
           continue shopping
         </Link>
       </div>

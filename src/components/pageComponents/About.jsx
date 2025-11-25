@@ -30,7 +30,7 @@ const About = () => {
         {/* text container */}
         <div className="w-full lg:w-1/2 flex flex-col items-center">
           {/* title */}
-          <h1 className="text-3xl text-center mt-8">Matt Marotti</h1>
+          <h1 className="text-3xl text-center mt-8  underline">Matt Marotti</h1>
           {/* body */}
           <p className="w-3/4 text-justify mt-8">
             {staticState.about.aboutText.slice(0, 201)}
