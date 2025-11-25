@@ -46,7 +46,7 @@ const About = () => {
             href={staticState.about.cvSrcHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 mb-8 bg-black text-white rounded-lg p-3 hover:text-gray-500"
+            className="mt-8 mb-8 bg-black text-white rounded-lg p-3 hover:text-blue-500"
           >
             Download my CV
           </a>

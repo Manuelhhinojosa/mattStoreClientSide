@@ -276,7 +276,7 @@ const Admin = () => {
   };
 
   return (
-    <section className="container mx-auto h-auto mt-32 flex flex-col">
+    <section className="container mx-auto h-auto mt-[100px] lg:mt-[175px] flex flex-col">
       {/* admin navbar */}
       <div className=" w-full flex flex-col justify-around items-center md:flex-row mb-5 ">
         {/* see all prods */}
@@ -286,8 +286,10 @@ const Admin = () => {
         >
           <p
             className={`${
-              logic.showAllProducts ? "underline text-xl font-semibold" : ""
-            } hover:text-slate-600`}
+              logic.showAllProducts
+                ? "underline  font-semibold text-blue-500"
+                : ""
+            } hover:text-blue-500`}
           >
             see all products
           </p>
@@ -300,8 +302,10 @@ const Admin = () => {
         >
           <p
             className={`${
-              logic.showAddProduct ? "underline text-xl font-semibold" : ""
-            } hover:text-slate-600`}
+              logic.showAddProduct
+                ? "underline  font-semibold text-blue-500"
+                : ""
+            } hover:text-blue-500`}
           >
             add a product
           </p>
@@ -314,8 +318,10 @@ const Admin = () => {
         >
           <p
             className={`${
-              logic.showViewOrders ? "underline text-xl font-semibold" : ""
-            } hover:text-slate-600`}
+              logic.showViewOrders
+                ? "underline  font-semibold text-blue-500"
+                : ""
+            } hover:text-blue-500`}
           >
             see orders
           </p>
@@ -328,8 +334,10 @@ const Admin = () => {
         >
           <p
             className={`${
-              logic.showMembersInfo ? "underline text-xl font-semibold" : ""
-            } hover:text-slate-600`}
+              logic.showMembersInfo
+                ? "underline  font-semibold text-blue-500"
+                : ""
+            } hover:text-blue-500`}
           >
             see members info
           </p>
@@ -342,7 +350,7 @@ const Admin = () => {
           {[...storeState.artPieces].reverse().map((p) => (
             <div
               key={p._id}
-              className=" py-12 mx-10 my-[50px] flex flex-col items-center border-[1px] border-black rounded-xl text-sm md:flex-row justify-evenly shadow-xl "
+              className=" py-12 mx-10 my-[100px] flex flex-col items-center border-[1px] border-black rounded-xl text-sm md:flex-row justify-evenly shadow-xl "
             >
               <img
                 src={p.media.url}
@@ -357,7 +365,7 @@ const Admin = () => {
                 <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
                 <div>NDF: {p.nationwideDelivery}</div>
                 <div>IDF: {p.internationalDelivery}</div>
-                <div className="mt-[25px] hover:cursor-pointer hover:text-gray-500 underline">
+                <div className="mt-[25px] hover:cursor-pointer hover:text-blue-500 underline">
                   <Link to={`/editproduct/${p._id}`}>Edit product</Link>
                 </div>
                 <div
@@ -455,7 +463,7 @@ const Admin = () => {
               </div>
               <p
                 className={`${
-                  storeState.media === "" ? "text-red-500" : "text-black"
+                  storeState.media === "" ? "text-red-500" : "text-blue-500"
                 }`}
               >
                 {storeState.media === ""
@@ -508,7 +516,7 @@ const Admin = () => {
               <div className="flex flex-col">
                 {/* add product button */}
                 <button
-                  className="hover:text-slate-600 mb-[15px]"
+                  className="hover:text-blue-500 mb-[15px]"
                   onClick={addPost}
                 >
                   Add product
@@ -516,7 +524,7 @@ const Admin = () => {
 
                 {/* cancel add product button */}
                 <button
-                  className="hover:text-slate-600"
+                  className="hover:text-red-600"
                   onClick={() => dispatch(setShowAllProducts())}
                 >
                   Cancel
@@ -564,9 +572,9 @@ const Admin = () => {
                         <div>
                           <p className=" text-center text-sm font-bold">{`"${product.title}"`}</p>
                           <p className=" text-center text-sm">{`${product.shortDesc}`}</p>
-                          <p className=" text-center text-sm">{`${product.cost}`}</p>
-                          <p className=" text-center text-sm">{`${product.deliveryCost}`}</p>
-                          <p className=" text-center text-sm">{`${product.totalAmountPaid}`}</p>
+                          <p className=" text-center text-sm">{`Cost: ${product.cost} CAD`}</p>
+                          <p className=" text-center text-sm">{`Delivery cost: ${product.deliveryCost} CAD`}</p>
+                          <p className=" text-center text-sm">{`Total amuont paid: ${product.totalAmountPaid} CAD`}</p>
                         </div>
                       </div>
                     ))}
@@ -630,7 +638,7 @@ const Admin = () => {
                             onChange={(e) =>
                               handleStatusChange(order._id, e.target.value)
                             }
-                            className="focus:outline-none focus:ring-0 block p-2.5"
+                            className="focus:outline-none focus:ring-0 block p-2.5 text-blue-500"
                           >
                             <option value="Processing">Processing</option>
                             <option value="Shipped">Shipped</option>
