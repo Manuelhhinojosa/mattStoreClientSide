@@ -1,5 +1,21 @@
 import React from "react";
 
+// react hooks
+import { useRef } from "react";
+
+// React router V6
+// react router hooks
+import { Link } from "react-router-dom";
+
+// Axios
+import axios from "axios";
+
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
 // redux
 // redux hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -27,10 +43,10 @@ import {
   // orders
   setOrders,
 } from "../../redux/slices/state/storeSlice";
-// fetching products function
+// fetching products function  from store slice
 import { fetchArtPieces } from "../../redux/slices/state/storeSlice";
 
-// utils functions
+// helper functions
 import {
   refreshOrdersData,
   refreshUsersData,
@@ -38,22 +54,6 @@ import {
   getApiErrorMessage,
   getApiSuccessMessage,
 } from "../../utils/helpers";
-
-// react hooks
-import { useRef } from "react";
-
-// React router V6
-// react router hooks
-import { Link } from "react-router-dom";
-
-// Axios
-import axios from "axios";
-
-// Toastify for error and success message handling
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-// error handling state (for styling)
-import { toastStyleObject } from "../../tostifyStyle";
 
 // helper vars
 // headers config
@@ -63,6 +63,7 @@ import { getHeadersConfig } from "../../utils/vars";
 // Admin compoonent function
 // Admin compoonent function
 const Admin = () => {
+  // redux and state
   // redux hooks and state
   const dispatch = useDispatch();
   // state in logic slice
@@ -173,7 +174,7 @@ const Admin = () => {
         getHeadersConfig()
       );
 
-      // success message after deleting product
+      // successafter deleting product call
 
       // console log result
       getApiSuccessMessage(result);
@@ -213,7 +214,7 @@ const Admin = () => {
         getHeadersConfig()
       );
 
-      // success after updating order status
+      // success after updating order status call
 
       // console log result
       getApiSuccessMessage(result);
@@ -276,7 +277,7 @@ const Admin = () => {
 
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
-      {/* navbar */}
+      {/* admin navbar */}
       <div className=" w-full flex flex-col justify-around items-center md:flex-row mb-5 ">
         {/* see all prods */}
         <div
@@ -335,7 +336,7 @@ const Admin = () => {
         </div>
       </div>
 
-      {/* all products */}
+      {/* all products section*/}
       {logic.showAllProducts ? (
         <div className=" w-full ">
           {[...storeState.artPieces].reverse().map((p) => (
@@ -371,7 +372,7 @@ const Admin = () => {
         </div>
       ) : null}
 
-      {/* add a product */}
+      {/* add a product section */}
       {logic.showAddProduct ? (
         <div className="h-[550px] w-full">
           <div className="h-full">
@@ -526,7 +527,7 @@ const Admin = () => {
         </div>
       ) : null}
 
-      {/* see orders */}
+      {/* see orders section*/}
       {logic.showViewOrders ? (
         <div className="w-full  mt-5">
           <div className="h-auto">
@@ -647,7 +648,7 @@ const Admin = () => {
         </div>
       ) : null}
 
-      {/* see users info */}
+      {/* see users info section */}
       {logic.showMembersInfo ? (
         <div className="w-full mt-10">
           <div className="h-auto">

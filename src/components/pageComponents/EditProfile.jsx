@@ -18,7 +18,7 @@ import {
   setUser,
 } from "../../redux/slices/staticState/logicSlice";
 
-// utils functions
+// helper functions
 import {
   refreshUserData,
   getApiErrorMessage,
@@ -39,13 +39,12 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
-//
-//
 // Edit profile function component
 // Edit profile function component
 // Edit profile function component
 const EditProfile = () => {
   // redux hooks & state
+  // hooks
   const dispatch = useDispatch();
   // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
@@ -114,6 +113,8 @@ const EditProfile = () => {
       // resetting
       dispatch(setShowEditPasswordTofalse());
       dispatch(resetEditUserState());
+
+      // navigate to profile page
       navigate("/profile");
 
       // success message

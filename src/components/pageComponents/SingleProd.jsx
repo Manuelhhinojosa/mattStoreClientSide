@@ -1,23 +1,41 @@
 import React from "react";
 
 // React Router V6
+// reactu router hooks
 import { useLocation, Link } from "react-router-dom";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
-// redux reducers
+// redux fucntions from store slice
 import { addProdShoppingCart } from "../../redux/slices/state/storeSlice";
 
+// single prod function component
+// single prod function component
+// single prod function component
 const SingleProd = () => {
   // redux & state
+  // redux hooks
   const dispatch = useDispatch();
+  // state in static state slice
   const staticState = useSelector((state) => state.staticTextSlice);
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
-  // react router v6
+
+  // react router hooks
   const location = useLocation();
-  // identifying single product by id in the url
+
+  // helper vars
   let reference = location.pathname.slice(7);
   let product = {};
+
+  // functions
+  // functions
+  // functions
+
+  // identifying single product by id in the url
+  // identifying single product by id in the url
+  // identifying single product by id in the url
   storeState.artPieces.forEach((p) => {
     if (p._id == reference) {
       product = p;
@@ -25,14 +43,20 @@ const SingleProd = () => {
     }
   });
 
+  // return
+  // return
+  // return
   return (
     <section className="container mx-auto flex items-end">
+      {/* main container */}
       <div className="mt-32 w-full">
+        {/* header */}
         <div>
           <p className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
             {staticState.home.homeMainTitle}
           </p>
         </div>
+        {/* image */}
         <div className="flex justify-center items-center">
           <img
             src={product.media.url}
@@ -40,17 +64,21 @@ const SingleProd = () => {
             className="mb-10 max-h-[700px] shadow-2xl "
           />
         </div>
+        {/* title */}
         <div>
           <div className="mb-8">
             <p className="text-center font-bold">{product.title}</p>
           </div>
+          {/* price */}
           <div>
             <p className="text-center">{`${product.cost} CAD`}</p>
           </div>
+          {/* description */}
           <div>
             <p className="text-center text-sm">{product.shortDesc}</p>
           </div>
         </div>
+        {/* button add */}
         <div className="my-8 text-center">
           <button
             className={`p-3 text-center text-sm h-5 font-extrabold ${
@@ -72,6 +100,7 @@ const SingleProd = () => {
             )}
           </button>
         </div>
+        {/* back to store button */}
         <div className="my-8 text-center">
           <Link to="/store" className="font-extrabold hover:text-slate-700">
             Back to store

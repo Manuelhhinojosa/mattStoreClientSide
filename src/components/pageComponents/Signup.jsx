@@ -3,18 +3,6 @@ import React from "react";
 // Axios
 import axios from "axios";
 
-// redux
-import { useSelector, useDispatch } from "react-redux";
-// redux reducers
-import {
-  setSignUpState,
-  toggleAddress,
-  setisLoggedInToTrue,
-  setUser,
-  setUserToken,
-  resetSignupState,
-} from "../../redux/slices/staticState/logicSlice";
-
 //React Router 6
 import { Link, useNavigate } from "react-router-dom";
 
@@ -24,75 +12,146 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
+// redux
+// redux hooks
+import { useSelector, useDispatch } from "react-redux";
+// redux functions in logic slice
+import {
+  setSignUpState,
+  toggleAddress,
+  setisLoggedInToTrue,
+  setUser,
+  setUserToken,
+  resetSignupState,
+} from "../../redux/slices/staticState/logicSlice";
+
+// herlper functions
+import {
+  refreshOrdersData,
+  refreshUsersData,
+  getApiErrorMessage,
+  getApiSuccessMessage,
+} from "../../utils/helpers";
+
+// signup function compoenent
+// signup function compoenent
+// signup function compoenent
 const Signup = () => {
   // redux and state
+  // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
+  // redux hooks
   const dispatch = useDispatch();
-  // React router V6
+
+  // React router hooks
   const navigate = useNavigate();
 
   // functions
+  // functions
+  // functions
+
+  // sets entered value in input as signup state (handles input change)
+  // sets entered value in input as signup state (handles input change)
   // sets entered value in input as signup state (handles input change)
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setSignUpState({ key: name, value: value }));
   };
 
-  // handle signup
-  const handleSignup = (e) => {
-    // form validation
+  // handle sign up
+  // handle sign up
+  // handle sign up
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    // checking for filled mandatory fields
+    const {
+      name,
+      lastname,
+      email,
+      confirmationEmail,
+      password,
+      confirmationPassword,
+    } = logic.signupState;
+
+    // form validation
     if (
-      logic.signupState.name === "" ||
-      logic.signupState.lastname === "" ||
-      logic.signupState.email === "" ||
-      logic.signupState.confirmationEmail === "" ||
-      logic.signupState.password === "" ||
-      logic.signupState.confirmationPassword === ""
+      !name ||
+      !lastname ||
+      !email ||
+      !confirmationEmail ||
+      !password ||
+      !confirmationPassword
     ) {
       toast(
-        "name, lastname, email and password are mandatory fields",
+        "Name, lastname, email, and password are mandatory fields",
         toastStyleObject()
       );
       return;
     }
 
-    // checking for matching email addresses
-    if (logic.signupState.email !== logic.signupState.confirmationEmail) {
+    // minimum password length
+    if (password.length < 6 || confirmationPassword.length < 6) {
+      toast("password must be at least 6 characters long", toastStyleObject());
+      return;
+    }
+
+    // email match
+    if (email !== confirmationEmail) {
       toast("email fields must match", toastStyleObject());
       return;
     }
 
-    // checking for matching passwords
-    if (logic.signupState.password !== logic.signupState.confirmationPassword) {
+    // password match
+    if (password !== confirmationPassword) {
       toast("password fields must match", toastStyleObject());
       return;
     }
-    // api call
-    axios
-      .post("http://localhost:3000/users/register", logic.signupState)
-      .then((res) => {
-        const newUser = res.data.user;
-        dispatch(setisLoggedInToTrue());
-        dispatch(setUser(newUser));
-        dispatch(setUserToken(res.data.token));
-        dispatch(resetSignupState());
-        navigate("/profile");
-        toast(`Welcome ${newUser.name}`, toastStyleObject());
-      })
-      .catch((error) => {
-        console.log("this is the error", error);
-      });
+
+    try {
+      // API call
+      const result = await axios.post(
+        `${import.meta.env.VITE_API_USERS_URL}/register`,
+        logic.signupState
+      );
+
+      getApiSuccessMessage(result);
+
+      const newUser = result.data.user;
+
+      // update store state
+      // user status
+      dispatch(setisLoggedInToTrue());
+      // user state
+      dispatch(setUser(newUser));
+      // token
+      dispatch(setUserToken(result.data.token));
+      // reset signup state values
+      dispatch(resetSignupState());
+
+      // redirect
+      navigate("/profile");
+
+      // success message
+      toast(`Welcome ${newUser.name}`, toastStyleObject());
+    } catch (error) {
+      // error handling
+      console.log("Signup error:", error);
+
+      // success message
+      toast(getApiErrorMessage(error), toastStyleObject());
+    }
   };
 
   // return
+  // return
+  // return
   return (
     <section className="relative  w-screen">
+      {/* header */}
       <div className="mt-[125px] mb-[25px] text-3xl text-center">
         <p>Sign up</p>
       </div>
+      {/* form container */}
       <div>
         <form className="flex flex-col items-center">
           <div className="border-[1px] border-black w-[90%] rounded-lg my-[25px] shadow-xl">

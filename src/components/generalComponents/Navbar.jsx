@@ -26,18 +26,19 @@ import {
 import { FaTimes, FaBars } from "react-icons/fa";
 import { CiShoppingCart } from "react-icons/ci";
 
-//
-//
 // Navbar function component
 // Navbar function component
 // Navbar function component
 const Navbar = () => {
   // redux & state
-  // hooks
+  // redux hooks
   const dispatch = useDispatch();
   // state
+  // state in stati text slice
   const staticText = useSelector((state) => state.staticTextSlice);
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
+  // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
 
   // functions:
@@ -56,7 +57,7 @@ const Navbar = () => {
     }
     dispatch(emptyShoppingCart());
 
-    // resetting
+    // resetting user, uster status, token and edit state
     dispatch(setisLoggedInToFalse());
     dispatch(setuserToNone());
     dispatch(setUserTokenEmpty());

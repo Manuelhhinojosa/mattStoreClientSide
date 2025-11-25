@@ -33,7 +33,12 @@ const ShoppingCart = () => {
   let newSubTotal = 0;
 
   // helper functions
-  // calculate subtotal
+  // helper functions
+  // helper functions
+
+  // calculate new subtotal
+  // calculate new subtotal
+  // calculate new subtotal
   storeState.shoppingCart.map((p) => {
     subtotal = p.cost + subtotal;
     taxes = subtotal * 0.13;
@@ -46,17 +51,21 @@ const ShoppingCart = () => {
   return (
     <section className="container mx-auto flex items-end lg:justify-center">
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
+        {/* header */}
         <div className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
           {staticState.home.homeMainTitle} / Shopping cart
         </div>
 
+        {/* list of prods in shopping cart */}
         {storeState.shoppingCart.length > 0 ? (
           storeState.shoppingCart.map((prod) => (
             <div key={prod._id} className=" m-5  border-b-[1px] border-b-black">
               <div className="flex items-center justify-between">
+                {/* quantity */}
                 <div>
                   <p className="text-center">1</p>
                 </div>
+                {/* image */}
                 <div>
                   <Link to={`/store/${prod._id}`}>
                     <img
@@ -66,10 +75,13 @@ const ShoppingCart = () => {
                     />
                   </Link>
                 </div>
+                {/* title */}
                 <div className="p-2 w-1/3">
                   <p className="text-center">{prod.title}</p>
                 </div>
+                {/* price */}
                 <div className="p-2">{`${prod.cost} CAD`}</div>
+                {/* remove item button */}
                 <div className="p-2">
                   <button
                     onClick={() => dispatch(removeProdShoppingCart(prod._id))}
@@ -81,23 +93,28 @@ const ShoppingCart = () => {
             </div>
           ))
         ) : (
+          // renders if shopping cart is empty
           <div className="text-center text-lg font-semibold m-10">
             <p className="font-light">Your shopping cart is empty</p>
           </div>
         )}
 
+        {/* subotal */}
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
           <div>Subtotal</div>
           <div>{`$${subtotal} CAD`}</div>
         </div>
+        {/* taxes */}
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
           <div>Taxes</div>
           <div>{`$${taxes} CAD`}</div>
         </div>
+        {/* delivery fee */}
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
           <div>Delivery fee</div>
           <div>Calculated @ checkout</div>
         </div>
+        {/* new subtotal */}
         <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
           <div>New subtotal</div>
           <div>{`$${newSubTotal} CAD`}</div>
@@ -105,6 +122,7 @@ const ShoppingCart = () => {
 
         <div className="h-[100px] mb-5 flex justify-center items-center">
           {storeState.shoppingCart.length > 0 ? (
+            // checkout button if shoppint cart has items
             <Link
               to="/checkout"
               className="font-extrabold hover:text-slate-700"
@@ -112,6 +130,7 @@ const ShoppingCart = () => {
               Checkout
             </Link>
           ) : (
+            // checout and shop buttons if shopping cart is empty
             <span className="font-extrabold text-gray-400 cursor-not-allowed">
               Checkout
             </span>

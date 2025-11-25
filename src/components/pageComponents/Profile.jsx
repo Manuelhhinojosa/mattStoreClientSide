@@ -1,5 +1,23 @@
 import React from "react";
 
+//React Router v6
+// react router hooks
+import { Link, useNavigate } from "react-router-dom";
+
+// Axios
+import axios from "axios";
+
+// react icons
+import { FaTimes } from "react-icons/fa";
+import { GoEyeClosed } from "react-icons/go";
+import { RxEyeOpen } from "react-icons/rx";
+
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
 // redux
 // redux hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -22,28 +40,6 @@ import {
   setUser,
 } from "../../redux/slices/staticState/logicSlice";
 
-//React Router v6
-// react router hooks
-import { Link, useNavigate } from "react-router-dom";
-
-// Axios
-import axios from "axios";
-
-// react icons
-import { FaTimes } from "react-icons/fa";
-import { GoEyeClosed } from "react-icons/go";
-import { RxEyeOpen } from "react-icons/rx";
-
-// Toastify for error and success message handling
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-// error handling state (for styling)
-import { toastStyleObject } from "../../tostifyStyle";
-
-// helper vars
-// headers config
-import { getHeadersConfig } from "../../utils/vars";
-
 // utils functions
 import {
   getApiErrorMessage,
@@ -52,6 +48,10 @@ import {
   refreshOrdersData,
   refreshUserData,
 } from "../../utils/helpers";
+
+// helper vars
+// headers config
+import { getHeadersConfig } from "../../utils/vars";
 
 // profile function component
 // profile function component
@@ -122,13 +122,15 @@ const Profile = () => {
       dispatch(emptyShoppingCart());
 
       // reset state
+      // user status, user state, token
       dispatch(setisLoggedInToFalse());
       dispatch(setuserToNone());
       dispatch(setUserTokenEmpty());
     } catch (error) {
       // error handling
       console.log("Error:", error);
-      //
+
+      // error message
       toast(getApiErrorMessage(error), toastStyleObject());
     }
   };
@@ -165,7 +167,10 @@ const Profile = () => {
       // success message
       toast("User successfully reactivated", toastStyleObject());
     } catch (error) {
+      // error handling
       console.log("Error reactivating user:", error);
+
+      // error message
       toast(getApiErrorMessage(error), toastStyleObject());
     }
   };

@@ -4,9 +4,11 @@ import React from "react";
 import { useState } from "react";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
 
 // React router V6
+// react router hooks
 import { useNavigate, useLocation } from "react-router-dom";
 
 // Axios
@@ -32,7 +34,7 @@ import { setShowAllProducts } from "../../redux/slices/staticState/logicSlice";
 // headers config
 import { getHeadersConfig } from "../../utils/vars";
 
-// utils functions
+// helper functions
 import {
   getApiSuccessMessage,
   refreshOrdersData,
@@ -40,6 +42,9 @@ import {
   getApiErrorMessage,
 } from "../../utils/helpers";
 
+// edit product function component
+// edit product function component
+// edit product function component
 const EditProduct = () => {
   // redux & state
   // state in store slice
@@ -53,9 +58,18 @@ const EditProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // helper vars
   // identifying single product by id in the url
   let reference = location.pathname.slice(13);
   let product = {};
+
+  // functions
+  // functions
+  // functions
+
+  // identifying single product by id in the url
+  // identifying single product by id in the url
+  // identifying single product by id in the url
   storeState.artPieces.forEach((p) => {
     if (p._id == reference) {
       product = p;
@@ -63,11 +77,8 @@ const EditProduct = () => {
     }
   });
 
+  // setting product to be edited
   const [newProductSate, setNewProductState] = useState(product);
-
-  // functions
-  // functions
-  // functions
 
   // handle edit product
   // handle edit product
@@ -104,6 +115,8 @@ const EditProduct = () => {
       );
 
       // success after editing product
+
+      // console result
       getApiSuccessMessage(result);
 
       // refresh products in storeState slice
@@ -132,6 +145,9 @@ const EditProduct = () => {
     }
   };
 
+  // return
+  // return
+  // retrun
   return (
     <section className="container mx-auto h-auto mt-32 flex flex-col">
       <div className="h-[600px] w-full">

@@ -29,7 +29,7 @@ import "react-toastify/dist/ReactToastify.css";
 // error handling state (for styling)
 import { toastStyleObject } from "../../tostifyStyle";
 
-// utils functions
+// herlper functions
 import {
   refreshOrdersData,
   refreshUsersData,
@@ -81,19 +81,22 @@ const login = () => {
       );
 
       // API success
+
+      // console result
       getApiSuccessMessage(result);
 
       const loggedInUser = result.data.user;
 
-      // store user + auth state
+      // user status + user state + token state
       dispatch(setisLoggedInToTrue());
       dispatch(setUser(loggedInUser));
       dispatch(setUserToken(result.data.token));
 
+      // resetting
       dispatch(setEnteredUsernameEmpty());
       dispatch(setEnteredUserpasswordEmpty());
 
-      // if admin, load admin dashboard data
+      // if admin, load admin dashboard data and navigate to admin page
       if (loggedInUser.role === "admin") {
         // refresh users
         await refreshUsersData(result.data.token, dispatch, setUsers);
@@ -101,11 +104,14 @@ const login = () => {
         // refresh orders
         await refreshOrdersData(result.data.token, dispatch, setOrders);
 
+        // admin page
         navigate("/admin");
       } else {
+        // if user non admin navigate to profile page
         navigate("/profile");
       }
 
+      // success / welcome message
       toast(`Welcome ${loggedInUser.name}`, toastStyleObject());
     } catch (error) {
       // error handling
@@ -116,10 +122,13 @@ const login = () => {
     }
   };
 
+  // return
+  // return
+  // return
   return (
     <section className="container mx-auto flex items-end">
       <div className="mt-32 w-full h-[700px] flex flex-col items-center justify-center">
-        {/*  */}
+        {/* form */}
         <form
           encType="multipart/form-data"
           className="flex flex-col items-center justify-around h-1/3"
@@ -143,11 +152,13 @@ const login = () => {
             onChange={(e) => dispatch(setEnteredUserpassword(e.target.value))}
           />
 
+          {/* login button */}
           <button onClick={handleSignIn} className="hover:text-slate-600">
             Login
           </button>
         </form>
         <div>
+          {/* sign up link */}
           <p>
             Don't have an account yet?{" "}
             <Link

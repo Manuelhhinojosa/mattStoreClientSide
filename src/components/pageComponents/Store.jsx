@@ -1,32 +1,48 @@
 import React from "react";
 
 // react router V6
+// react router hooks
 import { Link } from "react-router-dom";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
-// redux reducers
+// redux functions in store slice
 import { addProdShoppingCart } from "../../redux/slices/state/storeSlice";
 
+// store function component
+// store function component
+// store function component
 const Store = () => {
   // redux & state
-  const dispatch = useDispatch();
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
+  // state in static text slice
   const staticState = useSelector((state) => state.staticTextSlice);
+  // redux hooks
+  const dispatch = useDispatch();
 
+  // retrune
+  // retrune
+  // retrune
   return (
     <section className="container mx-auto flex ">
+      {/* main container */}
       <div className="mt-32 w-full  flex flex-col items-center justify-center mb-[150px]">
+        {/* header */}
         <div className="w-full text-2xl p-8 md:text-center md:text-3xl">
           <p> {staticState.home.homeMainTitle} / Store</p>
         </div>
 
+        {/* art pieces container */}
         <div className="w-full mt-10 flex flex-wrap items-center justify-evenly">
           {[...storeState.artPieces].reverse().map((art) => (
+            // art piece container
             <div
               key={art._id}
               className="flex flex-col items-center justify-center m-3"
             >
+              {/* img / link to single product */}
               <Link to={`/store/${art._id}`}>
                 <img
                   src={art.media.url}
@@ -34,13 +50,17 @@ const Store = () => {
                   className=" shadow-2xl max-h-[550px] mt-5"
                 />
               </Link>
+              {/* title */}
               <p className=" p-3 text-center text-sm h-5 font-bold">
                 {art.title}
               </p>
+              {/* description */}
               <p className=" p-3 text-center text-xs h-5 mt-5">
                 {art.shortDesc}
               </p>
+              {/* price */}
               <p className=" p-3 text-center text-xs h-5">{`${art.cost} CAD`}</p>
+              {/* add to cart button */}
               <button
                 className={`p-3 text-center text-sm h-5 font-extrabold ${
                   !art.added

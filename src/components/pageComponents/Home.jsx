@@ -19,7 +19,7 @@ const Home = () => {
       </div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent from-70% to-black"></div>
 
-      <div className="relative z-20 flex h-full flex-col justify-center pb-20">
+      <div className="relative z-20  flex  flex-col justify-center shadow-inner">
         <h1 className="text-3xl">{staticText.home.homeMainTitle}</h1>
       </div>
     </section>

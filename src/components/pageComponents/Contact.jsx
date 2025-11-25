@@ -17,10 +17,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastStyleObject } from "../../tostifyStyle";
 
 // redux
+// redux hooks
 import { useSelector } from "react-redux";
 
+// contat function component
+// contat function component
+// contat function component
 const Contact = () => {
   // redux & state
+  // state in static text slice
   const staticState = useSelector((state) => state.staticTextSlice);
 
   // form state ref
@@ -36,8 +41,8 @@ const Contact = () => {
   // handle send form function
   const handleUserData = (e) => {
     e.preventDefault();
-    // handleling form filling error
 
+    // form validation
     if (
       nameRef.current.value === "" ||
       subjectRef.current.value === "" ||
@@ -48,22 +53,32 @@ const Contact = () => {
       toast("All fields must be completed.", toastStyleObject());
       return;
     }
-    // Send data
+    // Send data to emailjs
     emailjs
       .sendForm(
-        "service_jmj41g7", // service ID
-        "template_9pokvbn", // template ID
-        formRef.current, // form data
-        "tYhN-ZrthmkJGHLfG" // key
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
-        (result) => {
-          console.log("Success. Result:", result);
+        (response) => {
+          console.log("Success. Result:", response);
+          console.log("Message sent successfully:", {
+            config: response.config,
+            data: response.data,
+            status: response.status,
+            headers: response.headers,
+          });
+
+          // resetting values
           nameRef.current.value = "";
           subjectRef.current.value = "";
           emailRef.current.value = "";
           messageRef.current.value = "";
           nameRef.current.focus();
+
+          // success messsage
           toast("Message received. Thanks.", toastStyleObject());
         },
         (error) => {
@@ -73,13 +88,19 @@ const Contact = () => {
       );
   };
 
+  // return
+  // return
+  // return
   return (
     <section className="container mx-auto h-[700px] mt-32 ">
       <div className="w-full">
         <div className="h-[150px] text-center border-b-[1px] border-b-slate-700">
+          {/* header */}
           <div className="flex justify-center items-center text-3xl h-1/2">
             {staticState.home.homeMainTitle} / Contact
           </div>
+
+          {/* social media navbar */}
           <div className=" flex justify-center gap-7 items-center text-3xl h-1/2">
             <a
               href={`mailto:${staticState.contact.email}`}
@@ -96,8 +117,9 @@ const Contact = () => {
             </a>
           </div>
         </div>
+
+        {/* form */}
         <form
-          action=""
           className="h-[550px] flex flex-col items-center justify-evenly"
           ref={formRef}
         >
