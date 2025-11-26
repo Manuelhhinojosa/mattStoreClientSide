@@ -4,6 +4,9 @@ import React from "react";
 import { CiInstagram } from "react-icons/ci";
 import { TfiEmail } from "react-icons/tfi";
 
+// framaer motion
+import { motion } from "framer-motion";
+
 // React Hooks
 import { useRef } from "react";
 
@@ -92,7 +95,13 @@ const Contact = () => {
   // return
   // return
   return (
-    <section className="container mx-auto h-[700px] mt-32 ">
+    <motion.section
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="container mx-auto h-[700px] mt-32 "
+    >
       <div className="w-full">
         <div className="h-[150px] text-center border-b-[1px] border-b-black">
           {/* header */}
@@ -162,7 +171,7 @@ const Contact = () => {
           </button>
         </form>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
