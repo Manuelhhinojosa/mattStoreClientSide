@@ -1,5 +1,27 @@
 import React from "react";
 
+// framer motion
+// framer motion hooks
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+const FadeInOnScroll = ({ children, delay = 1 }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 2, ease: "easeOut", delay }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 // React Router v6
 // react router hooks
 import { Link } from "react-router-dom";
@@ -32,20 +54,22 @@ const RecentWork = () => {
 
         {/* body */}
         <div className="w-full mt-10 flex flex-wrap items-center justify-evenly">
-          {storeState.artPieces.map((work) =>
+          {storeState.artPieces.map((work, index) =>
             work.recentWork ? (
-              <div className="flex flex-col items-center justify-center m-3">
-                <Link to={`/store/${work._id}`}>
-                  <img
-                    src={work.media.url}
-                    alt="recent work img"
-                    className="rounded-3xl shadow-2xl max-h-[550px]"
-                  />
-                </Link>
-                <p className=" p-3 text-center text-xs font-bold h-10">
-                  {work.title}
-                </p>
-              </div>
+              <FadeInOnScroll key={work._id} delay={index * 0.1}>
+                <div className="flex flex-col items-center justify-center m-3">
+                  <Link to={`/store/${work._id}`}>
+                    <img
+                      src={work.media.url}
+                      alt="recent work img"
+                      className="rounded-3xl shadow-2xl max-h-[550px]"
+                    />
+                  </Link>
+                  <p className=" p-3 text-center text-xs font-bold h-10 m-10">
+                    {work.title}
+                  </p>
+                </div>
+              </FadeInOnScroll>
             ) : null
           )}
         </div>
