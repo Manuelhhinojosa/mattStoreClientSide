@@ -7,6 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 // Axios
 import axios from "axios";
 
+// framer motion
+import { motion } from "framer-motion";
+
 // redux
 // redux hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -126,7 +129,12 @@ const login = () => {
   // return
   // return
   return (
-    <section className="container mx-auto flex items-end">
+    <motion.section
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="container mx-auto flex items-end"
+    >
       <div className="mt-32 w-full h-[700px] flex flex-col items-center justify-center">
         {/* form */}
         <form
@@ -170,7 +178,7 @@ const login = () => {
           </p>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
