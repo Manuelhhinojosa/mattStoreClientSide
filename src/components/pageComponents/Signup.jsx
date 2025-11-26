@@ -148,7 +148,7 @@ const Signup = () => {
   return (
     <section className="relative  w-screen">
       {/* header */}
-      <div className="mt-[125px] mb-[25px] text-3xl text-center">
+      <div className="mt-[125px] mb-[25px] text-3xl text-center underline">
         <p>Sign up</p>
       </div>
       {/* form container */}
@@ -319,7 +319,7 @@ const Signup = () => {
                 id="contactSameShipping"
                 type="checkbox"
                 name="shippingSameAsContactInfo"
-                className="accent-black w-5 h-5 rounded focus:outline-none"
+                className="accent-blue-500 w-5 h-5 rounded focus:outline-none"
                 value={logic.signupState.contactPostalCode}
                 onChange={() => dispatch(toggleAddress())}
               />
@@ -407,15 +407,15 @@ const Signup = () => {
           {/* sign up button */}
           <button
             onClick={handleSignup}
-            className="text-lg hover:text-slate-600 mt-10"
+            className=" hover:text-blue-500 mt-10 text-lg"
           >
-            sign up
+            Sign up
           </button>
         </form>
       </div>
 
       {/* cancel sing up request button */}
-      <div className="flex items-center justify-center my-8 hover:text-slate-600">
+      <div className="flex items-center justify-center my-8 hover:text-blue-500 text-lg">
         <Link to="/store">Cancel</Link>
       </div>
     </section>

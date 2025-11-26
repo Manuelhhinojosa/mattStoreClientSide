@@ -51,7 +51,7 @@ const RecentWork = () => {
         </div>
 
         {/* button */}
-        <div className="fixed bottom-20 right-10 font-extrabold text-lg hover:text-slate-700">
+        <div className="fixed bottom-20 right-10 font-extrabold text-lg hover:text-blue-500">
           <Link to="/store">more work</Link>
         </div>
       </div>

@@ -61,7 +61,7 @@ const SingleProd = () => {
           <img
             src={product.media.url}
             alt="Product image"
-            className="mb-10 max-h-[700px] shadow-2xl "
+            className="mb-10 max-h-[400px] shadow-2xl transition-transform duration-300 hover:scale-105 cursor-zoom-in"
           />
         </div>
         {/* title */}
@@ -81,9 +81,9 @@ const SingleProd = () => {
         {/* button add */}
         <div className="my-8 text-center">
           <button
-            className={`p-3 text-center text-sm h-5 font-extrabold ${
+            className={`p-3 text-center  h-5 font-extrabold ${
               !product.added
-                ? "hover:text-slate-700 cursor-pointer"
+                ? "hover:text-blue-500 cursor-pointer"
                 : "text-gray-400 cursor-not-allowed"
             }`}
             onClick={() =>
@@ -102,7 +102,7 @@ const SingleProd = () => {
         </div>
         {/* back to store button */}
         <div className="my-8 text-center">
-          <Link to="/store" className="font-extrabold hover:text-slate-700">
+          <Link to="/store" className="font-extrabold hover:text-blue-500">
             Back to store
           </Link>
         </div>

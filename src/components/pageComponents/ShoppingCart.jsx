@@ -82,7 +82,7 @@ const ShoppingCart = () => {
                 {/* price */}
                 <div className="p-2">{`${prod.cost} CAD`}</div>
                 {/* remove item button */}
-                <div className="p-2">
+                <div className="p-2 hover:text-blue-500">
                   <button
                     onClick={() => dispatch(removeProdShoppingCart(prod._id))}
                   >
@@ -120,13 +120,10 @@ const ShoppingCart = () => {
           <div>{`$${newSubTotal} CAD`}</div>
         </div>
 
-        <div className="h-[100px] mb-5 flex justify-center items-center">
+        <div className="h-[100px]  flex justify-center items-center">
           {storeState.shoppingCart.length > 0 ? (
             // checkout button if shoppint cart has items
-            <Link
-              to="/checkout"
-              className="font-extrabold hover:text-slate-700"
-            >
+            <Link to="/checkout" className="font-extrabold hover:text-blue-500">
               Checkout
             </Link>
           ) : (
@@ -136,7 +133,7 @@ const ShoppingCart = () => {
             </span>
           )}
         </div>
-        <div className=" mb-10 text-center font-extrabold hover:text-slate-700">
+        <div className=" mb-10 text-center font-extrabold hover:text-blue-500">
           <Link to="/store">Continue shopping</Link>
         </div>
       </div>
