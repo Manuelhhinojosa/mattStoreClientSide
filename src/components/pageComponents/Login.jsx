@@ -146,7 +146,7 @@ const login = () => {
             placeholder="email"
             name="username"
             autoComplete="off"
-            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center min-w-[350px]"
+            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center min-w-[350px] duration-500"
             value={logic.enteredUserUsername}
             onChange={(e) => dispatch(setEnteredUsername(e.target.value))}
           />
@@ -155,7 +155,7 @@ const login = () => {
             placeholder="password"
             name="password"
             autoComplete="off"
-            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center min-w-[350px]"
+            className="border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none text-center min-w-[350px] duration-500"
             value={logic.enteredUserPassword}
             onChange={(e) => dispatch(setEnteredUserpassword(e.target.value))}
           />
@@ -163,7 +163,7 @@ const login = () => {
           {/* login button */}
           <button
             onClick={handleSignIn}
-            className="hover:text-blue-500 underline"
+            className="hover:text-blue-500 underline duration-500"
           >
             Login
           </button>
@@ -172,7 +172,10 @@ const login = () => {
           {/* sign up link */}
           <p>
             Don't have an account yet?{" "}
-            <Link to="/signup" className="hover:text-blue-500 underline">
+            <Link
+              to="/signup"
+              className="hover:text-blue-500 underline duration-500"
+            >
               Sign up
             </Link>
           </p>

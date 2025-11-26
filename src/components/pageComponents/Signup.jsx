@@ -158,7 +158,7 @@ const Signup = () => {
             {/* name and lastname */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="name"
                 name="name"
@@ -167,7 +167,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="lastname"
                 name="lastname"
@@ -180,7 +180,7 @@ const Signup = () => {
             {/* email  */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly ">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="e-mail"
                 name="email"
@@ -189,7 +189,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="confirm email"
                 name="confirmationEmail"
@@ -202,7 +202,7 @@ const Signup = () => {
             {/* Password */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="password"
                 placeholder="password"
                 name="password"
@@ -211,7 +211,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="password"
                 placeholder="confirm password"
                 name="confirmationPassword"
@@ -230,7 +230,7 @@ const Signup = () => {
             {/* contact phone number */}
             <div className="flex items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="contact phone number"
                 name="contactPhoneNumber"
@@ -243,7 +243,7 @@ const Signup = () => {
             {/* contact address and unit */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="address"
                 name="contactAddress"
@@ -253,7 +253,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="unit"
                 name="contactUnit"
@@ -266,7 +266,7 @@ const Signup = () => {
             {/* contact country, provice or state, city, postal code */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="country"
                 name="contactCountry"
@@ -276,7 +276,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="province or state"
                 name="contactProvinceOrState"
@@ -286,7 +286,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="city"
                 name="contactCity"
@@ -296,7 +296,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="postal code"
                 name="contactPostalCode"
@@ -327,7 +327,7 @@ const Signup = () => {
 
             <div className="flex items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="shipping phone number"
                 name="shippingPhoneNumber"
@@ -340,7 +340,7 @@ const Signup = () => {
             {/* ahipping address and unit */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="shipping address"
                 name="shippingAddress"
@@ -350,7 +350,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="shipping unit"
                 name="shippingUnit"
@@ -363,7 +363,7 @@ const Signup = () => {
             {/* contact country, provice or state, city, postal code */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="shipping country"
                 name="shippingCountry"
@@ -373,7 +373,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="shipping province or state"
                 name="shippingProvinceOrState"
@@ -383,7 +383,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="shipping city"
                 name="shippingCity"
@@ -393,7 +393,7 @@ const Signup = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-[150px] text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
                 placeholder="shipping postal code"
                 name="shippingPostalCode"
@@ -407,7 +407,7 @@ const Signup = () => {
           {/* sign up button */}
           <button
             onClick={handleSignup}
-            className=" hover:text-blue-500 mt-10 text-lg"
+            className=" hover:text-blue-500 mt-10 text-lg duration-500"
           >
             Sign up
           </button>
@@ -415,7 +415,7 @@ const Signup = () => {
       </div>
 
       {/* cancel sing up request button */}
-      <div className="flex items-center justify-center my-8 hover:text-blue-500 text-lg">
+      <div className="flex items-center justify-center my-8 hover:text-blue-500 text-lg duration-500">
         <Link to="/store">Cancel</Link>
       </div>
     </section>
