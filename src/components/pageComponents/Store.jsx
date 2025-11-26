@@ -11,7 +11,7 @@ import { useInView } from "react-intersection-observer";
 const FadeInOnScroll = ({ children, delay = 1 }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.25,
   });
 
   return (
@@ -52,7 +52,7 @@ const Store = () => {
       {/* main container */}
       <div className="mt-32 w-full  flex flex-col items-center justify-center mb-[150px]">
         {/* header */}
-        <div className="w-full text-2xl p-8 md:text-center md:text-3xl">
+        <div className="w-full text-2xl p-8 text-center md:text-3xl">
           <p> {staticState.home.homeMainTitle} / Store</p>
         </div>
 
@@ -87,7 +87,7 @@ const Store = () => {
                 <button
                   className={`p-3 text-center text-sm h-5 font-extrabold ${
                     !art.added
-                      ? "hover:text-blue-500 cursor-pointer"
+                      ? "cursor-pointer duration-500"
                       : "text-gray-400 cursor-not-allowed"
                   }`}
                   onClick={() =>
@@ -98,9 +98,11 @@ const Store = () => {
                   {!art.inStock ? (
                     <p className="hover:cursor-not-allowed">Sold</p>
                   ) : art.added ? (
-                    <p>Added</p>
+                    <p> Added</p>
                   ) : (
-                    <p>Add to cart</p>
+                    <p className="hover:text-blue-500 duration-500">
+                      Add to cart
+                    </p>
                   )}
                 </button>
               </div>

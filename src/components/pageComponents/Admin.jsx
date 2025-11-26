@@ -313,9 +313,9 @@ const Admin = () => {
           <p
             className={`${
               logic.showAllProducts
-                ? "underline  font-semibold text-blue-500"
+                ? "underline  font-semibold text-blue-500 "
                 : ""
-            } hover:text-blue-500`}
+            } hover:text-blue-500 duration-500`}
           >
             see all products
           </p>
@@ -331,7 +331,7 @@ const Admin = () => {
               logic.showAddProduct
                 ? "underline  font-semibold text-blue-500"
                 : ""
-            } hover:text-blue-500`}
+            } hover:text-blue-500 duration-500`}
           >
             add a product
           </p>
@@ -347,7 +347,7 @@ const Admin = () => {
               logic.showViewOrders
                 ? "underline  font-semibold text-blue-500"
                 : ""
-            } hover:text-blue-500`}
+            } hover:text-blue-500 duration-500`}
           >
             see orders
           </p>
@@ -363,7 +363,7 @@ const Admin = () => {
               logic.showMembersInfo
                 ? "underline  font-semibold text-blue-500"
                 : ""
-            } hover:text-blue-500`}
+            } hover:text-blue-500 duration-500`}
           >
             see members info
           </p>
@@ -398,11 +398,11 @@ const Admin = () => {
                 <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
                 <div>NDF: {p.nationwideDelivery}</div>
                 <div>IDF: {p.internationalDelivery}</div>
-                <div className="mt-[25px] hover:cursor-pointer hover:text-blue-500 underline">
+                <div className="mt-[25px] hover:cursor-pointer hover:text-blue-500 underline duration-500">
                   <Link to={`/editproduct/${p._id}`}>Edit product</Link>
                 </div>
                 <div
-                  className="hover:text-red-900 hover:cursor-pointer mt-2 underline"
+                  className="hover:text-red-900 hover:cursor-pointer mt-2 underline duration-500"
                   onClick={() => handleDeleteProduct(p._id)}
                 >
                   Delete product
@@ -435,7 +435,7 @@ const Admin = () => {
                   name="inStock"
                   id="inStock"
                   required
-                  className="border-[1px] border-black focus:outline-none"
+                  className="border-[1px] border-black focus:outline-none rounded"
                   value={storeState.inStock}
                   onChange={(e) =>
                     dispatch(setInStock(e.target.value === "true"))
@@ -452,7 +452,7 @@ const Admin = () => {
                   name="recentWork"
                   id="recentWork"
                   required
-                  className="border-[1px] border-black focus:outline-none"
+                  className="border-[1px] border-black focus:outline-none rounded"
                   value={storeState.recentWork}
                   onChange={(e) =>
                     dispatch(setRecentWork(e.target.value === "true"))
@@ -468,7 +468,7 @@ const Admin = () => {
                 placeholder="Title"
                 name="title"
                 autoComplete="off"
-                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none duration-500"
                 value={storeState.title}
                 onChange={(e) => dispatch(setTitle(e.target.value))}
               />
@@ -478,14 +478,14 @@ const Admin = () => {
                 placeholder="Short description"
                 name="shortDesc"
                 autoComplete="off"
-                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none"
+                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none duration-500"
                 value={storeState.shortDesc}
                 onChange={(e) => dispatch(setShortDesc(e.target.value))}
               />
 
               <div className="flex flex-col">
                 <label
-                  className="text-center mb-[10px] hover:cursor-pointer hover:text-slate-600 border-b-[1px] border-b-black"
+                  className="text-center mb-[10px] hover:cursor-pointer hover:text-blue-500 underline duration-500"
                   htmlFor="imgSrcHref"
                 >
                   Select image
@@ -516,7 +516,7 @@ const Admin = () => {
                 placeholder="Price"
                 name="cost"
                 autoComplete="off"
-                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500"
                 value={storeState.cost === 0 ? "" : storeState.cost}
                 onChange={(e) => dispatch(setCost(Number(e.target.value)))}
               />
@@ -526,7 +526,7 @@ const Admin = () => {
                 placeholder="Natiowide delivery cost"
                 name="nationwideDelivery"
                 autoComplete="off"
-                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500"
                 value={
                   storeState.nationwideDelivery === 0
                     ? ""
@@ -542,7 +542,7 @@ const Admin = () => {
                 placeholder="International delivery cost"
                 name="internationalDelivery"
                 autoComplete="off"
-                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black "
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500"
                 value={
                   storeState.internationalDelivery === 0
                     ? ""
@@ -556,7 +556,7 @@ const Admin = () => {
               <div className="flex flex-col">
                 {/* add product button */}
                 <button
-                  className="hover:text-blue-500 mb-[15px]"
+                  className="hover:text-blue-500 mb-[15px] duration-500"
                   onClick={addPost}
                 >
                   Add product
@@ -564,7 +564,7 @@ const Admin = () => {
 
                 {/* cancel add product button */}
                 <button
-                  className="hover:text-red-600"
+                  className="hover:text-red-600 duration-500"
                   onClick={() => dispatch(setShowAllProducts())}
                 >
                   Cancel
@@ -845,7 +845,7 @@ const Admin = () => {
                     {/* delete profile */}
                     <div className=" mt-5 flex justify-center">
                       <button
-                        className="hover:text-red-600 text-xl underline"
+                        className="hover:text-red-600 text-xl underline duration-500"
                         onClick={() => handleDeleteAcc(user._id)}
                       >
                         Delete account

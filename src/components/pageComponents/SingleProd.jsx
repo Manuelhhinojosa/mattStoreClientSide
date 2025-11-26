@@ -101,8 +101,8 @@ const SingleProd = () => {
           <button
             className={`p-3 text-center  h-5 font-extrabold ${
               !product.added
-                ? "hover:text-blue-500 cursor-pointer"
-                : "text-gray-400 cursor-not-allowed"
+                ? "cursor-pointer duration-500"
+                : "text-gray-400 cursor-not-allowed "
             }`}
             onClick={() =>
               product.inStock && dispatch(addProdShoppingCart(product._id))
@@ -114,13 +114,16 @@ const SingleProd = () => {
             ) : product.added ? (
               <p>Added</p>
             ) : (
-              <p>Add to cart</p>
+              <p className="hover:text-blue-500 duration-500"> Add to cart</p>
             )}
           </button>
         </div>
         {/* back to store button */}
         <div className="mb-8 text-center">
-          <Link to="/store" className="font-extrabold hover:text-blue-500">
+          <Link
+            to="/store"
+            className="font-extrabold hover:text-blue-500 duration-500"
+          >
             Back to store
           </Link>
         </div>

@@ -300,7 +300,7 @@ const EditProfile = () => {
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="password"
                 placeholder="Enter old password"
                 name="oldPassword"
@@ -310,7 +310,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="password"
                 placeholder="Enter new password"
                 name="newPassword"
@@ -320,7 +320,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="password"
                 placeholder="Confirm new password"
                 name="confirmationNewPassword"
@@ -330,13 +330,13 @@ const EditProfile = () => {
               />
 
               <button
-                className="mt-5 hover:text-blue-500"
+                className="mt-5 hover:text-blue-500 duration-500"
                 onClick={handleEditPassword}
               >
                 Edit Password
               </button>
               <button
-                className="mt-5 hover:text-blue-500"
+                className="mt-5 hover:text-blue-500 duration-500"
                 onClick={() => handleCancel(setShowEditPasswordTofalse)}
               >
                 Cancel
@@ -361,9 +361,9 @@ const EditProfile = () => {
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.contactPhoneNumber}
+                placeholder={`contact phone number: ${logic.user.contactPhoneNumber}`}
                 name="contactPhoneNumber"
                 autoComplete="off"
                 value={logic.editUserState.contactPhoneNumber}
@@ -371,9 +371,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.contactAddress}
+                placeholder={`contact address: ${logic.user.contactAddress}`}
                 name="contactAddress"
                 autoComplete="off"
                 value={logic.editUserState.contactAddress}
@@ -381,9 +381,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.contactUnit}
+                placeholder={`contact unit: ${logic.user.contactUnit}`}
                 name="contactUnit"
                 autoComplete="off"
                 value={logic.editUserState.contactUnit}
@@ -391,9 +391,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.contactCountry}
+                placeholder={`contact country: ${logic.user.contactCountry}`}
                 name="contactCountry"
                 autoComplete="off"
                 value={logic.editUserState.contactCountry}
@@ -401,9 +401,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.contactProvinceOrState}
+                placeholder={`contact provice or state: ${logic.user.contactProvinceOrState}`}
                 name="contactProvinceOrState"
                 autoComplete="off"
                 value={logic.editUserState.contactProvinceOrState}
@@ -411,9 +411,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.contactCity}
+                placeholder={`contact city: ${logic.user.contactCity}`}
                 name="contactCity"
                 autoComplete="off"
                 value={logic.editUserState.contactCity}
@@ -421,9 +421,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.contactPostalCode}
+                placeholder={`contact postal code: ${logic.user.contactPostalCode}`}
                 name="contactPostalCode"
                 autoComplete="off"
                 value={logic.editUserState.contactPostalCode}
@@ -443,13 +443,13 @@ const EditProfile = () => {
               />
 
               <button
-                className="mt-5 hover:text-blue-500"
+                className="mt-5 hover:text-blue-500 duration-500"
                 onClick={handleEditContactInfo}
               >
                 Edit contact info
               </button>
               <button
-                className="mt-5 hover:text-blue-500"
+                className="mt-5 hover:text-blue-500 duration-500"
                 onClick={() => handleCancel(setShowEditContactInfoTofalse)}
               >
                 Cancel
@@ -474,9 +474,9 @@ const EditProfile = () => {
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.shippingPhoneNumber}
+                placeholder={`shipping phone number: ${logic.user.shippingPhoneNumber}`}
                 name="shippingPhoneNumber"
                 autoComplete="off"
                 value={logic.editUserState.shippingPhoneNumber}
@@ -484,9 +484,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.shippingAddress}
+                placeholder={`shipping address: ${logic.user.shippingAddress}`}
                 name="shippingAddress"
                 autoComplete="off"
                 value={logic.editUserState.shippingAddress}
@@ -494,9 +494,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.shippingUnit}
+                placeholder={`shipping unit: ${logic.user.shippingUnit}`}
                 name="shippingUnit"
                 autoComplete="off"
                 value={logic.editUserState.shippingUnit}
@@ -504,9 +504,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.shippingCountry}
+                placeholder={`shipping country: ${logic.user.shippingCountry}`}
                 name="shippingCountry"
                 autoComplete="off"
                 value={logic.editUserState.shippingCountry}
@@ -514,9 +514,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none durtion-500"
                 type="text"
-                placeholder={logic.user.shippingProvinceOrState}
+                placeholder={`shipping province or state: ${logic.user.shippingProvinceOrState}`}
                 name="shippingProvinceOrState"
                 autoComplete="off"
                 value={logic.editUserState.shippingProvinceOrState}
@@ -524,9 +524,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.shippingCity}
+                placeholder={`shipping city: ${logic.user.shippingCity}`}
                 name="shippingCity"
                 autoComplete="off"
                 value={logic.editUserState.shippingCity}
@@ -534,9 +534,9 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
                 type="text"
-                placeholder={logic.user.shippingPostalCode}
+                placeholder={`shipping postal code: ${logic.user.shippingPostalCode}`}
                 name="shippingPostalCode"
                 autoComplete="off"
                 value={logic.editUserState.shippingPostalCode}
@@ -556,13 +556,13 @@ const EditProfile = () => {
               />
 
               <button
-                className="mt-5 hover:text-blue-500"
+                className="mt-5 hover:text-blue-500 duration-500"
                 onClick={handleEditShippingInfo}
               >
                 Edit shipping info
               </button>
               <button
-                className="mt-5 hover:text-blue-500"
+                className="mt-5 hover:text-blue-500 duration-500"
                 onClick={() => handleCancel(setShowEditShippingInfoTofalse)}
               >
                 Cancel

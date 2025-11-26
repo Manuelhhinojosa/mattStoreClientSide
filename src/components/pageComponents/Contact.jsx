@@ -113,14 +113,14 @@ const Contact = () => {
           <div className=" flex justify-center gap-7 items-center text-4xl h-1/2">
             <a
               href={`mailto:${staticState.contact.email}`}
-              className="hover:text-blue-500"
+              className="hover:text-blue-500 duration-500"
             >
               <TfiEmail />
             </a>
             <a
               href={staticState.contact.IGlink}
               target="_blank"
-              className=" hover:text-blue-500"
+              className=" hover:text-blue-500 duration-500"
             >
               <CiInstagram />
             </a>
@@ -137,7 +137,7 @@ const Contact = () => {
             type="text"
             placeholder="Name"
             autocomplete="off"
-            className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent  hover:border-b-black"
+            className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent  hover:border-b-black duration-500"
             ref={nameRef}
           />
           <input
@@ -145,7 +145,7 @@ const Contact = () => {
             type="text"
             placeholder="Subject"
             autocomplete="off"
-            className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black"
+            className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black duration-500"
             ref={subjectRef}
           />
           <input
@@ -153,14 +153,14 @@ const Contact = () => {
             type="text"
             placeholder="E-mail"
             autocomplete="off"
-            className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black"
+            className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black duration-500"
             ref={emailRef}
           />
           <textarea
             name="message"
             rows="5"
             placeholder="Message"
-            className="w-3/4 text-center md:w-1/2 border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none"
+            className="w-3/4 text-center md:w-1/2 border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
             ref={messageRef}
           ></textarea>
           <button

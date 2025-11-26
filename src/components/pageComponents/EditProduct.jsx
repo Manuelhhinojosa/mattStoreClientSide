@@ -183,7 +183,7 @@ const EditProduct = () => {
                 name="inStock"
                 id="inStock"
                 required
-                className="border-[1px] border-black focus:outline-none"
+                className="border-[1px] border-black focus:outline-none rounded"
                 onChange={(e) => {
                   const newValue = e.target.value;
 
@@ -211,7 +211,7 @@ const EditProduct = () => {
                 name="recentWork"
                 id="recentWork"
                 required
-                className="border-[1px] border-black focus:outline-none"
+                className="border-[1px] border-black focus:outline-none rounded"
                 onChange={(e) => {
                   const newValue = e.target.value;
 
@@ -242,7 +242,7 @@ const EditProduct = () => {
               name="title"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none text-sm"
+              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none text-sm duration-500"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -257,7 +257,7 @@ const EditProduct = () => {
               name="shortDesc"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none text-sm"
+              className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none text-sm duration-500"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -272,7 +272,7 @@ const EditProduct = () => {
               name="cost"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm"
+              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm duration-500"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -287,7 +287,7 @@ const EditProduct = () => {
               name="nationwideDelivery"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm"
+              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm duration-500"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -305,7 +305,7 @@ const EditProduct = () => {
               name="internationalDelivery"
               autoComplete="off"
               required
-              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm"
+              className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black text-sm duration-500"
               onChange={(e) => {
                 const newValue = e.target.value;
 
@@ -319,7 +319,7 @@ const EditProduct = () => {
             {/* button */}
             <div className="flex flex-col">
               <button
-                className="hover:text-blue-500 mb-[15px]"
+                className="hover:text-blue-500 mb-[15px] duration-500"
                 onClick={(e) => handleEditProduct(e)}
               >
                 Edit product
@@ -327,7 +327,7 @@ const EditProduct = () => {
 
               {/* cancel button */}
               <button
-                className="hover:text-blue-500"
+                className="hover:text-blue-500 duration-500"
                 onClick={() => navigate("/admin")}
               >
                 Cancel

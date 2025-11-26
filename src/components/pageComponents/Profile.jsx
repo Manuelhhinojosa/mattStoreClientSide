@@ -190,7 +190,7 @@ const Profile = () => {
         <div className="mt-[125px]  flex flex-col justify-center items-center">
           <p className="text-2xl mb-10">This account has been inactivated.</p>
           <button
-            className="rounded-lg  w-1/2 p-2 bg-black text-white hover:bg-blue-500 "
+            className="rounded-lg  w-1/2 p-2 bg-black text-white hover:bg-blue-500 duration-500"
             onClick={() => handleAccReactivation(logic.user._id)}
           >
             Reactivate my account
@@ -249,7 +249,7 @@ const Profile = () => {
 
             <Link
               to="/editprofile"
-              className="underline hover:text-blue-500"
+              className="underline hover:text-blue-500 duration-500"
               onClick={navigateToEditPassword}
             >
               edit password
@@ -273,7 +273,7 @@ const Profile = () => {
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
               <Link
                 to="/editProfile"
-                className="underline hover:text-blue-500"
+                className="underline hover:text-blue-500 duration-500"
                 onClick={navigateToEditContactInfo}
               >
                 update contact info
@@ -311,7 +311,7 @@ const Profile = () => {
                 <p>{`Phone: ${logic.user.shippingPhoneNumber}`}</p>
                 <Link
                   to="/editprofile"
-                  className="underline hover:text-blue-500"
+                  className="underline hover:text-blue-500 duration-500"
                   onClick={navigateToEditShippingInfo}
                 >
                   update shipping info
@@ -389,7 +389,7 @@ const Profile = () => {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <Link to={`/store/${prod.id}`}>
+                    <Link to={`/store/${prod._id}`}>
                       <img
                         src={prod.media.url}
                         alt="prod img"
@@ -404,6 +404,7 @@ const Profile = () => {
                   <div className="p-2">
                     <button
                       onClick={() => dispatch(removeProdShoppingCart(prod._id))}
+                      className="hover:text-blue-500 duration-500"
                     >
                       <FaTimes />
                     </button>
@@ -416,7 +417,7 @@ const Profile = () => {
               <p className="text-sm">Your shopping cart is empty</p>
 
               <Link
-                className="text-sm underline hover:text-blue-500"
+                className="text-sm underline hover:text-blue-500 duration-500"
                 to="/store"
               >
                 shop
@@ -430,7 +431,7 @@ const Profile = () => {
           </div>
           <div className="flex items-center justify-center h-[50px]">
             <button
-              className="hover:text-red-500 underline"
+              className="hover:text-red-500 underline duration-500"
               onClick={() => handleAccInactivation(logic.user._id)}
             >
               Inactivate account

@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 const FadeInOnScroll = ({ children, delay = 1 }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.25,
   });
 
   return (
@@ -48,7 +48,7 @@ const RecentWork = () => {
       {/* main container */}
       <div className="mt-32 w-full flex flex-col items-center justify-center mb-[150px]">
         {/* header */}
-        <div className="w-full text-2xl p-8 md:text-center md:text-3xl">
+        <div className="w-full text-2xl p-8 text-center md:text-3xl">
           <p>{staticState.home.homeMainTitle} / Recent work</p>
         </div>
 
@@ -75,7 +75,7 @@ const RecentWork = () => {
         </div>
 
         {/* button */}
-        <div className="fixed bottom-20 right-10 font-extrabold text-lg hover:text-blue-500">
+        <div className="fixed bottom-20 right-10 font-extrabold text-lg hover:text-blue-500 duration-500">
           <Link to="/store">more work</Link>
         </div>
       </div>

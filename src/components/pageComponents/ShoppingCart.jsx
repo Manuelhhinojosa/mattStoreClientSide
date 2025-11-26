@@ -67,7 +67,10 @@ const ShoppingCart = () => {
         {/* list of prods in shopping cart */}
         {storeState.shoppingCart.length > 0 ? (
           storeState.shoppingCart.map((prod) => (
-            <div key={prod._id} className=" m-5  border-b-[1px] border-b-black">
+            <div
+              key={prod._id}
+              className=" m-5  border-b-[1px] border-b-black "
+            >
               <div className="flex items-center justify-between">
                 {/* quantity */}
                 <div>
@@ -90,7 +93,7 @@ const ShoppingCart = () => {
                 {/* price */}
                 <div className="p-2">{`${prod.cost} CAD`}</div>
                 {/* remove item button */}
-                <div className="p-2 hover:text-blue-500">
+                <div className="p-2 hover:text-blue-500 duration-500">
                   <button
                     onClick={() => dispatch(removeProdShoppingCart(prod._id))}
                   >
@@ -108,30 +111,33 @@ const ShoppingCart = () => {
         )}
 
         {/* subotal */}
-        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
+        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black mx-10">
           <div>Subtotal</div>
           <div>{`$${subtotal} CAD`}</div>
         </div>
         {/* taxes */}
-        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
+        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black mx-10">
           <div>Taxes</div>
           <div>{`$${taxes} CAD`}</div>
         </div>
         {/* delivery fee */}
-        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
+        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black mx-10">
           <div>Delivery fee</div>
           <div>Calculated @ checkout</div>
         </div>
         {/* new subtotal */}
-        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black">
+        <div className="h-8 flex justify-between p-5 items-center border-b-[1px] border-b-black mx-10">
           <div>New subtotal</div>
-          <div>{`$${newSubTotal} CAD`}</div>
+          <div>{`$${Number(newSubTotal).toFixed(2)} CAD`}</div>
         </div>
 
         <div className="h-[100px]  flex justify-center items-center">
           {storeState.shoppingCart.length > 0 ? (
             // checkout button if shoppint cart has items
-            <Link to="/checkout" className="font-extrabold hover:text-blue-500">
+            <Link
+              to="/checkout"
+              className="font-extrabold hover:text-blue-500 duration-500"
+            >
               Checkout
             </Link>
           ) : (
@@ -141,7 +147,7 @@ const ShoppingCart = () => {
             </span>
           )}
         </div>
-        <div className=" mb-10 text-center font-extrabold hover:text-blue-500">
+        <div className=" mb-10 text-center font-extrabold hover:text-blue-500 duration-500">
           <Link to="/store">Continue shopping</Link>
         </div>
       </div>
