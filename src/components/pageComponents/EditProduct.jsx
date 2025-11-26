@@ -1,5 +1,8 @@
 import React from "react";
 
+// framaer motion
+import { motion } from "framer-motion";
+
 // react hooks
 import { useState } from "react";
 
@@ -149,7 +152,13 @@ const EditProduct = () => {
   // return
   // retrun
   return (
-    <section className="container mx-auto h-auto mt-32 flex flex-col">
+    <motion.section
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="container mx-auto h-auto mt-32 flex flex-col"
+    >
       <div className="h-[600px] w-full">
         <div className="h-[100px] flex justify-center items-center text-3xl">
           <p className="underline ">Edit product</p>
@@ -327,7 +336,7 @@ const EditProduct = () => {
           </form>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

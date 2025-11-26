@@ -7,6 +7,32 @@ import { useRef } from "react";
 // react router hooks
 import { Link } from "react-router-dom";
 
+// framer motion
+import { motion } from "framer-motion";
+const cardVariants = {
+  hidden: (custom) => ({
+    opacity: 0,
+    scale: 1,
+    y: 60,
+    rotateX: 6,
+    filter: "blur(8px)",
+  }),
+  visible: (custom) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    rotateX: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 110,
+      damping: 20,
+
+      delay: Math.min(custom * 0.06, 0.8),
+    },
+  }),
+};
+
 // Axios
 import axios from "axios";
 
@@ -345,11 +371,18 @@ const Admin = () => {
       </div>
 
       {/* all products section*/}
+      {/* all products section*/}
+      {/* all products section*/}
       {logic.showAllProducts ? (
         <div className=" w-full ">
-          {[...storeState.artPieces].reverse().map((p) => (
-            <div
+          {[...storeState.artPieces].reverse().map((p, i) => (
+            <motion.div
               key={p._id}
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
               className=" py-12 mx-10 my-[100px] flex flex-col items-center border-[1px] border-black rounded-xl text-sm md:flex-row justify-evenly shadow-xl "
             >
               <img
@@ -375,14 +408,21 @@ const Admin = () => {
                   Delete product
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       ) : null}
 
       {/* add a product section */}
+      {/* add a product section */}
+      {/* add a product section */}
       {logic.showAddProduct ? (
-        <div className="h-[550px] w-full">
+        <motion.section
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="h-[550px] w-full"
+        >
           <div className="h-full">
             {/* form */}
             <form
@@ -532,9 +572,11 @@ const Admin = () => {
               </div>
             </form>
           </div>
-        </div>
+        </motion.section>
       ) : null}
 
+      {/* see orders section*/}
+      {/* see orders section*/}
       {/* see orders section*/}
       {logic.showViewOrders ? (
         <div className="w-full  mt-5">
@@ -545,9 +587,17 @@ const Admin = () => {
               </div>
             ) : (
               <div className="flex flex-col justify-center items-center">
-                {[...storeState.orders].reverse().map((order) => (
+                {[...storeState.orders].reverse().map((order, i) => (
                   //  ID & date
-                  <div className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl shadow-2xl">
+                  <motion.div
+                    key={order._id}
+                    custom={i}
+                    variants={cardVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl shadow-2xl"
+                  >
                     <div className="flex flex-col md:flex-row md:justify-between">
                       <p className="text-center font-semibold">{`Order ID: ${order._id}`}</p>
                       <p className="text-center">{`Date: ${order.createdAt.slice(
@@ -648,7 +698,7 @@ const Admin = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             )}
@@ -656,6 +706,8 @@ const Admin = () => {
         </div>
       ) : null}
 
+      {/* see users info section */}
+      {/* see users info section */}
       {/* see users info section */}
       {logic.showMembersInfo ? (
         <div className="w-full mt-10">
@@ -666,10 +718,15 @@ const Admin = () => {
               </div>
             ) : (
               <div>
-                {storeState.users.map((user) => (
-                  <div
+                {storeState.users.map((user, i) => (
+                  <motion.div
                     key={user._id}
-                    className="p-[25px] my-[70px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10 shadow-2xl"
+                    custom={i}
+                    variants={cardVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="p-[25px] mb-[150px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10 shadow-2xl"
                   >
                     <p
                       className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-xl p-4 text-pretty`}
@@ -794,7 +851,7 @@ const Admin = () => {
                         Delete account
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             )}

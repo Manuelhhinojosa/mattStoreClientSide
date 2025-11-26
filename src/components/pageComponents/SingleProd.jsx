@@ -4,6 +4,9 @@ import React from "react";
 // reactu router hooks
 import { useLocation, Link } from "react-router-dom";
 
+// framer motion
+import { motion } from "framer-motion";
+
 // redux
 // redux hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -47,7 +50,12 @@ const SingleProd = () => {
   // return
   // return
   return (
-    <section className="container mx-auto ">
+    <motion.section
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="container mx-auto "
+    >
       {/* main container */}
       <div className="mt-32 w-full flex flex-col items-center">
         {/* header */}
@@ -117,7 +125,7 @@ const SingleProd = () => {
           </Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -3,6 +3,9 @@ import React from "react";
 // Axios
 import axios from "axios";
 
+// framer motion
+import { motion } from "framer-motion";
+
 // redux
 // redux hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -286,7 +289,11 @@ const EditProfile = () => {
       {/* Edit password page */}
       {/* Edit password page */}
       {logic.showEditPassword ? (
-        <>
+        <motion.section
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="h-[100px] flex items-center justify-center">
             <p className="text-center text-3xl underline">Edit password</p>
           </div>
@@ -336,14 +343,18 @@ const EditProfile = () => {
               </button>
             </form>
           </div>
-        </>
+        </motion.section>
       ) : null}
 
       {/* Edit contact info page */}
       {/* Edit contact info page */}
       {/* Edit contact info page */}
       {logic.showEditContactInfo ? (
-        <>
+        <motion.section
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="h-[100px] flex items-center justify-center">
             <p className="text-center text-3xl underline">Edit contact info</p>
           </div>
@@ -445,14 +456,18 @@ const EditProfile = () => {
               </button>
             </form>
           </div>
-        </>
+        </motion.section>
       ) : null}
 
       {/* Edit shipping info page */}
       {/* Edit shipping info page */}
       {/* Edit shipping info page */}
       {logic.showEditShippingInfo ? (
-        <>
+        <motion.section
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="h-[100px] flex items-center justify-center">
             <p className="text-center text-3xl underline">Edit Shipping info</p>
           </div>
@@ -554,7 +569,7 @@ const EditProfile = () => {
               </button>
             </form>
           </div>
-        </>
+        </motion.section>
       ) : null}
     </section>
   );

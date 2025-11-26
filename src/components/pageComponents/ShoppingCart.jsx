@@ -3,6 +3,9 @@ import React from "react";
 // react icons
 import { FaTimes } from "react-icons/fa";
 
+// framer motion
+import { motion } from "framer-motion";
+
 // React Router V6
 // react router hooks
 import { Link } from "react-router-dom";
@@ -49,7 +52,12 @@ const ShoppingCart = () => {
   // return
   // return
   return (
-    <section className="container mx-auto flex items-end lg:justify-center">
+    <motion.section
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="container mx-auto flex items-end lg:justify-center"
+    >
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
         {/* header */}
         <div className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
@@ -137,7 +145,7 @@ const ShoppingCart = () => {
           <Link to="/store">Continue shopping</Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

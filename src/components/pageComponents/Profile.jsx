@@ -4,6 +4,9 @@ import React from "react";
 // react router hooks
 import { Link, useNavigate } from "react-router-dom";
 
+// framer motion
+import { motion } from "framer-motion";
+
 // Axios
 import axios from "axios";
 
@@ -204,7 +207,12 @@ const Profile = () => {
   // renders if profile is active
   // renders if profile is active
   return (
-    <section className="relative  h-screen w-screen flex flex-col items-center">
+    <motion.section
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="relative  h-screen w-screen flex flex-col items-center"
+    >
       {/* Headding */}
       <div className="mt-[175px] ">
         <p className="text-3xl underline">Profile</p>
@@ -430,7 +438,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
