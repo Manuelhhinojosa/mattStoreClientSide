@@ -47,9 +47,9 @@ const SingleProd = () => {
   // return
   // return
   return (
-    <section className="container mx-auto flex items-end">
+    <section className="container mx-auto ">
       {/* main container */}
-      <div className="mt-32 w-full">
+      <div className="mt-32 w-full flex flex-col items-center">
         {/* header */}
         <div>
           <p className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
@@ -57,16 +57,26 @@ const SingleProd = () => {
           </p>
         </div>
         {/* image */}
-        <div className="flex justify-center items-center">
+        <div
+          className=" flex max-w-fit justify-center overflow-hidden group cursor-zoom-in"
+          onMouseMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100 + "%";
+            const y = ((e.clientY - rect.top) / rect.height) * 100 + "%";
+
+            e.currentTarget.style.setProperty("--x", x);
+            e.currentTarget.style.setProperty("--y", y);
+          }}
+        >
           <img
             src={product.media.url}
             alt="Product image"
-            className="mb-10 max-h-[400px] shadow-2xl transition-transform duration-300 hover:scale-105 cursor-zoom-in"
+            className="max-h-[500px] shadow-2xl  transition duration-300 group-hover:scale-150"
           />
         </div>
         {/* title */}
         <div>
-          <div className="mb-8">
+          <div className="m-8">
             <p className="text-center font-bold">{product.title}</p>
           </div>
           {/* price */}
@@ -101,7 +111,7 @@ const SingleProd = () => {
           </button>
         </div>
         {/* back to store button */}
-        <div className="my-8 text-center">
+        <div className="mb-8 text-center">
           <Link to="/store" className="font-extrabold hover:text-blue-500">
             Back to store
           </Link>

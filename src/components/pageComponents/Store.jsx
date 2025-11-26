@@ -47,7 +47,7 @@ const Store = () => {
                 <img
                   src={art.media.url}
                   alt="art piece img"
-                  className=" shadow-2xl max-h-[550px] mt-5"
+                  className=" shadow-2xl max-h-[400px] mt-5"
                 />
               </Link>
               {/* title */}
@@ -64,7 +64,7 @@ const Store = () => {
               <button
                 className={`p-3 text-center text-sm h-5 font-extrabold ${
                   !art.added
-                    ? "hover:text-slate-700 cursor-pointer"
+                    ? "hover:text-blue-500 cursor-pointer"
                     : "text-gray-400 cursor-not-allowed"
                 }`}
                 onClick={() =>
