@@ -4,6 +4,9 @@ import React from "react";
 // redux hooks
 import { useSelector } from "react-redux";
 
+// framer motion
+import { motion } from "framer-motion";
+
 const Home = () => {
   // redux
   // state in staticText slice
@@ -19,9 +22,16 @@ const Home = () => {
       </div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent from-70% to-black"></div>
 
-      <div className="relative z-20  flex  flex-col justify-center shadow-2xl shadow-black">
-        <h1 className="text-3xl">{staticText.home.homeMainTitle}</h1>
-      </div>
+      <motion.div
+        initial={{ y: -200, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 3, ease: "easeOut" }}
+        className="relative z-20  flex  flex-col justify-center"
+      >
+        <h1 className="text-3xl hover:cursor-none">
+          {staticText.home.homeMainTitle}
+        </h1>
+      </motion.div>
     </section>
   );
 };
