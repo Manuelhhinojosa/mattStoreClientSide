@@ -190,7 +190,7 @@ const Profile = () => {
         <div className="mt-[125px]  flex flex-col justify-center items-center">
           <p className="text-2xl mb-10">This account has been inactivated.</p>
           <button
-            className="rounded-lg  w-1/2 p-2 bg-black text-white hover:bg-gray-500 hover:text-black"
+            className="rounded-lg  w-1/2 p-2 bg-black text-white hover:bg-blue-500 "
             onClick={() => handleAccReactivation(logic.user._id)}
           >
             Reactivate my account
