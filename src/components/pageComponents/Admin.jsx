@@ -468,7 +468,7 @@ const Admin = () => {
                 placeholder="Title"
                 name="title"
                 autoComplete="off"
-                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none duration-500"
+                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 value={storeState.title}
                 onChange={(e) => dispatch(setTitle(e.target.value))}
               />
@@ -478,7 +478,7 @@ const Admin = () => {
                 placeholder="Short description"
                 name="shortDesc"
                 autoComplete="off"
-                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none duration-500"
+                className="w-3/4 md:w-1/2 text-center border-b-[1px] border-b-transperent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 value={storeState.shortDesc}
                 onChange={(e) => dispatch(setShortDesc(e.target.value))}
               />
@@ -516,7 +516,7 @@ const Admin = () => {
                 placeholder="Price"
                 name="cost"
                 autoComplete="off"
-                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500"
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 value={storeState.cost === 0 ? "" : storeState.cost}
                 onChange={(e) => dispatch(setCost(Number(e.target.value)))}
               />
@@ -526,7 +526,7 @@ const Admin = () => {
                 placeholder="Natiowide delivery cost"
                 name="nationwideDelivery"
                 autoComplete="off"
-                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500"
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 value={
                   storeState.nationwideDelivery === 0
                     ? ""
@@ -542,7 +542,7 @@ const Admin = () => {
                 placeholder="International delivery cost"
                 name="internationalDelivery"
                 autoComplete="off"
-                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500"
+                className="w-3/4 md:w-1/3 text-center focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance]:textfield border-b-[1px] border-b-transperent hover:border-b-black duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 value={
                   storeState.internationalDelivery === 0
                     ? ""

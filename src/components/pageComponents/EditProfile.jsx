@@ -300,7 +300,7 @@ const EditProfile = () => {
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="password"
                 placeholder="Enter old password"
                 name="oldPassword"
@@ -310,7 +310,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="password"
                 placeholder="Enter new password"
                 name="newPassword"
@@ -320,7 +320,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="password"
                 placeholder="Confirm new password"
                 name="confirmationNewPassword"
@@ -361,7 +361,7 @@ const EditProfile = () => {
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`contact phone number: ${logic.user.contactPhoneNumber}`}
                 name="contactPhoneNumber"
@@ -371,7 +371,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`contact address: ${logic.user.contactAddress}`}
                 name="contactAddress"
@@ -381,7 +381,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`contact unit: ${logic.user.contactUnit}`}
                 name="contactUnit"
@@ -391,7 +391,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`contact country: ${logic.user.contactCountry}`}
                 name="contactCountry"
@@ -401,7 +401,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`contact provice or state: ${logic.user.contactProvinceOrState}`}
                 name="contactProvinceOrState"
@@ -411,7 +411,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`contact city: ${logic.user.contactCity}`}
                 name="contactCity"
@@ -421,7 +421,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`contact postal code: ${logic.user.contactPostalCode}`}
                 name="contactPostalCode"
@@ -474,7 +474,7 @@ const EditProfile = () => {
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`shipping phone number: ${logic.user.shippingPhoneNumber}`}
                 name="shippingPhoneNumber"
@@ -484,7 +484,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`shipping address: ${logic.user.shippingAddress}`}
                 name="shippingAddress"
@@ -494,7 +494,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`shipping unit: ${logic.user.shippingUnit}`}
                 name="shippingUnit"
@@ -504,7 +504,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`shipping country: ${logic.user.shippingCountry}`}
                 name="shippingCountry"
@@ -514,7 +514,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none durtion-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none durtion-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`shipping province or state: ${logic.user.shippingProvinceOrState}`}
                 name="shippingProvinceOrState"
@@ -524,7 +524,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`shipping city: ${logic.user.shippingCity}`}
                 name="shippingCity"
@@ -534,7 +534,7 @@ const EditProfile = () => {
               />
 
               <input
-                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500"
+                className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
                 placeholder={`shipping postal code: ${logic.user.shippingPostalCode}`}
                 name="shippingPostalCode"
