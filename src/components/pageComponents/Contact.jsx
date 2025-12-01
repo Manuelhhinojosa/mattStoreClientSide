@@ -23,6 +23,10 @@ import { toastStyleObject } from "../../tostifyStyle";
 // redux hooks
 import { useSelector } from "react-redux";
 
+// helper functions
+// success and error console log handleing
+import { getApiErrorMessage, getApiSuccessMessage } from "../../utils/helpers";
+
 // contat function component
 // contat function component
 // contat function component
@@ -56,6 +60,7 @@ const Contact = () => {
       toast("All fields must be completed.", toastStyleObject());
       return;
     }
+
     // Send data to emailjs
     emailjs
       .sendForm(
@@ -65,14 +70,12 @@ const Contact = () => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
-        (response) => {
-          console.log("Success. Result:", response);
-          console.log("Message sent successfully:", {
-            config: response.config,
-            data: response.data,
-            status: response.status,
-            headers: response.headers,
-          });
+        (result) => {
+          // console log result
+          getApiSuccessMessage(result);
+
+          // success messsage
+          toast("Message received. Thanks.", toastStyleObject());
 
           // resetting values
           nameRef.current.value = "";
@@ -80,13 +83,12 @@ const Contact = () => {
           emailRef.current.value = "";
           messageRef.current.value = "";
           nameRef.current.focus();
-
-          // success messsage
-          toast("Message received. Thanks.", toastStyleObject());
         },
         (error) => {
           console.log("Failure. Error:", error);
-          toast(error.text, toastStyleObject());
+
+          // error message
+          toast(getApiErrorMessage(error), toastStyleObject());
         }
       );
   };
