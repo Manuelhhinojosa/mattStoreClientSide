@@ -79,7 +79,7 @@ const SingleProd = () => {
           <img
             src={product.media.url}
             alt="Product image"
-            className="max-h-[500px] shadow-2xl  transition duration-300 group-hover:scale-150"
+            className="max-w-[550px] max-h-[550px] shadow-2xl  transition duration-300 group-hover:scale-150"
           />
         </div>
         {/* title */}

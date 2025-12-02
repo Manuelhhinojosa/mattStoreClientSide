@@ -345,11 +345,11 @@ const Profile = () => {
                   <br />
                   <p className="underline">Items:</p>
                   {order.products.map((product) => (
-                    <div className="w-[90%] flex flex-col items-center md:flex-row md:justify-between p-5 border-b border-black">
+                    <div className="w-[90%] flex flex-col items-center md:flex-row md:justify-between p-2 border-b border-black">
                       <img
                         src={product.media.url}
                         alt="productImg"
-                        className="w-[125px] my-5"
+                        className="max-w-[125px] max-h-[150px] my-5"
                       />
 
                       <div>
@@ -385,7 +385,7 @@ const Profile = () => {
             storeState.shoppingCart.map((prod) => (
               <div
                 key={prod.id}
-                className="m-5 mb-8 border-b-[1px] border-b-black"
+                className="m-5 p-2 mb-8 border-b-[1px] border-b-black"
               >
                 <div className="flex items-center justify-between">
                   <div>
@@ -393,7 +393,7 @@ const Profile = () => {
                       <img
                         src={prod.media.url}
                         alt="prod img"
-                        className="h-[150px] p-2 rounded-xl"
+                        className="max-h-[150px] max-w-[175px] p-2 rounded-xl"
                       />
                     </Link>
                   </div>

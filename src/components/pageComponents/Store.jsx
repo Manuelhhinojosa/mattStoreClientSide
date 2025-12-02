@@ -70,7 +70,7 @@ const Store = () => {
                   <img
                     src={art.media.url}
                     alt="art piece img"
-                    className=" shadow-2xl max-h-[550px] mt-5"
+                    className=" shadow-2xl max-w-[450px] max-h-[550px] mt-5"
                   />
                 </Link>
                 {/* title */}

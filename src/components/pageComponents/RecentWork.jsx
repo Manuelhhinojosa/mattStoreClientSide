@@ -62,7 +62,7 @@ const RecentWork = () => {
                     <img
                       src={work.media.url}
                       alt="recent work img"
-                      className="rounded-3xl shadow-2xl max-h-[550px]"
+                      className="rounded-3xl shadow-2xl max-w-[450px] max-h-[550px]"
                     />
                   </Link>
                   <p className=" p-3 text-center text-xs font-bold h-10 m-10">

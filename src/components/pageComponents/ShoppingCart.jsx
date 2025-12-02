@@ -69,7 +69,7 @@ const ShoppingCart = () => {
           storeState.shoppingCart.map((prod) => (
             <div
               key={prod._id}
-              className=" m-5  border-b-[1px] border-b-black "
+              className=" m-5 p-2 border-b-[1px] border-b-black "
             >
               <div className="flex items-center justify-between">
                 {/* quantity */}
@@ -82,7 +82,7 @@ const ShoppingCart = () => {
                     <img
                       src={prod.media.url}
                       alt="prod img"
-                      className="h-[150px] p-2 rounded-xl"
+                      className="max-h-[150px] max-w-[175px]  p-2 rounded-xl"
                     />
                   </Link>
                 </div>

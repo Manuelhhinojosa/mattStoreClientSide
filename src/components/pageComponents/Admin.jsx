@@ -304,6 +304,8 @@ const Admin = () => {
   return (
     <section className="container mx-auto h-auto mt-[100px] lg:mt-[175px] flex flex-col">
       {/* admin navbar */}
+      {/* admin navbar */}
+      {/* admin navbar */}
       <div className=" w-full flex flex-col justify-around items-center md:flex-row mb-5 ">
         {/* see all prods */}
         <div
@@ -388,7 +390,7 @@ const Admin = () => {
               <img
                 src={p.media.url}
                 alt="product image"
-                className="max-h-[350px] rounded-3xl shadow"
+                className="max-h-[350px] max-w-[350px] rounded-3xl shadow"
               />
               <div className="text-center">
                 <div className="mt-[25px]">Title: {p.title}</div>
@@ -614,7 +616,7 @@ const Admin = () => {
                     {order.productsInfoAtTimeOfPurchase.map((product) => (
                       <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-b border-black ">
                         <img
-                          className="w-[100px] mb-5 rounded shadow"
+                          className="max-w-[100px] max-h-[150px] mb-5 rounded shadow"
                           src={product.imgUrl}
                           alt="productImage"
                         />
@@ -823,7 +825,7 @@ const Admin = () => {
                                   <img
                                     src={product.imgUrl}
                                     alt="productImg"
-                                    className="w-[125px] my-5 rounded shadow"
+                                    className="max-w-[125px] max-h-[150px] my-5 rounded shadow"
                                   />
 
                                   <div>
