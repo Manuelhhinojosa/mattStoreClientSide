@@ -106,39 +106,6 @@ function App() {
   }, []);
 
   // logs out user when token expires
-  // useEffect(() => {
-  //   if (!logic.userToken) return;
-
-  //   const { exp } = jwtDecode(logic.userToken);
-  //   const now = Date.now() / 1000;
-
-  //   const timeout = (exp - now) * 1000;
-
-  //   if (timeout > 0) {
-  //     const timer = setTimeout(() => {
-  //       // empty shopping cart
-  //       if (storeState.shoppingCart.length > 0) {
-  //         storeState.shoppingCart.map((prod) => {
-  //           dispatch(removeProdShoppingCart(prod._id));
-  //         });
-  //       }
-  //       dispatch(emptyShoppingCart());
-
-  //       // resetting user, uster status, token and edit state
-  //       dispatch(setisLoggedInToFalse());
-  //       dispatch(setuserToNone());
-  //       dispatch(setUserTokenEmpty());
-  //       dispatch(resetEditUserState());
-
-  //       // reset local storage
-  //       localStorage.removeItem("token");
-  //       navigate("/login");
-  //     }, timeout);
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [logic.userToken]);
-
   useEffect(() => {
     const token = logic.userToken;
     if (!token) return;
