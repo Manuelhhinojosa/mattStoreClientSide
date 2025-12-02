@@ -1,11 +1,14 @@
 // React Router V6
-import { Routes, Route } from "react-router-dom";
+// hooks
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 // react hooks
 import { useEffect } from "react";
 
 // axios
 import axios from "axios";
+
+import { jwtDecode } from "jwt-decode";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -20,12 +23,19 @@ import {
   setUserToken,
 } from "./redux/slices/staticState/logicSlice";
 
-// helper functions
-import { getApiSuccessMessage } from "./utils/helpers";
+import { removeProdShoppingCart } from "./redux/slices/state/storeSlice";
+import { emptyShoppingCart } from "./redux/slices/state/storeSlice";
+import { setisLoggedInToFalse } from "./redux/slices/staticState/logicSlice";
+import { setuserToNone } from "./redux/slices/staticState/logicSlice";
+import { setUserTokenEmpty } from "./redux/slices/staticState/logicSlice";
+import { resetEditUserState } from "./redux/slices/staticState/logicSlice";
 
 // Toastify (messages to user)
-// Toastify component for handling errors
 import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "./tostifyStyle";
 
 // Components
 // Page components
@@ -57,51 +67,117 @@ function App() {
   const storeState = useSelector((state) => state.storeSlice);
   const logic = useSelector((state) => state.logicSlice);
 
+  // react router hooks
+  const navigate = useNavigate();
+
   // functions
   // functions
   // functions
+
+  // fectches products
   useEffect(() => {
-    // fetch art pieces
     dispatch(fetchArtPieces());
+  }, [dispatch]);
 
-    // session (1 hour long)
-    const restoreSession = async () => {
-      // handl no token
-      const savedToken = localStorage.getItem("token");
-      if (!savedToken) return;
+  // Restore session on page load
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    if (!savedToken) return;
 
-      // if user logged in
+    const fetchUser = async () => {
       try {
-        // Fetch currently logged in user
         const result = await axios.get(
           `${import.meta.env.VITE_API_USERS_URL}/me`,
           {
-            headers: {
-              Authorization: `Bearer ${savedToken}`,
-            },
+            headers: { Authorization: `Bearer ${savedToken}` },
           }
         );
 
-        // console result
-        getApiSuccessMessage(result);
-
-        // Success → restore redux
         dispatch(setisLoggedInToTrue());
         dispatch(setUser(result.data));
         dispatch(setUserToken(savedToken));
-      } catch (error) {
-        console.log("Session expired or invalid token");
-        console.log("error:", error);
-
-        // Clear invalid token
+      } catch (err) {
+        console.log("Expired or invalid session");
         localStorage.removeItem("token");
       }
     };
 
-    restoreSession();
-  }, [dispatch]);
+    fetchUser();
+  }, []);
 
-  // return
+  // logs out user when token expires
+  // useEffect(() => {
+  //   if (!logic.userToken) return;
+
+  //   const { exp } = jwtDecode(logic.userToken);
+  //   const now = Date.now() / 1000;
+
+  //   const timeout = (exp - now) * 1000;
+
+  //   if (timeout > 0) {
+  //     const timer = setTimeout(() => {
+  //       // empty shopping cart
+  //       if (storeState.shoppingCart.length > 0) {
+  //         storeState.shoppingCart.map((prod) => {
+  //           dispatch(removeProdShoppingCart(prod._id));
+  //         });
+  //       }
+  //       dispatch(emptyShoppingCart());
+
+  //       // resetting user, uster status, token and edit state
+  //       dispatch(setisLoggedInToFalse());
+  //       dispatch(setuserToNone());
+  //       dispatch(setUserTokenEmpty());
+  //       dispatch(resetEditUserState());
+
+  //       // reset local storage
+  //       localStorage.removeItem("token");
+  //       navigate("/login");
+  //     }, timeout);
+
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [logic.userToken]);
+
+  useEffect(() => {
+    const token = logic.userToken;
+    if (!token) return;
+
+    const payload = jwtDecode(token);
+    if (!payload || typeof payload.exp !== "number") return;
+
+    const now = Date.now() / 1000; // seconds
+    const millisUntilExpiry = (payload.exp - now) * 1000;
+
+    // Timer for actual logout
+    const logoutTimer = setTimeout(() => {
+      if (storeState.shoppingCart.length > 0) {
+        storeState.shoppingCart.forEach((prod) => {
+          dispatch(removeProdShoppingCart(prod._id));
+        });
+      }
+      dispatch(emptyShoppingCart());
+      dispatch(setisLoggedInToFalse());
+      dispatch(setuserToNone());
+      dispatch(setUserTokenEmpty());
+      dispatch(resetEditUserState());
+      localStorage.removeItem("token");
+      navigate("/login");
+    }, millisUntilExpiry);
+
+    // Timer for warning toast (1 minute before expiry or immediately if token < 1min)
+    const warningTime =
+      millisUntilExpiry > 60 * 1000 ? millisUntilExpiry - 60 * 1000 : 0;
+    const warningTimer = setTimeout(() => {
+      toast("⚠️ Your session will expire in 1 minute", toastStyleObject());
+    }, warningTime);
+
+    return () => {
+      clearTimeout(logoutTimer);
+      clearTimeout(warningTimer);
+    };
+  }, [logic.userToken, dispatch, storeState.shoppingCart, navigate]);
+
   return (
     <main>
       <ToastContainer />
