@@ -90,6 +90,9 @@ const login = () => {
 
       const loggedInUser = result.data.user;
 
+      // save token for session persistence
+      localStorage.setItem("token", result.data.token);
+
       // user status + user state + token state
       dispatch(setisLoggedInToTrue());
       dispatch(setUser(loggedInUser));

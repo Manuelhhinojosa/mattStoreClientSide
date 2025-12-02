@@ -4,12 +4,24 @@ import { Routes, Route } from "react-router-dom";
 // react hooks
 import { useEffect } from "react";
 
+// axios
+import axios from "axios";
+
 // redux
 import { useSelector, useDispatch } from "react-redux";
 
 // Redux functions
 // fetch products
 import { fetchArtPieces } from "./redux/slices/state/storeSlice";
+// functions in logic slice
+import {
+  setisLoggedInToTrue,
+  setUser,
+  setUserToken,
+} from "./redux/slices/staticState/logicSlice";
+
+// helper functions
+import { getApiSuccessMessage } from "./utils/helpers";
 
 // Toastify (messages to user)
 // Toastify component for handling errors
@@ -48,9 +60,45 @@ function App() {
   // functions
   // functions
   // functions
-  // load products upon opening site
   useEffect(() => {
+    // fetch art pieces
     dispatch(fetchArtPieces());
+
+    // session (1 hour long)
+    const restoreSession = async () => {
+      // handl no token
+      const savedToken = localStorage.getItem("token");
+      if (!savedToken) return;
+
+      // if user logged in
+      try {
+        // Fetch currently logged in user
+        const result = await axios.get(
+          `${import.meta.env.VITE_API_USERS_URL}/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${savedToken}`,
+            },
+          }
+        );
+
+        // console result
+        getApiSuccessMessage(result);
+
+        // Success → restore redux
+        dispatch(setisLoggedInToTrue());
+        dispatch(setUser(result.data));
+        dispatch(setUserToken(savedToken));
+      } catch (error) {
+        console.log("Session expired or invalid token");
+        console.log("error:", error);
+
+        // Clear invalid token
+        localStorage.removeItem("token");
+      }
+    };
+
+    restoreSession();
   }, [dispatch]);
 
   // return
