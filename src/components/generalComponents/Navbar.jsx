@@ -90,6 +90,9 @@ const Navbar = () => {
     dispatch(setuserToNone());
     dispatch(setUserTokenEmpty());
     dispatch(resetEditUserState());
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("shoppingCart");
   };
 
   // return
