@@ -226,27 +226,7 @@ const Profile = () => {
             <p>{`Email: ${logic.user.email}`}</p>
           </div>
 
-          <div className="flex justify-between text-sm ">
-            <div className="flex">
-              {logic.showPassword ? (
-                <p className="mr-5">Password: {logic.user.password}</p>
-              ) : (
-                <p className="mr-5">Password: *****</p>
-              )}
-
-              {logic.showPassword ? (
-                <GoEyeClosed
-                  className="text-xl hover:cursor-pointer"
-                  onClick={() => dispatch(toggleShowPassword())}
-                />
-              ) : (
-                <RxEyeOpen
-                  className="text-xl hover:cursor-pointer"
-                  onClick={() => dispatch(toggleShowPassword())}
-                />
-              )}
-            </div>
-
+          <div className="flex justify-end text-sm ">
             <Link
               to="/editprofile"
               className="underline hover:text-blue-500 duration-500"
