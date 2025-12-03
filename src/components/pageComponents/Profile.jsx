@@ -211,7 +211,7 @@ const Profile = () => {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="relative  h-screen w-screen flex flex-col items-center"
+      className="relative w-screen flex flex-col items-center"
     >
       {/* Headding */}
       <div className="mt-[175px] ">

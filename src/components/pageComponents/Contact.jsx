@@ -131,7 +131,7 @@ const Contact = () => {
 
         {/* form */}
         <form
-          className="h-[550px] flex flex-col items-center justify-evenly"
+          className="h-[500px] flex flex-col items-center justify-around "
           ref={formRef}
         >
           <input

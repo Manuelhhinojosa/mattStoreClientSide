@@ -56,7 +56,7 @@ const ShoppingCart = () => {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="container mx-auto flex items-end lg:justify-center"
+      className="container mx-auto flex items-end lg:justify-center mb-20"
     >
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
         {/* header */}

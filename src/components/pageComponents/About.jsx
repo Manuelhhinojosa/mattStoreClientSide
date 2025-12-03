@@ -20,8 +20,8 @@ const About = () => {
   // return
   return (
     // main container
-    <section className="container mx-auto  flex items-end">
-      <div className="mt-32 w-full flex flex-col items-center lg:flex-row lg:justify-evenly">
+    <section className="container h-auto mx-auto mb-20 flex items-end">
+      <div className="mt-32 w-full flex flex-col items-center lg:flex-row lg:justify-evenly ">
         {/* img container */}
         <motion.div
           initial={{ x: -120, opacity: 0 }}

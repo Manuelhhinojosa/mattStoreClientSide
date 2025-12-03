@@ -58,6 +58,7 @@ import Signup from "./components/pageComponents/Signup";
 import ErrorPage from "./components/pageComponents/ErrorPage";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
+import Footer from "./components/generalComponents/Footer";
 import ScrollToTop from "./utils/ScrollTop";
 
 // App functio component
@@ -254,6 +255,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </main>
   );
 }
