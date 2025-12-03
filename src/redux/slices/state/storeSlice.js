@@ -76,11 +76,27 @@ export const storeSlice = createSlice({
   reducers: {
     // shopping cart
     // add product to shopping cart
+    // addProdShoppingCart: (state, action) => {
+    //   let prod = state.artPieces.find((piece) => piece._id == action.payload);
+    //   state.shoppingCart.push(prod);
+    //   prod.added = true;
+    //   toast("Item added to your shopping cart", toastStyleObject());
+    // },
     addProdShoppingCart: (state, action) => {
-      let prod = state.artPieces.find((piece) => piece._id == action.payload);
+      const { id, silent } =
+        typeof action.payload === "object"
+          ? action.payload
+          : { id: action.payload, silent: false };
+
+      const prod = state.artPieces.find((piece) => piece._id == id);
+      if (!prod) return;
+
       state.shoppingCart.push(prod);
       prod.added = true;
-      toast("Item added to your shopping cart", toastStyleObject());
+
+      if (!silent) {
+        toast("Item added to your shopping cart", toastStyleObject());
+      }
     },
 
     // remove product from shopping cart

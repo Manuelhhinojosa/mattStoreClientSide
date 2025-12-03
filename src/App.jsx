@@ -3,32 +3,35 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 // react hooks
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 // axios
 import axios from "axios";
 
+// jwt hooks
 import { jwtDecode } from "jwt-decode";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
-
 // Redux functions
 // fetch products
 import { fetchArtPieces } from "./redux/slices/state/storeSlice";
+// functions in store clice
+import {
+  removeProdShoppingCart,
+  emptyShoppingCart,
+  addProdShoppingCart,
+} from "./redux/slices/state/storeSlice";
 // functions in logic slice
 import {
   setisLoggedInToTrue,
   setUser,
   setUserToken,
+  setisLoggedInToFalse,
+  setuserToNone,
+  setUserTokenEmpty,
+  resetEditUserState,
 } from "./redux/slices/staticState/logicSlice";
-
-import { removeProdShoppingCart } from "./redux/slices/state/storeSlice";
-import { emptyShoppingCart } from "./redux/slices/state/storeSlice";
-import { setisLoggedInToFalse } from "./redux/slices/staticState/logicSlice";
-import { setuserToNone } from "./redux/slices/staticState/logicSlice";
-import { setUserTokenEmpty } from "./redux/slices/staticState/logicSlice";
-import { resetEditUserState } from "./redux/slices/staticState/logicSlice";
 
 // Toastify (messages to user)
 import { ToastContainer } from "react-toastify";
@@ -53,40 +56,64 @@ import EditProduct from "./components/pageComponents/EditProduct";
 import EditProfile from "./components/pageComponents/EditProfile";
 import Signup from "./components/pageComponents/Signup";
 import ErrorPage from "./components/pageComponents/ErrorPage";
-
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
-// Scroll top component
 import ScrollToTop from "./utils/ScrollTop";
 
 // App functio component
+// App functio component
+// App functio component
 function App() {
-  // redux hooks
-  const dispatch = useDispatch();
   // redux hooks & state
   const storeState = useSelector((state) => state.storeSlice);
   const logic = useSelector((state) => state.logicSlice);
-
+  // redux hooks
+  const dispatch = useDispatch();
   // react router hooks
   const navigate = useNavigate();
+  // helper vars
+  const hasRestoredRef = useRef(false);
 
   // functions
   // functions
   // functions
 
-  // fectches products
+  // fectches products on load
+  // fectches products on load
+  // fectches products on load
   useEffect(() => {
     dispatch(fetchArtPieces());
   }, [dispatch]);
 
-  // Restore session on page load
+  // Save shopping cart on every change
+  // Save shopping cart on every change
+  // Save shopping cart on every change
   useEffect(() => {
+    // don't save until we've restored once
+    if (!hasRestoredRef.current) return;
+    if (!logic.userToken) return;
+
+    const ids = [];
+    storeState.shoppingCart.map((p) => ids.push(p._id));
+    localStorage.setItem("shoppingCart", JSON.stringify(ids));
+  }, [storeState.shoppingCart, logic.userToken]);
+
+  // Restores user's session and shopping cart on re load
+  // Restores user's session and shopping cart on re load
+  // Restores user's session and shopping cart on re load
+  useEffect(() => {
+    if (hasRestoredRef.current) return;
+    if (storeState.artPieces.length === 0) return;
+
     const savedToken = localStorage.getItem("token");
-    if (!savedToken) return;
+    if (!savedToken) {
+      hasRestoredRef.current = true;
+      return;
+    }
 
     const fetchUser = async () => {
       try {
-        const result = await axios.get(
+        const res = await axios.get(
           `${import.meta.env.VITE_API_USERS_URL}/me`,
           {
             headers: { Authorization: `Bearer ${savedToken}` },
@@ -94,17 +121,45 @@ function App() {
         );
 
         dispatch(setisLoggedInToTrue());
-        dispatch(setUser(result.data));
+        dispatch(setUser(res.data));
         dispatch(setUserToken(savedToken));
+
+        // restore cart from stored ids
+        const savedCart = localStorage.getItem("shoppingCart");
+        if (savedCart) {
+          const savedIds = JSON.parse(savedCart);
+          savedIds.forEach((id) => {
+            dispatch(addProdShoppingCart({ id, silent: true }));
+          });
+        }
+
+        hasRestoredRef.current = true;
       } catch (err) {
         console.log("Expired or invalid session");
         localStorage.removeItem("token");
+        localStorage.removeItem("shoppingCart");
+        hasRestoredRef.current = true;
       }
     };
 
     fetchUser();
-  }, []);
+  }, [dispatch, storeState.artPieces.length]);
 
+  // restores shopping cart
+  // restores shopping cart
+  // restores shopping cart
+  useEffect(() => {
+    if (!hasRestoredRef.current) return;
+    if (!logic.userToken) {
+      localStorage.removeItem("shoppingCart");
+      return;
+    }
+    const ids = storeState.shoppingCart.map((p) => p._id);
+    localStorage.setItem("shoppingCart", JSON.stringify(ids));
+  }, [storeState.shoppingCart, logic.userToken]);
+
+  // logs out user when token expires
+  // logs out user when token expires
   // logs out user when token expires
   useEffect(() => {
     const token = logic.userToken;
@@ -113,7 +168,7 @@ function App() {
     const payload = jwtDecode(token);
     if (!payload || typeof payload.exp !== "number") return;
 
-    const now = Date.now() / 1000; // seconds
+    const now = Date.now() / 1000;
     const millisUntilExpiry = (payload.exp - now) * 1000;
 
     // Timer for actual logout
@@ -129,6 +184,7 @@ function App() {
       dispatch(setUserTokenEmpty());
       dispatch(resetEditUserState());
       localStorage.removeItem("token");
+      localStorage.removeItem("shoppingCart");
       navigate("/login");
     }, millisUntilExpiry);
 
@@ -145,6 +201,9 @@ function App() {
     };
   }, [logic.userToken, dispatch, storeState.shoppingCart, navigate]);
 
+  // return
+  // return
+  // return
   return (
     <main>
       <ToastContainer />
