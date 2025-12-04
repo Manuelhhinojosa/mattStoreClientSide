@@ -12,8 +12,6 @@ import axios from "axios";
 
 // react icons
 import { FaTimes } from "react-icons/fa";
-import { GoEyeClosed } from "react-icons/go";
-import { RxEyeOpen } from "react-icons/rx";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -36,7 +34,6 @@ import {
   setShowEditPasswordToTrue,
   setShowEditContactInfoToTrue,
   setShowEditShippingInfoToTrue,
-  toggleShowPassword,
   setisLoggedInToFalse,
   setuserToNone,
   setUserTokenEmpty,

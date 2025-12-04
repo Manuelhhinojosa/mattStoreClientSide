@@ -9,7 +9,8 @@ const Footer = () => {
           href="https://manuelhinojosa.netlify.app"
           target="_blank"
           rel="noreferrer"
-          style={{ color: "#0070f3", textDecoration: "none" }}
+          style={{ textDecoration: "none" }}
+          className="hover:text-blue-500 duration-300"
         >
           Manuel Hinojosa
         </a>

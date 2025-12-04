@@ -76,12 +76,6 @@ export const storeSlice = createSlice({
   reducers: {
     // shopping cart
     // add product to shopping cart
-    // addProdShoppingCart: (state, action) => {
-    //   let prod = state.artPieces.find((piece) => piece._id == action.payload);
-    //   state.shoppingCart.push(prod);
-    //   prod.added = true;
-    //   toast("Item added to your shopping cart", toastStyleObject());
-    // },
     addProdShoppingCart: (state, action) => {
       const { id, silent } =
         typeof action.payload === "object"
