@@ -39,10 +39,11 @@ import { getHeadersConfig } from "../../utils/vars";
 
 // helper functions
 import {
-  getApiSuccessMessage,
   refreshOrdersData,
   refreshUsersData,
+  // success and error console log handleing
   getApiErrorMessage,
+  getApiSuccessMessage,
 } from "../../utils/helpers";
 
 // edit product function component
@@ -152,6 +153,7 @@ const EditProduct = () => {
   // return
   // retrun
   return (
+    // main conainer
     <motion.section
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
@@ -159,7 +161,9 @@ const EditProduct = () => {
       viewport={{ once: true, amount: 0.2 }}
       className="container mx-auto h-auto mt-32 flex flex-col"
     >
+      {/* secondary container */}
       <div className="h-[600px] w-full">
+        {/* header container */}
         <div className="h-[100px] flex justify-center items-center text-3xl">
           <p className="underline ">Edit product</p>
         </div>
@@ -170,6 +174,7 @@ const EditProduct = () => {
             encType="multipart/form-data"
             className="h-full flex flex-col items-center justify-evenly"
           >
+            {/* image field */}
             <img
               src={product.media.url}
               alt="productImage"
@@ -316,8 +321,9 @@ const EditProduct = () => {
               }}
             />
 
-            {/* button */}
+            {/* buttons conatainer */}
             <div className="flex flex-col">
+              {/* edit button  */}
               <button
                 className="hover:text-blue-500 mb-[15px] duration-500"
                 onClick={(e) => handleEditProduct(e)}
