@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 // framer motion
 import { motion } from "framer-motion";
+// framer motion helper vars33
 const cardVariants = {
   hidden: (custom) => ({
     opacity: 0,
@@ -374,8 +375,10 @@ const Admin = () => {
       {/* all products section*/}
       {/* all products section*/}
       {logic.showAllProducts ? (
+        // main container
         <div className=" w-full ">
           {[...storeState.artPieces].reverse().map((p, i) => (
+            // product container
             <motion.div
               key={p._id}
               custom={i}
@@ -385,11 +388,13 @@ const Admin = () => {
               viewport={{ once: true, amount: 0.2 }}
               className=" py-12 mx-10 my-[100px] flex flex-col items-center border-[1px] border-black rounded-xl text-sm md:flex-row justify-evenly shadow-xl "
             >
+              {/* image */}
               <img
                 src={p.media.url}
                 alt="product image"
                 className="max-h-[350px] max-w-[350px] rounded-3xl shadow"
               />
+              {/* description */}
               <div className="text-center">
                 <div className="mt-[25px]">Title: {p.title}</div>
                 <div className="text-center">Description: {p.shortDesc}</div>
@@ -398,9 +403,13 @@ const Admin = () => {
                 <div>{p.recentWork ? "Recent work" : "Not recent work"}</div>
                 <div>NDF: {p.nationwideDelivery}</div>
                 <div>IDF: {p.internationalDelivery}</div>
+
+                {/* edit product link button */}
                 <div className="mt-[25px] hover:cursor-pointer hover:text-blue-500 underline duration-500">
                   <Link to={`/editproduct/${p._id}`}>Edit product</Link>
                 </div>
+
+                {/* delete product button */}
                 <div
                   className="hover:text-red-900 hover:cursor-pointer mt-2 underline duration-500"
                   onClick={() => handleDeleteProduct(p._id)}
@@ -417,18 +426,21 @@ const Admin = () => {
       {/* add a product section */}
       {/* add a product section */}
       {logic.showAddProduct ? (
+        // main container
         <motion.section
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="h-[550px] w-full"
         >
+          {/* form container */}
           <div className="h-full">
             {/* form */}
             <form
               encType="multipart/form-data"
               className="h-full flex flex-col items-center justify-evenly"
             >
+              {/* in sotck field */}
               <div className="flex flex-col">
                 <label htmlFor="inStock">In Stock?</label>
                 <select
@@ -446,6 +458,7 @@ const Admin = () => {
                 </select>
               </div>
 
+              {/* recent work field */}
               <div className="flex flex-col">
                 <label htmlFor="recentWork">Recent work?</label>
                 <select
@@ -463,6 +476,7 @@ const Admin = () => {
                 </select>
               </div>
 
+              {/* title field */}
               <input
                 type="text"
                 placeholder="Title"
@@ -473,6 +487,7 @@ const Admin = () => {
                 onChange={(e) => dispatch(setTitle(e.target.value))}
               />
 
+              {/* short desc field */}
               <input
                 type="text"
                 placeholder="Short description"
@@ -483,6 +498,7 @@ const Admin = () => {
                 onChange={(e) => dispatch(setShortDesc(e.target.value))}
               />
 
+              {/* img field */}
               <div className="flex flex-col">
                 <label
                   className="text-center mb-[10px] hover:cursor-pointer hover:text-blue-500 underline duration-500"
@@ -511,6 +527,7 @@ const Admin = () => {
                   : `Image selected succesfully: ${storeState.media.name}`}
               </p>
 
+              {/* cost field */}
               <input
                 type="number"
                 placeholder="Price"
@@ -521,6 +538,7 @@ const Admin = () => {
                 onChange={(e) => dispatch(setCost(Number(e.target.value)))}
               />
 
+              {/* national deliery fee */}
               <input
                 type="number"
                 placeholder="Natiowide delivery cost"
@@ -537,6 +555,7 @@ const Admin = () => {
                 }
               />
 
+              {/* international delivery field */}
               <input
                 type="number"
                 placeholder="International delivery cost"
@@ -553,6 +572,7 @@ const Admin = () => {
                 }
               />
 
+              {/* buttons container */}
               <div className="flex flex-col">
                 {/* add product button */}
                 <button
@@ -579,6 +599,7 @@ const Admin = () => {
       {/* see orders section*/}
       {/* see orders section*/}
       {logic.showViewOrders ? (
+        // renders if there aren't any orders
         <div className="w-full  mt-5">
           <div className="h-auto">
             {storeState.orders.length === 0 ? (
@@ -586,9 +607,10 @@ const Admin = () => {
                 <p>There are no orders</p>
               </div>
             ) : (
+              // renders if there are orders
               <div className="flex flex-col justify-center items-center">
                 {[...storeState.orders].reverse().map((order, i) => (
-                  //  ID & date
+                  // main container
                   <motion.div
                     key={order._id}
                     custom={i}
@@ -598,6 +620,7 @@ const Admin = () => {
                     viewport={{ once: true, amount: 0.2 }}
                     className="w-7/8 border-[1px] border-black m-8 p-5 md:w-2/3 rounded-xl shadow-2xl"
                   >
+                    {/* id and date container */}
                     <div className="flex flex-col md:flex-row md:justify-between">
                       <p className="text-center font-semibold">{`Order ID: ${order._id}`}</p>
                       <p className="text-center">{`Date: ${order.createdAt.slice(
@@ -606,6 +629,7 @@ const Admin = () => {
                       )}`}</p>
                     </div>
 
+                    {/* header conteiner */}
                     <div className="text-center mt-[10px] text-lg">
                       <p className="mb-[10px] mt-7">Items purchased:</p>
                     </div>
@@ -613,12 +637,14 @@ const Admin = () => {
                     {/* products */}
                     {order.productsInfoAtTimeOfPurchase.map((product) => (
                       <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-b border-black ">
+                        {/* img */}
                         <img
                           className="max-w-[100px] max-h-[150px] mb-5 rounded shadow"
                           src={product.imgUrl}
                           alt="productImage"
                         />
 
+                        {/* desription */}
                         <div>
                           <p className=" text-center text-sm font-bold">{`"${product.title}"`}</p>
                           <p className=" text-center text-sm">{`${product.shortDesc}`}</p>
@@ -629,12 +655,13 @@ const Admin = () => {
                       </div>
                     ))}
 
+                    {/* customer's info */}
                     <div className="text-center text-xl mt-5">
                       Customer's info:
                     </div>
 
+                    {/* name, status and email */}
                     <div className="p-2 w-full md:full mt-[25px]">
-                      {/* client's info */}
                       <div className="p-3 border-[1px] border-black rounded-md  ">
                         <div className="lg:flex justify-between mb-2 text-sm">
                           <p>
@@ -681,7 +708,7 @@ const Admin = () => {
                         {/* Amount paid info */}
                         <div className="mb-5">{`Amount paid: ${"000.00 CAD"}`}</div>
 
-                        {/* status button */}
+                        {/* order status button */}
                         <div>
                           <select
                             value={order.status}
@@ -710,6 +737,7 @@ const Admin = () => {
       {/* see users info section */}
       {/* see users info section */}
       {logic.showMembersInfo ? (
+        // renders if there aren't any users
         <div className="w-full mt-10">
           <div className="h-auto">
             {storeState.users.length === 0 ? (
@@ -717,7 +745,10 @@ const Admin = () => {
                 <p>There aren't any members yet</p>
               </div>
             ) : (
+              // renders if there are users
+              // main container
               <div>
+                {/* card container */}
                 {storeState.users.map((user, i) => (
                   <motion.div
                     key={user._id}
@@ -728,6 +759,7 @@ const Admin = () => {
                     viewport={{ once: true, amount: 0.2 }}
                     className="p-[25px] mb-[150px] border-[3px] border-black m-2 rounded-xl flex flex-col py-10 shadow-2xl"
                   >
+                    {/* name and status */}
                     <p
                       className={`text-center mb-[25px] border-[1px] border-black rounded-xl text-xl p-4 text-pretty`}
                     >
@@ -739,11 +771,15 @@ const Admin = () => {
                              : "(inactive member)"
                          }`}
                     </p>
+
+                    {/* email */}
                     <div className="border-[1px] border-black rounded-xl p-5 flex flex-col items-center justify-center">
                       <p>
                         Email: <span className="underline"> {user.email}</span>
                       </p>
                     </div>
+
+                    {/* contact info container */}
                     <div className=" flex flex-col md:flex-row md:justify-evenly">
                       <div className="border-[1px] border-black rounded-lg my-5 p-5 text-left">
                         <div>
@@ -765,12 +801,16 @@ const Admin = () => {
                         </div>
                       </div>
 
+                      {/* shipping info container */}
                       {user.shippingSameAsContactInfo ? (
+                        // if contact and shipping info are the same
                         <p className="border-[1px] border-black rounded-lg my-5 p-5 flex items-center justify-center">
                           Shipping info is the same as contact info
                         </p>
                       ) : (
+                        // if contact and shipping info are different
                         <div className="border-[1px] border-black rounded-lg my-5 p-5 text-left">
+                          {/* shipping info */}
                           <div>
                             <p className="mb-2 underline">
                               Current shipping info
@@ -791,10 +831,14 @@ const Admin = () => {
                         </div>
                       )}
                     </div>
+
+                    {/* orders container */}
                     <div className="rounded-lg my-5 p-10 text-center">
+                      {/* header */}
                       <p className="text-xl">orders:</p>
                       {user.orders.length > 0 ? (
                         user.orders.map((order) => (
+                          // oder info container
                           <div className="border-[1px] border-black rounded-lg my-10 flex flex-col items-center h-[500px] overflow-hidden overflow-y-scroll shadow-2xl">
                             <p className="pt-5 underline">{`Date of purcharse: ${order.createdAt.slice(
                               0,
@@ -819,6 +863,7 @@ const Admin = () => {
 
                             {order.productsInfoAtTimeOfPurchase.map(
                               (product) => (
+                                // card container
                                 <div className="flex flex-col items-center md:flex-row justify-between lg:justify-around p-5 w-[90%] border-b border-black m-5">
                                   <img
                                     src={product.imgUrl}
@@ -839,6 +884,7 @@ const Admin = () => {
                           </div>
                         ))
                       ) : (
+                        // renders if there aren't any orders
                         <p>there aren't any orders</p>
                       )}
                     </div>
