@@ -1,7 +1,8 @@
 import React from "react";
 
+// framer motion (animation)
 import { motion, AnimatePresence } from "framer-motion";
-
+// framer motion helper vars
 const mobileContainerVariants = {
   hidden: { y: -30, opacity: 0 },
   visible: {
@@ -21,7 +22,6 @@ const mobileContainerVariants = {
     transition: { type: "spring", stiffness: 300, damping: 32 },
   },
 };
-
 const mobileItemVariants = {
   hidden: { y: -8, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { duration: 0.18 } },
@@ -62,7 +62,7 @@ const Navbar = () => {
   // redux hooks
   const dispatch = useDispatch();
   // state
-  // state in stati text slice
+  // state in static text slice
   const staticText = useSelector((state) => state.staticTextSlice);
   // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
@@ -85,12 +85,13 @@ const Navbar = () => {
     }
     dispatch(emptyShoppingCart());
 
-    // resetting user, uster status, token and edit state
+    // resetting user, uster status, token and edit user state
     dispatch(setisLoggedInToFalse());
     dispatch(setuserToNone());
     dispatch(setUserTokenEmpty());
     dispatch(resetEditUserState());
 
+    // restet local storage
     localStorage.removeItem("token");
     localStorage.removeItem("shoppingCart");
   };
@@ -100,6 +101,8 @@ const Navbar = () => {
   // return
   return (
     <nav className="fixed top-4 z-50 w-full flex flex-col items-center ">
+      {/* big screen navbar */}
+      {/* big screen navbar */}
       {/* big screen navbar */}
       <div className="flex w-[95%] my-1 items-center justify-between overflow-hidden p-4 backdrop-blur-lg lg:m-2 lg:w-[60rem] lg:rounded-full lg:shadow-lg rounded-2xl ">
         <Link to="/">
@@ -155,7 +158,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* mobile navbar with drop animation */}
+      {/* mobile navbar */}
+      {/* mobile navbar */}
+      {/* mobile navbar */}
       <AnimatePresence initial={false}>
         {logic.showNavbar && (
           <motion.div

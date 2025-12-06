@@ -1,5 +1,8 @@
 import React from "react";
 
+// footer function component
+// footer function component
+// footer function component
 const Footer = () => {
   return (
     <footer className="p-5 flex justify-end text-sm shadow-2xl">

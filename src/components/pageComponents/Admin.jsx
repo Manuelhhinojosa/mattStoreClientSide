@@ -3,8 +3,7 @@ import React from "react";
 // react hooks
 import { useRef } from "react";
 
-// React router V6
-// react router hooks
+// React router V6 hooks
 import { Link } from "react-router-dom";
 
 // framer motion
@@ -55,7 +54,7 @@ import {
 } from "../../redux/slices/staticState/logicSlice";
 // functions from redux / store slice
 import {
-  // for new product
+  // +++ for new product +++
   setInStock,
   setRecentWork,
   setTitle,
@@ -64,9 +63,8 @@ import {
   setCost,
   setNationwideDelivery,
   setInternationalDelivery,
-  // users
+  // +++
   setUsers,
-  // orders
   setOrders,
 } from "../../redux/slices/state/storeSlice";
 // fetching products function  from store slice
