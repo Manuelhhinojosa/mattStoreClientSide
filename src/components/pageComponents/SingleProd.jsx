@@ -50,13 +50,14 @@ const SingleProd = () => {
   // return
   // return
   return (
+    // main container
     <motion.section
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="container mx-auto "
     >
-      {/* main container */}
+      {/* secondary container */}
       <div className="mt-32 w-full flex flex-col items-center">
         {/* header */}
         <div>

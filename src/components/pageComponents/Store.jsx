@@ -48,8 +48,9 @@ const Store = () => {
   // retrune
   // retrune
   return (
+    // maind container
     <section className="container mx-auto flex ">
-      {/* main container */}
+      {/* secondary container */}
       <div className="mt-32 w-full  flex flex-col items-center justify-center mb-[150px]">
         {/* header */}
         <div className="w-full text-2xl p-8 text-center md:text-3xl">

@@ -57,7 +57,9 @@ const RecentWork = () => {
           {storeState.artPieces.map((work, index) =>
             work.recentWork ? (
               <FadeInOnScroll key={work._id} delay={index * 0.1}>
+                {/* product card container */}
                 <div className="flex flex-col items-center justify-center m-3">
+                  {/* image */}
                   <Link to={`/store/${work._id}`}>
                     <img
                       src={work.media.url}
@@ -65,6 +67,8 @@ const RecentWork = () => {
                       className="rounded-3xl shadow-2xl max-w-[450px] max-h-[550px]"
                     />
                   </Link>
+
+                  {/* title */}
                   <p className=" p-3 text-center text-xs font-bold h-10 m-10">
                     {work.title}
                   </p>
@@ -74,7 +78,7 @@ const RecentWork = () => {
           )}
         </div>
 
-        {/* button */}
+        {/* more work button */}
         <div className="fixed bottom-20 right-10 font-extrabold text-lg hover:text-blue-500 duration-500">
           <Link to="/store">more work</Link>
         </div>

@@ -24,6 +24,7 @@ import {
 // helper functions
 import {
   refreshUserData,
+  // success and error console log handleingssss
   getApiErrorMessage,
   getApiSuccessMessage,
 } from "../../utils/helpers";
@@ -185,6 +186,8 @@ const EditProfile = () => {
       // resetting
       dispatch(setShowEditContactInfoTofalse());
       dispatch(resetEditUserState());
+
+      // navigate to profile page
       navigate("/profile");
 
       // success message
@@ -252,6 +255,8 @@ const EditProfile = () => {
       // resetting
       dispatch(setShowEditShippingInfoTofalse());
       dispatch(resetEditUserState());
+
+      // navigate to profile page
       navigate("/profile");
 
       // success message
@@ -289,16 +294,21 @@ const EditProfile = () => {
       {/* Edit password page */}
       {/* Edit password page */}
       {logic.showEditPassword ? (
+        // main section
         <motion.section
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
+          {/* header container */}
           <div className="h-[100px] flex items-center justify-center">
             <p className="text-center text-3xl underline">Edit password</p>
           </div>
+
+          {/* form container */}
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
+              {/* old password */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="password"
@@ -309,6 +319,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* new password */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="password"
@@ -319,6 +330,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* confirm new password */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="password"
@@ -329,12 +341,15 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* edit button */}
               <button
                 className="mt-5 hover:text-blue-500 duration-500"
                 onClick={handleEditPassword}
               >
                 Edit Password
               </button>
+
+              {/* cancel button */}
               <button
                 className="mt-5 hover:text-blue-500 duration-500"
                 onClick={() => handleCancel(setShowEditPasswordTofalse)}
@@ -350,16 +365,21 @@ const EditProfile = () => {
       {/* Edit contact info page */}
       {/* Edit contact info page */}
       {logic.showEditContactInfo ? (
+        // main container
         <motion.section
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
+          {/* header container */}
           <div className="h-[100px] flex items-center justify-center">
             <p className="text-center text-3xl underline">Edit contact info</p>
           </div>
+
+          {/* form container */}
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
+              {/* phone number */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -370,6 +390,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* contact address */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -380,6 +401,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* contact unit */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -390,6 +412,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* contact country */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -400,6 +423,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* contact province or state */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -410,6 +434,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* contact city */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -420,6 +445,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* comtact postal code */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -430,6 +456,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* shipping same as contact */}
               <label htmlFor="contactSameShipping" className="mt-5">
                 Edit shipping info to match the new contact info?
               </label>
@@ -442,12 +469,15 @@ const EditProfile = () => {
                 onChange={() => dispatch(toggleEditUserContactAddress())}
               />
 
+              {/* edit button */}
               <button
                 className="mt-5 hover:text-blue-500 duration-500"
                 onClick={handleEditContactInfo}
               >
                 Edit contact info
               </button>
+
+              {/* cancel button */}
               <button
                 className="mt-5 hover:text-blue-500 duration-500"
                 onClick={() => handleCancel(setShowEditContactInfoTofalse)}
@@ -463,16 +493,21 @@ const EditProfile = () => {
       {/* Edit shipping info page */}
       {/* Edit shipping info page */}
       {logic.showEditShippingInfo ? (
+        // main conatiner
         <motion.section
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
+          {/* header container */}
           <div className="h-[100px] flex items-center justify-center">
             <p className="text-center text-3xl underline">Edit Shipping info</p>
           </div>
+
+          {/* form conatiner */}
           <div className="h-[600px] w-full">
             <form className="h-full flex flex-col items-center justify-center">
+              {/* shipping phone number */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -483,6 +518,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* shipping address */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -493,6 +529,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* shipping  unit*/}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -503,6 +540,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* shipping country*/}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -513,6 +551,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* shipping province or state */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none durtion-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -523,6 +562,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* shipping city */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -533,6 +573,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* shipping postal code */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -543,6 +584,7 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
 
+              {/* conatct same as shipping info */}
               <label htmlFor="contactSameShipping" className="mt-5">
                 Edit contact info to match the new shipping info?
               </label>
@@ -555,12 +597,15 @@ const EditProfile = () => {
                 onChange={() => dispatch(toggleEditUsershippingAddress())}
               />
 
+              {/* edit button */}
               <button
                 className="mt-5 hover:text-blue-500 duration-500"
                 onClick={handleEditShippingInfo}
               >
                 Edit shipping info
               </button>
+
+              {/* cancel button */}
               <button
                 className="mt-5 hover:text-blue-500 duration-500"
                 onClick={() => handleCancel(setShowEditShippingInfoTofalse)}

@@ -26,12 +26,7 @@ import {
 } from "../../redux/slices/staticState/logicSlice";
 
 // herlper functions
-import {
-  refreshOrdersData,
-  refreshUsersData,
-  getApiErrorMessage,
-  getApiSuccessMessage,
-} from "../../utils/helpers";
+import { getApiErrorMessage, getApiSuccessMessage } from "../../utils/helpers";
 
 // signup function compoenent
 // signup function compoenent
@@ -146,6 +141,7 @@ const Signup = () => {
   // return
   // return
   return (
+    // main conatiner
     <section className="relative  w-screen">
       {/* header */}
       <div className="mt-[125px] mb-[25px] text-3xl text-center underline">
@@ -252,6 +248,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
 
+              {/* contact unit */}
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
                 type="text"
@@ -325,6 +322,7 @@ const Signup = () => {
               />
             </div>
 
+            {/* shipping phone number */}
             <div className="flex items-center justify-center">
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
@@ -337,7 +335,7 @@ const Signup = () => {
               />
             </div>
 
-            {/* ahipping address and unit */}
+            {/* shipping address and unit */}
             <div className="flex flex-col items-center md:flex-row md:justify-evenly">
               <input
                 className="my-2 w-2/3 md:w-1/3 text-center border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"

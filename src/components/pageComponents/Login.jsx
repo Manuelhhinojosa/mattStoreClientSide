@@ -36,6 +36,7 @@ import { toastStyleObject } from "../../tostifyStyle";
 import {
   refreshOrdersData,
   refreshUsersData,
+  // success and error console log handleing
   getApiErrorMessage,
   getApiSuccessMessage,
 } from "../../utils/helpers";
@@ -132,18 +133,21 @@ const login = () => {
   // return
   // return
   return (
+    // main container
     <motion.section
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
       className="container mx-auto flex items-end"
     >
+      {/* form container */}
       <div className="mt-32 w-full h-[700px] flex flex-col items-center justify-center">
         {/* form */}
         <form
           encType="multipart/form-data"
           className="flex flex-col items-center justify-around h-1/3"
         >
+          {/* email */}
           <input
             type="text"
             placeholder="email"
@@ -153,6 +157,8 @@ const login = () => {
             value={logic.enteredUserUsername}
             onChange={(e) => dispatch(setEnteredUsername(e.target.value))}
           />
+
+          {/* password */}
           <input
             type="password"
             placeholder="password"
@@ -171,8 +177,9 @@ const login = () => {
             Login
           </button>
         </form>
+
+        {/* sign up */}
         <div>
-          {/* sign up link */}
           <p>
             Don't have an account yet?{" "}
             <Link

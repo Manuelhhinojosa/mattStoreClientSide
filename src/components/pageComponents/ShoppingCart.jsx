@@ -52,21 +52,24 @@ const ShoppingCart = () => {
   // return
   // return
   return (
+    // main conatiner
     <motion.section
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="container mx-auto flex items-end lg:justify-center mb-20"
     >
+      {/* secondary container */}
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
         {/* header */}
         <div className="ml-5 text-2xl p-8 md:text-center md:text-3xl">
           {staticState.home.homeMainTitle} / Shopping cart
         </div>
 
-        {/* list of prods in shopping cart */}
         {storeState.shoppingCart.length > 0 ? (
+          // list of prods in shopping cart
           storeState.shoppingCart.map((prod) => (
+            // prod container
             <div
               key={prod._id}
               className=" m-5 p-2 border-b-[1px] border-b-black "
@@ -147,6 +150,7 @@ const ShoppingCart = () => {
             </span>
           )}
         </div>
+        {/* continue shopping button */}
         <div className=" mb-10 text-center font-extrabold hover:text-blue-500 duration-500">
           <Link to="/store">Continue shopping</Link>
         </div>

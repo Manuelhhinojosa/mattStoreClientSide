@@ -178,6 +178,7 @@ const Profile = () => {
   // return
   // return
   // return
+
   // Renders if profile is not active
   // Renders if profile is not active
   // Renders if profile is not active
@@ -200,17 +201,19 @@ const Profile = () => {
   // return
   // return
   // return
+
   // renders if profile is active
   // renders if profile is active
   // renders if profile is active
   return (
+    // main section
     <motion.section
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="relative w-screen flex flex-col items-center"
     >
-      {/* Headding */}
+      {/* Header */}
       <div className="mt-[175px] ">
         <p className="text-3xl underline">Profile</p>
       </div>
@@ -223,6 +226,7 @@ const Profile = () => {
             <p>{`Email: ${logic.user.email}`}</p>
           </div>
 
+          {/* edit password link button */}
           <div className="flex justify-end text-sm ">
             <Link
               to="/editprofile"
@@ -236,9 +240,12 @@ const Profile = () => {
 
         {/* Contact info */}
         <div className="p-2 mt-10 border-[1px] border-black rounded-md text-sm shadow">
+          {/* header */}
           <div className="mb-2">
             <p className="text-center text-xl">Contact info:</p>
           </div>
+
+          {/* info */}
           <div>
             <p>Address: {`${logic.user.contactAddress}`}</p>
             <p>Unit: {`${logic.user.contactUnit}`}</p>
@@ -246,6 +253,8 @@ const Profile = () => {
             <p>Province or State: {`${logic.user.contactProvinceOrState}`}</p>
             <p>City: {`${logic.user.contactCity}`}</p>
             <p>Postal Code: {`${logic.user.contactPostalCode}`}</p>
+
+            {/* phone number and edit info link button */}
             <div className="flex justify-between">
               <p>{`Phone: ${logic.user.contactPhoneNumber}`}</p>
               <Link
@@ -258,12 +267,16 @@ const Profile = () => {
             </div>
           </div>
         </div>
+
         {/* Shipping info */}
         <div className="p-2 mt-3 border-[1px] border-black rounded-md text-sm shadow">
+          {/* header */}
           <div className="mb-2">
             <p className="text-center text-xl">Shipping info:</p>
           </div>
+
           {logic.user.shippingSameAsContactInfo ? (
+            // shipping and contact info same and edit info link button
             <div className="flex justify-between">
               <p className="text-center ">Same as contact info</p>
               <Link
@@ -275,6 +288,7 @@ const Profile = () => {
               </Link>
             </div>
           ) : (
+            // shipping info contaienr different from contact info and update info link button
             <div>
               <p>Address: {`${logic.user.shippingAddress}`}</p>
               <p>Unit: {`${logic.user.shippingUnit}`}</p>
@@ -284,6 +298,7 @@ const Profile = () => {
               </p>
               <p>City: {`${logic.user.shippingCity}.`}</p>
               <p>Postal Code: {`${logic.user.shippingPostalCode}`}</p>
+              {/* phone number and update info link button */}
               <div className="flex justify-between">
                 <p>{`Phone: ${logic.user.shippingPhoneNumber}`}</p>
                 <Link
@@ -297,31 +312,43 @@ const Profile = () => {
             </div>
           )}
         </div>
-        {/* Past orders */}
+
+        {/* orders container*/}
         <div className="p-2 mt-10  text-sm  ">
+          {/* header */}
           <div className="mb-2">
             <p className="text-center text-xl underline">Orders</p>
           </div>
+          {/* if there are orders */}
           <div>
             {logic.user?.orders?.length > 0 ? (
               logic.user.orders.map((order) => (
+                // orders container
                 <div className="my-10 flex flex-col items-center border-[1px] border-black rounded-xl  h-[350px] overflow-hidden overflow-y-scroll p-3 shadow-lg">
+                  {/* date */}
                   <p className="pt-5 text-center">{`Date of purcharse: ${order.createdAt.slice(
                     0,
                     10
                   )}`}</p>
+                  {/* id */}
                   <p className="text-sm">Order ID: {order._id}</p>
+                  {/* items amount */}
                   <p className="text-sm">
                     Total items: {order.products.length}
                   </p>
+                  {/* order status */}
                   <p className="text-sm">Status: {order.status}</p>
+                  {/* shipping info */}
                   <p className="text-sm">
                     Shipped to: Shipping address at the time of purchase
                   </p>
+                  {/* amont pide */}
                   <p className="text-sm">Total amount paid: 123 CAD</p>
                   <br />
+                  {/* items */}
                   <p className="underline">Items:</p>
                   {order.products.map((product) => (
+                    // image
                     <div className="w-[90%] flex flex-col items-center md:flex-row md:justify-between p-2 border-b border-black">
                       <img
                         src={product.media.url}
@@ -329,6 +356,7 @@ const Profile = () => {
                         className="max-w-[125px] max-h-[150px] my-5"
                       />
 
+                      {/* general info */}
                       <div>
                         <p className="text-sm py-1 text-center">{`${product.title}`}</p>
                         <p className="text-sm py-1 text-center">{`${product.shortDesc}`}</p>
@@ -343,6 +371,7 @@ const Profile = () => {
                 </div>
               ))
             ) : (
+              // if there aren't any orders
               <p
                 className="flex items-center justify-center border-[1px] border-black rounded-lg h-[70px] text-xl
               "
@@ -352,18 +381,23 @@ const Profile = () => {
             )}
           </div>
         </div>
-        {/* Shopping cart */}
+
+        {/* Shopping cart container */}
         <div className="border-[1px] border-black rounded-md my-8 shadow">
+          {/* header */}
           <div>
             <p className="text-center text-xl m-2">Shopping Cart</p>
           </div>
 
           {storeState.shoppingCart.length > 0 ? (
+            // if there are items in the shopping cart
             storeState.shoppingCart.map((prod) => (
+              // shopping cart container
               <div
                 key={prod.id}
                 className="m-5 p-2 mb-8 border-b-[1px] border-b-black"
               >
+                {/* image */}
                 <div className="flex items-center justify-between">
                   <div>
                     <Link to={`/store/${prod._id}`}>
@@ -374,10 +408,13 @@ const Profile = () => {
                       />
                     </Link>
                   </div>
+                  {/* title */}
                   <div className="p-2 w-1/3">
                     <p className="text-center">{prod.title}</p>
                   </div>
+                  {/* cost */}
                   <div className="p-2">{`${prod.cost} CAD`}</div>
+                  {/* remove button */}
                   <div className="p-2">
                     <button
                       onClick={() => dispatch(removeProdShoppingCart(prod._id))}
@@ -390,9 +427,11 @@ const Profile = () => {
               </div>
             ))
           ) : (
+            // if shopping cart is empty
             <div className="flex justify-between p-5 text-center mt-3 ">
               <p className="text-sm">Your shopping cart is empty</p>
 
+              {/* button to store */}
               <Link
                 className="text-sm underline hover:text-blue-500 duration-500"
                 to="/store"
@@ -402,10 +441,14 @@ const Profile = () => {
             </div>
           )}
         </div>
+
+        {/* inactivate section profile container*/}
         <div className="border-[1px] border-black rounded-md my-8 shadow">
+          {/* header */}
           <div>
             <p className="text-center text-xl m-2">Danger zone</p>
           </div>
+          {/* button */}
           <div className="flex items-center justify-center h-[50px]">
             <button
               className="hover:text-red-500 underline duration-500"
