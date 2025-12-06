@@ -4,14 +4,14 @@ import React from "react";
 import { CiInstagram } from "react-icons/ci";
 import { TfiEmail } from "react-icons/tfi";
 
-// framaer motion
-import { motion } from "framer-motion";
-
 // React Hooks
 import { useRef } from "react";
 
 // emailJS
 import emailjs from "@emailjs/browser";
+
+// framaer motion
+import { motion } from "framer-motion";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -97,6 +97,7 @@ const Contact = () => {
   // return
   // return
   return (
+    // main container
     <motion.section
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
@@ -104,14 +105,15 @@ const Contact = () => {
       viewport={{ once: true, amount: 0.2 }}
       className="container mx-auto h-[700px] mt-32 "
     >
+      {/* secondary container */}
       <div className="w-full">
+        {/* header container */}
         <div className="h-[150px] text-center border-b-[1px] border-b-black">
-          {/* header */}
           <div className="flex justify-center items-center text-3xl h-1/2 ">
             {staticState.home.homeMainTitle} / Contact
           </div>
 
-          {/* social media navbar */}
+          {/* social media navbar container*/}
           <div className=" flex justify-center gap-7 items-center text-4xl h-1/2">
             <a
               href={`mailto:${staticState.contact.email}`}
@@ -134,6 +136,7 @@ const Contact = () => {
           className="h-[500px] flex flex-col items-center justify-around "
           ref={formRef}
         >
+          {/* name field */}
           <input
             name="name"
             type="text"
@@ -142,6 +145,8 @@ const Contact = () => {
             className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent  hover:border-b-black duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
             ref={nameRef}
           />
+
+          {/* subject field */}
           <input
             name="subject"
             type="text"
@@ -150,6 +155,8 @@ const Contact = () => {
             className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
             ref={subjectRef}
           />
+
+          {/* email field */}
           <input
             name="email"
             type="text"
@@ -158,6 +165,8 @@ const Contact = () => {
             className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent hover:border-b-black duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
             ref={emailRef}
           />
+
+          {/* message field */}
           <textarea
             name="message"
             rows="5"
@@ -165,6 +174,8 @@ const Contact = () => {
             className="w-3/4 text-center md:w-1/2 border-b-[1px] border-b-transparent hover:border-b-black focus:outline-none duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
             ref={messageRef}
           ></textarea>
+
+          {/* send button */}
           <button
             onClick={handleUserData}
             className="h-10 hover:text-blue-500 font-extrabold text-lg transition-all duration-500"
