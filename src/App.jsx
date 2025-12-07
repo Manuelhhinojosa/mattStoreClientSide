@@ -195,6 +195,8 @@ function App() {
     }, millisUntilExpiry);
 
     // Timer for warning toast (1 minute before expiry or immediately if token < 1min)
+    // Timer for warning toast (1 minute before expiry or immediately if token < 1min)
+    // Timer for warning toast (1 minute before expiry or immediately if token < 1min)
     const warningTime =
       millisUntilExpiry > 60 * 1000 ? millisUntilExpiry - 60 * 1000 : 0;
     const warningTimer = setTimeout(() => {
