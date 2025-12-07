@@ -1,5 +1,9 @@
+// redux
 import { createSlice } from "@reduxjs/toolkit";
 
+// state and reducers (Slice)
+// state and reducers (Slice)
+// state and reducers (Slice)
 export const staticTextSlice = createSlice({
   name: "staticTextSlice",
   initialState: {

@@ -1,3 +1,6 @@
+// toast style object
+// toast style object
+// toast style object
 export const toastStyleObject = () => {
   const isMobile = window.innerWidth <= 600;
 

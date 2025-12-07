@@ -12,6 +12,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 // redux
+// redux hooks
 import { useSelector, useDispatch } from "react-redux";
 // Redux functions
 // fetch products
@@ -61,17 +62,21 @@ import Navbar from "./components/generalComponents/Navbar";
 import Footer from "./components/generalComponents/Footer";
 import ScrollToTop from "./utils/ScrollTop";
 
-// App functio component
-// App functio component
-// App functio component
+// App function component
+// App functino component
+// App function component
 function App() {
   // redux hooks & state
+  // state in store slice
   const storeState = useSelector((state) => state.storeSlice);
+  // store in logic slice
   const logic = useSelector((state) => state.logicSlice);
   // redux hooks
   const dispatch = useDispatch();
+
   // react router hooks
   const navigate = useNavigate();
+
   // helper vars
   const hasRestoredRef = useRef(false);
 
@@ -86,9 +91,9 @@ function App() {
     dispatch(fetchArtPieces());
   }, [dispatch]);
 
-  // Save shopping cart on every change
-  // Save shopping cart on every change
-  // Save shopping cart on every change
+  // Saves shopping cart state on every change
+  // Saves shopping cart state on every change
+  // Saves shopping cart state on every change
   useEffect(() => {
     // don't save until we've restored once
     if (!hasRestoredRef.current) return;

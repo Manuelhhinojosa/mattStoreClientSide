@@ -1,7 +1,14 @@
+// react
+// hooks
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
+// styles
 import "./index.css";
+
+// app component
 import App from "./App.jsx";
+
 // redux
 import store from "./redux/store";
 import { Provider } from "react-redux";

@@ -10,12 +10,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastStyleObject } from "../../../tostifyStyle";
 
+// functions
+// functions
+// functions
+
+// Fetching products function
+// Fetching products function
 // Fetching products function
 export const fetchArtPieces = createAsyncThunk(
   "store/fetchArtPieces",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:3000/posts/allposts");
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_POSTS_URL}/allposts`
+      );
       console.log("result to call fetch all products:", response);
       console.log("art pieces info loaded successfully:", {
         config: response.config,
@@ -32,14 +40,14 @@ export const fetchArtPieces = createAsyncThunk(
   }
 );
 
-// state and reducers
+// state and reducers (Slice)
+// state and reducers (Slice)
+// state and reducers (Slice)
 export const storeSlice = createSlice({
   name: "storeSlice",
   initialState: {
     // admin page state
-    // admin page / add product page
-    // new product state
-    // new product initial state
+    // add product initial state
     reference: Math.floor(Math.random() * 10000000000).toString(),
     inStock: true,
     added: false,
@@ -56,16 +64,16 @@ export const storeSlice = createSlice({
     nationalDeliveryFee: 50,
     internationalDeliveryFee: 100,
 
-    // products array state for store and admin pages
+    // products array state
     artPieces: [],
 
-    // shopping cart array (products) for shoppign cart, admin pages
+    // shopping cart array (products)
     shoppingCart: [],
 
-    // users array (users) for admin page
+    // users array
     users: [],
 
-    // orders array (orders) for admin and profile pages
+    // orders array
     orders: [],
   },
 
@@ -113,6 +121,7 @@ export const storeSlice = createSlice({
       state.shoppingCart = [];
     },
 
+    // admin page
     // add a product
     // setting inital state for creating new product
     setInStock: (state, action) => {
@@ -140,7 +149,6 @@ export const storeSlice = createSlice({
       state.internationalDelivery = action.payload;
     },
 
-    // admin page
     // setting array of users
     setUsers: (state, action) => {
       state.users = action.payload;
@@ -170,6 +178,8 @@ export const storeSlice = createSlice({
   },
 });
 
+// functions exports
+// functions exports
 // functions exports
 export const {
   // shopping cart related

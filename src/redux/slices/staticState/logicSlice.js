@@ -6,13 +6,16 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastStyleObject } from "../../../tostifyStyle";
 
-// logic slice
+// state and reducers (Slice)
+// state and reducers (Slice)
+// state and reducers (Slice)
 export const logicSlice = createSlice({
   name: "logicSlice",
   initialState: {
-    // user initial state
     // user state
     user: {},
+
+    // token
     userToken: "",
 
     // sgning user in state
@@ -95,7 +98,7 @@ export const logicSlice = createSlice({
   // functions
   reducers: {
     // navbar
-    // hide show navbar
+    // show navbar
     toggleNavbar: (state, action) => {
       state.showNavbar = !state.showNavbar;
     },
