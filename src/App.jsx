@@ -95,7 +95,6 @@ function App() {
   // Saves shopping cart state on every change
   // Saves shopping cart state on every change
   useEffect(() => {
-    // don't save until we've restored once
     if (!hasRestoredRef.current) return;
     if (!logic.userToken) return;
 
