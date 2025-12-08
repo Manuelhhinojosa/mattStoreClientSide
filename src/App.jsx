@@ -22,6 +22,8 @@ import {
   removeProdShoppingCart,
   emptyShoppingCart,
   addProdShoppingCart,
+  setOrders,
+  setUsers,
 } from "./redux/slices/state/storeSlice";
 // functions in logic slice
 import {
@@ -33,6 +35,9 @@ import {
   setUserTokenEmpty,
   resetEditUserState,
 } from "./redux/slices/staticState/logicSlice";
+
+// helper functions
+import { refreshOrdersData, refreshUsersData } from "./utils/helpers";
 
 // Toastify (messages to user)
 import { ToastContainer } from "react-toastify";
@@ -103,9 +108,9 @@ function App() {
     localStorage.setItem("shoppingCart", JSON.stringify(ids));
   }, [storeState.shoppingCart, logic.userToken]);
 
-  // Restores user's session and shopping cart on re load
-  // Restores user's session and shopping cart on re load
-  // Restores user's session and shopping cart on re load
+  // Restores user's session and shopping cart on re load (orders and users if user role is admin)
+  // Restores user's session and shopping cart on re load (orders and users if user role is admin)
+  // Restores user's session and shopping cart on re load (orders and users if user role is admin)
   useEffect(() => {
     if (hasRestoredRef.current) return;
     if (storeState.artPieces.length === 0) return;
@@ -128,6 +133,14 @@ function App() {
         dispatch(setisLoggedInToTrue());
         dispatch(setUser(res.data));
         dispatch(setUserToken(savedToken));
+
+        if (res.data.role === "admin") {
+          // refresh users
+          await refreshUsersData(savedToken, dispatch, setUsers);
+
+          // refresh orders
+          await refreshOrdersData(savedToken, dispatch, setOrders);
+        }
 
         // restore cart from stored ids
         const savedCart = localStorage.getItem("shoppingCart");
