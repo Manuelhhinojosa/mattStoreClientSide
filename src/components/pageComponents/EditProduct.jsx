@@ -159,20 +159,20 @@ const EditProduct = () => {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
-      className="container mx-auto h-auto mt-32 flex flex-col"
+      className="container mx-auto h-auto mt-32 flex flex-col "
     >
       {/* secondary container */}
-      <div className="h-[600px] w-full">
+      <div className="h-[700px] w-full ">
         {/* header container */}
         <div className="h-[100px] flex justify-center items-center text-3xl">
           <p className="underline ">Edit product</p>
         </div>
         {/* form container */}
-        <div className="h-full">
+        <div>
           {/* form */}
           <form
             encType="multipart/form-data"
-            className="h-full flex flex-col items-center justify-evenly"
+            className="h-[600px] flex flex-col items-center justify-evenly"
           >
             {/* image field */}
             <img
