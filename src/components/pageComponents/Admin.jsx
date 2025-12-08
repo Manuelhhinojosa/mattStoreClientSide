@@ -637,7 +637,10 @@ const Admin = () => {
 
                     {/* products */}
                     {order.productsInfoAtTimeOfPurchase.map((product) => (
-                      <div className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-b border-black ">
+                      <div
+                        key={product._id}
+                        className="my-5 flex flex-col items-center md:flex-row justify-between px-5 border-b border-black "
+                      >
                         {/* img */}
                         <img
                           className="max-w-[100px] max-h-[150px] mb-5 rounded shadow"
