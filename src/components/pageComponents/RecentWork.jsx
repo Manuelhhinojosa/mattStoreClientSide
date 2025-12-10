@@ -54,7 +54,7 @@ const RecentWork = () => {
 
         {/* body */}
         <div className="w-full mt-10 flex flex-wrap items-center justify-evenly">
-          {storeState.artPieces.map((work, index) =>
+          {[...storeState.artPieces].reverse().map((work, index) =>
             work.recentWork ? (
               <FadeInOnScroll key={work._id} delay={index * 0.1}>
                 {/* product card container */}
