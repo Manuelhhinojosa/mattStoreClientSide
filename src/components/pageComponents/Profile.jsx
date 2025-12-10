@@ -296,7 +296,7 @@ const Profile = () => {
               <p>
                 Province or State: {`${logic.user.shippingProvinceOrState}`}
               </p>
-              <p>City: {`${logic.user.shippingCity}.`}</p>
+              <p>City: {`${logic.user.shippingCity}`}</p>
               <p>Postal Code: {`${logic.user.shippingPostalCode}`}</p>
               {/* phone number and update info link button */}
               <div className="flex justify-between">

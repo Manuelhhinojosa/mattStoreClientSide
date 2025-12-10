@@ -719,7 +719,7 @@ const Admin = () => {
                             onChange={(e) =>
                               handleStatusChange(order._id, e.target.value)
                             }
-                            className="focus:outline-none focus:ring-0 block p-2.5 text-blue-500"
+                            className="focus:outline-none focus:ring-0 block p-2.5 text-blue-500 hover:cursor-pointer"
                           >
                             <option value="Processing">Processing</option>
                             <option value="Shipped">Shipped</option>

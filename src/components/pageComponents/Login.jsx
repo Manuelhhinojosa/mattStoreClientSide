@@ -89,6 +89,10 @@ const login = () => {
       // console result
       getApiSuccessMessage(result);
 
+      // resetting
+      dispatch(setEnteredUsernameEmpty());
+      dispatch(setEnteredUserpasswordEmpty());
+
       const loggedInUser = result.data.user;
 
       // save token for session persistence
@@ -109,10 +113,6 @@ const login = () => {
 
         // admin page
         navigate("/admin");
-
-        // resetting
-        dispatch(setEnteredUsernameEmpty());
-        dispatch(setEnteredUserpasswordEmpty());
       } else {
         // if user non admin navigate to profile page
         navigate("/profile");
