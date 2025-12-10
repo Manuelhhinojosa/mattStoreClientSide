@@ -99,10 +99,6 @@ const login = () => {
       dispatch(setUser(loggedInUser));
       dispatch(setUserToken(result.data.token));
 
-      // resetting
-      dispatch(setEnteredUsernameEmpty());
-      dispatch(setEnteredUserpasswordEmpty());
-
       // if admin, load admin dashboard data and navigate to admin page
       if (loggedInUser.role === "admin") {
         // refresh users
@@ -113,6 +109,10 @@ const login = () => {
 
         // admin page
         navigate("/admin");
+
+        // resetting
+        dispatch(setEnteredUsernameEmpty());
+        dispatch(setEnteredUserpasswordEmpty());
       } else {
         // if user non admin navigate to profile page
         navigate("/profile");
