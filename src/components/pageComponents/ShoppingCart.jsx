@@ -31,6 +31,8 @@ const ShoppingCart = () => {
   const dispatch = useDispatch();
 
   // helper vars
+  // helper vars
+  // helper vars
   let subtotal = 0;
   let taxes = 0;
   let newSubTotal = 0;
