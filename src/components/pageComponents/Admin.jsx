@@ -225,12 +225,20 @@ const Admin = () => {
   // handle order status update
   // handle order status update
   // handle order status update
-  const handleStatusChange = async (id, newStatus) => {
+  const handleStatusChange = async (id, newStatus, currentStatus) => {
     // data
     const data = {
       _id: id,
       status: newStatus,
+      currentStatus: currentStatus,
     };
+
+    if (data.currentStatus === "Cancelled") {
+      return toast(
+        "Once an order has been cancelled you need to create a new one.",
+        toastStyleObject()
+      );
+    }
 
     try {
       // update status API call
@@ -717,7 +725,11 @@ const Admin = () => {
                           <select
                             value={order.status}
                             onChange={(e) =>
-                              handleStatusChange(order._id, e.target.value)
+                              handleStatusChange(
+                                order._id,
+                                e.target.value,
+                                order.status
+                              )
                             }
                             className="focus:outline-none focus:ring-0 block p-2.5 text-blue-500 hover:cursor-pointer"
                           >
