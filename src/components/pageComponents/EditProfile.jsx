@@ -21,12 +21,16 @@ import {
   setUser,
 } from "../../redux/slices/staticState/logicSlice";
 
+// functions from redux / store slice
+import { setUsers } from "../../redux/slices/state/storeSlice";
+
 // helper functions
 import {
   refreshUserData,
   // success and error console log handleingssss
   getApiErrorMessage,
   getApiSuccessMessage,
+  refreshUsersData,
 } from "../../utils/helpers";
 
 // helper vars
@@ -183,6 +187,9 @@ const EditProfile = () => {
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
 
+      // get updated array of users
+      await refreshUsersData(logic.userToken, dispatch, setUsers);
+
       // resetting
       dispatch(setShowEditContactInfoTofalse());
       dispatch(resetEditUserState());
@@ -251,6 +258,9 @@ const EditProfile = () => {
 
       // get updated user api call / setting user to updated user
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
+
+      // get updated array of users
+      await refreshUsersData(logic.userToken, dispatch, setUsers);
 
       // resetting
       dispatch(setShowEditShippingInfoTofalse());

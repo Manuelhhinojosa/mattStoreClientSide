@@ -327,7 +327,7 @@ const Admin = () => {
                 : ""
             } hover:text-blue-500 duration-500`}
           >
-            see all products
+            {`see all products (${storeState.artPieces.length}) `}
           </p>
         </div>
 
@@ -440,7 +440,7 @@ const Admin = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="h-[550px] w-full"
+          className="h-[550px] w-full mb-20"
         >
           {/* form container */}
           <div className="h-full">

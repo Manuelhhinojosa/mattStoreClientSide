@@ -116,6 +116,7 @@ const Navbar = () => {
         <div className="hidden   space-x-6 lg:flex">
           {staticText.links.map((link, index) => (
             <Link
+              state={link.id === 6 ? { from: "/cart" } : ""}
               key={index}
               className={`text-sm   ${
                 index !== 0 ? "border-l-2 border-neutral-300/20 pl-2  " : ""

@@ -2,7 +2,7 @@ import React from "react";
 
 // React router V6
 // react router hooks
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 // Axios
 import axios from "axios";
@@ -53,6 +53,7 @@ const login = () => {
 
   // React router hooks
   const navigate = useNavigate();
+  const location = useLocation();
 
   // functions
   // functions
@@ -103,18 +104,22 @@ const login = () => {
       dispatch(setUser(loggedInUser));
       dispatch(setUserToken(result.data.token));
 
-      // if admin, load admin dashboard data and navigate to admin page
-      if (loggedInUser.role === "admin") {
-        // refresh users
+      // if user logs in from clicking cart and is admin
+      const from = location.state?.from;
+      if (from === "/cart" && loggedInUser.role === "admin") {
         await refreshUsersData(result.data.token, dispatch, setUsers);
-
-        // refresh orders
         await refreshOrdersData(result.data.token, dispatch, setOrders);
-
-        // admin page
+        navigate("/cart");
+        // if user logs in from clicking cart and is NOT admin
+      } else if (from === "/cart" && loggedInUser.role !== "admin") {
+        navigate("/cart");
+        // if user is admin coming from anywhere but /cart
+      } else if (loggedInUser.role === "admin") {
+        await refreshUsersData(result.data.token, dispatch, setUsers);
+        await refreshOrdersData(result.data.token, dispatch, setOrders);
         navigate("/admin");
       } else {
-        // if user non admin navigate to profile page
+        // if user non admin  coming from anywhere but /cart
         navigate("/profile");
       }
 

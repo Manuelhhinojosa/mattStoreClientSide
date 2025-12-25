@@ -119,6 +119,7 @@ export const storeSlice = createSlice({
     // empty shopping cart
     emptyShoppingCart: (state, action) => {
       state.shoppingCart = [];
+      localStorage.removeItem("shoppingCart");
     },
 
     // admin page

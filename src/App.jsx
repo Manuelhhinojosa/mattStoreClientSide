@@ -62,6 +62,8 @@ import EditProduct from "./components/pageComponents/EditProduct";
 import EditProfile from "./components/pageComponents/EditProfile";
 import Signup from "./components/pageComponents/Signup";
 import ErrorPage from "./components/pageComponents/ErrorPage";
+import OrderSuccess from "./components/pageComponents/OrderSuccess";
+import OrderCancel from "./components/pageComponents/OrderCancel";
 // Genereal components
 import Navbar from "./components/generalComponents/Navbar";
 import Footer from "./components/generalComponents/Footer";
@@ -238,7 +240,12 @@ function App() {
           <Route key={p.id} path={`/store/${p._id}`} element={<SingleProd />} />
         ))}
 
-        <Route path="/cart" element={<ShoppingCart />} />
+        {logic.isLoggedIn ? (
+          <Route path="/cart" element={<ShoppingCart />} />
+        ) : (
+          <Route path="/cart" element={<Login />} />
+        )}
+
         <Route path="/login" element={<Login />} />
 
         {logic.isLoggedIn && logic.user.role === "admin" ? (
@@ -270,6 +277,8 @@ function App() {
         )}
 
         <Route path="/signup" element={<Signup />} />
+        <Route path="/success" element={<OrderSuccess />} />
+        <Route path="/cancel" element={<OrderCancel />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

@@ -1,10 +1,25 @@
 import React from "react";
 
-// react icons
-import { FaTimes } from "react-icons/fa";
+// dependencies
+//
+// stripe
+// import { loadStripe } from "@stripe/stripe-js";
+
+// axios
+import axios from "axios";
 
 // framer motion
 import { motion } from "framer-motion";
+
+// toast
+// Toastify for error and success message handling
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// error handling state (for styling)
+import { toastStyleObject } from "../../tostifyStyle";
+
+// react icons
+import { FaTimes } from "react-icons/fa";
 
 // React Router V6
 // react router hooks
@@ -15,6 +30,13 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // functions in redux store slice
 import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
+
+// helper vars
+// headers config
+import { getHeadersConfig } from "../../utils/vars";
+
+// helper functions
+import { getApiErrorMessage } from "../../utils/helpers";
 
 // shopping cart function component
 // shopping cart function component
@@ -33,22 +55,70 @@ const ShoppingCart = () => {
   // helper vars
   // helper vars
   // helper vars
+  // calculate amounts to pay
   let subtotal = 0;
   let taxes = 0;
   let newSubTotal = 0;
 
-  // helper functions
-  // helper functions
-  // helper functions
+  // stripe
+  // const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
-  // calculate new subtotal
-  // calculate new subtotal
-  // calculate new subtotal
+  // functions
+  // functions
+  // functions
+
+  // calculate amounts subtotal
+  // calculate amounts subtotal
+  // calculate amounts subtotal
   storeState.shoppingCart.map((p) => {
     subtotal = p.cost + subtotal;
-    taxes = subtotal * 0.13;
+    taxes =
+      logicState.user.shippingCountry.toLowerCase() === "canada"
+        ? subtotal * 0.13
+        : subtotal * 0.16;
     newSubTotal = subtotal + taxes;
   });
+
+  // handle checkout
+  // handle checkout
+  // handle checkout
+  const handleCheckout = async () => {
+    try {
+      // const stripe = await stripePromise;
+
+      // Extract product IDs
+      const productIds = storeState.shoppingCart.map((p) => p._id);
+
+      // state to send to backend
+      const body = {
+        products: productIds,
+        userId: logicState.user._id,
+        shippingSameAsContact: logicState.user.shippingSameAsContactInfo,
+        deliveryFee:
+          logicState.user.shippingCountry?.toLowerCase() === "canada"
+            ? storeState.nationalDeliveryFee
+            : storeState.internationalDeliveryFee,
+      };
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_ORDERS_URL}/create-checkout-session`,
+        body,
+        getHeadersConfig()
+      );
+
+      const { url } = response.data;
+      window.location.href = url;
+      // const { sessionId } = response.data;
+      // const result = await stripe.redirectToCheckout({
+      //   sessionId,
+      // });
+    } catch (error) {
+      console.error("Error starting checkout:", error);
+
+      // error message
+      toast(getApiErrorMessage(error), toastStyleObject());
+    }
+  };
 
   // return
   // return
@@ -59,7 +129,7 @@ const ShoppingCart = () => {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="container mx-auto flex items-end lg:justify-center mb-20"
+      className="container mx-auto flex items-end lg:justify-center mb-32"
     >
       {/* secondary container */}
       <div className="mt-32 w-full flex flex-col lg:w-2/3">
@@ -139,12 +209,12 @@ const ShoppingCart = () => {
         <div className="h-[100px]  flex justify-center items-center">
           {storeState.shoppingCart.length > 0 ? (
             // checkout button if shoppint cart has items
-            <Link
-              to="/checkout"
+            <button
+              onClick={handleCheckout}
               className="font-extrabold hover:text-blue-500 duration-500"
             >
               Checkout
-            </Link>
+            </button>
           ) : (
             // checout and shop buttons if shopping cart is empty
             <span className="font-extrabold text-gray-400 cursor-not-allowed">

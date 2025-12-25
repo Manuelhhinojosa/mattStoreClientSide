@@ -20,7 +20,7 @@ const About = () => {
   // return
   return (
     // main container
-    <section className="container h-auto mx-auto mb-20 flex items-end">
+    <section className="container h-full mx-auto mb-32 flex items-end ">
       <div className="mt-32 w-full flex flex-col items-center lg:flex-row lg:justify-evenly ">
         {/* img container */}
         <motion.div
