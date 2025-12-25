@@ -23,13 +23,15 @@ import { FaTimes } from "react-icons/fa";
 
 // React Router V6
 // react router hooks
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // redux
 // redux hooks
 import { useSelector, useDispatch } from "react-redux";
 // functions in redux store slice
 import { removeProdShoppingCart } from "../../redux/slices/state/storeSlice";
+// functions
+import { setShowEditShippingInfoToTrue } from "../../redux/slices/staticState/logicSlice";
 
 // helper vars
 // headers config
@@ -51,6 +53,9 @@ const ShoppingCart = () => {
   const staticState = useSelector((state) => state.staticTextSlice);
   // redux hooks
   const dispatch = useDispatch();
+
+  // react router hooks
+  const navigate = useNavigate();
 
   // helper vars
   // helper vars
@@ -83,6 +88,26 @@ const ShoppingCart = () => {
   // handle checkout
   // handle checkout
   const handleCheckout = async () => {
+    if (
+      logicState.user.shippingPhoneNumber === "" ||
+      !logicState.user.shippingPhoneNumber ||
+      logicState.user.shippingAddress === "" ||
+      !logicState.user.shippingAddress ||
+      logicState.user.shippingCountry === "" ||
+      !logicState.user.shippingCountry ||
+      logicState.user.shippingProvinceOrState === "" ||
+      !logicState.user.shippingProvinceOrState ||
+      logicState.user.shippingCity === "" ||
+      !logicState.user.shippingCity ||
+      logicState.user.shippingPostalCode === "" ||
+      !logicState.user.shippingPostalCode
+    ) {
+      dispatch(setShowEditShippingInfoToTrue());
+      navigate("/editprofile");
+      toast("First let's verify your shipping address.", toastStyleObject());
+      return;
+    }
+
     try {
       // const stripe = await stripePromise;
 
