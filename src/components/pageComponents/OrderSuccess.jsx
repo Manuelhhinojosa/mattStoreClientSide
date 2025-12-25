@@ -12,8 +12,8 @@ import { useDispatch } from "react-redux";
 // functions in redux store slice
 import { emptyShoppingCart } from "../../redux/slices/state/storeSlice";
 
-// axios
-import axios from "axios";
+// framer motion
+import { motion } from "framer-motion";
 
 // Toastify for error and success message handling
 import { toast } from "react-toastify";
@@ -69,7 +69,13 @@ const OrderSuccess = () => {
   // return
   // return
   return (
-    <section className="relative flex flex-col h-screen w-screen items-center justify-center">
+    <motion.section
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative flex flex-col h-screen w-screen items-center justify-center"
+    >
       {isSuccess ? (
         <>
           <h1>Thank You!</h1>
@@ -84,7 +90,7 @@ const OrderSuccess = () => {
           your order status in a moment.
         </p>
       )}
-    </section>
+    </motion.section>
   );
 };
 
