@@ -69,7 +69,7 @@ const OrderSuccess = () => {
   // return
   // return
   return (
-    <section className="success-page">
+    <section className="relative flex flex-col h-screen w-screen items-center justify-center">
       {isSuccess ? (
         <>
           <h1>Thank You!</h1>

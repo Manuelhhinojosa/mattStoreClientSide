@@ -2,7 +2,7 @@ import React from "react";
 
 const OrderCancel = () => {
   return (
-    <section className="cancel-page">
+    <section className="relative flex flex-col h-screen w-screen items-center justify-center">
       <h1>Payment Cancelled</h1>
       <p>Your payment was not completed.</p>
 
