@@ -359,7 +359,7 @@ const Admin = () => {
                 : ""
             } hover:text-blue-500 duration-500`}
           >
-            see orders
+            {`see orders (${storeState.orders.length}) `}
           </p>
         </div>
 
@@ -375,7 +375,7 @@ const Admin = () => {
                 : ""
             } hover:text-blue-500 duration-500`}
           >
-            see members info
+            {`see members (${storeState.users.length}) `}
           </p>
         </div>
       </div>
@@ -612,8 +612,8 @@ const Admin = () => {
         <div className="w-full  mt-5">
           <div className="h-auto">
             {storeState.orders.length === 0 ? (
-              <div className="h-[500px] flex justify-center text-3xl">
-                <p>There are no orders</p>
+              <div className="h-[550px] flex justify-center items-center text-3xl">
+                <p>There are no orders.</p>
               </div>
             ) : (
               // renders if there are orders
@@ -757,8 +757,8 @@ const Admin = () => {
         <div className="w-full mt-10">
           <div className="h-auto">
             {storeState.users.length === 0 ? (
-              <div className="h-[500px] flex items-center justify-center text-3xl">
-                <p>There aren't any members yet</p>
+              <div className="h-[550px] flex items-center justify-center text-3xl">
+                <p>There aren't any members yet.</p>
               </div>
             ) : (
               // renders if there are users
