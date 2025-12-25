@@ -89,7 +89,6 @@ const OrderSuccess = () => {
       {isSuccess ? (
         <div className="p-10 flex flex-col items-center justiy-center shadow-2xl rounded-2xl">
           <h1 className="text-2xl font-bold">Order confimation.</h1>
-          <p className="text-sm">Order number: {storeState.orders[0]._id}</p>
           <br />
           <h2 className="text-xl font-semibold">
             Thank You for your purchase!
