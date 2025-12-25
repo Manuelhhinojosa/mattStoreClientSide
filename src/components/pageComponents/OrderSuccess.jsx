@@ -8,9 +8,14 @@ import { useNavigate } from "react-router-dom";
 
 // redux
 // redux hooks
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 // functions in redux store slice
 import { emptyShoppingCart } from "../../redux/slices/state/storeSlice";
+
+//React Router v6
+// react router hooks
+import { Link } from "react-router-dom";
 
 // framer motion
 import { motion } from "framer-motion";
@@ -25,7 +30,12 @@ import { toastStyleObject } from "../../tostifyStyle";
 // order success function component
 // oreder succes function component
 const OrderSuccess = () => {
-  // redux hooks
+  // redux
+  // state in logic slice
+  const logic = useSelector((state) => state.logicSlice);
+  // state in store slice
+  const storeState = useSelector((state) => state.storeSlice);
+  // hooks
   const dispatch = useDispatch();
 
   //   react router hooks
@@ -72,18 +82,38 @@ const OrderSuccess = () => {
     <motion.section
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      transition={{ duration: 2, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
       className="relative flex flex-col h-screen w-screen items-center justify-center"
     >
       {isSuccess ? (
-        <>
-          <h1>Thank You!</h1>
-          <p>Your payment was successful and your order has been placed.</p>
-          <a href="/store" className="btn">
-            Continue Shopping
-          </a>
-        </>
+        <div className="p-10 flex flex-col items-center justiy-center shadow-2xl rounded-2xl">
+          <h1 className="text-2xl font-bold">Order confimation.</h1>
+          <p className="text-sm">Order number: {storeState.orders[0]._id}</p>
+          <br />
+          <h2 className="text-xl font-semibold">
+            Thank You for your purchase!
+          </h2>
+          <br />
+          <p className="text-sm">
+            Your payment was successful and your order has been placed.
+          </p>
+          <br />
+          <p className="text-sm">
+            An email with the order details has been sent to {logic.user.email}
+          </p>
+          <p className="text-sm">
+            If you have any questions about your order feel free to reach out to
+            me.
+          </p>
+          <br />
+          <Link
+            className="underline hover:text-blue-500 duration-300"
+            to={"/store"}
+          >
+            continue Shopping
+          </Link>
+        </div>
       ) : (
         <p>
           We’re processing your order. If you are not redirected, please check

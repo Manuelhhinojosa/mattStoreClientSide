@@ -20,7 +20,13 @@ const Home = () => {
   // return
   return (
     // main section
-    <section className="relative flex h-screen w-screen items-center justify-center">
+    <motion.section
+      initial={{ opacity: 0, scale: 1 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 3, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative flex h-screen w-screen items-center justify-center"
+    >
       {/* img container */}
       <div className="absolute inset-0 -z-20 h-full w-full overflow-hidden">
         <img
@@ -43,7 +49,7 @@ const Home = () => {
           {staticText.home.homeMainTitle}
         </h1>
       </motion.div>
-    </section>
+    </motion.section>
   );
 };
 
