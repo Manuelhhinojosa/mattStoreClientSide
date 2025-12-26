@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 // redux
 // redux hooks
 import { useDispatch, useSelector } from "react-redux";
+// functions from redux / logic slice
+import { setUser } from "../../redux/slices/staticState/logicSlice";
+// helper functions
+import { refreshUserData } from "../../utils/helpers";
 
 // functions in redux store slice
 import { emptyShoppingCart } from "../../redux/slices/state/storeSlice";
@@ -33,8 +37,7 @@ const OrderSuccess = () => {
   // redux
   // state in logic slice
   const logic = useSelector((state) => state.logicSlice);
-  // state in store slice
-  const storeState = useSelector((state) => state.storeSlice);
+
   // hooks
   const dispatch = useDispatch();
 
@@ -51,29 +54,30 @@ const OrderSuccess = () => {
   //   functions
 
   useEffect(() => {
-    try {
-      const sessionId = new URLSearchParams(window.location.search).get(
-        "session_id"
-      );
+    // if users/me has not finished running
+    if (!logic.user || !logic.userToken) return;
 
-      if (!sessionId) {
-        toast("Invalid. Redirecting to your shopping cart", toastStyleObject());
-        navigate("/cart");
-        return;
-      }
+    const sessionId = new URLSearchParams(window.location.search).get(
+      "session_id"
+    );
 
-      console.log("Order created");
-      toast("order created", toastStyleObject());
-
-      dispatch(emptyShoppingCart());
-      localStorage.removeItem("shoppingCart");
-      setIsSuccess(true);
-    } catch (err) {
-      console.error("Error confirming order:", err);
-      toast("Error confirming order", { type: "error" });
+    // if there is no confirmation from stripe
+    if (!sessionId) {
+      toast("Invalid session. Redirecting to cart.", toastStyleObject());
       navigate("/cart");
+      return;
     }
-  }, []);
+
+    // success
+    // refresh user
+    refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
+    // empty shopping cart
+    dispatch(emptyShoppingCart());
+    localStorage.removeItem("shoppingCart");
+
+    // display success page
+    setIsSuccess(true);
+  }, [logic.user]);
 
   // return
   // return
