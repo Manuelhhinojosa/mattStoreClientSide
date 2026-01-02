@@ -17,6 +17,13 @@ import { refreshUserData } from "../../utils/helpers";
 // functions in redux store slice
 import { emptyShoppingCart } from "../../redux/slices/state/storeSlice";
 
+// helper vars
+// headers config
+import { getHeadersConfig } from "../../utils/vars";
+
+// Axios
+import axios from "axios";
+
 //React Router v6
 // react router hooks
 import { Link } from "react-router-dom";
@@ -48,35 +55,57 @@ const OrderSuccess = () => {
   //    helper vars
   //    helper vars
   const [isSuccess, setIsSuccess] = useState(false);
+  const [order, setOrder] = useState({});
 
   //   functions
   //   functions
   //   functions
-
+  //   on load
   useEffect(() => {
-    // if users/me has not finished running
-    if (!logic.user || !logic.userToken) return;
+    const fetchOrder = async () => {
+      try {
+        if (!logic.user || !logic.userToken) return;
 
-    const sessionId = new URLSearchParams(window.location.search).get(
-      "session_id"
-    );
+        // get session id
+        const sessionId = new URLSearchParams(window.location.search).get(
+          "session_id"
+        );
 
-    // if there is no confirmation from stripe
-    if (!sessionId) {
-      toast("Invalid session. Redirecting to cart.", toastStyleObject());
-      navigate("/cart");
-      return;
-    }
+        // if there is no confirmation from stripe
+        if (!sessionId) {
+          toast("Invalid session. Redirecting to cart.", toastStyleObject());
+          navigate("/cart");
+          return;
+        }
 
-    // success
-    // refresh user
-    refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
-    // empty shopping cart
-    dispatch(emptyShoppingCart());
-    localStorage.removeItem("shoppingCart");
+        // get order data
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_ORDERS_URL}/by-session/${sessionId}`,
+          getHeadersConfig()
+        );
+        setOrder(res.data);
 
-    // display success page
-    setIsSuccess(true);
+        // refresh user
+        await refreshUserData(
+          logic.user._id,
+          logic.userToken,
+          dispatch,
+          setUser
+        );
+
+        // empty shopping cart
+        dispatch(emptyShoppingCart());
+        localStorage.removeItem("shoppingCart");
+
+        // display success page
+        setIsSuccess(true);
+      } catch (err) {
+        console.log(err);
+        toast("We are still processing your order", toastStyleObject());
+      }
+    };
+
+    fetchOrder();
   }, [logic.user]);
 
   // return
@@ -93,6 +122,7 @@ const OrderSuccess = () => {
       {isSuccess ? (
         <div className="p-10 flex flex-col items-center justiy-center shadow-2xl rounded-2xl">
           <h1 className="text-2xl font-bold">Order confimation.</h1>
+          <p>{order._id}</p>
           <br />
           <h2 className="text-xl font-semibold">
             Thank You for your purchase!
