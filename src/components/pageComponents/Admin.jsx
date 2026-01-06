@@ -866,7 +866,8 @@ const Admin = () => {
                             </p>
                             <p className="text-sm">Status: {order.status}</p>
                             <p className="text-sm">
-                              Shipped to: {order.shippingInfoAtTimeOfPurchase}
+                              Shipping info:{" "}
+                              {order.shippingInfoAtTimeOfPurchase}
                             </p>
                             <p className="text-sm">
                               Contact info: {order.contactInfoAtTimeOfPurchase}

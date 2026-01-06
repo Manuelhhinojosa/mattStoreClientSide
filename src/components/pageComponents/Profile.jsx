@@ -324,32 +324,32 @@ const Profile = () => {
             {logic.user?.orders?.length > 0 ? (
               logic.user.orders.map((order) => (
                 // orders container
-                <div className="my-10 flex flex-col items-center border-[1px] border-black rounded-xl  h-[350px] overflow-hidden overflow-y-scroll p-3 shadow-lg">
+                <div className="my-10 flex flex-col items-center border-[1px] border-black rounded-xl  h-[350px] overflow-hidden overflow-y-scroll p-3 shadow-lg ">
                   {/* date */}
                   <p className="pt-5 text-center">{`Date of purcharse: ${order.createdAt.slice(
                     0,
                     10
                   )}`}</p>
                   {/* id */}
-                  <p className="text-sm">Order ID: {order._id}</p>
+                  <p className="text-sm p-1">Order ID: {order._id}</p>
                   {/* items amount */}
-                  <p className="text-sm">
+                  <p className="text-sm p-1">
                     Total items: {order.products.length}
                   </p>
                   {/* order status */}
-                  <p className="text-sm">Status: {order.status}</p>
+                  <p className="text-sm p-1">Status: {order.status}</p>
                   {/* shipping info */}
-                  <p className="text-sm">
-                    Shipped to: Shipping address at the time of purchase
+                  <p className="text-sm text-center p-1">
+                    Shipping info: {order.shippingInfoAtTimeOfPurchase}
                   </p>
                   {/* amont pide */}
-                  <p className="text-sm">Total amount paid: 123 CAD</p>
+                  <p className="text-sm p-1">Total amount paid: 123 CAD</p>
                   <br />
                   {/* items */}
                   <p className="underline">Items:</p>
                   {order.products.map((product) => (
                     // image
-                    <div className="w-[90%] flex flex-col items-center md:flex-row md:justify-between p-2 border-b border-black">
+                    <div className="w-[90%] flex flex-col items-center md:flex-row md:justify-between p-2 border-b border-black mb-5">
                       <img
                         src={product.media.url}
                         alt="productImg"
