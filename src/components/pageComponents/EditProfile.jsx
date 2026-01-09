@@ -188,7 +188,9 @@ const EditProfile = () => {
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
 
       // get updated array of users
-      await refreshUsersData(logic.userToken, dispatch, setUsers);
+      if (logic.user?.role === "admin") {
+        await refreshUsersData(logic.userToken, dispatch, setUsers);
+      }
 
       // resetting
       dispatch(setShowEditContactInfoTofalse());
@@ -260,7 +262,9 @@ const EditProfile = () => {
       await refreshUserData(logic.user._id, logic.userToken, dispatch, setUser);
 
       // get updated array of users
-      await refreshUsersData(logic.userToken, dispatch, setUsers);
+      if (logic.user?.role === "admin") {
+        await refreshUsersData(logic.userToken, dispatch, setUsers);
+      }
 
       // resetting
       dispatch(setShowEditShippingInfoTofalse());
