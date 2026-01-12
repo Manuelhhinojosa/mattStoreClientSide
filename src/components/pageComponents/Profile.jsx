@@ -343,7 +343,10 @@ const Profile = () => {
                     Shipping info: {order.shippingInfoAtTimeOfPurchase}
                   </p>
                   {/* amont pide */}
-                  <p className="text-sm p-1">Total amount paid: 123 CAD</p>
+                  <p className="text-sm p-1">
+                    Total amount paid:{" "}
+                    {order.productsInfoAtTimeOfPurchase[0].totalAmountPaid}
+                  </p>
                   <br />
                   {/* items */}
                   <p className="underline">Items:</p>
