@@ -80,7 +80,7 @@ const ShoppingCart = () => {
     taxes =
       logicState.user.shippingCountry.toLowerCase() === "canada"
         ? subtotal * 0.13
-        : subtotal * 0.16;
+        : subtotal * 0.13;
     newSubTotal = subtotal + taxes;
   });
 
