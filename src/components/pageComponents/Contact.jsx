@@ -141,7 +141,7 @@ const Contact = () => {
             name="name"
             type="text"
             placeholder="Name"
-            autocomplete="off"
+            autoComplete="off"
             className="h-10 w-3/4 text-center md:w-1/2 focus:outline-none border-b-[1px] border-b-transparent  hover:border-b-black duration-500 transition-colors  ease-out focus:border-b-black focus:ring-0 focus-visible:ring-0 will-change-[border-color] -webkit-tap-highlight-color-transparent"
             ref={nameRef}
           />
